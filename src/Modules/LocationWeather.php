@@ -117,6 +117,41 @@ final class LocationWeather extends AbstractModule
                     ],
                 ],
             ],
+            'editor-pro-teasers' => [
+                'label' => __('Move the weather editor\'s Pro pitches to the Upgrades panel', 'wppack-tidy-admin'),
+                // The "Power up with Location Weather Pro" side metabox (feature
+                // list + upgrade button) from the weather editor, kept in the
+                // plugin's own text domain (the flame marks are appended outside
+                // the translated strings, exactly like the original)
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'premium',
+                        'parent' => $this->menuParent(),
+                        'html' => '<p><strong>' . sprintf(esc_html__('Power up with %1$sLocation Weather Pro%2$s', 'location-weather'), '', '') . '</strong></p>'
+                            . '<ul class="tidy-admin-meta-links">'
+                            . '<li>' . esc_html__('AI Weather Assistant', 'location-weather') . ' 🔥</li>'
+                            . '<li><a href="https://locationweather.io/#weather-showcase" target="_blank" rel="noopener noreferrer">' . esc_html__('15+ Gutenberg Blocks', 'location-weather') . '</a></li>'
+                            . '<li>' . esc_html__('200+ Ready Weather Patterns', 'location-weather') . '</li>'
+                            . '<li>' . esc_html__('Interactive Weather Map', 'location-weather') . '</li>'
+                            . '<li>' . esc_html__('Air Quality (AQI)', 'location-weather') . ' 🔥</li>'
+                            . '<li>' . esc_html__('Weather & AQI Graph Charts', 'location-weather') . '</li>'
+                            . '<li>' . esc_html__('46-Year Historical Data', 'location-weather') . '</li>'
+                            . '<li>' . esc_html__('Astronomy & Sun & Moon', 'location-weather') . ' 🔥</li>'
+                            . '<li>' . esc_html__('Global Weather Search', 'location-weather') . '</li>'
+                            . '<li>' . esc_html__('12+ Weather Icon Packs', 'location-weather') . '</li>'
+                            . '</ul>'
+                            . '<p><a href="https://locationweather.io/pricing/?ref=1" target="_blank" rel="noopener noreferrer">' . esc_html__('Upgrade to Pro Now', 'location-weather') . '</a></p>',
+                    ],
+                ],
+                'adminCss' => <<<'CSS'
+                /* Location Weather: "Power up with Location Weather Pro" side metabox on
+                   the weather editor (feature list + upgrade button; moved to the panel) */
+                #sp_lw_pro_notice { display: none !important; }
+                /* Location Weather: framework "notice" fields on the weather editor —
+                   every one is an "Upgrade to Pro!" pitch for a locked section */
+                body.post-type-location_weather .splwt-lite-field-notice { display: none !important; }
+                CSS,
+            ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'

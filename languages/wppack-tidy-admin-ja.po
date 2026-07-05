@@ -118,6 +118,10 @@ msgstr "マーケティング通知・お知らせを除去"
 msgid "Remove promotional notices and popups"
 msgstr "宣伝通知・ポップアップを除去"
 
+#: src/Modules/LocationWeather.php
+msgid "Move the weather editor's Pro pitches to the Upgrades panel"
+msgstr "ウェザーエディター内の Pro 宣伝をアップグレードパネルへ移設"
+
 #: src/Modules/LocationWeather.php src/Modules/WpMailSmtp.php
 msgid "Restore the standard admin footer"
 msgstr "標準の管理画面フッターを復元"
