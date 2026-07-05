@@ -143,6 +143,19 @@ final class Yoast extends AbstractModule
         /* Yoast: only inside settings-form sections (yst-space-y-8), lift the cap on field
            rows as well (a toggle plus description is cramped at 24rem; sm/xs elsewhere stay) */
         body[class*="page_wpseo"] .yst-space-y-8 .yst-max-w-sm { max-width: none !important; }
+        /* Yoast: full-bleed UI with a roomy header — overlay the whole screen-meta
+           region (closed: buttons over the header; open: the panel covers the content
+           instead of pushing it, with the buttons on its bottom edge) */
+        @media (min-width: 768px) {
+            body[class*="page_wpseo"] #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
+            body[class*="page_wpseo"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+        }
+        /* Yoast: on desktop, drop the main column below the overlaid buttons */
+        @media (min-width: 768px) {
+            body[class*="page_wpseo"] .yst-grow.yst-max-w-page { padding-top: 2.5rem; }
+            /* Integrations has no .yst-max-w-page wrapper; pad the body instead */
+            body[class*="page_wpseo_integrations"] #wpbody-content { padding-top: 2.5rem; }
+        }
         /* Yoast: General and Settings remove #wpcontent's left padding for a full-bleed
            layout; restore the standard 20px gap for the screen-meta panel region there
            so the opened Plugin Help / Upgrades panels align with the admin menu like

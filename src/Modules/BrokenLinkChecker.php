@@ -49,6 +49,17 @@ final class BrokenLinkChecker extends AbstractModule
         .local-header-link-to-dash { display: none !important; }
         /* Broken Link Checker: the Local page renders a stray empty heading */
         body[class*="page_blc_local"] h2:empty { display: none !important; }
+        /* Broken Link Checker: full-bleed React UI — overlay the whole screen-meta
+           region (closed: buttons over the header; open: the panel covers the content
+           instead of pushing it, with the buttons on its bottom edge) */
+        @media (min-width: 768px) {
+            body[class*="page_blc_dash"] #tidy-admin-meta-region,
+            body[class*="page_blc_local"] #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
+            body[class*="page_blc_dash"] #tidy-admin-meta-region #screen-meta,
+            body[class*="page_blc_local"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+        }
+        /* Broken Link Checker: keep the onboarding illustration clear of the overlaid buttons */
+        .sui-col.blc-onboarding-column.onboarding-illustration-column { margin-top: 2.5rem; }
         CSS;
     }
 }

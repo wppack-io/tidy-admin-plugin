@@ -51,6 +51,24 @@ final class InstagramFeed extends AbstractModule
         ];
     }
 
+    public function extraScreenMetaContent(): array
+    {
+        // Direct links for the sections of its Support page (the page itself
+        // stays reachable from the same Help panel via the relocated submenu)
+        return [
+            [
+                'category' => 'help',
+                'parent' => $this->menuParent(),
+                'html' => '<ul class="tidy-admin-meta-links">'
+                    . '<li><a href="https://smashballoon.com/docs/getting-started/" target="_blank" rel="noopener noreferrer">' . esc_html__('Getting Started', 'instagram-feed') . '</a></li>'
+                    . '<li><a href="https://smashballoon.com/docs/instagram/" target="_blank" rel="noopener noreferrer">' . esc_html__('Docs & Troubleshooting', 'instagram-feed') . '</a></li>'
+                    . '<li><a href="https://smashballoon.com/blog/" target="_blank" rel="noopener noreferrer">' . esc_html__('View Blog', 'instagram-feed') . '</a></li>'
+                    . '<li><a href="https://smashballoon.com/instagram-feed/support/" target="_blank" rel="noopener noreferrer">' . esc_html__('Submit a Support Ticket', 'instagram-feed') . '</a></li>'
+                    . '</ul>',
+            ],
+        ];
+    }
+
     public function upsellLinkUrls(): array
     {
         return [
@@ -85,6 +103,15 @@ final class InstagramFeed extends AbstractModule
         /* Instagram Feed: "Did You Know ... our other plugins" box at the bottom of the feed
            builder screen (pitch to install Facebook/TikTok etc.) */
         .sbi-fb-mr-feeds { display: none !important; }
+        /* Instagram Feed: full-bleed UI with a roomy header — overlay the whole
+           screen-meta region (closed: buttons over the header; open: the panel covers
+           the content instead of pushing it, with the buttons on its bottom edge) */
+        @media (min-width: 768px) {
+            body[class*="page_sb-instagram-feed"] #tidy-admin-meta-region,
+            body[class*="page_sbi-"] #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
+            body[class*="page_sb-instagram-feed"] #tidy-admin-meta-region #screen-meta,
+            body[class*="page_sbi-"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+        }
         CSS;
     }
 

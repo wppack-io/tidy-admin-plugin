@@ -106,6 +106,9 @@ final class Mc4wp extends AbstractModule
            resources moved to the Help panel; let the main column span the full width */
         .mc4wp-sidebar { display: none !important; }
         .mc4wp-row .mc4wp-col { width: 100% !important; }
+        /* MC4WP: standard-looking pages, but the heading sits inside .mc4wp-row rather
+           than directly under .wrap — opt into the core float-beside-title behavior */
+        body[class*="page_mailchimp-for-wp"] #tidy-admin-meta-region #screen-meta-links { display: block; float: right; }
         CSS;
     }
 

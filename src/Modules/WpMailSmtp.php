@@ -100,6 +100,10 @@ final class WpMailSmtp extends AbstractModule
         .wp-mail-smtp-dash-widget-chart-block-container { display: none !important; }
         /* WP Mail SMTP: dashboard widget "Upgrade to Pro" footer (shown once the chart teaser is dismissed) */
         #wp-mail-smtp-dash-widget-upgrade-footer { display: none !important; }
+        /* WP Mail SMTP: the sidebar "Upgrade to Pro" item gets its href rewritten by
+           the plugin after the slug-based hiding CSS is built — hide it by its own
+           class (the link stays available in the Upgrades panel) */
+        #adminmenu li.wp-mail-smtp-sidebar-upgrade-pro { display: none !important; }
         CSS;
     }
 

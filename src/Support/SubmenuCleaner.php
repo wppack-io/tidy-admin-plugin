@@ -178,7 +178,17 @@ final class SubmenuCleaner
                full-width row above the page instead. Flex layout neutralizes the
                toggles' floats, so nothing shrinks beside them, no page needs padding,
                and the row still rides below the opened panel exactly like core */
+            #wpbody { position: relative; } /* containing block for overlay-mode regions */
             #tidy-admin-meta-region #screen-meta-links { float: none; display: flex; justify-content: flex-end; margin: 0 20px 0 0; }
+            /* In overlay mode the region spans the page full-width above the plugin's
+               header — let clicks pass through everywhere except our own controls */
+            #tidy-admin-meta-region { pointer-events: none; }
+            #tidy-admin-meta-region #screen-meta,
+            #tidy-admin-meta-region .screen-meta-toggle { pointer-events: auto; }
+            /* Pages built on the standard .wrap + heading pattern get the exact core
+               behavior instead: the buttons float right and the page title flows up
+               beside them, without the row reserving its own vertical space */
+            #wpbody-content:has(> .wrap > :is(h1, h2):not(:empty)) #tidy-admin-meta-region #screen-meta-links { display: block; float: right; }
             /* Contain the floated tab column, like core's #contextual-help-wrap { overflow: auto } */
             .tidy-admin-meta-panel { overflow: auto; position: relative; }
             /* Vertical border + tinted content background, replicated from core's #contextual-help-back */
