@@ -10,32 +10,26 @@
 WPPack Tidy Admin is a WordPress plugin that tidies up wp-admin. It takes
 plugin vendors' upsell menus, promotional banners, review requests and setup
 nags out of your way and relocates them into consistent, WordPress-native
-places: an **Upgrades** button and a **Help** button on each plugin's own
-screens, and a single **Pending plugin setup** dashboard widget. Nothing
-functional is removed — every page and link stays reachable, and each cleanup
-can be toggled per plugin, feature by feature.
+places: upgrade guidance and Premium feature pages move to an **Upgrades**
+button next to the standard Help button on each plugin's own screens (a
+running discount shows there too), documentation and support links join the
+**Help** button beside it, and setup reminders collect into a single
+**Pending plugin setup** dashboard widget instead of nagging on every
+screen. Nothing functional is removed — every page and link stays reachable,
+and each cleanup can be toggled per plugin, feature by feature.
 
 **This plugin does not exist to stop anyone from upgrading to paid plugins.**
 We understand that paid plugins fund and motivate the development of the free
-plugins we all rely on.
+plugins we all rely on — which is exactly why upgrade information stays
+available: quietly, in one predictable place.
 
 But wp-admin today is crowded with every plugin's own promotions — banners,
 menu items, popups and notices, each shouting for attention with no restraint
 or coordination. This is a violation of guideline 11 of the WordPress.org
 plugin guidelines ("Plugins should not hijack the admin dashboard"), and it
-is a daily nuisance for everyone who works in the WordPress admin.
-
-This plugin is an answer to
+is a daily nuisance for everyone who works in the WordPress admin. This
+plugin is an answer to
 [“Please Stop Abusing WordPress Admin Notices” (WP Tavern, 2016)](https://wptavern.com/please-stop-abusing-wordpress-admin-notices).
-
-We keep upgrade information available — quietly, in one consistent place: an
-**Upgrades** button next to WordPress's standard Help button on each plugin's
-own screens, leading with how to upgrade and keeping the pages an upgrade
-would unlock in a "Premium features" tab. Documentation and support links
-move to a **Help** button in the same place. Setup reminders are
-collected into a single **Pending plugin setup** dashboard widget instead of
-nagging on every screen, and a running discount promotion shows inside the
-Upgrades panel instead of on every page.
 
 Our goal is a better experience for everyone who uses WordPress, through a
 tidy, organized admin UI.
