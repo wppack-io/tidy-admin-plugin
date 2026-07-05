@@ -36,10 +36,11 @@ plugins.
 - One module per target plugin (`src/Modules/`); a module registers only when
   its target plugin is active.
 - Shared mechanics (`src/Support/`), fed by each module's declarations:
-  - **Submenu relocation** — upsell submenus are hidden from the sidebar
-    (via CSS, so the pages stay registered and reachable) and collected into
-    an "Upgrades" screen-meta button styled exactly like core Help;
-    documentation/support submenus go to a plugin-specific "Help" button.
+  - **Submenu relocation** — upsell submenus are hidden from the sidebar and
+    collected into an "Upgrades" screen-meta button styled exactly like core
+    Help; documentation/support submenus go to a plugin-specific "Help"
+    button. However they are hidden, the pages themselves always stay
+    registered and reachable.
   - **plugins.php link cleanup** — Pro/Premium links are removed from the
     plugin list rows (functional links such as Docs and FAQ stay).
   - **Notice removal** — promotional notices (review requests, campaigns,
