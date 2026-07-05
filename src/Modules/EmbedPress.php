@@ -40,9 +40,22 @@ final class EmbedPress extends AbstractModule
         // link already lives in the WordPress.org sidebar.
         return [
             [
+                'category' => 'upgrade',
+                'parent' => $this->menuParent(),
+                // From the floating "sponsored" quick links (hidden via adminCss())
+                'html' => '<ul class="tidy-admin-meta-links">'
+                    . '<li><a href="https://embedpress.com/#pricing" target="_blank" rel="noopener noreferrer">' . esc_html__('Unlock pro Features', 'embedpress') . '</a></li>'
+                    . '</ul>',
+            ],
+            [
                 'category' => 'help',
                 'parent' => $this->menuParent(),
-                'html' => '<p><strong>' . esc_html__('Documentation', 'embedpress') . '</strong></p>'
+                'html' => '<ul class="tidy-admin-meta-links">'
+                    . '<li><a href="https://embedpress.com/support/" target="_blank" rel="noopener noreferrer">' . esc_html__('Get Support', 'embedpress') . '</a></li>'
+                    . '<li><a href="https://wpdeveloper.com/support/new-ticket/" target="_blank" rel="noopener noreferrer">' . esc_html__('Suggest a Feature', 'embedpress') . '</a></li>'
+                    . '<li><a href="https://www.facebook.com/groups/wpdeveloper.net" target="_blank" rel="noopener noreferrer">' . esc_html__('Join Our Community', 'embedpress') . '</a></li>'
+                    . '</ul>'
+                    . '<p><strong>' . esc_html__('Documentation', 'embedpress') . '</strong></p>'
                     . '<p>' . esc_html__("Get started by spending some time with the documentation to get familiar with EmbedPress. Build awesome websites for you or your clients with ease.\n               ", 'embedpress')
                     . ' <a href="https://embedpress.com/documentation/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation', 'embedpress') . '</a></p>'
                     . '<p><strong>' . esc_html__('Need Help?', 'embedpress') . '</strong></p>'
@@ -121,6 +134,15 @@ final class EmbedPress extends AbstractModule
            and remove #wpcontent's left padding; match the screen-meta row's background
            and restore the standard gap so the opened panels align like core Help */
         body[class*="page_embedpress"] #tidy-admin-meta-region { background: #f5f7fd; padding-left: 20px; }
+        /* EmbedPress: floating "sponsored" quick-links launcher (Unlock pro Features /
+           Get Support / Suggest a Feature / Join Our Community — moved to the panels) */
+        .sponsored-quick_link,
+        .sponsored-floating_quick-links_wrapper,
+        .sponsored-floating_action { display: none !important; }
+        /* EmbedPress: Pro-feature entries in its internal sidebar nav — the pages live
+           in the Upgrades panel's Premium features tab */
+        .embedpress-sidebar .sidebar__item.branding-item,
+        .embedpress-sidebar .sidebar__item.sponserd-item { display: none !important; }
         CSS;
     }
 }

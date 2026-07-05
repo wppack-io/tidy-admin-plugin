@@ -138,6 +138,13 @@ final class LocationWeather extends AbstractModule
         .splwb-qs-pro-card { display: none !important; }
         /* Location Weather: Pro pitch section at the bottom of the settings page */
         .splw-upgrade-to-pro-promotion { display: none !important; }
+        /* Location Weather: full-bleed dashboard (spl-weather-pro-block-admin-page) —
+           overlay the whole screen-meta region (closed: buttons over the header;
+           open: the panel covers the content, with the buttons on its bottom edge) */
+        @media (min-width: 768px) {
+            body[class*="page_splw"] #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
+            body[class*="page_splw"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+        }
         /* Location Weather: "Get Help" dropdown button in the dashboard header and the
            support popover in the settings header (all links moved to the Help panel) */
         .spl-weather-admin-page-header-right,
