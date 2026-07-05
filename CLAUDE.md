@@ -62,7 +62,7 @@ defer one.
 
 ## Architecture
 
-A single WordPress plugin (`wppack/tidy-admin`, entry point
+A single WordPress plugin (`wppack/tidy-admin-plugin`, entry point
 `wppack-tidy-admin.php`) that cleans vendor upsells out of wp-admin.
 
 - `src/Module.php` — interface: one implementation per target plugin. Each

@@ -76,7 +76,7 @@ Upgrades パネル内に表示します。
 
 ## インストール
 
-Composer で `wppack/tidy-admin`(type: `wordpress-plugin`)を require して
+Composer で `wppack/tidy-admin-plugin`(type: `wordpress-plugin`)を require して
 有効化するか、`tidy-admin/` ディレクトリを `wp-content/plugins/` に配置して
 ください。設定は不要です。
 

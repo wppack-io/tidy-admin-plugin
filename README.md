@@ -79,7 +79,7 @@ plugins.
 
 ## Installation
 
-Require `wppack/tidy-admin` with Composer (type `wordpress-plugin`) and
+Require `wppack/tidy-admin-plugin` with Composer (type `wordpress-plugin`) and
 activate it, or drop the `tidy-admin/` directory into `wp-content/plugins/`.
 No configuration.
 

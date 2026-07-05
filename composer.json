@@ -1,5 +1,5 @@
 {
-    "name": "wppack/tidy-admin",
+    "name": "wppack/tidy-admin-plugin",
     "description": "Tidy up wp-admin: take plugin vendors' upsells, promos and notices out of the flow. Per-plugin modules activate only when the target plugin is active.",
     "type": "wordpress-plugin",
     "license": "MIT",
@@ -70,7 +70,7 @@
         "sort-packages": true
     },
     "extra": {
-        "installer-name": "tidy-admin",
+        "installer-name": "wppack-tidy-admin",
         "wordpress-install-dir": "web/wp",
         "installer-paths": {
             "web/wp-content/plugins/{$name}/": [
