@@ -189,8 +189,8 @@ final class EmbedPress extends AbstractModule
                        strip instead of exposing the admin gray; pages without that wrapper
                        pad the body. Player & Engagement is excluded: its full-height
                        layout reserves the space itself */
-                    body[class*="page_embedpress"]:not([class*="page_embedpress-player-engagement"]) .template__wrapper { padding-top: calc(30px + 2.5rem) !important; }
-                    body[class*="page_embedpress"]:not([class*="page_embedpress-player-engagement"]):not(:has(.template__wrapper)) #wpbody-content { padding-top: 2.5rem; }
+                    body[class*="page_embedpress"]:not([class*="page_embedpress-player-engagement"]) .template__wrapper { padding-top: 50px !important; }
+                    body[class*="page_embedpress"]:not([class*="page_embedpress-player-engagement"]):not(:has(.template__wrapper)) #wpbody-content { padding-top: 3.5rem; }
                 }
                 CSS,
             ],
