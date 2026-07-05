@@ -67,10 +67,12 @@ A single WordPress plugin (`wppack/tidy-admin`, entry point
 
 - `src/Module.php` — interface: one implementation per target plugin. Each
   module declares `targetPluginFile()`, `supportedMajorVersions()`,
-  `submenuRelocations()` (upgrade/premium/help categories),
-  `extraScreenMetaContent()`, `upsellLinkUrls()`, `noticeDenyByHook()`,
-  `setupNoticeByHook()` + `ownPagePrefixes()`, `adminCss()`, plus a
-  free-form `register()` for plugin-specific hooks.
+  `menuParent()`, `ownPagePrefixes()`, and `features()` — one entry per
+  user-visible cleanup with a translated label and its bundled declarations
+  (`submenuRelocations`, `extraScreenMetaContent`, `saleNoticeRelocation`,
+  `upsellLinkUrls`, `noticeDenyByHook`, `setupNoticeByHook`, `adminCss`,
+  `register` closure). Every feature is individually toggleable on
+  Settings > Tidy Admin.
 - `src/AbstractModule.php` — empty defaults; modules override only what they
   need (`targetPluginFile()` and `supportedMajorVersions()` are mandatory).
 - `src/Modules/` — one final class per supported plugin.
@@ -80,11 +82,12 @@ A single WordPress plugin (`wppack/tidy-admin`, entry point
   `SetupNoticeRelocator` (setup notices → own screens + "Pending plugin
   setup" dashboard widget), `AdminCss`, `CallbackMatcher`, `NoticeHtml`,
   `WordPressOrgLinks`, and `Settings`/`SettingsPage` (Settings › Tidy
-  Admin: per-module/per-location toggles, license-field visibility;
-  everything defaults to ON with licenses hidden).
+  Admin: per-module and per-feature toggles; everything defaults to ON,
+  license fields hidden via each module's `license-fields` feature).
 - `src/TidyAdminPlugin.php` — lists all modules in `MODULES`, instantiates
-  only those whose target plugin is in `active_plugins`, aggregates their
-  declarations into the Support mechanisms, then calls each `register()`.
+  only those whose target plugin is in `active_plugins`, and aggregates the
+  declarations of every enabled feature into the Support mechanisms
+  (calling each feature's `register` closure).
 
 Modules for plugins that are currently uninstalled stay in the codebase so
 they take effect again on reinstall.

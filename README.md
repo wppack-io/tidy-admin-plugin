@@ -54,10 +54,10 @@ plugins.
 - Each module pins the plugin major versions its removals were verified
   against (`supportedMajorVersions()`); a catalog test fails when a target
   plugin moves to an unverified major.
-- **Settings › Tidy Admin** lets you disable tidying per plugin — entirely or
-  per area (sidebar & panels, notices, setup notices, plugin list links,
-  cosmetic CSS) — and toggle the visibility of plugins' license fields, which
-  are hidden by default.
+- **Settings › Tidy Admin** lets you disable tidying per plugin — entirely,
+  or feature by feature: every module lists its actual cleanups (e.g. "Remove
+  the HelpScout support beacon", "Hide the license fields") as individually
+  toggleable checkboxes. Everything is ON by default.
 
 ## Supported plugins
 

@@ -19,22 +19,26 @@ they are; everything else moves to predictable, restrained places.
 ## Deciding what to do
 
 Classify every piece of vendor UI you meet, then apply the matching
-treatment with the matching mechanism:
+treatment with the matching mechanism. Every cleanup is declared as an
+entry of `Module::features()` — one entry per user-visible feature, with a
+translated label saying what it actually does — so users can toggle each
+one individually on Settings > Tidy Admin. Never lump unrelated cleanups
+into one feature (no "cosmetic CSS" catch-alls):
 
 | What it is | Treatment | Mechanism |
 |---|---|---|
 | Feature page or feature notice (API errors, failed jobs, results) | **Leave untouched** | — |
-| Documentation, support, developer resources, disclaimers | **Relocate** to the **Help** button on the plugin's own screens | `submenuRelocations()['help']`, `extraScreenMetaContent()` |
-| Purchase guidance **only** — upgrade links, pricing/plans, Lite-vs-Pro comparisons, add-on stores | **Relocate** to the **Upgrades** button — first tab, "Upgrade" | `submenuRelocations()['upgrade']` |
-| What paying gets you — locked/teaser feature pages, paid support, license pages, other-product pages | **Relocate** to the **Upgrades** button — second tab, "Premium features". A user opening Upgrades wants to know *how to upgrade* first, not what they would get | `submenuRelocations()['premium']` |
-| Functional setup notice (missing API key, first-run configuration) | **Confine** to the plugin's own screens + the **Pending plugin setup** dashboard widget (first position, no dismiss buttons) | `setupNoticeByHook()` + `ownPagePrefixes()` |
-| Seasonal sale / discount notice | **Relocate** to the top of the Upgrades panel — a running discount is real information for someone considering the upgrade | `saleNoticeRelocation()` |
-| Review requests, cross-sell notices, gamification popups | **Remove outright** | `noticeDenyByHook()` |
-| Upsell UI rendered inside JS bundles (React/Vue), teaser blocks with no hook | **Hide with CSS** | `adminCss()` |
-| Admin-footer branding hijacks ("Made with ♥ by …", version text) | **Remove**; the emptied core footer is the fallback | `register()` + core footer emptying |
-| plugins.php row links | Sales links **removed**; functional links (Docs, FAQ) kept | `upsellLinkUrls()` |
-| Behavior only reachable through the plugin's own filters (education tabs, teaser mailers, flyouts) | **Disable via the plugin's own filter** | `register()` |
-| License fields (key inputs, license headings) | **Hide by default**; the "Show plugins' license fields" setting lifts it while a key is being entered | `licenseCss()` |
+| Documentation, support, developer resources, disclaimers | **Relocate** to the **Help** button on the plugin's own screens | feature with `submenuRelocations.help` / `extraScreenMetaContent` |
+| Purchase guidance **only** — upgrade links, pricing/plans, Lite-vs-Pro comparisons, add-on stores | **Relocate** to the **Upgrades** button — first tab, "Upgrade" | feature with `submenuRelocations.upgrade` |
+| What paying gets you — locked/teaser feature pages, paid support, license pages, other-product pages | **Relocate** to the **Upgrades** button — second tab, "Premium features". A user opening Upgrades wants to know *how to upgrade* first, not what they would get | feature with `submenuRelocations.premium` |
+| Functional setup notice (missing API key, first-run configuration) | **Confine** to the plugin's own screens + the **Pending plugin setup** dashboard widget (first position, no dismiss buttons) | feature with `setupNoticeByHook` (+ module `ownPagePrefixes()`) |
+| Seasonal sale / discount notice | **Relocate** to the top of the Upgrades panel — a running discount is real information for someone considering the upgrade | feature with `saleNoticeRelocation` |
+| Review requests, cross-sell notices, gamification popups | **Remove outright** | feature with `noticeDenyByHook` |
+| Upsell UI rendered inside JS bundles (React/Vue), teaser blocks with no hook | **Hide with CSS** | feature with `adminCss` |
+| Admin-footer branding hijacks ("Made with ♥ by …", version text) | **Remove**; the emptied core footer is the fallback | feature with `register` + core footer emptying |
+| plugins.php row links | Sales links **removed**; functional links (Docs, FAQ) kept | feature with `upsellLinkUrls` |
+| Behavior only reachable through the plugin's own filters (education tabs, teaser mailers, flyouts) | **Disable via the plugin's own filter** | feature with `register` |
+| License fields (key inputs, license headings) | **Hide by default** as a per-module feature; users turn it off while entering a key | a `license-fields` feature with `adminCss` |
 
 When in doubt whether something is promotional or functional, leave it and
 note the question — removing a functional element is the one failure mode
