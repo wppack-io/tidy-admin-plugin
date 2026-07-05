@@ -1,0 +1,153 @@
+# CLAUDE.md
+
+This file provides guidance for Claude Code when working in this repository.
+
+Project overview and installation live in [README.md](README.md). This file is
+Claude-specific navigation + session hygiene, nothing duplicated from there.
+
+## Non-negotiables (failing these loses trust; do not skip)
+
+1. **Tests must pass before every commit.** `vendor/bin/phpunit` — the suite
+   boots a real WordPress and needs the test database up
+   (`docker compose up -d`, MySQL on `127.0.0.1:3309`).
+2. **PHPStan must be clean (level 8).** `vendor/bin/phpstan analyse` shows
+   `[OK] No errors`. Don't lower the level.
+3. **`1.x` is the only long-lived branch.** All work goes there; PRs target
+   `1.x`.
+4. **Never skip hooks or signing.** No `--no-verify`, no `--no-gpg-sign`.
+5. **Destructive ops require explicit user confirmation.** `git push --force`,
+   `git reset --hard`, `rm -rf` — call it out and wait.
+6. **Don't auto-push after every commit.** Batch locally; push only on
+   explicit instruction.
+7. **Only remove upsells, promos and review requests.** Never touch a target
+   plugin's functional pages, functional notices, or front-end output. When
+   in doubt whether something is promotional, leave it and ask.
+8. **Follow [docs/ui-guidelines.md](docs/ui-guidelines.md) for every UI
+   decision** — it defines what gets removed, relocated, confined, or
+   CSS-hidden, and which mechanism to use. Propose a guideline change
+   rather than deviating silently.
+
+## Architecture
+
+A single WordPress plugin (`wppack/tidy-admin`, entry point
+`wppack-tidy-admin.php`) that cleans vendor upsells out of wp-admin.
+
+- `src/Module.php` — interface: one implementation per target plugin. Each
+  module declares `targetPluginFile()`, `supportedMajorVersions()`,
+  `submenuRelocations()` (upgrade/premium/help categories),
+  `extraScreenMetaContent()`, `upsellLinkUrls()`, `noticeDenyByHook()`,
+  `setupNoticeByHook()` + `ownPagePrefixes()`, `adminCss()`, plus a
+  free-form `register()` for plugin-specific hooks.
+- `src/AbstractModule.php` — empty defaults; modules override only what they
+  need (`targetPluginFile()` and `supportedMajorVersions()` are mandatory).
+- `src/Modules/` — one final class per supported plugin.
+- `src/Support/` — shared mechanics fed by the aggregated module
+  declarations: `SubmenuCleaner` (sidebar → "Help" / "Upgrades"
+  screen-meta buttons), `PluginListLinkCleaner`, `NoticeHookCleaner`,
+  `SetupNoticeRelocator` (setup notices → own screens + "Pending plugin
+  setup" dashboard widget), `AdminCss`, `CallbackMatcher`.
+- `src/TidyAdminPlugin.php` — lists all modules in `MODULES`, instantiates
+  only those whose target plugin is in `active_plugins`, aggregates their
+  declarations into the Support mechanisms, then calls each `register()`.
+
+Modules for plugins that are currently uninstalled stay in the codebase so
+they take effect again on reinstall.
+
+### Conventions that matter here
+
+- Every removal is documented with an inline comment saying what the removed
+  item is and why removing it is safe (e.g. "Pro feature; Lite only shows a
+  sample plus a Pro pitch"). Keep that discipline for new entries; comments
+  are in English.
+- Submenu slugs and upsell URLs are matched by **substring** (external links
+  carry UTM params; labels vary by locale, so match URLs, never display text).
+- `declare(strict_types=1)`, PER coding style, one final class per file.
+
+## Testing
+
+- The suite boots a real WordPress via wp-phpunit and installs the **real
+  target plugins** from wp-packages.org (see `require-dev`), so modules run
+  against actual plugin code.
+- `tests/TestCase.php` is a custom base class that snapshots/restores
+  `$wp_filter` and key globals between tests. wp-phpunit's `WP_UnitTestCase`
+  is not used (incompatible with PHPUnit 11).
+- `TidyAdminPluginTest::test_every_module_targets_an_installed_plugin_file`
+  is the catalog test: it fails when a plugin update renames its main file.
+
+### Adding a module (checklist)
+
+1. Add `wp-plugin/{slug}: "*"` to `require-dev` and `composer update` it in.
+2. Create `src/Modules/{Name}.php` extending `AbstractModule`; classify every
+   item per [docs/ui-guidelines.md](docs/ui-guidelines.md) and comment each
+   entry with what it is and why the treatment is safe. Declare
+   `supportedMajorVersions()` with the major you verified against.
+3. Register the class in `TidyAdminPlugin::MODULES` (alphabetical order).
+4. Add it to the supported-plugins tables in `README.md` and `README.ja.md`.
+5. Run the full suite — catalog tests validate the target file exists and
+   the installed major is verified.
+
+## Toolchain Quick Reference
+
+| Task | Command |
+|------|---------|
+| Databases | `docker compose up -d` (dev on `127.0.0.1:3308` persistent, test on `127.0.0.1:3309` tmpfs) |
+| Install deps | `composer install` |
+| Run tests | `vendor/bin/phpunit` |
+| Run one test file | `vendor/bin/phpunit tests/Modules/YoastTest.php` |
+| PHPStan | `vendor/bin/phpstan analyse --no-progress` |
+| Code style check | `vendor/bin/php-cs-fixer fix --dry-run --diff` |
+| Code style fix | `vendor/bin/php-cs-fixer fix` |
+| Dev server (browser testing) | `bin/dev-server` → http://localhost:8080 (admin / password); this machine: `TIDY_ADMIN_DEV_PORT=8082` |
+| Reset dev site to fresh state | `bin/dev-reset` (also bootstraps first-time setup) |
+
+## Browser testing (dev server)
+
+Modeled on wppack: wp-cli as a dev dependency, `wp-cli.yml` (`path: web/wp`,
+`server.docroot: web`), and a persistent `mysql` dev service
+(`tidy_admin_dev`, port 3308) next to `mysql-test` in `compose.yaml`.
+
+The HTTP port defaults to 8080 and is overridable via `TIDY_ADMIN_DEV_PORT`,
+honored by both `bin/dev-server` and `bin/dev-reset`. On this machine 8080 is
+taken by another process, so run with `TIDY_ADMIN_DEV_PORT=8082` (or export it
+in the shell). The generated `web/wp-config.php` derives `WP_HOME` from the
+request's `HTTP_HOST`, so switching ports needs no regeneration.
+
+**`bin/dev-reset` is both first-time setup and reset to a fresh state** —
+plugin testing dirties options/notices constantly, so run it whenever you
+want a clean slate (drops all tables, clears uploads and debug.log,
+reinstalls, reactivates all plugins):
+
+```console
+$ docker compose up -d
+$ bin/dev-reset
+$ bin/dev-server
+```
+
+`web/` is gitignored; `bin/dev-reset` is the canonical source of the
+dev-only files it generates there (`web/wp-config.php`, `web/index.php`,
+and the plugin dev stub — regenerated only when missing, so local tweaks
+survive a reset). Two lessons baked into the script; keep them if editing:
+
+- The plugin stub is a **real file**, never a symlink to the repo root:
+  `wp_register_plugin_realpath()` would map the plugin dir to the repo root
+  — an ancestor of `web/` — corrupting `plugin_basename()`/`plugins_url()`
+  for **every** plugin under `web/wp-content/plugins/`.
+- Instagram Feed's `< 1.7` DB migration runs a GDPR image-editor self-test
+  that crashes WP loading when offline (passes a `WP_Error` to
+  `wp_get_image_editor()`); the script pre-sets `sbi_db_version` to skip it.
+
+## Session Hygiene
+
+- **Documentation sync check on every change**: before finishing, always
+  check whether the change requires updating `README.md` **and**
+  `README.ja.md` (keep the two in sync), anything under `docs/`
+  (ui-guidelines etc.), and `languages/` — new or changed UI strings need
+  the right text domain, a regenerated POT (`vendor/bin/wp i18n make-pot .
+  languages/wppack-tidy-admin.pot --domain=wppack-tidy-admin
+  --exclude=web,vendor,tests,bin`), updated `ja.po`, and
+  `vendor/bin/wp i18n make-mo languages/`.
+- Edit → test → PHPStan → commit. Never claim done with red tests.
+- Discovered a bug along the way? Note it in the commit message or a
+  follow-up; don't expand scope silently.
+- This file is not static: when a rule proves wrong or a non-obvious
+  convention lands, **edit, don't append** — and keep it short.
