@@ -184,9 +184,13 @@ final class EmbedPress extends AbstractModule
                 @media (min-width: 768px) {
                     body[class*="page_embedpress"] #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
                     body[class*="page_embedpress"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
-                    /* Drop the page content below the overlaid buttons. Player & Engagement
-                       is excluded: its full-height layout reserves that space itself */
-                    body[class*="page_embedpress"]:not([class*="page_embedpress-player-engagement"]) #wpbody-content { padding-top: 2.5rem; }
+                    /* Drop the page content below the overlaid buttons — pad the plugin's
+                       own wrapper so its background (e.g. background__liteGrey) covers the
+                       strip instead of exposing the admin gray; pages without that wrapper
+                       pad the body. Player & Engagement is excluded: its full-height
+                       layout reserves the space itself */
+                    body[class*="page_embedpress"]:not([class*="page_embedpress-player-engagement"]) .template__wrapper { padding-top: calc(30px + 2.5rem) !important; }
+                    body[class*="page_embedpress"]:not([class*="page_embedpress-player-engagement"]):not(:has(.template__wrapper)) #wpbody-content { padding-top: 2.5rem; }
                 }
                 CSS,
             ],
