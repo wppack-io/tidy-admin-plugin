@@ -111,10 +111,13 @@ final class Yoast extends AbstractModule
         body[class*="page_wpseo"] .yst-max-w-4xl { display: none !important; }
         /* Yoast: promo sidebar on classic pages such as Tools (Sidebar_Presenter; not output in the Premium version) */
         body[class*="page_wpseo"] #sidebar-container { display: none !important; }
-        /* Yoast: Premium pitch block shown on "SEO data" and similar screens */
-        .yoast_premium_upsell { display: none !important; }
-        /* Yoast: Premium feature upsell cards in the editor (related keyphrases, internal linking suggestions, etc.) */
-        .yst-feature-upsell { display: none !important; }
+        /* Yoast: Premium pitch blocks, upsell cards, badges and buttons — hidden
+           everywhere EXCEPT on the relocated Premium teaser pages (Academy, Plans,
+           Redirects, Workouts, AI Brand Insights), where reaching the upsell is the
+           whole point of following the Upgrades panel link */
+        body:not(:is([class*="page_wpseo_page_academy"], [class*="page_wpseo_licenses"], [class*="page_wpseo_redirects"],
+            [class*="page_wpseo_workouts"], [class*="page_wpseo_brand_insights"]))
+            :is(.yoast_premium_upsell, .yst-feature-upsell, .yst-badge--upsell, .yst-button--upsell) { display: none !important; }
         /* Yoast: editor buttons that open the Premium feature modal (add related keyphrase /
            internal linking suggestions; target both metabox and sidebar variants via the ID prefix) */
         button[id^="yoast-additional-keyphrase-"],
@@ -122,10 +125,6 @@ final class Yoast extends AbstractModule
         /* Yoast: "prominent words" in the editor (a promo slot for a Premium feature) */
         [id^="yoast-prominent-words"],
         [class*="yoast-prominent-words"] { display: none !important; }
-        /* Yoast: Premium badge (--upsell is the upsell-only variant) */
-        .yst-badge--upsell { display: none !important; }
-        /* Yoast: buttons such as "Upgrade" / "Unlock with Premium" (--upsell is the upsell-only variant) */
-        .yst-button--upsell { display: none !important; }
         /* Yoast: release the margin reserved for the hidden right sidebar */
         @media (min-width: 1280px) {
             body[class*="page_wpseo"] .xl\:yst-pe-\[17\.5rem\] { padding-inline-end: 0 !important; }

@@ -130,10 +130,19 @@ final class EmbedPress extends AbstractModule
         /* EmbedPress: settings-page footer cards — review request ("Show Your Love");
            Documentation and Need Help? moved to the Help panel */
         .background__white:has(> .embedpress__row > .embedpress-card) { display: none !important; }
-        /* EmbedPress: its pages paint their own light background (.background__liteGrey)
-           and remove #wpcontent's left padding; match the screen-meta row's background
-           and restore the standard gap so the opened panels align like core Help */
-        body[class*="page_embedpress"] #tidy-admin-meta-region { background: #f5f7fd; padding-left: 20px; }
+        /* EmbedPress: marketing tagline in its page header ("Embed content instantly.
+           No code needed. Trusted by 100,000+ sites.") — the freed space hosts the
+           overlaid screen-meta buttons */
+        .embedpress-header > p { display: none !important; }
+        /* EmbedPress: it removes #wpcontent's left padding; restore the standard gap
+           so the opened panels align with the admin menu like core Help */
+        body[class*="page_embedpress"] #tidy-admin-meta-region { margin-left: 20px; }
+        /* EmbedPress: overlay the whole screen-meta region over its header (closed:
+           buttons over the header; open: the panel covers the content) */
+        @media (min-width: 768px) {
+            body[class*="page_embedpress"] #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
+            body[class*="page_embedpress"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+        }
         /* EmbedPress: floating "sponsored" quick-links launcher (Unlock pro Features /
            Get Support / Suggest a Feature / Join Our Community — moved to the panels) */
         .sponsored-quick_link,

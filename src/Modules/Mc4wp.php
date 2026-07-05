@@ -106,9 +106,12 @@ final class Mc4wp extends AbstractModule
            resources moved to the Help panel; let the main column span the full width */
         .mc4wp-sidebar { display: none !important; }
         .mc4wp-row .mc4wp-col { width: 100% !important; }
-        /* MC4WP: standard-looking pages, but the heading sits inside .mc4wp-row rather
-           than directly under .wrap — opt into the core float-beside-title behavior */
-        body[class*="page_mailchimp-for-wp"] #tidy-admin-meta-region #screen-meta-links { display: block; float: right; }
+        /* MC4WP: some views (e.g. the form editor) shrink beside a floated row —
+           use the desktop overlay placement instead */
+        @media (min-width: 768px) {
+            body[class*="page_mailchimp-for-wp"] #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
+            body[class*="page_mailchimp-for-wp"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+        }
         CSS;
     }
 

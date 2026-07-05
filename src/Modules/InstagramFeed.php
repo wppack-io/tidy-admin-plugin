@@ -64,7 +64,13 @@ final class InstagramFeed extends AbstractModule
                     . '<li><a href="https://smashballoon.com/docs/instagram/" target="_blank" rel="noopener noreferrer">' . esc_html__('Docs & Troubleshooting', 'instagram-feed') . '</a></li>'
                     . '<li><a href="https://smashballoon.com/blog/" target="_blank" rel="noopener noreferrer">' . esc_html__('View Blog', 'instagram-feed') . '</a></li>'
                     . '<li><a href="https://smashballoon.com/instagram-feed/support/" target="_blank" rel="noopener noreferrer">' . esc_html__('Submit a Support Ticket', 'instagram-feed') . '</a></li>'
-                    . '</ul>',
+                    . '</ul>'
+                    // The cards from its floating help widget (hidden via adminCss()),
+                    // in the Smash Balloon framework's own text domain
+                    . '<p><a href="https://smashballoon.com/support/" target="_blank" rel="noopener noreferrer">' . esc_html__('I have an idea or feedback', 'sb-common') . '</a><br>'
+                    . esc_html__('Help shape the product with your input', 'sb-common') . '</p>'
+                    . '<p><a href="https://smashballoon.com/docs/" target="_blank" rel="noopener noreferrer">' . esc_html__('I need help', 'sb-common') . '</a><br>'
+                    . esc_html__('Find answers or talk to support', 'sb-common') . '</p>',
             ],
         ];
     }
@@ -103,6 +109,14 @@ final class InstagramFeed extends AbstractModule
         /* Instagram Feed: "Did You Know ... our other plugins" box at the bottom of the feed
            builder screen (pitch to install Facebook/TikTok etc.) */
         .sbi-fb-mr-feeds { display: none !important; }
+        /* Instagram Feed: its own floating Help button in the page header and the
+           Smash Balloon help widget launcher — replaced by the standard Help panel */
+        .sbi-fb-header-right,
+        #sb-help-widget-host { display: none !important; }
+        /* Instagram Feed: it removes #wpcontent's left padding; restore the standard
+           gap so the opened panels align with the admin menu like core Help */
+        body[class*="page_sb-instagram-feed"] #tidy-admin-meta-region,
+        body[class*="page_sbi-"] #tidy-admin-meta-region { margin-left: 20px; }
         /* Instagram Feed: full-bleed UI with a roomy header — overlay the whole
            screen-meta region (closed: buttons over the header; open: the panel covers
            the content instead of pushing it, with the buttons on its bottom edge) */
