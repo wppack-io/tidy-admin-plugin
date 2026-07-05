@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Starts the browser-testing dev server (wp-cli's built-in server).
+#
+# Usage: [TIDY_ADMIN_DEV_PORT=8080] bin/dev-server
+
+set -eu
+cd "$(dirname "$0")/.."
+
+exec vendor/bin/wp server --port="${TIDY_ADMIN_DEV_PORT:-8080}"
