@@ -1,0 +1,88 @@
+{
+    "name": "wppack/tidy-admin",
+    "description": "Tidy up wp-admin: take plugin vendors' upsells, promos and notices out of the flow. Per-plugin modules activate only when the target plugin is active.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.wp-packages.org",
+            "only": [
+                "wp-plugin/*",
+                "wp-theme/*"
+            ]
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "composer/installers": "^2.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.68",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpunit/phpunit": "^11.5",
+        "roots/wordpress-core-installer": "^3.0",
+        "roots/wordpress-full": ">=6.7 <8.0",
+        "szepeviktor/phpstan-wordpress": "^2.0",
+        "wp-phpunit/wp-phpunit": ">=6.7 <8.0",
+        "wp-plugin/bnfw": "*",
+        "wp-plugin/broken-link-checker": "*",
+        "wp-plugin/contact-form-cfdb7": "*",
+        "wp-plugin/embedpress": "*",
+        "wp-plugin/instagram-feed": "*",
+        "wp-plugin/location-weather": "*",
+        "wp-plugin/mailchimp-for-wp": "*",
+        "wp-plugin/post-expirator": "*",
+        "wp-plugin/post-types-order": "*",
+        "wp-plugin/taxonomy-terms-order": "*",
+        "wp-plugin/wordpress-seo": "*",
+        "wp-plugin/wp-mail-smtp": "*",
+        "wp-plugin/yet-another-related-posts-plugin": "*",
+        "yoast/phpunit-polyfills": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WPPack\\Plugin\\TidyAdminPlugin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WPPack\\Plugin\\TidyAdminPlugin\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "roots/wordpress-core-installer": true
+        },
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "installer-name": "tidy-admin",
+        "wordpress-install-dir": "web/wp",
+        "installer-paths": {
+            "web/wp-content/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "web/wp-content/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        }
+    },
+    "prefer-stable": true,
+    "archive": {
+        "exclude": [
+            "/.gitignore",
+            "/.php-cs-fixer.php",
+            "/docker-compose.yml",
+            "/phpstan.neon",
+            "/phpunit.xml.dist",
+            "/tests",
+            "/web",
+            "/vendor"
+        ]
+    }
+}
