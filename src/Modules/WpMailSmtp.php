@@ -288,7 +288,7 @@ final class WpMailSmtp extends AbstractModule
                    stack on top of each other. Lay the row out with flex inside the
                    band instead (the .show() call sets inline display:block, hence the
                    !important) */
-                #wp-mail-smtp-header-temp #screen-meta-links { display: flex !important; justify-content: flex-end; position: absolute; top: 0; right: 20px; }
+                #wp-mail-smtp-header-temp #screen-meta-links { display: flex !important; justify-content: flex-end; float: none !important; position: static !important; margin: 0 20px 0 0; }
                 #wp-mail-smtp-header-temp #screen-meta-links .screen-meta-toggle { position: static !important; float: none !important; margin: 0 0 0 6px; }
                 CSS,
             ],
