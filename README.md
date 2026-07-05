@@ -27,8 +27,8 @@ available: quietly, in one predictable place.
 
 But a wp-admin where those promotions shout for attention with no restraint
 or coordination violates guideline 11 of the WordPress.org plugin guidelines
-("Plugins should not hijack the admin dashboard"), and it is a daily nuisance
-for everyone who works in it. This plugin is an answer to
+("Plugins should not hijack the admin dashboard"), and it confuses everyone
+who works in it every day. This plugin is an answer to
 [“Please Stop Abusing WordPress Admin Notices” (WP Tavern, 2016)](https://wptavern.com/please-stop-abusing-wordpress-admin-notices).
 
 Our goal is a better experience for everyone who uses WordPress, through a
