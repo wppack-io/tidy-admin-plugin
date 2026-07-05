@@ -79,8 +79,11 @@ final class WpMailSmtp extends AbstractModule
                         'parent' => $this->menuParent(),
                         'html' => '<ul class="tidy-admin-meta-links">'
                             . '<li><a href="https://wpmailsmtp.com/docs/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation') . '</a></li>'
-                            . '<li><a href="https://wpmailsmtp.com/suggest-a-mailer/" target="_blank" rel="noopener noreferrer">' . esc_html__('Suggest a Mailer', 'wp-mail-smtp') . '</a></li>'
-                            . '</ul>',
+                            . '</ul>'
+                            // Kept as the author's original sentence (both strings in
+                            // the plugin's own text domain)
+                            . '<p>' . esc_html__('Don\'t see what you\'re looking for?', 'wp-mail-smtp')
+                            . ' <a href="https://wpmailsmtp.com/suggest-a-mailer/" target="_blank" rel="noopener noreferrer">' . esc_html__('Suggest a Mailer', 'wp-mail-smtp') . '</a></p>',
                     ],
                 ],
                 'adminCss' => <<<'CSS'
