@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T06:54:42+09:00\n"
+"POT-Creation-Date: 2026-07-06T07:04:44+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -36,7 +36,7 @@ msgstr ""
 #: src/Modules/LocationWeather.php:44
 #: src/Modules/Mc4wp.php:44
 #: src/Modules/PublishPressFuture.php:39
-#: src/Modules/WpMailSmtp.php:39
+#: src/Modules/WpMailSmtp.php:44
 #: src/Modules/Yoast.php:45
 msgid "Move upgrade menus to the Upgrades panel"
 msgstr ""
@@ -44,7 +44,7 @@ msgstr ""
 #: src/Modules/Bnfw.php:47
 #: src/Modules/EmbedPress.php:52
 #: src/Modules/InstagramFeed.php:47
-#: src/Modules/WpMailSmtp.php:53
+#: src/Modules/WpMailSmtp.php:58
 #: src/Modules/Yoast.php:54
 msgid "Move Premium feature pages to the Upgrades panel"
 msgstr ""
@@ -54,8 +54,8 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:59
 #: src/Modules/LocationWeather.php:61
 #: src/Modules/Mc4wp.php:52
-#: src/Modules/PublishPressFuture.php:56
-#: src/Modules/WpMailSmtp.php:63
+#: src/Modules/PublishPressFuture.php:87
+#: src/Modules/WpMailSmtp.php:68
 #: src/Modules/Yarpp.php:49
 #: src/Modules/Yoast.php:65
 msgid "Move documentation and support links to the Help panel"
@@ -88,7 +88,7 @@ msgstr ""
 
 #: src/Modules/Cfdb7.php:47
 #: src/Modules/Mc4wp.php:120
-#: src/Modules/PublishPressFuture.php:110
+#: src/Modules/PublishPressFuture.php:141
 #: src/Modules/Yarpp.php:41
 msgid "Remove the review request"
 msgstr ""
@@ -97,8 +97,8 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:91
 #: src/Modules/LocationWeather.php:85
 #: src/Modules/Mc4wp.php:92
-#: src/Modules/PublishPressFuture.php:85
-#: src/Modules/WpMailSmtp.php:88
+#: src/Modules/PublishPressFuture.php:116
+#: src/Modules/WpMailSmtp.php:95
 #: src/Modules/Yoast.php:80
 msgid "Remove upgrade links from the plugin list"
 msgstr ""
@@ -113,14 +113,14 @@ msgid "Remove the milestone celebration popup"
 msgstr ""
 
 #: src/Modules/EmbedPress.php:142
-#: src/Modules/WpMailSmtp.php:158
+#: src/Modules/WpMailSmtp.php:195
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
 #: src/Modules/EmbedPress.php:152
 #: src/Modules/InstagramFeed.php:129
 #: src/Modules/LocationWeather.php:156
-#: src/Modules/WpMailSmtp.php:214
+#: src/Modules/WpMailSmtp.php:251
 #: src/Modules/Yoast.php:176
 msgid "Hide upsell promotions on its screens"
 msgstr ""
@@ -136,6 +136,7 @@ msgstr ""
 #: src/Modules/LocationWeather.php:112
 #: src/Modules/Mc4wp.php:128
 #: src/Modules/PostTypesOrder.php:50
+#: src/Modules/WpMailSmtp.php:101
 #: src/Modules/Yoast.php:99
 msgid "Move the setup notice to the plugin screens and dashboard widget"
 msgstr ""
@@ -145,7 +146,7 @@ msgid "Move the weather editor's Pro pitches to the Upgrades panel"
 msgstr ""
 
 #: src/Modules/LocationWeather.php:171
-#: src/Modules/WpMailSmtp.php:177
+#: src/Modules/WpMailSmtp.php:214
 msgid "Restore the standard admin footer"
 msgstr ""
 
@@ -180,43 +181,47 @@ msgstr ""
 msgid "Remove the icon from its Settings menu item"
 msgstr ""
 
-#: src/Modules/PublishPressFuture.php:91
+#: src/Modules/PublishPressFuture.php:59
+msgid "Show Scheduled Actions in the sidebar instead of a page button"
+msgstr ""
+
+#: src/Modules/PublishPressFuture.php:122
 msgid "Hide locked Pro settings rows"
 msgstr ""
 
-#: src/Modules/PublishPressFuture.php:99
+#: src/Modules/PublishPressFuture.php:130
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:94
+#: src/Modules/WpMailSmtp.php:131
 msgid "Remove the \"You're using Lite\" notice bar"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:100
+#: src/Modules/WpMailSmtp.php:137
 msgid "Remove the SendLayer setup banner"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:110
+#: src/Modules/WpMailSmtp.php:147
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:139
+#: src/Modules/WpMailSmtp.php:176
 msgid "Remove Pro-only teaser mailers from the mailer list"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:165
+#: src/Modules/WpMailSmtp.php:202
 msgid "Always show the Scheduled Actions tools page"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:194
+#: src/Modules/WpMailSmtp.php:231
 msgid "Remove the dashboard widget's Pro teaser chart"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:205
+#: src/Modules/WpMailSmtp.php:242
 msgid "Remove the Backup Connection teaser"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:235
+#: src/Modules/WpMailSmtp.php:270
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
@@ -248,7 +253,7 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#: src/Support/SetupNoticeRelocator.php:104
+#: src/Support/SetupNoticeRelocator.php:113
 msgid "Pending plugin setup"
 msgstr ""
 

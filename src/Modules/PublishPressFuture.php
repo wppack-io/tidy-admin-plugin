@@ -50,6 +50,37 @@ final class PublishPressFuture extends AbstractModule
                    slug-based hiding CSS was built — hide it by its own stable class
                    (the link stays available in the Upgrades panel) */
                 #adminmenu li.pp-version-notice-upgrade-menu-item { display: none !important; }
+                /* PublishPress Future: "Upgrade to Pro" button in the workflow editor's
+                   header toolbar (the upgrade link lives in the Upgrades panel) */
+                .edit-post-header-toolbar__buy-pro { display: none !important; }
+                CSS,
+            ],
+            'scheduled-actions-menu' => [
+                'label' => __('Show Scheduled Actions in the sidebar instead of a page button', 'wppack-tidy-admin'),
+                /*
+                 * The Scheduled Actions screen is registered without a menu
+                 * entry; the plugin instead injects a "Scheduled Actions"
+                 * button next to page titles via jQuery. A submenu entry is
+                 * the WordPress-native place for a screen, so add one and
+                 * hide the injected button.
+                 */
+                'register' => static function (): void {
+                    add_action('admin_menu', static function (): void {
+                        global $submenu;
+                        if (isset($submenu['publishpress-future'])) {
+                            $submenu['publishpress-future'][] = [
+                                __('Scheduled Actions', 'post-expirator'),
+                                'manage_options',
+                                'admin.php?page=publishpress-future-scheduled-actions',
+                            ];
+                        }
+                    }, PHP_INT_MAX);
+                },
+                'adminCss' => <<<'CSS'
+                /* PublishPress Future: the jQuery-injected "Scheduled Actions" button next
+                   to page titles — the screen now has its own submenu entry */
+                .wrap .page-title-action[href*="publishpress-future-scheduled-actions"],
+                .wrap .pp-settings-title + a[href*="publishpress-future-scheduled-actions"] { display: none !important; }
                 CSS,
             ],
             'help-links' => [

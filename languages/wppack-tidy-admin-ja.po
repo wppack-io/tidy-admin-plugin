@@ -147,6 +147,10 @@ msgid "Remove the icon from its Settings menu item"
 msgstr "設定メニュー項目のアイコンを除去"
 
 #: src/Modules/PublishPressFuture.php
+msgid "Show Scheduled Actions in the sidebar instead of a page button"
+msgstr "Scheduled Actions をページ内ボタンではなくサイドバーに表示"
+
+#: src/Modules/PublishPressFuture.php
 msgid "Hide locked Pro settings rows"
 msgstr "ロックされた Pro 設定行を非表示"
 
