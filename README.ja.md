@@ -68,7 +68,7 @@ Upgrades パネル内に表示します。
 | Location Weather | 3.x | Lite vs Pro / Upgrade メニュー、宣伝カード、Get Help ドロップダウン → Help パネル、セールバナー → Upgrades パネル、API キー通知 → ダッシュボードウィジェット |
 | MC4WP (Mailchimp for WP) | 4.x | Extensions メニュー、Premium 広告、レビュー依頼、API キー通知 → ダッシュボードウィジェット |
 | Post Types Order | 2.x | 上位版宣伝ボックス、設定要求通知 → ダッシュボードウィジェット |
-| PublishPress Future | 4.x | Upgrade メニュー/リンク、バージョン通知バー、評価依頼フッター |
+| PublishPress Future | 4.x | Upgrade メニュー/リンク、バージョン通知バー、ロックされた Pro 設定行、サポート/ドキュメントカードとフッター → Help パネル |
 | Taxonomy Terms Order | 1.x | 上位版宣伝ボックス |
 | WP Mail SMTP | 4.x | Pro タブ/メニュー、SendLayer バナー、ウィジェットのチャート teaser、Pro 専用 Mailer スタブ、flyout メニュー |
 | YARPP | 5.x | レビュー依頼 |

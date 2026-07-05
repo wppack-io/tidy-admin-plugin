@@ -143,6 +143,10 @@ msgid "Remove the icon from its Settings menu item"
 msgstr "設定メニュー項目のアイコンを除去"
 
 #: src/Modules/PublishPressFuture.php
+msgid "Hide locked Pro settings rows"
+msgstr "ロックされた Pro 設定行を非表示"
+
+#: src/Modules/PublishPressFuture.php
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr "「無料版を使用中」バーを除去"
 

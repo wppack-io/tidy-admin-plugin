@@ -52,11 +52,48 @@ final class PublishPressFuture extends AbstractModule
                 #adminmenu li.pp-version-notice-upgrade-menu-item { display: none !important; }
                 CSS,
             ],
+            'help-links' => [
+                'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
+                // The "Need PublishPress Future Support?" sidebar card and the
+                // page footer's About / Documentation / Contact links (both
+                // hidden below), kept in the plugin's own text domain. The
+                // support-forum link already lives in the WordPress.org sidebar
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'help',
+                        'parent' => $this->menuParent(),
+                        'html' => '<p>' . esc_html__('If you need help or have a new feature request, let us know.', 'post-expirator')
+                            . ' <a href="https://wordpress.org/support/plugin/post-expirator/" target="_blank" rel="noopener noreferrer">' . esc_html__('Request Support', 'post-expirator') . '</a></p>'
+                            . '<p>' . esc_html__('Detailed documentation is also available on the plugin website.', 'post-expirator')
+                            . ' <a href="https://publishpress.com/knowledge-base/introduction-future/" target="_blank" rel="noopener noreferrer">' . esc_html__('View Knowledge Base', 'post-expirator') . '</a></p>'
+                            . '<ul class="tidy-admin-meta-links">'
+                            . '<li><a href="https://publishpress.com/future/" target="_blank" rel="noopener noreferrer">' . esc_html__('About', 'post-expirator') . '</a></li>'
+                            . '<li><a href="https://publishpress.com/knowledge-base/future-introduction/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation', 'post-expirator') . '</a></li>'
+                            . '<li><a href="https://publishpress.com/publishpress-support/" target="_blank" rel="noopener noreferrer">' . esc_html__('Contact', 'post-expirator') . '</a></li>'
+                            . '</ul>',
+                    ],
+                ],
+                'adminCss' => <<<'CSS'
+                /* PublishPress Future: "Need PublishPress Future Support?" right-sidebar card
+                   and the branded page footer (review request + About / Documentation /
+                   Contact) — every link lives in the Help panel */
+                body[class*="page_publishpress-future"] .pp-column-right,
+                body[class*="page_publishpress-future"] #wpbody-content footer { display: none !important; }
+                CSS,
+            ],
             'plugin-list-links' => [
                 'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
                 'upsellLinkUrls' => [
                     'publishpress.com/links/future', // Upgrade to Pro
                 ],
+            ],
+            'pro-settings-rows' => [
+                'label' => __('Hide locked Pro settings rows', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* PublishPress Future: settings rows whose control is a locked Pro teaser,
+                   marked by the lock icon (Custom statuses, Metadata scheduling, ...) */
+                body[class*="page_publishpress-future"] table.form-table tr:has(.pp-pro-loc-icon) { display: none !important; }
+                CSS,
             ],
             'version-notice' => [
                 'label' => __('Remove the "You\'re using the Free version" bar', 'wppack-tidy-admin'),

@@ -71,7 +71,7 @@ plugins.
 | Location Weather | 3.x | Lite vs Pro / Upgrade menus; promo cards; Get Help dropdown → Help panel; sale banners → Upgrades panel; API-key notice → dashboard widget |
 | MC4WP (Mailchimp for WP) | 4.x | Extensions menu; Premium ads; review request; API-key notice → dashboard widget |
 | Post Types Order | 2.x | Advanced-version promo box; configuration notice → dashboard widget |
-| PublishPress Future | 4.x | Upgrade menu and links; version notice bar; rating footer |
+| PublishPress Future | 4.x | Upgrade menu and links; version notice bar; locked Pro settings rows; support/docs card and branded footer → Help panel |
 | Taxonomy Terms Order | 1.x | Advanced-version promo box |
 | WP Mail SMTP | 4.x | Pro tabs and menus; SendLayer banners; dashboard-widget teaser; Pro-only mailer stubs; flyout menu |
 | YARPP | 5.x | Review request |

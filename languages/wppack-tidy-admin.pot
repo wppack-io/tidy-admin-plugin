@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T06:35:22+09:00\n"
+"POT-Creation-Date: 2026-07-06T06:42:45+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -54,6 +54,7 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:59
 #: src/Modules/LocationWeather.php:61
 #: src/Modules/Mc4wp.php:52
+#: src/Modules/PublishPressFuture.php:56
 #: src/Modules/WpMailSmtp.php:63
 #: src/Modules/Yarpp.php:49
 #: src/Modules/Yoast.php:65
@@ -81,13 +82,13 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:146
 #: src/Modules/LocationWeather.php:174
 #: src/Modules/Mc4wp.php:144
-#: src/Modules/Yoast.php:228
+#: src/Modules/Yoast.php:236
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
 #: src/Modules/Cfdb7.php:47
 #: src/Modules/Mc4wp.php:120
-#: src/Modules/PublishPressFuture.php:73
+#: src/Modules/PublishPressFuture.php:110
 #: src/Modules/Yarpp.php:41
 msgid "Remove the review request"
 msgstr ""
@@ -96,7 +97,7 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:91
 #: src/Modules/LocationWeather.php:85
 #: src/Modules/Mc4wp.php:92
-#: src/Modules/PublishPressFuture.php:56
+#: src/Modules/PublishPressFuture.php:85
 #: src/Modules/WpMailSmtp.php:88
 #: src/Modules/Yoast.php:80
 msgid "Remove upgrade links from the plugin list"
@@ -120,7 +121,7 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:129
 #: src/Modules/LocationWeather.php:121
 #: src/Modules/WpMailSmtp.php:214
-#: src/Modules/Yoast.php:168
+#: src/Modules/Yoast.php:176
 msgid "Hide upsell promotions on its screens"
 msgstr ""
 
@@ -175,7 +176,11 @@ msgstr ""
 msgid "Remove the icon from its Settings menu item"
 msgstr ""
 
-#: src/Modules/PublishPressFuture.php:62
+#: src/Modules/PublishPressFuture.php:91
+msgid "Hide locked Pro settings rows"
+msgstr ""
+
+#: src/Modules/PublishPressFuture.php:99
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr ""
 
@@ -219,15 +224,15 @@ msgstr ""
 msgid "Remove upgrade items from the admin bar"
 msgstr ""
 
-#: src/Modules/Yoast.php:119
+#: src/Modules/Yoast.php:127
 msgid "Disable promotional introduction popups"
 msgstr ""
 
-#: src/Modules/Yoast.php:131
+#: src/Modules/Yoast.php:139
 msgid "Stop the webinar promo notice"
 msgstr ""
 
-#: src/Modules/Yoast.php:198
+#: src/Modules/Yoast.php:206
 msgid "Use the freed upsell space for content"
 msgstr ""
 
