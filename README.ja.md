@@ -67,21 +67,24 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 
 ## 対応プラグイン
 
-| プラグイン | 検証済みメジャー | 整理内容 |
-|---|---|---|
-| BNFW | 1.x | アドオン/有償サポート/ライセンスのメニュー、他社 SMTP プラグイン推奨通知 |
-| Broken Link Checker | 2.x | 「Our Other Plugins」メニュー、Local ページヘッダの Cloud 誘導 |
-| Contact Form CFDB7 | 1.x | Extensions メニュー、レビュー依頼 |
-| EmbedPress | 4.x | Go Pro リンク/バナー/アップセルポップアップ、マイルストーンポップアップ、キャンペーン通知 → アップグレードパネル |
-| Instagram Feed (Smash Balloon) | 6.x | アップセル/クロスセルメニュー、宣伝通知、Pro CTA、Support メニュー → ヘルプパネル |
-| Location Weather | 3.x | Lite vs Pro / Upgrade メニュー、宣伝カード、Get Help ドロップダウン → ヘルプパネル、セールバナー → アップグレードパネル、API キー通知 → ダッシュボードウィジェット |
-| MC4WP (Mailchimp for WP) | 4.x | Extensions メニュー、Premium 広告、レビュー依頼、API キー通知 → ダッシュボードウィジェット |
-| Post Types Order | 2.x | 上位版宣伝ボックス、設定要求通知 → ダッシュボードウィジェット |
-| PublishPress Future | 4.x | Upgrade メニュー/リンク、バージョン通知バー、ロックされた Pro 設定行、サポート/ドキュメントカードとフッター → ヘルプパネル |
-| Taxonomy Terms Order | 1.x | 上位版宣伝ボックス |
-| WP Mail SMTP | 4.x | Pro タブ/メニュー、SendLayer バナー、ウィジェットのチャート teaser、Pro 専用 Mailer スタブ、flyout メニュー |
-| YARPP | 5.x | レビュー依頼 |
-| Yoast SEO | 27.x | Premium / Academy / AI メニュー、アップセル UI とサイドバー、HelpScout ビーコン、初期設定通知 → ダッシュボードウィジェット、Support メニュー → ヘルプパネル |
+各プラグインで何を整理するかは、**設定 › Tidy Admin** に機能単位でそのまま
+列挙されています(宣言は `src/Modules/`)。現在の対応と検証済みメジャー:
+
+| プラグイン | 検証済みメジャー |
+|---|---|
+| BNFW | 1.x |
+| Broken Link Checker | 2.x |
+| Contact Form CFDB7 | 1.x |
+| EmbedPress | 4.x |
+| Instagram Feed (Smash Balloon) | 6.x |
+| Location Weather | 3.x |
+| MC4WP (Mailchimp for WP) | 4.x |
+| Post Types Order | 2.x |
+| PublishPress Future | 4.x |
+| Taxonomy Terms Order | 1.x |
+| WP Mail SMTP | 4.x |
+| YARPP | 5.x |
+| Yoast SEO | 27.x |
 
 ## インストール
 

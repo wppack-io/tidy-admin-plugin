@@ -68,21 +68,25 @@ plugins.
 
 ## Supported plugins
 
-| Plugin | Verified major | Cleanups |
-|---|---|---|
-| BNFW | 1.x | Add-ons / paid-support / license menus; third-party SMTP plugin recommendation |
-| Broken Link Checker | 2.x | "Our Other Plugins" menu; Cloud cross-sell in the Local page header |
-| Contact Form CFDB7 | 1.x | Extensions menu; review request |
-| EmbedPress | 4.x | Go Pro links, banners and upsell popups; milestone popup; campaign notices → Upgrades panel |
-| Instagram Feed (Smash Balloon) | 6.x | Upsell and cross-sell menus; marketing notices; Pro CTAs; Support menu → Plugin Help tab |
-| Location Weather | 3.x | Lite vs Pro / Upgrade menus; promo cards; Get Help dropdown → Help panel; sale banners → Upgrades panel; API-key notice → dashboard widget |
-| MC4WP (Mailchimp for WP) | 4.x | Extensions menu; Premium ads; review request; API-key notice → dashboard widget |
-| Post Types Order | 2.x | Advanced-version promo box; configuration notice → dashboard widget |
-| PublishPress Future | 4.x | Upgrade menu and links; version notice bar; locked Pro settings rows; support/docs card and branded footer → Help panel |
-| Taxonomy Terms Order | 1.x | Advanced-version promo box |
-| WP Mail SMTP | 4.x | Pro tabs and menus; SendLayer banners; dashboard-widget teaser; Pro-only mailer stubs; flyout menu |
-| YARPP | 5.x | Review request |
-| Yoast SEO | 27.x | Premium / Academy / AI menus; upsell UI and sidebars; HelpScout beacon; first-time configuration notice → dashboard widget; Support menu → Plugin Help tab |
+What gets tidied for each plugin is listed, feature by feature, on
+**Settings › Tidy Admin** (and declared in `src/Modules/`). Currently
+supported, with the major versions the cleanups were verified against:
+
+| Plugin | Verified major |
+|---|---|
+| BNFW | 1.x |
+| Broken Link Checker | 2.x |
+| Contact Form CFDB7 | 1.x |
+| EmbedPress | 4.x |
+| Instagram Feed (Smash Balloon) | 6.x |
+| Location Weather | 3.x |
+| MC4WP (Mailchimp for WP) | 4.x |
+| Post Types Order | 2.x |
+| PublishPress Future | 4.x |
+| Taxonomy Terms Order | 1.x |
+| WP Mail SMTP | 4.x |
+| YARPP | 5.x |
+| Yoast SEO | 27.x |
 
 ## Installation
 
