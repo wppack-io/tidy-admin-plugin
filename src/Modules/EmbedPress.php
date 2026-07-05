@@ -149,9 +149,11 @@ final class EmbedPress extends AbstractModule
         .sponsored-floating_quick-links_wrapper,
         .sponsored-floating_action { display: none !important; }
         /* EmbedPress: Pro-feature entries in its internal sidebar nav — the pages live
-           in the Upgrades panel's Premium features tab */
+           in the Upgrades panel's Premium features tab. The Elements item's separator
+           border pointed at these now-hidden entries, so it goes too */
         .embedpress-sidebar .sidebar__item.branding-item,
         .embedpress-sidebar .sidebar__item.sponserd-item { display: none !important; }
+        .embedpress-sidebar .sidebar__menu .sidebar__item.elements-item { border-bottom: 0 !important; padding-bottom: 0 !important; }
         CSS;
     }
 }
