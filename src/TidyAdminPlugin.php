@@ -127,6 +127,7 @@ final class TidyAdminPlugin
                         'file' => $file,
                         'pagePrefixes' => $module->ownPagePrefixes(),
                         'noticesByHook' => $feature['setupNoticeByHook'],
+                        'capture' => $feature['setupNoticeCapture'] ?? null,
                     ];
                 }
                 if (trim($feature['adminCss'] ?? '') !== '') {

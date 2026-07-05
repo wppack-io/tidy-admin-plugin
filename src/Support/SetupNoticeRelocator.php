@@ -32,7 +32,10 @@ final class SetupNoticeRelocator
      *     file: string,
      *     pagePrefixes: list<string>,
      *     noticesByHook: array<string, list<string>>,
-     * }> $plugins Plugin basename, its own-screen page prefixes, and hook => setup-notice callbacks
+     *     capture?: (callable(): void)|null,
+     * }> $plugins Plugin basename, its own-screen page prefixes, hook => setup-notice
+     *             callbacks, and an optional printer for notices the hook callbacks
+     *             cannot reproduce (e.g. queued on admin_init behind an own-page check)
      */
     public function __construct(private readonly array $plugins) {}
 
@@ -72,11 +75,17 @@ final class SetupNoticeRelocator
             $sections = [];
             foreach ($this->plugins as $plugin) {
                 $html = '';
-                foreach ($plugin['noticesByHook'] as $hook => $names) {
-                    foreach (CallbackMatcher::extract($hook, $names) as $callback) {
-                        ob_start();
-                        $callback();
-                        $html .= (string) ob_get_clean();
+                if (($plugin['capture'] ?? null) !== null) {
+                    ob_start();
+                    ($plugin['capture'])();
+                    $html = (string) ob_get_clean();
+                } else {
+                    foreach ($plugin['noticesByHook'] as $hook => $names) {
+                        foreach (CallbackMatcher::extract($hook, $names) as $callback) {
+                            ob_start();
+                            $callback();
+                            $html .= (string) ob_get_clean();
+                        }
                     }
                 }
                 if (trim($html) !== '') {

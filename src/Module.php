@@ -80,6 +80,10 @@ interface Module
      *  - 'setupNoticeByHook': functional setup notices confined to the
      *    plugin's own screens (ownPagePrefixes()) and the "Pending plugin
      *    setup" dashboard widget.
+     *  - 'setupNoticeCapture': optional callable that prints the setup
+     *    notice for the dashboard widget, for notices that cannot be
+     *    captured by re-running the hook callbacks (e.g. queued on
+     *    admin_init behind an own-page check).
      *  - 'adminCss': hides promotional UI that PHP hooks cannot control.
      *  - 'register': plugin-specific hook registrations for this feature.
      *
@@ -91,6 +95,7 @@ interface Module
      *     upsellLinkUrls?: list<string>,
      *     noticeDenyByHook?: array<string, list<string>>,
      *     setupNoticeByHook?: array<string, list<string>>,
+     *     setupNoticeCapture?: callable(): void,
      *     adminCss?: string,
      *     register?: callable(): void,
      * }>

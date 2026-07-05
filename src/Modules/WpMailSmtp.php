@@ -32,6 +32,11 @@ final class WpMailSmtp extends AbstractModule
         return 'wp-mail-smtp';
     }
 
+    public function ownPagePrefixes(): array
+    {
+        return ['wp-mail-smtp'];
+    }
+
     public function features(): array
     {
         return [
@@ -80,8 +85,10 @@ final class WpMailSmtp extends AbstractModule
                 ],
                 'adminCss' => <<<'CSS'
                 /* WP Mail SMTP: "Don't see what you're looking for? Suggest a Mailer" line
-                   under the mailer picker — the link lives in the Help panel */
+                   under the mailer picker — the link lives in the Help panel. With it gone
+                   the picker ends its section, so drop the separator and tighten the padding */
                 .wp-mail-smtp-suggest-new-mailer { display: none !important; }
+                body[class*="page_wp-mail-smtp"] #wp-mail-smtp-setting-row-mailer { border-bottom: none !important; padding: 20px 0 10px !important; }
                 CSS,
             ],
             'plugin-list-links' => [
@@ -89,6 +96,36 @@ final class WpMailSmtp extends AbstractModule
                 'upsellLinkUrls' => [
                     'wpmailsmtp.com/lite-upgrade/', // Get WP Mail SMTP Pro (distinct from the docs link URL)
                 ],
+            ],
+            'setup-notice' => [
+                'label' => __('Move the setup notice to the plugin screens and dashboard widget', 'wppack-tidy-admin'),
+                /*
+                 * "Thanks for using WP Mail SMTP! ... please select and configure
+                 * your Mailer." It queues on admin_init behind an own-page check
+                 * and already shows only on the General screen, so confinement is
+                 * a no-op — the capture callable reproduces it for the widget by
+                 * emulating that screen and flushing the plugin's notice queue.
+                 */
+                'setupNoticeByHook' => [
+                    'admin_init' => ['WPMailSMTP\Admin\Area::display_setup_notice'],
+                ],
+                'setupNoticeCapture' => static function (): void {
+                    if (!function_exists('wp_mail_smtp') || !class_exists('WPMailSMTP\WP')) {
+                        return;
+                    }
+                    $original = $_GET['page'] ?? null;
+                    $_GET['page'] = 'wp-mail-smtp'; // is_admin_page('general') wants the exact slug
+                    try {
+                        wp_mail_smtp()->get_admin()->display_setup_notice();
+                        \WPMailSMTP\WP::display_admin_notices();
+                    } finally {
+                        if ($original === null) {
+                            unset($_GET['page']);
+                        } else {
+                            $_GET['page'] = $original;
+                        }
+                    }
+                },
             ],
             'notice-bar' => [
                 'label' => __('Remove the "You\'re using Lite" notice bar', 'wppack-tidy-admin'),
@@ -213,11 +250,9 @@ final class WpMailSmtp extends AbstractModule
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
-                /* WP Mail SMTP: "Recommended" ribbon on the SendLayer mailer tile (vendor steering, not information) */
-                .wp-mail-smtp-mailer-image.is-recommended::before,
-                .wp-mail-smtp-mailer-image.is-recommended::after { display: none !important; content: none !important; }
-                .wp-mail-smtp-mailer-image.is-recommended img.is-recommended,
-                .wp-mail-smtp-mailer-image > .wp-mail-smtp-mailer-recommended { display: none !important; }
+                /* WP Mail SMTP: "Recommended" ribbon on the SendLayer mailer tile — drawn
+                   as the tile's background image (vendor steering, not information) */
+                .wp-mail-smtp-mailer-image.is-recommended { background-image: none !important; }
                 /* WP Mail SMTP: upsell on the successful test-email screen (keep the success message itself) */
                 .wp-mail-smtp-test-success-banner--lite .wpms-test-email-success-banner__heading ~ p,
                 .wp-mail-smtp-test-success-banner--lite ul,
