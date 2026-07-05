@@ -25,12 +25,10 @@ We understand that paid plugins fund and motivate the development of the free
 plugins we all rely on — which is exactly why upgrade information stays
 available: quietly, in one predictable place.
 
-But wp-admin today is crowded with every plugin's own promotions — banners,
-menu items, popups and notices, each shouting for attention with no restraint
-or coordination. This is a violation of guideline 11 of the WordPress.org
-plugin guidelines ("Plugins should not hijack the admin dashboard"), and it
-is a daily nuisance for everyone who works in the WordPress admin. This
-plugin is an answer to
+But a wp-admin where those promotions shout for attention with no restraint
+or coordination violates guideline 11 of the WordPress.org plugin guidelines
+("Plugins should not hijack the admin dashboard"), and it is a daily nuisance
+for everyone who works in it. This plugin is an answer to
 [“Please Stop Abusing WordPress Admin Notices” (WP Tavern, 2016)](https://wptavern.com/please-stop-abusing-wordpress-admin-notices).
 
 Our goal is a better experience for everyone who uses WordPress, through a

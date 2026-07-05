@@ -25,11 +25,10 @@ WPPack Tidy Admin は wp-admin を整頓する WordPress プラグインです�
 開発を支えていることを理解しています。だからこそアップグレードの案内は消さず、
 控えめに、予測できる場所で提供し続けます。
 
-しかし今の wp-admin は、各プラグインが思い思いに出す宣伝 — バナー、メニュー項目、
-ポップアップ、通知 — であふれ、抑制も統一感もないまま注意を奪い合っています。
-これは WordPress.org プラグインガイドライン第11条(「プラグインは管理画面を
-乗っ取ってはならない」)への違反であり、毎日 wp-admin を使うすべての WordPress
-ユーザーにとっての迷惑です。このプラグインは、
+しかし、こうした宣伝が抑制も統一感もないまま注意を奪い合う今の wp-admin は、
+WordPress.org プラグインガイドライン第11条(「プラグインは管理画面を
+乗っ取ってはならない」)への違反であり、毎日使うすべてのユーザーにとっての
+迷惑です。このプラグインは、
 [“Please Stop Abusing WordPress Admin Notices”(WP Tavern, 2016)](https://wptavern.com/please-stop-abusing-wordpress-admin-notices)
 へのひとつの回答です。
 
