@@ -1,5 +1,7 @@
 # WPPack Tidy Admin
 
+![WPPack Tidy Admin](.wordpress-org/banner-1544x500.png)
+
 [![CI](https://img.shields.io/github/actions/workflow/status/wppack-io/tidy-admin-plugin/ci.yml?branch=1.x)](https://github.com/wppack-io/tidy-admin-plugin/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-777BB4.svg)](https://php.net)
