@@ -52,9 +52,11 @@ final class EmbedPress extends AbstractModule
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
                 'submenuRelocations' => [
                     'premium' => [
-                        // Custom Ads only. The Branding page (page_type=custom-logo) STAYS:
+                        // Custom Ads. The Branding page (page_type=custom-logo) STAYS:
                         // its Global Branding Settings toggle is a free, functional setting
                         'embedpress&page_type=ads',
+                        // Player & Engagement (every tab is a Pro teaser, e.g. Leads)
+                        'embedpress-player-engagement',
                     ],
                 ],
                 'adminCss' => <<<'CSS'
@@ -182,6 +184,9 @@ final class EmbedPress extends AbstractModule
                 @media (min-width: 768px) {
                     body[class*="page_embedpress"] #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
                     body[class*="page_embedpress"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                    /* Drop the page content below the overlaid buttons. Player & Engagement
+                       is excluded: its full-height layout reserves that space itself */
+                    body[class*="page_embedpress"]:not([class*="page_embedpress-player-engagement"]) #wpbody-content { padding-top: 2.5rem; }
                 }
                 CSS,
             ],
