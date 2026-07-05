@@ -112,6 +112,14 @@ final class Yoast extends AbstractModule
                         $bar->remove_node('wpseo-upgrade-sidebar');
                         $bar->remove_node('wpseo_brand_insights');
                         $bar->remove_node('wpseo_brand_insights_premium');
+                        // Mirrors of the relocated sidebar entries: Plans, Workouts,
+                        // Redirects and Academy are teasers, Support lives in the Help
+                        // panel — none belongs in the admin bar
+                        $bar->remove_node('wpseo-licenses');
+                        $bar->remove_node('wpseo-workouts');
+                        $bar->remove_node('wpseo-redirects');
+                        $bar->remove_node('wpseo-academy');
+                        $bar->remove_node('wpseo-page-support');
                     }, 999);
                 },
             ],
@@ -237,8 +245,9 @@ final class Yoast extends AbstractModule
                 /* Yoast: on desktop, drop the main column below the overlaid buttons */
                 @media (min-width: 768px) {
                     body[class*="page_wpseo"] .yst-grow.yst-max-w-page { padding-top: 2.5rem; }
-                    /* Integrations has no .yst-max-w-page wrapper; pad the body instead */
-                    body[class*="page_wpseo_integrations"] #wpbody-content { padding-top: 2.5rem; }
+                    /* Integrations and Plans have no .yst-max-w-page wrapper; pad the body instead */
+                    body[class*="page_wpseo_integrations"] #wpbody-content,
+                    body[class*="page_wpseo_licenses"] #wpbody-content { padding-top: 2.5rem; }
                 }
                 /* Yoast: General and Settings remove #wpcontent's left padding for a full-bleed
                    layout; restore the standard 20px gap for the screen-meta panel region there
