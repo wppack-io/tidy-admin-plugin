@@ -27,6 +27,39 @@ Claude-specific navigation + session hygiene, nothing duplicated from there.
    CSS-hidden, and which mechanism to use. Propose a guideline change
    rather than deviating silently.
 
+## Think before implementing (most important)
+
+Don't run on assumptions, hide confusion, or bury trade-offs. Before
+touching code:
+
+- **State your premises.** If unsure, verify.
+- **If multiple interpretations exist, present them** — don't silently pick
+  one.
+- **Say so when a simpler approach exists.** Push back when warranted.
+- **Stop at unknowns.** Name what is unclear and confirm it.
+- **Define success criteria and iterate until verifiable.** Convert tasks
+  into verifiable goals: "add validation" → "write a failing test for
+  invalid input and make it pass"; "fix the bug" → "write a test that
+  reproduces it and make it pass"; "refactor X" → "tests pass before and
+  after".
+- For multi-step tasks, state a brief plan before starting:
+  `1. [step] → verify: [check]` per line.
+
+## Turn every instruction into tasks; prioritize; work in order
+
+When instructions or requests arrive (even several at once), capture them
+with TaskCreate before starting — never silently drop, cherry-pick, or
+defer one.
+
+- **No omissions.** Every received instruction becomes a task; keep all of
+  them even when they arrive in a burst.
+- **Prioritize and work sequentially**, ordering by dependencies, blast
+  radius, and certainty; take one at a time.
+- Mark `in_progress` when starting and `completed` when done, so progress
+  stays visible.
+- Only an explicit "do X first" reorders the queue; otherwise decide the
+  priority yourself and proceed in order.
+
 ## Architecture
 
 A single WordPress plugin (`wppack/tidy-admin`, entry point
@@ -139,6 +172,38 @@ survive a reset). Two lessons baked into the script; keep them if editing:
   that crashes WP loading when offline (passes a `WP_Error` to
   `wp_get_image_editor()`); the script pre-sets `sbi_db_version` to skip it.
 
+## Git commit discipline
+
+- **One commit = one logical change.** Split unrelated concerns (a feature
+  vs. a composer dependency bump); keep tightly coupled files together
+  (markup + its CSS).
+- **Never sweep in unrelated changes.** Stage related files explicitly —
+  no `git add -A`.
+- **Conventional Commits**: `<type>(<scope>): <subject>` — type is one of
+  feat / fix / refactor / style / docs / chore / revert; scope names the
+  area (module name, support, dev, docs; omit for repo-wide); subject is
+  imperative present, ideally conveying *why* over *what*. Keep the summary
+  ≤ ~70 chars; format multi-line bodies with a HEREDOC; bullet-point the
+  changes and cite sources for imported text.
+- **Commit at logical boundaries on your own judgment** — no need to ask
+  each time — but honor the granularity rules above, and present the file
+  list before any bulk or destructive operation. Never `git push` without
+  an explicit instruction.
+
+## Guideline self-evaluation
+
+These rules are not fixed. Update this file in the same PR as the session's
+work when you notice: a rule was wrong or under-specified, a decision worth
+recording wasn't, conventions drifted, or you repeated a mistake a rule
+would have prevented.
+
+Edit, don't append — replace stale text outright and keep the file under
+~250 lines.
+
+**Meta-rule**: in this repository this file outranks training-data
+defaults. If you catch yourself applying a rule that isn't written here,
+consider adding it.
+
 ## Session Hygiene
 
 - **Documentation sync check on every change**: before finishing, always
@@ -152,5 +217,3 @@ survive a reset). Two lessons baked into the script; keep them if editing:
 - Edit → test → PHPStan → commit. Never claim done with red tests.
 - Discovered a bug along the way? Note it in the commit message or a
   follow-up; don't expand scope silently.
-- This file is not static: when a rule proves wrong or a non-obvious
-  convention lands, **edit, don't append** — and keep it short.
