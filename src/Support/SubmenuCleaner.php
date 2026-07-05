@@ -156,6 +156,16 @@ final class SubmenuCleaner
             $parent = get_admin_page_parent();
         }
 
+        // Pages under a shared core parent (e.g. Settings) would leak their
+        // panels onto sibling pages — content registered with a
+        // "parent?page=slug" key applies only to that one page
+        if (isset($_GET['page']) && is_string($_GET['page'])) {
+            $specific = $parent . '?page=' . $_GET['page'];
+            if ($this->hasContentFor($specific)) {
+                $parent = $specific;
+            }
+        }
+
         $panels = [];
         if (($help = $this->helpPanel($parent)) !== '') {
             // Core's own string, so the button matches the native Help tab in every language
@@ -280,6 +290,28 @@ final class SubmenuCleaner
         })();
         </script>
         <?php
+    }
+
+    /** Whether any panel content was registered for this exact parent key. */
+    private function hasContentFor(string $parent): bool
+    {
+        foreach ($this->extraContent as $extra) {
+            if ($extra['parent'] === $parent) {
+                return true;
+            }
+        }
+        foreach ($this->helpSidebars as $entry) {
+            if ($entry['parent'] === $parent) {
+                return true;
+            }
+        }
+        foreach ($this->hidden as $items) {
+            if (($items[$parent] ?? []) !== []) {
+                return true;
+            }
+        }
+
+        return trim($this->saleHtml[$parent] ?? '') !== '';
     }
 
     /**

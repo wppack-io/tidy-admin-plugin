@@ -19,40 +19,43 @@ use WPPack\Plugin\TidyAdminPlugin\Tests\TestCase;
 
 final class SettingsTest extends TestCase
 {
-    public function test_everything_defaults_to_tidying_on_and_licenses_hidden(): void
+    public function test_everything_defaults_to_tidying_on(): void
     {
         $this->assertTrue(Settings::moduleEnabled('wordpress-seo/wp-seo.php'));
-        $this->assertTrue(Settings::locationEnabled('wordpress-seo/wp-seo.php', 'css'));
-        $this->assertFalse(Settings::showLicenses());
+        $this->assertTrue(Settings::featureEnabled('wordpress-seo/wp-seo.php', 'upsell-ui'));
     }
 
     public function test_stored_overrides_win(): void
     {
         update_option(Settings::OPTION, [
-            'show_licenses' => true,
             'modules' => [
-                'wordpress-seo/wp-seo.php' => ['enabled' => false, 'css' => false, 'notices' => true],
+                'wordpress-seo/wp-seo.php' => ['enabled' => false, 'upsell-ui' => false, 'helpscout-beacon' => true],
             ],
         ]);
 
         $this->assertFalse(Settings::moduleEnabled('wordpress-seo/wp-seo.php'));
-        $this->assertFalse(Settings::locationEnabled('wordpress-seo/wp-seo.php', 'css'));
-        $this->assertTrue(Settings::locationEnabled('wordpress-seo/wp-seo.php', 'notices'));
-        $this->assertTrue(Settings::showLicenses());
+        $this->assertFalse(Settings::featureEnabled('wordpress-seo/wp-seo.php', 'upsell-ui'));
+        $this->assertTrue(Settings::featureEnabled('wordpress-seo/wp-seo.php', 'helpscout-beacon'));
         $this->assertTrue(Settings::moduleEnabled('bnfw/bnfw.php'), 'unlisted modules keep the defaults');
     }
 
     public function test_sanitize_stores_explicit_booleans_for_submitted_groups(): void
     {
+        // Unchecked boxes are absent from POST; the _features key list tells
+        // sanitize which feature checkboxes were rendered
         $clean = SettingsPage::sanitize([
             'modules' => [
-                'bnfw/bnfw.php' => ['enabled' => '1', 'css' => '1'], // unchecked boxes are absent from POST
+                'bnfw/bnfw.php' => [
+                    '_features' => 'upgrade-menus,premium-pages,help-links,smtp-recommendation',
+                    'enabled' => '1',
+                    'upgrade-menus' => '1',
+                ],
             ],
         ]);
 
-        $this->assertFalse($clean['show_licenses']);
         $this->assertTrue($clean['modules']['bnfw/bnfw.php']['enabled']);
-        $this->assertTrue($clean['modules']['bnfw/bnfw.php']['css']);
-        $this->assertFalse($clean['modules']['bnfw/bnfw.php']['notices'], 'absent checkbox means off');
+        $this->assertTrue($clean['modules']['bnfw/bnfw.php']['upgrade-menus']);
+        $this->assertFalse($clean['modules']['bnfw/bnfw.php']['smtp-recommendation'], 'absent checkbox means off');
+        $this->assertArrayNotHasKey('_features', $clean['modules']['bnfw/bnfw.php']);
     }
 }

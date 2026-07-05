@@ -22,9 +22,6 @@ final class Settings
 {
     public const OPTION = 'wppack_tidy_admin_settings';
 
-    /** The per-module toggle groups, in display order. */
-    public const LOCATIONS = ['submenu', 'notices', 'setup', 'links', 'css'];
-
     /** Whole-module toggle. */
     public static function moduleEnabled(string $pluginFile): bool
     {
@@ -32,20 +29,12 @@ final class Settings
     }
 
     /**
-     * Per-location toggle (see self::LOCATIONS). Combine with
-     * moduleEnabled(); this reads the location flag on its own.
+     * Per-feature toggle (a key of Module::features()). Combine with
+     * moduleEnabled(); this reads the feature flag on its own.
      */
-    public static function locationEnabled(string $pluginFile, string $location): bool
+    public static function featureEnabled(string $pluginFile, string $feature): bool
     {
-        return self::read(['modules', $pluginFile, $location]);
-    }
-
-    /** Whether vendors' license fields should stay visible (hidden by default). */
-    public static function showLicenses(): bool
-    {
-        $settings = get_option(self::OPTION, []);
-
-        return is_array($settings) && !empty($settings['show_licenses']);
+        return self::read(['modules', $pluginFile, $feature]);
     }
 
     /**

@@ -27,13 +27,26 @@ final class TaxonomyTermsOrder extends AbstractModule
         return [1];
     }
 
-    public function adminCss(): string
+    public function features(): array
     {
-        return <<<'CSS'
-        /* Taxonomy Terms Order: promo box "An advanced version of this plugin is available ..."
-           on the settings/reorder screens (an info_box that only pitches the Advanced version
-           and other plugins; hardcoded in the template with no hook) */
-        #cpt_info_box { display: none !important; }
-        CSS;
+        return [
+            'advanced-promo' => [
+                'label' => __('Hide the advanced-version promo box', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Taxonomy Terms Order: promo box "An advanced version of this plugin is available ..."
+                   on the settings/reorder screens (an info_box that only pitches the Advanced version
+                   and other plugins; hardcoded in the template with no hook) */
+                #cpt_info_box { display: none !important; }
+                CSS,
+            ],
+            'menu-icon' => [
+                'label' => __('Remove the icon from its Settings menu item', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Taxonomy Terms Order: vendor logo image injected into its Settings submenu
+                   label — core submenu items carry no icons */
+                #adminmenu img.menu_tto { display: none !important; }
+                CSS,
+            ],
+        ];
     }
 }

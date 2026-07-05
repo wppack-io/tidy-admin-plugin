@@ -16,39 +16,9 @@ namespace WPPack\Plugin\TidyAdminPlugin;
 /** Empty implementation of each definition. Modules override only what they need. */
 abstract class AbstractModule implements Module
 {
-    public function submenuRelocations(): array
-    {
-        return [];
-    }
-
     public function menuParent(): string
     {
         return '';
-    }
-
-    public function extraScreenMetaContent(): array
-    {
-        return [];
-    }
-
-    public function saleNoticeRelocation(): array
-    {
-        return [];
-    }
-
-    public function upsellLinkUrls(): array
-    {
-        return [];
-    }
-
-    public function noticeDenyByHook(): array
-    {
-        return [];
-    }
-
-    public function setupNoticeByHook(): array
-    {
-        return [];
     }
 
     public function ownPagePrefixes(): array
@@ -56,15 +26,8 @@ abstract class AbstractModule implements Module
         return [];
     }
 
-    public function adminCss(): string
+    public function features(): array
     {
-        return '';
+        return [];
     }
-
-    public function licenseCss(): string
-    {
-        return '';
-    }
-
-    public function register(): void {}
 }

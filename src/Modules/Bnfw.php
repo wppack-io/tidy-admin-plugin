@@ -32,29 +32,43 @@ final class Bnfw extends AbstractModule
         return 'edit.php?post_type=bnfw_notification';
     }
 
-    public function submenuRelocations(): array
+    public function features(): array
     {
         return [
-            'upgrade' => [
-                'betternotificationsforwp.com/downloads', // Add-ons store — how to buy (→ add-on-bundles)
+            'upgrade-menus' => [
+                'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
+                'submenuRelocations' => [
+                    'upgrade' => [
+                        'betternotificationsforwp.com/downloads', // Add-ons store — how to buy (→ add-on-bundles)
+                    ],
+                ],
             ],
-            'premium' => [
-                'betternotificationsforwp.com/priority-support', // Priority Support (what paying gets you)
-                'bnfw-license',                                  // Add-on Licenses (only useful once paid add-ons are bought)
+            'premium-pages' => [
+                'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
+                'submenuRelocations' => [
+                    'premium' => [
+                        'betternotificationsforwp.com/priority-support', // Priority Support (what paying gets you)
+                        'bnfw-license',                                  // Add-on Licenses (only useful once paid add-ons are bought)
+                    ],
+                ],
             ],
-            'help' => [
-                'betternotificationsforwp.com/documentation', // Documentation
+            'help-links' => [
+                'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
+                'submenuRelocations' => [
+                    'help' => [
+                        'betternotificationsforwp.com/documentation', // Documentation
+                    ],
+                ],
             ],
-        ];
-    }
-
-    public function noticeDenyByHook(): array
-    {
-        return [
-            'admin_notices' => [
+            'smtp-recommendation' => [
+                'label' => __('Remove the third-party SMTP plugin recommendation', 'wppack-tidy-admin'),
                 // "... you may need to install an SMTP plugin ... I recommend Post SMTP /
                 // Email Log" — third-party plugin promo (this site already runs WP Mail SMTP)
-                'BNFW_Notification::show_help_notice',
+                'noticeDenyByHook' => [
+                    'admin_notices' => [
+                        'BNFW_Notification::show_help_notice',
+                    ],
+                ],
             ],
         ];
     }

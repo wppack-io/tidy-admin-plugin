@@ -32,20 +32,24 @@ final class Cfdb7 extends AbstractModule
         return 'cfdb7-list.php';
     }
 
-    public function submenuRelocations(): array
+    public function features(): array
     {
         return [
-            'upgrade' => [
-                'cfdb7-extensions', // Extensions (paid add-on list)
+            'upgrade-menus' => [
+                'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
+                'submenuRelocations' => [
+                    'upgrade' => [
+                        'cfdb7-extensions', // Extensions (paid add-on list)
+                    ],
+                ],
             ],
-        ];
-    }
-
-    public function noticeDenyByHook(): array
-    {
-        return [
-            'admin_notices' => [
-                'cfdb7_admin_notice', // 5-star review request
+            'review-request' => [
+                'label' => __('Remove the review request', 'wppack-tidy-admin'),
+                'noticeDenyByHook' => [
+                    'admin_notices' => [
+                        'cfdb7_admin_notice', // 5-star review request
+                    ],
+                ],
             ],
         ];
     }

@@ -51,6 +51,27 @@ final class TidyAdminPluginTest extends TestCase
         $this->assertSame($intros, apply_filters('wpseo_introductions', $intros));
     }
 
+    public function test_settings_can_disable_a_single_feature(): void
+    {
+        update_option('active_plugins', ['wordpress-seo/wp-seo.php']);
+        update_option(\WPPack\Plugin\TidyAdminPlugin\Support\Settings::OPTION, [
+            'modules' => ['wordpress-seo/wp-seo.php' => ['upsell-ui' => false]],
+        ]);
+        $GLOBALS['wp_filter']['admin_head'] = new \WP_Hook();
+
+        (new TidyAdminPlugin())->register();
+
+        ob_start();
+        do_action('admin_head');
+        $css = (string) ob_get_clean();
+
+        // The disabled feature's CSS is gone ...
+        $this->assertStringNotContainsString('.yst-feature-upsell', $css);
+        // ... while the module's other features still apply (layout CSS, introductions filter)
+        $this->assertStringContainsString('.yst-max-w-page', $css);
+        $this->assertSame([], apply_filters('wpseo_introductions', ['intro']));
+    }
+
     public function test_empties_default_admin_footer_regardless_of_modules(): void
     {
         update_option('active_plugins', []);

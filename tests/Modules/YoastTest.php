@@ -46,7 +46,8 @@ final class YoastTest extends TestCase
         set_current_screen('dashboard');
         $userId = (int) wp_insert_user(['user_login' => 'tidy-admin-test', 'user_pass' => 'password']);
 
-        (new Yoast())->register();
+        $features = (new Yoast())->features();
+        ($features['webinar-notice']['register'])();
 
         $dismissed = get_user_meta($userId, '_yoast_alerts_dismissed', true);
         $this->assertIsArray($dismissed);

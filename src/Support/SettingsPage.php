@@ -15,16 +15,19 @@ namespace WPPack\Plugin\TidyAdminPlugin\Support;
 
 /**
  * The plugin's own settings screen (Settings > Tidy Admin), built on the
- * standard Settings API and form-table markup. Offers a whole-module toggle
- * plus per-location toggles for every active module, and the global switch
- * for vendors' license fields. Everything defaults to ON, so the page only
- * stores overrides.
+ * standard Settings API and form-table markup. Every module lists its
+ * actual cleanups as individually toggleable features, plus a whole-module
+ * switch and the global toggle for vendors' license fields. Everything
+ * defaults to ON, so the page only stores overrides.
  */
 final class SettingsPage
 {
     private const PAGE = 'wppack-tidy-admin';
 
-    /** @param list<array{file: string, name: string}> $modules Active modules (plugin basename + display name) */
+    /**
+     * @param list<array{file: string, name: string, features: array<string, string>}> $modules
+     *        Active modules: plugin basename, display name, and feature key => label
+     */
     public function __construct(private readonly array $modules) {}
 
     public function register(): void
@@ -51,10 +54,11 @@ final class SettingsPage
     }
 
     /**
-     * Stores explicit booleans for every rendered checkbox (unchecked boxes
-     * do not POST, so absence within a submitted group means "off").
+     * Stores explicit booleans for every submitted checkbox group (unchecked
+     * boxes do not POST, so absence within a submitted group means "off").
+     * Feature keys are free-form: everything but 'enabled' is one.
      *
-     * @return array{show_licenses: bool, modules: array<string, array<string, bool>>}
+     * @return array{modules: array<string, array<string, bool>>}
      */
     public static function sanitize(mixed $input): array
     {
@@ -65,66 +69,50 @@ final class SettingsPage
         foreach ($submitted as $file => $toggles) {
             $toggles = is_array($toggles) ? $toggles : [];
             $module = ['enabled' => !empty($toggles['enabled'])];
-            foreach (Settings::LOCATIONS as $location) {
-                $module[$location] = !empty($toggles[$location]);
+            $keys = isset($toggles['_features']) && is_string($toggles['_features'])
+                ? explode(',', $toggles['_features'])
+                : [];
+            foreach ($keys as $key) {
+                if ($key !== '' && $key !== 'enabled') {
+                    $module[$key] = !empty($toggles[$key]);
+                }
             }
             $modules[(string) $file] = $module;
         }
 
         return [
-            'show_licenses' => !empty($input['show_licenses']),
             'modules' => $modules,
         ];
     }
 
     private function renderPage(): void
     {
-        $locationLabels = [
-            'submenu' => __('Sidebar & panels', 'wppack-tidy-admin'),
-            'notices' => __('Promotional notices', 'wppack-tidy-admin'),
-            'setup' => __('Setup notices', 'wppack-tidy-admin'),
-            'links' => __('Plugin list links', 'wppack-tidy-admin'),
-            'css' => __('Cosmetic CSS', 'wppack-tidy-admin'),
-        ];
-
         ?>
         <div class="wrap">
             <h1>Tidy Admin</h1>
             <form method="post" action="options.php">
                 <?php settings_fields(self::PAGE); ?>
-                <table class="form-table" role="presentation">
-                    <tr>
-                        <th scope="row"><?php esc_html_e('License fields', 'wppack-tidy-admin'); ?></th>
-                        <td>
-                            <label>
-                                <input type="checkbox" name="<?php echo esc_attr(Settings::OPTION); ?>[show_licenses]" value="1" <?php checked(Settings::showLicenses()); ?>>
-                                <?php esc_html_e('Show plugins\' license fields', 'wppack-tidy-admin'); ?>
-                            </label>
-                            <p class="description"><?php esc_html_e('License fields are hidden by default; enable this while entering or checking a license key.', 'wppack-tidy-admin'); ?></p>
-                        </td>
-                    </tr>
-                </table>
-
-                <h2><?php esc_html_e('Plugins'); // Core's own string?></h2>
-                <p class="description"><?php esc_html_e('Disable tidying entirely per plugin, or only for specific areas.', 'wppack-tidy-admin'); ?></p>
+                <p class="description"><?php esc_html_e('Disable tidying entirely per plugin, or feature by feature.', 'wppack-tidy-admin'); ?></p>
                 <table class="form-table" role="presentation">
                     <?php foreach ($this->modules as $module) : ?>
+                        <?php $group = Settings::OPTION . '[modules][' . $module['file'] . ']'; ?>
                         <tr>
                             <th scope="row"><?php echo esc_html($module['name']); ?></th>
                             <td>
                                 <fieldset>
+                                    <input type="hidden"
+                                        name="<?php echo esc_attr($group); ?>[_features]"
+                                        value="<?php echo esc_attr(implode(',', array_keys($module['features']))); ?>">
                                     <label>
-                                        <input type="checkbox"
-                                            name="<?php echo esc_attr(Settings::OPTION); ?>[modules][<?php echo esc_attr($module['file']); ?>][enabled]"
+                                        <input type="checkbox" name="<?php echo esc_attr($group); ?>[enabled]"
                                             value="1" <?php checked(Settings::moduleEnabled($module['file'])); ?>>
-                                        <strong><?php esc_html_e('Tidy this plugin', 'wppack-tidy-admin'); ?></strong>
+                                        <strong><?php esc_html_e('Enable', 'wppack-tidy-admin'); ?></strong>
                                     </label>
                                     <br>
-                                    <?php foreach ($locationLabels as $location => $label) : ?>
+                                    <?php foreach ($module['features'] as $key => $label) : ?>
                                         <label style="margin-inline-start: 24px;">
-                                            <input type="checkbox"
-                                                name="<?php echo esc_attr(Settings::OPTION); ?>[modules][<?php echo esc_attr($module['file']); ?>][<?php echo esc_attr($location); ?>]"
-                                                value="1" <?php checked(Settings::locationEnabled($module['file'], $location)); ?>>
+                                            <input type="checkbox" name="<?php echo esc_attr($group); ?>[<?php echo esc_attr($key); ?>]"
+                                                value="1" <?php checked(Settings::featureEnabled($module['file'], $key)); ?>>
                                             <?php echo esc_html($label); ?>
                                         </label>
                                         <br>

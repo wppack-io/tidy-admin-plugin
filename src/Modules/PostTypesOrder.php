@@ -27,16 +27,6 @@ final class PostTypesOrder extends AbstractModule
         return [2];
     }
 
-    public function setupNoticeByHook(): array
-    {
-        return [
-            'admin_notices' => [
-                // "Post Types Order must be configured ..." (the plugin only hooks it while unconfigured)
-                'CPTO::admin_configure_notices',
-            ],
-        ];
-    }
-
     public function ownPagePrefixes(): array
     {
         // Settings > Post Types Order only. The Re-Order pages
@@ -47,13 +37,35 @@ final class PostTypesOrder extends AbstractModule
         ];
     }
 
-    public function adminCss(): string
+    public function features(): array
     {
-        return <<<'CSS'
-        /* Post Types Order: promo box "An advanced version of this plugin is available ..."
-           on the settings/reorder screens (same author and same info_box id as
-           taxonomy-terms-order; hardcoded in the template with no hook) */
-        #cpt_info_box { display: none !important; }
-        CSS;
+        return [
+            'setup-notice' => [
+                'label' => __('Move the setup notice to the plugin screens and dashboard widget', 'wppack-tidy-admin'),
+                'setupNoticeByHook' => [
+                    'admin_notices' => [
+                        // "Post Types Order must be configured ..." (the plugin only hooks it while unconfigured)
+                        'CPTO::admin_configure_notices',
+                    ],
+                ],
+            ],
+            'advanced-promo' => [
+                'label' => __('Hide the advanced-version promo box', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Post Types Order: promo box "An advanced version of this plugin is available ..."
+                   on the settings/reorder screens (same author and same info_box id as
+                   taxonomy-terms-order; hardcoded in the template with no hook) */
+                #cpt_info_box { display: none !important; }
+                CSS,
+            ],
+            'menu-icon' => [
+                'label' => __('Remove the icon from its Settings menu item', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Post Types Order: vendor logo image injected into its Settings submenu
+                   label — core submenu items carry no icons */
+                #adminmenu img.menu_pto { display: none !important; }
+                CSS,
+            ],
+        ];
     }
 }

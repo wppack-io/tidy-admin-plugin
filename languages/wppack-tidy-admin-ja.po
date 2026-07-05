@@ -43,41 +43,153 @@ msgid "Report a bug (GitHub)"
 msgstr "バグ報告 (GitHub)"
 
 #: src/Support/SettingsPage.php
-msgid "Sidebar & panels"
-msgstr "サイドバーとパネル"
+msgid "Disable tidying entirely per plugin, or feature by feature."
+msgstr "プラグインごとに整理を完全に無効化するか、機能単位で無効化できます。"
 
 #: src/Support/SettingsPage.php
-msgid "Promotional notices"
-msgstr "宣伝通知"
+msgid "Enable"
+msgstr "有効にする"
 
-#: src/Support/SettingsPage.php
-msgid "Setup notices"
-msgstr "セットアップ通知"
+#: src/Modules
+msgid "Move upgrade menus to the Upgrades panel"
+msgstr "アップグレード系メニューをアップグレードパネルへ移設"
 
-#: src/Support/SettingsPage.php
-msgid "Plugin list links"
-msgstr "プラグイン一覧のリンク"
+#: src/Modules
+msgid "Move Premium feature pages to the Upgrades panel"
+msgstr "プレミアム機能ページをアップグレードパネルへ移設"
 
-#: src/Support/SettingsPage.php
-msgid "Cosmetic CSS"
-msgstr "表示調整 CSS"
+#: src/Modules
+msgid "Move documentation and support links to the Help panel"
+msgstr "ドキュメント・サポートのリンクをヘルプパネルへ移設"
 
-#: src/Support/SettingsPage.php
-msgid "License fields"
-msgstr "ライセンス項目"
+#: src/Modules
+msgid "Remove upgrade links from the plugin list"
+msgstr "プラグイン一覧からアップグレードリンクを除去"
 
-#: src/Support/SettingsPage.php
-msgid "Show plugins' license fields"
-msgstr "プラグインのライセンス項目を表示する"
+#: src/Modules
+msgid "Remove the review request"
+msgstr "レビュー依頼を除去"
 
-#: src/Support/SettingsPage.php
-msgid "License fields are hidden by default; enable this while entering or checking a license key."
-msgstr "ライセンス項目は標準で非表示です。ライセンスキーの入力や確認を行うときに有効にしてください。"
+#: src/Modules
+msgid "Show sale notices only in the Upgrades panel"
+msgstr "セール通知はアップグレードパネル内のみに表示"
 
-#: src/Support/SettingsPage.php
-msgid "Disable tidying entirely per plugin, or only for specific areas."
-msgstr "プラグインごとに整理を完全に無効化するか、特定の箇所だけ無効化できます。"
+#: src/Modules
+msgid "Move the setup notice to the plugin screens and dashboard widget"
+msgstr "セットアップ通知をプラグイン画面とダッシュボードウィジェットへ移設"
 
-#: src/Support/SettingsPage.php
-msgid "Tidy this plugin"
-msgstr "このプラグインを整理する"
+#: src/Modules
+msgid "Hide upsell promotions on its screens"
+msgstr "画面内のアップセル宣伝を非表示"
+
+#: src/Modules
+msgid "Integrate the Help and Upgrades buttons into the page header"
+msgstr "ヘルプ / アップグレードボタンをページヘッダーに統合"
+
+#: src/Modules/Bnfw.php
+msgid "Remove the third-party SMTP plugin recommendation"
+msgstr "他社 SMTP プラグインの推奨通知を除去"
+
+#: src/Modules/BrokenLinkChecker.php
+msgid "Move the free-plugins page to the Help panel"
+msgstr "無料プラグイン一覧ページをヘルプパネルへ移設"
+
+#: src/Modules/BrokenLinkChecker.php
+msgid "Remove the Cloud Link Checker cross-sell"
+msgstr "Cloud Link Checker のクロスセルを除去"
+
+#: src/Modules/BrokenLinkChecker.php
+msgid "Hide the stray empty heading on its pages"
+msgstr "ページ内の余分な空見出しを非表示"
+
+#: src/Modules/EmbedPress.php
+msgid "Remove the milestone celebration popup"
+msgstr "マイルストーン祝賀ポップアップを除去"
+
+#: src/Modules/EmbedPress.php
+msgid "Remove the floating quick-links menu"
+msgstr "フローティングのクイックリンクメニューを除去"
+
+#: src/Modules/InstagramFeed.php
+msgid "Remove marketing notices and announcements"
+msgstr "マーケティング通知・お知らせを除去"
+
+#: src/Modules/LocationWeather.php
+msgid "Remove promotional notices and popups"
+msgstr "宣伝通知・ポップアップを除去"
+
+#: src/Modules/LocationWeather.php src/Modules/WpMailSmtp.php
+msgid "Restore the standard admin footer"
+msgstr "標準の管理画面フッターを復元"
+
+#: src/Modules/LocationWeather.php
+msgid "Skip the unused block-editor promo bundle"
+msgstr "未使用のブロックエディター宣伝バンドルを読み込まない"
+
+#: src/Modules/Mc4wp.php
+msgid "Remove Premium ads from its screens"
+msgstr "画面内の Premium 広告を除去"
+
+#: src/Modules/Mc4wp.php
+msgid "Hide the \"You are here\" breadcrumb"
+msgstr "「You are here」パンくずを非表示"
+
+#: src/Modules/PostTypesOrder.php src/Modules/TaxonomyTermsOrder.php
+msgid "Hide the advanced-version promo box"
+msgstr "上位版の宣伝ボックスを非表示"
+
+#: src/Modules/PostTypesOrder.php src/Modules/TaxonomyTermsOrder.php
+msgid "Remove the icon from its Settings menu item"
+msgstr "設定メニュー項目のアイコンを除去"
+
+#: src/Modules/PublishPressFuture.php
+msgid "Remove the \"You're using the Free version\" bar"
+msgstr "「無料版を使用中」バーを除去"
+
+#: src/Modules/WpMailSmtp.php
+msgid "Remove the \"You're using Lite\" notice bar"
+msgstr "「Lite を使用中」通知バーを除去"
+
+#: src/Modules/WpMailSmtp.php
+msgid "Remove the SendLayer setup banner"
+msgstr "SendLayer セットアップバナーを除去"
+
+#: src/Modules/WpMailSmtp.php
+msgid "Remove Pro-only education tabs"
+msgstr "Pro 専用の紹介タブを除去"
+
+#: src/Modules/WpMailSmtp.php
+msgid "Remove Pro-only teaser mailers from the mailer list"
+msgstr "メーラー一覧から Pro 専用ティーザーを除去"
+
+#: src/Modules/WpMailSmtp.php
+msgid "Always show the Scheduled Actions tools page"
+msgstr "Scheduled Actions ツールページを常に表示"
+
+#: src/Modules/WpMailSmtp.php
+msgid "Remove the dashboard widget's Pro teaser chart"
+msgstr "ダッシュボードウィジェットの Pro ティーザーチャートを除去"
+
+#: src/Modules/WpMailSmtp.php
+msgid "Hide the license fields (turn off while entering a key)"
+msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
+
+#: src/Modules/Yoast.php
+msgid "Remove the HelpScout support beacon"
+msgstr "HelpScout サポートビーコンを除去"
+
+#: src/Modules/Yoast.php
+msgid "Remove upgrade items from the admin bar"
+msgstr "管理バーからアップグレード項目を除去"
+
+#: src/Modules/Yoast.php
+msgid "Disable promotional introduction popups"
+msgstr "宣伝の紹介ポップアップを無効化"
+
+#: src/Modules/Yoast.php
+msgid "Stop the webinar promo notice"
+msgstr "ウェビナー宣伝通知を停止"
+
+#: src/Modules/Yoast.php
+msgid "Use the freed upsell space for content"
+msgstr "空いたアップセル領域をコンテンツの表示に活用"
