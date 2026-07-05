@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9bc65d3b4f29cdce939b93b9a550ed1",
+    "content-hash": "63c60b2caee3cb6a00aeb03bed096e4c",
     "packages": [
         {
             "name": "composer/installers",
@@ -6217,6 +6217,37 @@
                 "source": "https://github.com/wp-phpunit/wp-phpunit"
             },
             "time": "2026-05-21T02:56:35+00:00"
+        },
+        {
+            "name": "wp-plugin/all-in-one-seo-pack",
+            "version": "4.9.9",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/all-in-one-seo-pack/",
+                "reference": "tags/4.9.9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/all-in-one-seo-pack.4.9.9.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "AIOSEO is the most powerful WordPress SEO plugin. Improve SEO rankings and traffic with comprehensive SEO tools and smart AI SEO optimizations!",
+            "homepage": "https://aioseo.com/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/all-in-one-seo-pack/#developers",
+                "issues": "https://wordpress.org/support/plugin/all-in-one-seo-pack",
+                "source": "https://plugins.svn.wordpress.org/all-in-one-seo-pack"
+            },
+            "time": "2026-06-24T16:35:39+00:00"
         },
         {
             "name": "wp-plugin/bnfw",

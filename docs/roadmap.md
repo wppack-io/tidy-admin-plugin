@@ -28,6 +28,7 @@ time and are listed only to explain prioritization.
 | Plugin | Active installs | Commercial edition |
 |---|---|---|
 | [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) | 10M+ | Yoast SEO Premium, Academy, add-ons |
+| [All in One SEO](https://wordpress.org/plugins/all-in-one-seo-pack/) | 3M+ | AIOSEO Pro |
 | [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 3M+ | WP Mail SMTP Pro |
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 2M+ | MC4WP Premium |
 | [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 1M+ | Instagram Feed Pro |
@@ -56,7 +57,6 @@ version. These are the plugins where a module helps the most people.
 | [Wordfence](https://wordpress.org/plugins/wordfence/) | 4M+ | Wordfence Premium / Care / Response | Premium teasers across scan/firewall screens, notices |
 | [Jetpack](https://wordpress.org/plugins/jetpack/) | 4M+ | Paid plans | My Jetpack plan cards, recommendation banners, notices |
 | [UpdraftPlus](https://wordpress.org/plugins/updraftplus/) | 3M+ | UpdraftPlus Premium | Premium tabs and teaser settings, add-on store, notices |
-| [All in One SEO](https://wordpress.org/plugins/all-in-one-seo-pack/) | 3M+ | AIOSEO Pro | Upgrade submenu, locked feature pages and toggles, notices |
 | [Rank Math SEO](https://wordpress.org/plugins/seo-by-rank-math/) | 3M+ | Rank Math Pro | Upgrade menus, Pro-badged modules, setup-wizard promotions |
 | [MonsterInsights](https://wordpress.org/plugins/google-analytics-for-wordpress/) | 3M+ | MonsterInsights Pro | Teaser report pages, upgrade submenu, dashboard widget, notices |
 

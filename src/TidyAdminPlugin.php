@@ -32,6 +32,7 @@ final class TidyAdminPlugin
 
     /** @var list<class-string<Module>> */
     private const MODULES = [
+        Modules\AllInOneSeo::class,
         Modules\Bnfw::class,
         Modules\BrokenLinkChecker::class,
         Modules\Cfdb7::class,
@@ -139,7 +140,12 @@ final class TidyAdminPlugin
             }
         }
 
-        (new Support\SubmenuCleaner($submenuRelocations, $extraMetaLinks, $saleNotices, $helpSidebars))->register();
+        $panelParents = array_values(array_filter(array_map(
+            static fn(Module $module): string => Support\Settings::moduleEnabled($module->targetPluginFile()) ? $module->menuParent() : '',
+            $modules,
+        ), static fn(string $parent): bool => $parent !== ''));
+
+        (new Support\SubmenuCleaner($submenuRelocations, $extraMetaLinks, $saleNotices, $helpSidebars, $panelParents))->register();
         (new Support\PluginListLinkCleaner($upsellLinkUrlsByPlugin))->register();
         (new Support\NoticeHookCleaner($noticeDenyByHook))->register();
         (new Support\SetupNoticeRelocator($setupNoticePlugins))->register();
