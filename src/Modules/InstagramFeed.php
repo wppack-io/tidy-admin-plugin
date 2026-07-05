@@ -47,7 +47,6 @@ final class InstagramFeed extends AbstractModule
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
                 'submenuRelocations' => [
                     'premium' => [
-                        'sbi-about-us',               // About Us (Pro comparison + plugin-family pages)
                         'page=sbtt',                  // TikTok Feeds (teaser page for another plugin)
                         'page=sbr',                   // Reviews Feeds (ditto)
                         'page=cff-builder',           // Facebook Feeds (ditto)
@@ -59,7 +58,8 @@ final class InstagramFeed extends AbstractModule
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
                 'submenuRelocations' => [
                     'help' => [
-                        'sbi-support', // Support
+                        'sbi-support',  // Support
+                        'sbi-about-us', // About Us (team/product background — a resource, not upgrade guidance)
                     ],
                 ],
                 // Direct links for the sections of its Support page, plus the cards
