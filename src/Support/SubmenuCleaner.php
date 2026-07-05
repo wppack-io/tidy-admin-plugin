@@ -51,12 +51,18 @@ final class SubmenuCleaner
      *        Seasonal sale notices to capture into the top of the Upgrades panel
      * @param list<array{parent: string, html: string}> $helpSidebars
      *        Right-sidebar content for the Help panel (the WordPress.org links), styled like core's contextual-help-sidebar
+     * @param list<string> $panelParents
+     *        Parent menus allowed to carry panels (the modules' menuParent()s). Some
+     *        vendors duplicate teaser items under core menus (e.g. AIOSEO's
+     *        "Redirection Manager" under Tools) — those matches are hidden from the
+     *        sidebar but must not spawn panels on core screens. Empty = no restriction.
      */
     public function __construct(
         private readonly array $needlesByCategory,
         private readonly array $extraContent = [],
         private readonly array $saleNotices = [],
         private readonly array $helpSidebars = [],
+        private readonly array $panelParents = [],
     ) {}
 
     public function register(): void
@@ -110,6 +116,12 @@ final class SubmenuCleaner
                             continue;
                         }
                         $matched["{$parent}|{$index}"] = true;
+                        $this->hiddenSlugs[] = $slug;
+                        // Duplicates under foreign (core) parents are hidden only —
+                        // their panel home is the plugin's own parent menu
+                        if ($this->panelParents !== [] && !in_array((string) $parent, $this->panelParents, true)) {
+                            continue;
+                        }
                         $label = (string) ($item[0] ?? $slug);
                         // Some vendors wrap the whole menu label in its own <a>
                         // (e.g. Location Weather's Upgrade to Pro) and register the
@@ -122,7 +134,6 @@ final class SubmenuCleaner
                             'label' => trim(wp_strip_all_tags($label)),
                             'url' => $url,
                         ];
-                        $this->hiddenSlugs[] = $slug;
                     }
                 }
             }
