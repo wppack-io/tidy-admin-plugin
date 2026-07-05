@@ -75,6 +75,19 @@ final class PublishPressFuture extends AbstractModule
                             ];
                         }
                     }, PHP_INT_MAX);
+
+                    // The screen itself is registered as a hidden page, so core
+                    // cannot resolve which menu to highlight — point it at the
+                    // entry added above
+                    add_filter('submenu_file', static function ($submenuFile) {
+                        if (($_GET['page'] ?? '') === 'publishpress-future-scheduled-actions') {
+                            $GLOBALS['parent_file'] = 'publishpress-future';
+
+                            return 'admin.php?page=publishpress-future-scheduled-actions';
+                        }
+
+                        return $submenuFile;
+                    });
                 },
                 'adminCss' => <<<'CSS'
                 /* PublishPress Future: the jQuery-injected "Scheduled Actions" button next
