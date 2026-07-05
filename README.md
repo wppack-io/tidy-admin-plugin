@@ -7,6 +7,14 @@
 
 [日本語版 README](README.ja.md)
 
+WPPack Tidy Admin is a WordPress plugin that tidies up wp-admin. It takes
+plugin vendors' upsell menus, promotional banners, review requests and setup
+nags out of your way and relocates them into consistent, WordPress-native
+places: an **Upgrades** button and a **Help** button on each plugin's own
+screens, and a single **Pending plugin setup** dashboard widget. Nothing
+functional is removed — every page and link stays reachable, and each cleanup
+can be toggled per plugin, feature by feature.
+
 **This plugin does not exist to stop anyone from upgrading to paid plugins.**
 We understand that paid plugins fund and motivate the development of the free
 plugins we all rely on.
