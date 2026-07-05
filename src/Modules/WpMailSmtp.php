@@ -124,6 +124,16 @@ final class WpMailSmtp extends AbstractModule
                         } else {
                             $_GET['page'] = $original;
                         }
+
+                        /*
+                         * display_admin_notices() does not consume the queue, and
+                         * the plugin prints it again on the real admin_notices
+                         * hook — the notice would show at the top of the dashboard
+                         * as well as in the widget. Empty the (protected) queue:
+                         * everything in it was just rendered into the widget.
+                         */
+                        $queue = new \ReflectionProperty(\WPMailSMTP\WP::class, 'admin_notices');
+                        $queue->setValue(null, []);
                     }
                 },
             ],
