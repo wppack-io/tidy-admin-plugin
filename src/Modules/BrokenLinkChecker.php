@@ -22,10 +22,33 @@ final class BrokenLinkChecker extends AbstractModule
         return 'broken-link-checker/broken-link-checker.php';
     }
 
-    public function submenuDenyList(): array
+    public function supportedMajorVersions(): array
+    {
+        return [2];
+    }
+
+    public function menuParent(): string
+    {
+        return 'blc_dash';
+    }
+
+    public function submenuRelocations(): array
     {
         return [
-            'plugins_cross_sell', // Our Other Plugins
+            'premium' => [
+                'plugins_cross_sell', // Our Other Plugins (other-product pages, not upgrade guidance)
+            ],
         ];
+    }
+
+    public function adminCss(): string
+    {
+        return <<<'CSS'
+        /* Broken Link Checker: "Managing multiple sites? Try Cloud Link Checker" link in the
+           Local page header (pitch for their cloud service; rendered by the React top nav) */
+        .local-header-link-to-dash { display: none !important; }
+        /* Broken Link Checker: the Local page renders a stray empty heading */
+        body[class*="page_blc_local"] h2:empty { display: none !important; }
+        CSS;
     }
 }

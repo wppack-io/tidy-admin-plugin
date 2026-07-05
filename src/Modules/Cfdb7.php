@@ -22,10 +22,22 @@ final class Cfdb7 extends AbstractModule
         return 'contact-form-cfdb7/contact-form-cfdb-7.php';
     }
 
-    public function submenuDenyList(): array
+    public function supportedMajorVersions(): array
+    {
+        return [1];
+    }
+
+    public function menuParent(): string
+    {
+        return 'cfdb7-list.php';
+    }
+
+    public function submenuRelocations(): array
     {
         return [
-            'cfdb7-extensions', // Extensions（有料アドオン一覧）
+            'upgrade' => [
+                'cfdb7-extensions', // Extensions (paid add-on list)
+            ],
         ];
     }
 
@@ -33,7 +45,7 @@ final class Cfdb7 extends AbstractModule
     {
         return [
             'admin_notices' => [
-                'cfdb7_admin_notice', // 5つ星レビュー依頼
+                'cfdb7_admin_notice', // 5-star review request
             ],
         ];
     }

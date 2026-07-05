@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace WPPack\Plugin\TidyAdminPlugin\Support;
 
 /**
- * プラグイン一覧（plugins.php）の行アクション・メタ情報から Pro/Premium 誘導リンクを除去。
- * 各プラグインは自分専用の plugin_action_links_{file} フックでリンクを追加するため、
- * 対象プラグインごとのフックへ最後段（PHP_INT_MAX）で登録する。
+ * Removes Pro/Premium promo links from row actions and row meta on the plugin
+ * list (plugins.php). Each plugin adds its links on its own
+ * plugin_action_links_{file} hook, so register on the per-plugin hooks at the
+ * very end (PHP_INT_MAX).
  */
 final class PluginListLinkCleaner
 {
-    /** @param array<string, list<string>> $denyUrlsByPlugin プラグインベース名 => 誘導リンク固有 URL */
+    /** @param array<string, list<string>> $denyUrlsByPlugin Plugin basename => URLs unique to promo links */
     public function __construct(private readonly array $denyUrlsByPlugin) {}
 
     public function register(): void

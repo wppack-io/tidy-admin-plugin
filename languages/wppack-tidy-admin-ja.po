@@ -1,0 +1,43 @@
+# Japanese translation for WPPack Tidy Admin.
+# This file is distributed under the same license as the WPPack Tidy Admin plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPPack Tidy Admin 1.0.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: wppack-tidy-admin\n"
+
+#. Description of the plugin
+msgid "Tidy up wp-admin — take plugin vendors' upsells, promos and notices out of the flow. Per-plugin modules activate only when the target plugin is active."
+msgstr "wp-admin を整頓 — プラグインベンダーのアップセル・宣伝・通知を導線の外へ。対象プラグインが有効なときだけ、プラグインごとのモジュールが働きます。"
+
+#: src/Support/SubmenuCleaner.php
+msgid "Upgrades"
+msgstr "アップグレード"
+
+#: src/Support/SubmenuCleaner.php
+msgid "Upgrade"
+msgstr "アップグレード"
+
+#: src/Support/SubmenuCleaner.php
+msgid "Premium features"
+msgstr "プレミアム機能"
+
+#: src/Support/SetupNoticeRelocator.php
+msgid "Pending plugin setup"
+msgstr "セットアップが必要なプラグイン"
+
+#: src/Support/WordPressOrgLinks.php
+msgid "Plugin page"
+msgstr "プラグインページ"
+
+#: src/Support/WordPressOrgLinks.php src/Modules/Mc4wp.php
+msgid "Support forum"
+msgstr "サポートフォーラム"
+
+#: src/Modules/Mc4wp.php
+msgid "Report a bug (GitHub)"
+msgstr "バグ報告 (GitHub)"

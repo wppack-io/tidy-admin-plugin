@@ -13,10 +13,25 @@ declare(strict_types=1);
 
 namespace WPPack\Plugin\TidyAdminPlugin;
 
-/** 各定義の空実装。モジュールは必要なものだけをオーバーライドする。 */
+/** Empty implementation of each definition. Modules override only what they need. */
 abstract class AbstractModule implements Module
 {
-    public function submenuDenyList(): array
+    public function submenuRelocations(): array
+    {
+        return [];
+    }
+
+    public function menuParent(): string
+    {
+        return '';
+    }
+
+    public function extraScreenMetaContent(): array
+    {
+        return [];
+    }
+
+    public function saleNoticeRelocation(): array
     {
         return [];
     }
@@ -27,6 +42,16 @@ abstract class AbstractModule implements Module
     }
 
     public function noticeDenyByHook(): array
+    {
+        return [];
+    }
+
+    public function setupNoticeByHook(): array
+    {
+        return [];
+    }
+
+    public function ownPagePrefixes(): array
     {
         return [];
     }

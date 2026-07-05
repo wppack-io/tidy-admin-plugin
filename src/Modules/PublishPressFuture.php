@@ -22,12 +22,24 @@ final class PublishPressFuture extends AbstractModule
         return 'post-expirator/post-expirator.php';
     }
 
-    public function submenuDenyList(): array
+    public function supportedMajorVersions(): array
+    {
+        return [4];
+    }
+
+    public function menuParent(): string
+    {
+        return 'publishpress-future';
+    }
+
+    public function submenuRelocations(): array
     {
         return [
-            // プロ版にアップグレード。外部 URL でなくローカル slug 経由のリダイレクト方式のため
-            // version-notices ライブラリ共通の slug 接尾辞で照合する
-            '-menu-upgrade-link',
+            'upgrade' => [
+                // Upgrade to Pro. It redirects via a local slug rather than an external URL,
+                // so match on the slug suffix shared by the version-notices library
+                '-menu-upgrade-link',
+            ],
         ];
     }
 
@@ -41,17 +53,23 @@ final class PublishPressFuture extends AbstractModule
     public function adminCss(): string
     {
         return <<<'CSS'
-        /* PublishPress Future: 自画面フッターの ★5 評価依頼（テンプレート直書きでフックが無い） */
+        /* PublishPress Future: 5-star rating request in the footer of its own screens (hardcoded in the template with no hook) */
         .pp-rating { display: none !important; }
+        /* PublishPress Future: the version-notices library rewrites the upgrade
+           submenu's href to an external URL at admin_print_scripts, after the
+           slug-based hiding CSS was built — hide it by its own stable class
+           (the link stays available in the Upgrades panel) */
+        #adminmenu li.pp-version-notice-upgrade-menu-item { display: none !important; }
         CSS;
     }
 
     public function register(): void
     {
         /*
-         * 自画面上部の「あなたは PublishPress Future Free を使用しています…」バー
-         * （version-notices ライブラリの TopNotice）を無効化。表示設定はこのフィルタ経由で
-         * 供給されるため、空にすれば描画自体が止まる。
+         * Disable the "You're using PublishPress Future Free ..." bar at the
+         * top of its own screens (the version-notices library's TopNotice).
+         * The display settings are supplied through this filter, so emptying
+         * it stops the rendering entirely.
          */
         add_filter('pp_version_notice_top_notice_settings', '__return_empty_array', PHP_INT_MAX);
     }

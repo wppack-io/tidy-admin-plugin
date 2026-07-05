@@ -19,6 +19,8 @@ declare(strict_types=1);
  * Requires at least: 6.7
  * Author: WPPack
  * License: MIT
+ * Text Domain: wppack-tidy-admin
+ * Domain Path: /languages
  */
 
 namespace WPPack\Plugin\TidyAdminPlugin;

@@ -14,11 +14,22 @@ declare(strict_types=1);
 namespace WPPack\Plugin\TidyAdminPlugin;
 
 /**
- * モジュールを対象プラグインの有効状態で振り分け、共通機構（サブメニュー除去・
- * plugins.php のリンク除去・notice コールバック除去・管理画面 CSS）へ集約して登録する。
+ * Dispatches modules based on whether their target plugin is active, and
+ * aggregates them into the shared mechanisms (submenu removal, plugins.php
+ * link removal, notice callback removal, admin CSS) for registration.
  */
 final class TidyAdminPlugin
 {
+    /**
+     * Reclaims the space WordPress reserves for the admin footer, which
+     * emptyDefaultAdminFooter() leaves blank. !important also overrides
+     * per-plugin variants (e.g. WP Mail SMTP's 200px on its own pages,
+     * reserved for its removed footer promotion and flyout menu).
+     */
+    private const BASE_ADMIN_CSS = <<<'CSS'
+        #wpbody-content { padding-bottom: 0 !important; }
+        CSS;
+
     /** @var list<class-string<Module>> */
     private const MODULES = [
         Modules\Bnfw::class,
@@ -38,37 +49,76 @@ final class TidyAdminPlugin
 
     public static function boot(): void
     {
-        // 有効状態での振り分けとフック登録は、全プラグイン読込後の plugins_loaded で行う
-        add_action('plugins_loaded', static function (): void {
+        /*
+         * Register on init (not plugins_loaded): the aggregation below builds
+         * translated panel strings, and loading a text domain before init is
+         * a doing-it-wrong since WP 6.7 — the strings would come out
+         * untranslated. Everything registered here targets admin hooks that
+         * fire well after init.
+         */
+        add_action('init', static function (): void {
             (new self())->register();
         }, 0);
     }
 
     public function register(): void
     {
+        // The plugin ships its translations itself (not on wordpress.org)
+        load_textdomain(
+            'wppack-tidy-admin',
+            dirname(__DIR__) . '/languages/wppack-tidy-admin-' . determine_locale() . '.mo',
+        );
+
         $modules = $this->activeModules();
 
-        $submenuDenyList = [];
+        $submenuRelocations = [];
+        $extraMetaLinks = [];
+        $saleNotices = [];
+        $helpSidebars = [];
         $upsellLinkUrlsByPlugin = [];
         $noticeDenyByHook = [];
-        $adminCss = [];
+        $setupNoticePlugins = [];
+        $adminCss = [self::BASE_ADMIN_CSS];
 
         foreach ($modules as $module) {
-            $submenuDenyList = [...$submenuDenyList, ...$module->submenuDenyList()];
+            foreach ($module->submenuRelocations() as $category => $needles) {
+                $submenuRelocations[$category] = [...($submenuRelocations[$category] ?? []), ...$needles];
+            }
+            $extraMetaLinks = [...$extraMetaLinks, ...$module->extraScreenMetaContent()];
+            if ($module->menuParent() !== '') {
+                // Every plugin's Help panel carries the standard WordPress.org
+                // links (locale-aware plugin page, reviews, support forum) in
+                // its right sidebar, like core's "For more information:" column
+                $helpSidebars[] = [
+                    'parent' => $module->menuParent(),
+                    'html' => Support\WordPressOrgLinks::html(dirname($module->targetPluginFile())),
+                ];
+            }
+            if ($module->saleNoticeRelocation() !== []) {
+                $saleNotices[] = $module->saleNoticeRelocation();
+            }
             if ($module->upsellLinkUrls() !== []) {
                 $upsellLinkUrlsByPlugin[$module->targetPluginFile()] = $module->upsellLinkUrls();
             }
             foreach ($module->noticeDenyByHook() as $hook => $deny) {
                 $noticeDenyByHook[$hook] = [...($noticeDenyByHook[$hook] ?? []), ...$deny];
             }
+            if ($module->setupNoticeByHook() !== []) {
+                $setupNoticePlugins[] = [
+                    'file' => $module->targetPluginFile(),
+                    'pagePrefixes' => $module->ownPagePrefixes(),
+                    'noticesByHook' => $module->setupNoticeByHook(),
+                ];
+            }
             if (trim($module->adminCss()) !== '') {
                 $adminCss[] = $module->adminCss();
             }
         }
 
-        (new Support\SubmenuCleaner($submenuDenyList))->register();
+        (new Support\SubmenuCleaner($submenuRelocations, $extraMetaLinks, $saleNotices, $helpSidebars))->register();
         (new Support\PluginListLinkCleaner($upsellLinkUrlsByPlugin))->register();
         (new Support\NoticeHookCleaner($noticeDenyByHook))->register();
+        (new Support\SetupNoticeRelocator($setupNoticePlugins))->register();
         (new Support\AdminCss(implode("\n", $adminCss)))->register();
 
         foreach ($modules as $module) {
@@ -79,7 +129,7 @@ final class TidyAdminPlugin
     }
 
     /**
-     * 有効な対象プラグインを持つモジュールだけを返す。
+     * Returns only the modules whose target plugin is active.
      *
      * @return list<Module>
      */
@@ -97,9 +147,9 @@ final class TidyAdminPlugin
     }
 
     /**
-     * 管理画面フッターの既定文言（「WordPress のご利用ありがとうございます。」/
-     * バージョン表記）を出さない。各プラグインのフッター乗っ取り除去
-     * （LocationWeather / WpMailSmtp モジュール）はこの空文字化が受け皿になる。
+     * Suppresses the default admin footer text ("Thank you for creating with
+     * WordPress." / version text). The per-plugin footer-hijack removals
+     * (LocationWeather / WpMailSmtp modules) fall back to this empty string.
      */
     private function emptyDefaultAdminFooter(): void
     {

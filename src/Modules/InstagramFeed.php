@@ -22,15 +22,32 @@ final class InstagramFeed extends AbstractModule
         return 'instagram-feed/instagram-feed.php';
     }
 
-    public function submenuDenyList(): array
+    public function supportedMajorVersions(): array
+    {
+        return [6];
+    }
+
+    public function menuParent(): string
+    {
+        return 'sb-instagram-feed';
+    }
+
+    public function submenuRelocations(): array
     {
         return [
-            'sbi-about-us',             // 私たちについて（Pro 比較ページ）
-            'instagram-lite-upgrade',   // Pro にアップグレード（smashballoon.com へ誘導）
-            'page=sbtt',                // TikTok フィード（別プラグイン導入誘導）
-            'page=sbr',                 // レビューフィード（同上）
-            'page=cff-builder',         // Facebook フィード（同上）
-            'sb-instagram-feed&tab=more', // Twitter/YouTube フィード（同上）
+            'upgrade' => [
+                'instagram-lite-upgrade', // Upgrade to Pro (redirects to smashballoon.com) — how to buy
+            ],
+            'premium' => [
+                'sbi-about-us',               // About Us (Pro comparison + plugin-family pages)
+                'page=sbtt',                  // TikTok Feeds (teaser page for another plugin)
+                'page=sbr',                   // Reviews Feeds (ditto)
+                'page=cff-builder',           // Facebook Feeds (ditto)
+                'sb-instagram-feed&tab=more', // Twitter/YouTube Feeds (ditto)
+            ],
+            'help' => [
+                'sbi-support', // Support
+            ],
         ];
     }
 
@@ -44,8 +61,9 @@ final class InstagramFeed extends AbstractModule
     public function noticeDenyByHook(): array
     {
         return [
-            // 自画面ヘッダの「You're using Instagram Feed Lite. Upgrade for 50% OFF …」バー
-            // （このフックの唯一のコールバック。機能通知は admin_notices 側で別管理）
+            // The "You're using Instagram Feed Lite. Upgrade for 50% OFF ..." bar
+            // in the plugin's own screen header (the only callback on this hook;
+            // functional notices are managed separately on admin_notices)
             'sbi_header_notices' => [
                 'InstagramFeed\\Admin\\SBI_Admin_Notices',
             ],
@@ -55,16 +73,17 @@ final class InstagramFeed extends AbstractModule
     public function adminCss(): string
     {
         return <<<'CSS'
-        /* Instagram Feed: フィード一覧・設定ページ下部の「Instagram Feed プロ版でより多くの機能を入手」CTA
-           （builder_footer_cta / settings_footer_cta。無料版のみ描画されるアップセル専用ブロック） */
+        /* Instagram Feed: "Get more features with Instagram Feed Pro" CTA at the bottom of the
+           feed list and settings pages (builder_footer_cta / settings_footer_cta; an
+           upsell-only block rendered only in the free version) */
         .sbi-settings-cta { display: none !important; }
-        /* Instagram Feed: 設定 General タブの「ライセンスキー」行
-           （Lite はライセンス不要のため、実態は Pro 誘導文言＋アップグレードボタンのみ） */
+        /* Instagram Feed: "License key" row on the settings General tab
+           (Lite needs no license, so in practice it is only a Pro pitch plus an upgrade button) */
         .sb-license-box { display: none !important; }
-        /* Instagram Feed: 設定 Feeds タブの「GDPR — WPConsent をインストール」枠（他社プラグイン導入誘導） */
+        /* Instagram Feed: "GDPR — install WPConsent" box on the settings Feeds tab (pitch for a third-party plugin) */
         .sb-wpconsent-box { display: none !important; }
-        /* Instagram Feed: フィード作成画面下部の「当社のその他のプラグインで…」枠
-           （Facebook/TikTok 等の別プラグイン導入誘導） */
+        /* Instagram Feed: "Did You Know ... our other plugins" box at the bottom of the feed
+           builder screen (pitch to install Facebook/TikTok etc.) */
         .sbi-fb-mr-feeds { display: none !important; }
         CSS;
     }
@@ -72,16 +91,18 @@ final class InstagramFeed extends AbstractModule
     public function register(): void
     {
         /*
-         * リモート配信お知らせ（plugin.smashballoon.com/notifications.json。
-         * WPChat 等の宣伝アナウンス）を無効化。新規の取得・登録はこのフィルタで止まる。
+         * Disable remotely served announcements (plugin.smashballoon.com/notifications.json;
+         * promotional announcements such as WPChat). This filter stops new
+         * fetches and registrations.
          */
         add_filter('sbi_admin_notifications_has_access', '__return_false');
 
         /*
-         * 宣伝 notice は DB（sb_instagram_feed_notices オプション）に永続化されるため、
-         * 登録済み分は上の無効化だけでは消えない。表示直前のフィルタで
-         * group=marketing（リモートお知らせ・レビュー依頼・割引）を除去する。
-         * 機能系（API エラー等）は group 無しのため残る。
+         * Promotional notices are persisted in the DB (sb_instagram_feed_notices
+         * option), so the disabling above does not clear already-registered
+         * ones. Strip group=marketing (remote announcements, review requests,
+         * discounts) with a filter just before display. Functional notices (API
+         * errors etc.) have no group and therefore remain.
          */
         add_filter('sb_instagram_feed_admin_notices', static function (array $notices): array {
             return array_filter(

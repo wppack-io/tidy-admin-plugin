@@ -22,12 +22,40 @@ final class Bnfw extends AbstractModule
         return 'bnfw/bnfw.php';
     }
 
-    public function submenuDenyList(): array
+    public function supportedMajorVersions(): array
+    {
+        return [1];
+    }
+
+    public function menuParent(): string
+    {
+        return 'edit.php?post_type=bnfw_notification';
+    }
+
+    public function submenuRelocations(): array
     {
         return [
-            'betternotificationsforwp.com/downloads',        // Add-ons（→ add-on-bundles）
-            'betternotificationsforwp.com/priority-support', // Priority Support
-            'bnfw-license',                                  // アドオンライセンス（有料アドオン未使用）
+            'upgrade' => [
+                'betternotificationsforwp.com/downloads', // Add-ons store — how to buy (→ add-on-bundles)
+            ],
+            'premium' => [
+                'betternotificationsforwp.com/priority-support', // Priority Support (what paying gets you)
+                'bnfw-license',                                  // Add-on Licenses (only useful once paid add-ons are bought)
+            ],
+            'help' => [
+                'betternotificationsforwp.com/documentation', // Documentation
+            ],
+        ];
+    }
+
+    public function noticeDenyByHook(): array
+    {
+        return [
+            'admin_notices' => [
+                // "... you may need to install an SMTP plugin ... I recommend Post SMTP /
+                // Email Log" — third-party plugin promo (this site already runs WP Mail SMTP)
+                'BNFW_Notification::show_help_notice',
+            ],
         ];
     }
 }

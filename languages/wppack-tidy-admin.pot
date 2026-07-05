@@ -1,0 +1,59 @@
+# Copyright (C) 2026 WPPack
+# This file is distributed under the MIT.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPPack Tidy Admin 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tidy-admin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-06T04:33:59+09:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wppack-tidy-admin\n"
+
+#. Plugin Name of the plugin
+#: wppack-tidy-admin.php:15
+msgid "WPPack Tidy Admin"
+msgstr ""
+
+#. Description of the plugin
+#: wppack-tidy-admin.php:16
+msgid "Tidy up wp-admin — take plugin vendors' upsells, promos and notices out of the flow. Per-plugin modules activate only when the target plugin is active."
+msgstr ""
+
+#. Author of the plugin
+#: wppack-tidy-admin.php:20
+msgid "WPPack"
+msgstr ""
+
+#: src/Modules/Mc4wp.php:57
+#: src/Support/WordPressOrgLinks.php:50
+msgid "Support forum"
+msgstr ""
+
+#: src/Modules/Mc4wp.php:58
+msgid "Report a bug (GitHub)"
+msgstr ""
+
+#: src/Support/SetupNoticeRelocator.php:104
+msgid "Pending plugin setup"
+msgstr ""
+
+#: src/Support/SubmenuCleaner.php:153
+msgid "Upgrades"
+msgstr ""
+
+#: src/Support/SubmenuCleaner.php:315
+msgid "Upgrade"
+msgstr ""
+
+#: src/Support/SubmenuCleaner.php:316
+msgid "Premium features"
+msgstr ""
+
+#: src/Support/WordPressOrgLinks.php:40
+msgid "Plugin page"
+msgstr ""

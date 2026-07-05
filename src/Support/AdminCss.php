@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace WPPack\Plugin\TidyAdminPlugin\Support;
 
-/** 各モジュールの管理画面用 CSS をまとめて1つの style タグで出力する。 */
+/** Outputs each module's admin CSS together in a single style tag. */
 final class AdminCss
 {
     public function __construct(private readonly string $css) {}

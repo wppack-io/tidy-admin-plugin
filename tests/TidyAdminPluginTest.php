@@ -49,8 +49,8 @@ final class TidyAdminPluginTest extends TestCase
     }
 
     /**
-     * 対象プラグインのベース名が実在するかの一括チェック。プラグイン更新で
-     * 本体ファイル名やディレクトリが変わった場合にここで検出する。
+     * Bulk check that each target plugin basename actually exists. Detects
+     * cases where a plugin update renamed the main file or directory.
      */
     public function test_every_module_targets_an_installed_plugin_file(): void
     {
@@ -60,7 +60,36 @@ final class TidyAdminPluginTest extends TestCase
             $target = $module->targetPluginFile();
             $this->assertFileExists(
                 $pluginsDir . $target,
-                sprintf('%s の対象 %s が実在しない（プラグイン更新で変わった可能性）', $module::class, $target),
+                sprintf('Target %s of %s does not exist (may have changed in a plugin update)', $target, $module::class),
+            );
+        }
+    }
+
+    /**
+     * Removal definitions are version-sensitive, so each module pins the
+     * plugin majors it was verified against. A new major failing here is the
+     * prompt to re-verify the module's removals and then add the major.
+     */
+    public function test_every_module_supports_the_installed_plugin_major_version(): void
+    {
+        if (!function_exists('get_plugin_data')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+        $pluginsDir = dirname(__DIR__) . '/web/wp-content/plugins/';
+
+        foreach ($this->modules() as $module) {
+            $version = get_plugin_data($pluginsDir . $module->targetPluginFile(), false, false)['Version'];
+            $this->assertContains(
+                (int) $version,
+                $module->supportedMajorVersions(),
+                sprintf(
+                    '%s is at v%s but %s is only verified for majors [%s] — re-verify its removals, then add major %d',
+                    $module->targetPluginFile(),
+                    $version,
+                    $module::class,
+                    implode(', ', $module->supportedMajorVersions()),
+                    (int) $version,
+                ),
             );
         }
     }

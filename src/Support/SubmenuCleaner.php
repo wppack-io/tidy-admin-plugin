@@ -14,34 +14,369 @@ declare(strict_types=1);
 namespace WPPack\Plugin\TidyAdminPlugin\Support;
 
 /**
- * アップセル系サブメニューの除去（スラッグ部分一致）。
- * remove_submenu_page() は $submenu 直挿し（例: BNFW）の項目に効かないため、
- * 全メニュー登録後（PHP_INT_MAX）に $submenu を直接走査する。
+ * Hides submenus from the sidebar (matched by slug substring) instead of
+ * deleting them: on the plugin's own screens (matched by the parent menu the
+ * items were removed from) they stay reachable through screen-meta buttons
+ * next to the standard Help button. "Help" carries documentation and
+ * support content; "Upgrades" leads with how to get the paid version and
+ * keeps the pages an upgrade would unlock in a second "Premium features"
+ * tab, using the same left tab menu as the core Help panel. The buttons
+ * reuse WordPress core's screen-meta toggle (screenMeta.init() binds any
+ * .show-settings inside #screen-meta-links at DOM ready), so they look and
+ * behave exactly like Help / Screen Options. The admin pages themselves
+ * stay registered, so direct URLs keep working.
+ *
+ * remove_submenu_page() does not work on items inserted directly into
+ * $submenu (e.g. BNFW), so $submenu is scanned directly after all menus are
+ * registered (PHP_INT_MAX).
  */
 final class SubmenuCleaner
 {
-    /** @param list<string> $needles スラッグの部分一致パターン */
-    public function __construct(private readonly array $needles) {}
+    private const CATEGORIES = ['upgrade', 'premium', 'help'];
+
+    /** @var array<string, array<string, list<array{label: string, url: string}>>> Relocated items by category and parent menu slug */
+    private array $hidden = [];
+
+    /** @var array<string, string> Captured seasonal-sale notice HTML by parent menu slug */
+    private array $saleHtml = [];
+
+    /** @var list<string> Submenu slugs to hide from the sidebar via CSS */
+    private array $hiddenSlugs = [];
+
+    /**
+     * @param array<string, list<string>> $needlesByCategory Category (upgrade|premium|help) => slug substring patterns
+     * @param list<array{category: string, parent: string, html: string}> $extraContent
+     *        Extra panel HTML for content that is not a submenu item (e.g. a paragraph from a hidden footer block)
+     * @param list<array{parent: string, byHook: array<string, list<string>>}> $saleNotices
+     *        Seasonal sale notices to capture into the top of the Upgrades panel
+     * @param list<array{parent: string, html: string}> $helpSidebars
+     *        Right-sidebar content for the Help panel (the WordPress.org links), styled like core's contextual-help-sidebar
+     */
+    public function __construct(
+        private readonly array $needlesByCategory,
+        private readonly array $extraContent = [],
+        private readonly array $saleNotices = [],
+        private readonly array $helpSidebars = [],
+    ) {}
 
     public function register(): void
     {
-        if ($this->needles === []) {
+        if ($this->needlesByCategory === [] && $this->extraContent === [] && $this->saleNotices === [] && $this->helpSidebars === []) {
             return;
         }
 
         add_action('admin_menu', function (): void {
-            global $submenu;
-            foreach ($submenu as $parent => $items) {
-                foreach ($items as $index => $item) {
-                    $slug = (string) ($item[2] ?? '');
-                    foreach ($this->needles as $needle) {
-                        if (str_contains($slug, $needle)) {
-                            unset($submenu[$parent][$index]);
-                            break;
+            $this->hideItems();
+        }, PHP_INT_MAX);
+
+        // Capture sale notices at the front of their hook: while a promotion
+        // runs, the discount shows in the Upgrades panel instead of nagging.
+        foreach ($this->saleNotices as $sale) {
+            foreach ($sale['byHook'] as $hook => $names) {
+                add_action($hook, function () use ($hook, $names, $sale): void {
+                    foreach (CallbackMatcher::extract($hook, $names) as $callback) {
+                        ob_start();
+                        $callback();
+                        $this->saleHtml[$sale['parent']] = ($this->saleHtml[$sale['parent']] ?? '') . (string) ob_get_clean();
+                    }
+                }, PHP_INT_MIN);
+            }
+        }
+
+        add_action('admin_footer', function (): void {
+            $this->printScreenMetaButtons();
+        });
+    }
+
+    /**
+     * Collects the matching items per category in the modules' declaration
+     * order (so e.g. "Upgrade" and "Plans" can lead the panel regardless of
+     * sidebar order). The items are NOT removed from $submenu — unregistering
+     * them breaks WP's parent resolution and locks the pages out — they are
+     * hidden from the sidebar with CSS instead, so direct URLs and the panel
+     * links keep working.
+     */
+    private function hideItems(): void
+    {
+        global $submenu;
+        $matched = [];
+
+        foreach (self::CATEGORIES as $category) {
+            foreach ($this->needlesByCategory[$category] ?? [] as $needle) {
+                foreach ($submenu as $parent => $items) {
+                    foreach ($items as $index => $item) {
+                        $slug = (string) ($item[2] ?? '');
+                        if (isset($matched["{$parent}|{$index}"]) || !str_contains($slug, $needle)) {
+                            continue;
                         }
+                        $matched["{$parent}|{$index}"] = true;
+                        $label = (string) ($item[0] ?? $slug);
+                        // Some vendors wrap the whole menu label in its own <a>
+                        // (e.g. Location Weather's Upgrade to Pro) and register the
+                        // page slug with an empty callback — prefer the label's URL
+                        // so the panel link doesn't lead to a blank page.
+                        $url = preg_match('/\bhref=(["\'])(https?:\/\/.*?)\1/', $label, $m) === 1
+                            ? $m[2]
+                            : self::itemUrl((string) $parent, $slug);
+                        $this->hidden[$category][(string) $parent][] = [
+                            'label' => trim(wp_strip_all_tags($label)),
+                            'url' => $url,
+                        ];
+                        $this->hiddenSlugs[] = $slug;
                     }
                 }
             }
-        }, PHP_INT_MAX);
+        }
+
+        if ($this->hiddenSlugs !== []) {
+            add_action('admin_head', function (): void {
+                $selectors = array_map(
+                    // CSS-string escaping, not esc_attr(): attribute selectors match
+                    // the DOM value, where "&" stays "&" — esc_attr()'s "&amp;" would
+                    // silently unmatch every slug containing an ampersand
+                    static fn(string $slug): string => '#adminmenu li:has(> a[href*="'
+                        . str_replace(['\\', '"'], ['\\\\', '\\"'], $slug) . '"])',
+                    $this->hiddenSlugs,
+                );
+                echo '<style>' . implode(",\n", array_unique($selectors)) . " { display: none; }</style>\n";
+            });
+        }
+    }
+
+    /**
+     * Adds one screen-meta toggle button per non-empty panel, wired up by
+     * core's screenMeta.init() so they behave exactly like Help.
+     */
+    private function printScreenMetaButtons(): void
+    {
+        // wp-admin/includes/menu.php resolves $parent_file before the header
+        // renders; fall back to recomputing it for contexts where it is unset.
+        $parent = (string) ($GLOBALS['parent_file'] ?? '');
+        if ($parent === '') {
+            $parent = get_admin_page_parent();
+        }
+
+        $panels = [];
+        if (($help = $this->helpPanel($parent)) !== '') {
+            // Core's own string, so the button matches the native Help tab in every language
+            $panels[] = ['id' => 'tidy-admin-plugin-help', 'title' => __('Help'), 'content' => $help];
+        }
+        if (($upgrades = $this->upgradesPanel($parent)) !== '') {
+            $panels[] = ['id' => 'tidy-admin-upgrades', 'title' => __('Upgrades', 'wppack-tidy-admin'), 'content' => $upgrades];
+        }
+
+        if ($panels === []) {
+            return;
+        }
+
+        ?>
+        <style>
+            /* Core floats its own toggles via ID selectors (#contextual-help-link-wrap); ours need the same */
+            #screen-meta-links .screen-meta-toggle { float: left; margin: 0 0 0 6px; }
+            /* When the page has no native meta buttons (core omitted #screen-meta-links),
+               its layout never accounted for a float — render ours as a normal-flow,
+               full-width row above the page instead. Flex layout neutralizes the
+               toggles' floats, so nothing shrinks beside them, no page needs padding,
+               and the row still rides below the opened panel exactly like core */
+            #tidy-admin-meta-region #screen-meta-links { float: none; display: flex; justify-content: flex-end; margin: 0 20px 0 0; }
+            /* Contain the floated tab column, like core's #contextual-help-wrap { overflow: auto } */
+            .tidy-admin-meta-panel { overflow: auto; position: relative; }
+            /* Vertical border + tinted content background, replicated from core's #contextual-help-back */
+            .tidy-admin-help-back { position: absolute; top: 0; bottom: 0; left: 150px; right: 0; border-left: 1px solid #c3c4c7; background: rgba(var(--wp-admin-theme-color--rgb), 0.08); border-bottom-right-radius: 2px; }
+            .tidy-admin-help-back.tidy-admin-no-tabs { left: 0; border-left: none; }
+            .tidy-admin-help-back.tidy-admin-has-sidebar { right: 170px; border-right: 1px solid #c3c4c7; border-bottom-right-radius: 0; }
+            .tidy-admin-help-columns { position: relative; }
+            /* Right sidebar, replicated from core's .contextual-help-sidebar */
+            .tidy-admin-help-sidebar { width: 150px; float: right; padding: 0 8px 0 12px; overflow: auto; }
+            @media screen and (max-width: 782px) {
+                .tidy-admin-help-sidebar { display: none; }
+                .tidy-admin-help-back.tidy-admin-has-sidebar { right: 0; border-right: none; }
+            }
+            /* Left tab menu, replicated from the core Help panel (.contextual-help-tabs) */
+            .tidy-admin-help-tabs { float: left; width: 150px; margin: 0; }
+            .tidy-admin-help-tabs ul { margin: 1em 0; }
+            .tidy-admin-help-tabs li { margin-bottom: 0; list-style-type: none; border-style: solid; border-width: 0 0 0 2px; border-color: transparent; }
+            .tidy-admin-help-tabs a { display: block; padding: 5px 5px 5px 12px; line-height: 1.4; text-decoration: none; border: 1px solid transparent; border-right: none; border-left: none; }
+            .tidy-admin-help-tabs a:hover { color: #2c3338; }
+            .tidy-admin-help-tabs .active { padding: 0; margin: 0 -1px 0 0; border-left: 2px solid var(--wp-admin-theme-color); background: color-mix(in srgb, var(--wp-admin-theme-color) 8%, white); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02), 0 1px 0 rgba(0, 0, 0, 0.02); }
+            .tidy-admin-help-tabs .active a { border-color: #c3c4c7; color: #2c3338; }
+            .tidy-admin-help-tabs-wrap { padding: 0 20px; overflow: auto; }
+            .tidy-admin-help-tab { display: none; margin: 1em 22px 12px 0; line-height: 1.6; }
+            .tidy-admin-help-tab.active { display: block; }
+            .tidy-admin-meta-links { margin: 1em 0 12px; }
+            .tidy-admin-meta-links li { list-style-type: disc; margin-left: 18px; }
+        </style>
+        <script>
+        (function () {
+            // Runs before DOM ready, so core's screenMeta.init() picks the
+            // buttons up and binds its toggle — vanilla DOM insertion only.
+            var meta = document.getElementById('screen-meta');
+            if (!meta) {
+                return;
+            }
+            // Core omits #screen-meta-links on screens without help tabs or
+            // screen options; create it in its canonical spot in that case.
+            var links = document.getElementById('screen-meta-links');
+            if (!links) {
+                // The page never made room for meta buttons: wrap the panel
+                // and the buttons in a positioned region so the buttons hug
+                // the panel's bottom edge without taking flow space.
+                links = document.createElement('div');
+                links.id = 'screen-meta-links';
+                var region = document.createElement('div');
+                region.id = 'tidy-admin-meta-region';
+                meta.parentNode.insertBefore(region, meta);
+                region.appendChild(meta);
+                region.appendChild(links);
+            }
+
+            <?php echo 'var panels = ' . wp_json_encode($panels) . ";\n"; ?>
+            panels.forEach(function (panel) {
+                var wrap = document.createElement('div');
+                wrap.id = panel.id + '-wrap';
+                wrap.className = 'hidden tidy-admin-meta-panel';
+                wrap.tabIndex = -1;
+                wrap.setAttribute('aria-label', panel.title);
+                wrap.innerHTML = panel.content;
+                wrap.addEventListener('click', function (event) {
+                    var tab = event.target.closest('.tidy-admin-help-tabs a');
+                    if (!tab) {
+                        return;
+                    }
+                    event.preventDefault();
+                    wrap.querySelectorAll('.tidy-admin-help-tabs li').forEach(function (li) {
+                        li.classList.toggle('active', li.contains(tab));
+                    });
+                    wrap.querySelectorAll('.tidy-admin-help-tab').forEach(function (el) {
+                        el.classList.toggle('active', el.dataset.tab === tab.dataset.tab);
+                    });
+                });
+                meta.appendChild(wrap);
+
+                var button = document.createElement('button');
+                button.type = 'button';
+                button.id = panel.id + '-link';
+                button.className = 'button show-settings';
+                button.setAttribute('aria-controls', panel.id + '-wrap');
+                button.setAttribute('aria-expanded', 'false');
+                button.textContent = panel.title;
+
+                var buttonWrap = document.createElement('div');
+                buttonWrap.id = panel.id + '-link-wrap';
+                buttonWrap.className = 'hide-if-no-js screen-meta-toggle';
+                buttonWrap.appendChild(button);
+                links.appendChild(buttonWrap);
+            });
+        })();
+        </script>
+        <?php
+    }
+
+    /**
+     * The Help panel: documentation/support content on the left, and the
+     * standard WordPress.org links in a bordered right sidebar — the same
+     * layout as the core Help panel's "For more information:" column.
+     */
+    private function helpPanel(string $parent): string
+    {
+        $content = $this->sectionContent('help', $parent);
+
+        $sidebar = '';
+        foreach ($this->helpSidebars as $entry) {
+            if ($entry['parent'] === $parent) {
+                $sidebar .= $entry['html'];
+            }
+        }
+
+        if ($sidebar === '' || $content === '') {
+            // Without both columns there is nothing to divide: render flat.
+            $flat = $content !== '' ? $content : $sidebar;
+
+            return $flat === '' ? '' : '<div class="tidy-admin-help-tabs-wrap">' . $flat . '</div>';
+        }
+
+        return '<div class="tidy-admin-help-back tidy-admin-no-tabs tidy-admin-has-sidebar"></div>'
+            . '<div class="tidy-admin-help-columns">'
+            . '<div class="tidy-admin-help-sidebar">' . $sidebar . '</div>'
+            . '<div class="tidy-admin-help-tabs-wrap">' . $content . '</div>'
+            . '</div>';
+    }
+
+    /**
+     * The Upgrades panel leads with how to get the paid version; the pages
+     * an upgrade would unlock sit in a second "Premium features" tab behind
+     * the same left tab menu as the core Help panel.
+     */
+    private function upgradesPanel(string $parent): string
+    {
+        $upgrade = $this->sectionContent('upgrade', $parent);
+        $premium = $this->sectionContent('premium', $parent);
+
+        if ($upgrade === '' && $premium === '') {
+            return '';
+        }
+        if ($upgrade === '' || $premium === '') {
+            return '<div class="tidy-admin-help-tabs-wrap">' . $upgrade . $premium . '</div>';
+        }
+
+        return '<div class="tidy-admin-help-back"></div>'
+            . '<div class="tidy-admin-help-columns">'
+            . '<div class="tidy-admin-help-tabs">'
+            . '<ul>'
+            . '<li class="active"><a href="#" data-tab="upgrade">' . esc_html__('Upgrade', 'wppack-tidy-admin') . '</a></li>'
+            . '<li><a href="#" data-tab="premium">' . esc_html__('Premium features', 'wppack-tidy-admin') . '</a></li>'
+            . '</ul>'
+            . '</div>'
+            . '<div class="tidy-admin-help-tabs-wrap">'
+            . '<div class="tidy-admin-help-tab active" data-tab="upgrade">' . $upgrade . '</div>'
+            . '<div class="tidy-admin-help-tab" data-tab="premium">' . $premium . '</div>'
+            . '</div>'
+            . '</div>';
+    }
+
+    /** Relocated submenu links plus any extra module-declared HTML for the category. */
+    private function sectionContent(string $category, string $parent): string
+    {
+        $html = '';
+        if ($category === 'upgrade' && trim($this->saleHtml[$parent] ?? '') !== '') {
+            $html .= NoticeHtml::inline($this->saleHtml[$parent]);
+        }
+
+        $items = $this->hidden[$category][$parent] ?? [];
+
+        $links = '';
+        foreach ($items as $item) {
+            $external = str_starts_with($item['url'], 'http') && !str_starts_with($item['url'], admin_url());
+            $links .= sprintf(
+                '<li><a href="%s"%s>%s</a></li>',
+                esc_url($item['url']),
+                $external ? ' target="_blank" rel="noopener noreferrer"' : '',
+                esc_html($item['label'] !== '' ? $item['label'] : $item['url']),
+            );
+        }
+
+        $html .= $links === '' ? '' : '<ul class="tidy-admin-meta-links">' . $links . '</ul>';
+        foreach ($this->extraContent as $extra) {
+            if ($extra['category'] === $category && $extra['parent'] === $parent) {
+                $html .= $extra['html'];
+            }
+        }
+
+        return $html;
+    }
+
+    /** Mirrors how wp-admin/menu-header.php builds submenu link URLs. */
+    private static function itemUrl(string $parent, string $slug): string
+    {
+        if (preg_match('#^https?://#', $slug) === 1) {
+            return $slug;
+        }
+        if (str_contains($slug, '.php')) {
+            return admin_url($slug);
+        }
+
+        return str_contains($parent, '.php')
+            ? add_query_arg('page', $slug, admin_url($parent))
+            : admin_url('admin.php?page=' . $slug);
     }
 }

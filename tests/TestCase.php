@@ -17,8 +17,9 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 use WP_Hook;
 
 /**
- * WordPress を起動したままフック・グローバルをテスト間で隔離する基底クラス。
- * wp-phpunit の WP_UnitTestCase は PHPUnit 11 と互換がないため使わない。
+ * Base class that keeps WordPress booted while isolating hooks and globals
+ * between tests. wp-phpunit's WP_UnitTestCase is not compatible with
+ * PHPUnit 11, so it is not used.
  */
 abstract class TestCase extends BaseTestCase
 {

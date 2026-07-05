@@ -22,11 +22,16 @@ final class Yarpp extends AbstractModule
         return 'yet-another-related-posts-plugin/yarpp.php';
     }
 
+    public function supportedMajorVersions(): array
+    {
+        return [5];
+    }
+
     public function noticeDenyByHook(): array
     {
         return [
             'admin_notices' => [
-                'YARPP_Admin::display_review_notice', // レビュー依頼
+                'YARPP_Admin::display_review_notice', // Review request
             ],
         ];
     }

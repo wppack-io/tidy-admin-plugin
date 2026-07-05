@@ -14,50 +14,135 @@ declare(strict_types=1);
 namespace WPPack\Plugin\TidyAdminPlugin;
 
 /**
- * 対象プラグイン1つぶんのアップセル除去定義。
+ * Upsell-removal definitions for a single target plugin.
  *
- * 各モジュールは対象プラグインが有効なサイトでのみ登録される（Plugin::activeModules()）。
- * 除去してよいのはアップセル・宣伝・レビュー依頼のみで、機能本体のページ・機能通知には
- * 触れないこと。
+ * Each module is registered only on sites where its target plugin is active
+ * (Plugin::activeModules()). Only upsells, promotions, and review requests may
+ * be removed — never touch functional pages or functional notices. Functional
+ * setup notices may be *relocated* via setupNoticeByHook() (kept on the
+ * plugin's own screens and collected into the dashboard widget), never
+ * dropped.
  */
 interface Module
 {
-    /** 対象プラグインのベース名（active_plugins の値。例: wordpress-seo/wp-seo.php）。 */
+    /** Basename of the target plugin (an active_plugins value, e.g. wordpress-seo/wp-seo.php). */
     public function targetPluginFile(): string;
 
     /**
-     * 除去するアップセル系サブメニューのスラッグ（部分一致）。
-     * 外部リンク型の項目は UTM 等の動的パラメータが付くため部分一致で照合する。
+     * Major versions of the target plugin the removal definitions were
+     * verified against. Hooks, callbacks, slugs, and CSS selectors change
+     * between majors, so a catalog test fails once the installed plugin
+     * moves to an unlisted major — re-verify every removal against the new
+     * version, then add its major here.
      *
-     * @return list<string>
+     * @return list<int>
      */
-    public function submenuDenyList(): array;
+    public function supportedMajorVersions(): array;
 
     /**
-     * プラグイン一覧（plugins.php）の行アクション・メタ情報から除去する
-     * 誘導リンク固有の URL（部分一致）。表示文言はロケールで変わるため URL で照合する。
-     * 販売ページ URL のみを指定し、同ドメインのドキュメント等の機能リンクと
-     * 衝突させないこと。
+     * Submenu items to move out of the sidebar, categorized. Slugs are
+     * matched by substring (external-link items carry dynamic parameters
+     * such as UTM). On the plugin's own screens the items stay reachable
+     * through screen-meta buttons next to the standard Help button:
+     *
+     *  - 'upgrade': purchase guidance ONLY — upgrade links, pricing/plans,
+     *    comparisons, add-on stores. First tab of the "Upgrades" button.
+     *  - 'premium': what paying gets you — locked/teaser feature pages
+     *    (e.g. Yoast Redirects, WP Mail SMTP Email Log), paid support,
+     *    license pages, other-product pages. Second tab of the "Upgrades"
+     *    button: a user opening Upgrades wants to know how to upgrade
+     *    first, not what they would get.
+     *  - 'help': documentation/support links — functional, so they get
+     *    their own "Help" button.
+     *
+     * Nothing is deleted: the admin pages stay registered, so direct URLs
+     * keep working.
+     *
+     * @return array{upgrade?: list<string>, premium?: list<string>, help?: list<string>}
+     */
+    public function submenuRelocations(): array;
+
+    /**
+     * The plugin's dedicated parent menu slug (an array key of $submenu,
+     * e.g. "mailchimp-for-wp" or "edit.php?post_type=bnfw_notification").
+     * Its screens automatically get the standard WordPress.org links
+     * (plugin page, reviews, support forum) in the Help panel. Return ''
+     * when the plugin has no dedicated menu (e.g. a single page under
+     * Settings, where the panel would leak onto unrelated screens).
+     */
+    public function menuParent(): string;
+
+    /**
+     * Extra HTML for the same screen-meta panels, for content that is not a
+     * submenu item — e.g. a documentation link the plugin only exposes on
+     * plugins.php, or a paragraph from a footer block the module hides.
+     * 'parent' is the parent menu slug whose screens show the panel (an
+     * array key of $submenu, e.g. "mailchimp-for-wp").
+     *
+     * @return list<array{category: 'upgrade'|'premium'|'help', parent: string, html: string}>
+     */
+    public function extraScreenMetaContent(): array;
+
+    /**
+     * Seasonal sale / discount notices to relocate to the top of the
+     * "Upgrades" panel on the plugin's own screens: the parent menu slug
+     * whose screens show the panel, plus hook => callbacks (matched like
+     * noticeDenyByHook()). While the vendor runs a promotion the discount is
+     * real information for someone considering the upgrade, so it is
+     * captured instead of removed; outside promotion periods the callbacks
+     * print nothing and the section stays empty.
+     *
+     * @return array{parent: string, byHook: array<string, list<string>>}|array{}
+     */
+    public function saleNoticeRelocation(): array;
+
+    /**
+     * URLs (substring match) unique to promotional links to remove from row
+     * actions and row meta on the plugin list (plugins.php). Display text
+     * varies by locale, so matching is done by URL. Specify only sales-page
+     * URLs, and make sure they do not collide with functional links (docs
+     * etc.) on the same domain.
      *
      * @return list<string>
      */
     public function upsellLinkUrls(): array;
 
     /**
-     * フック名 => そのフックから除去する宣伝コールバック
-     * （クラス名・関数名・「Class::method」）。
-     * 機能通知が混在するコールバック（例: EWWW の display_notices）は対象にしない。
+     * Hook name => promotional callbacks to remove from that hook
+     * (class name, function name, or "Class::method").
+     * Do not target callbacks that mix in functional notices
+     * (e.g. EWWW's display_notices).
      *
      * @return array<string, list<string>>
      */
     public function noticeDenyByHook(): array;
 
     /**
-     * React/Vue バンドル内で描画される等、PHP フックでは制御できない宣伝 UI を
-     * 非表示にする管理画面用 CSS。
+     * Functional setup notices (missing API key, first-run configuration) to
+     * relocate: they keep showing on the plugin's own screens
+     * (ownPagePrefixes()) and in the "Pending plugin setup" dashboard widget,
+     * but no longer nag on every admin screen. Hook name => callbacks,
+     * matched like noticeDenyByHook(). Upsells do not belong here — remove
+     * them outright via noticeDenyByHook().
+     *
+     * @return array<string, list<string>>
+     */
+    public function setupNoticeByHook(): array;
+
+    /**
+     * $_GET['page'] slug prefixes identifying the plugin's own admin screens,
+     * where relocated setup notices keep showing.
+     *
+     * @return list<string>
+     */
+    public function ownPagePrefixes(): array;
+
+    /**
+     * Admin CSS that hides promotional UI which PHP hooks cannot control,
+     * such as UI rendered inside React/Vue bundles.
      */
     public function adminCss(): string;
 
-    /** 上記の共通機構で表現できないプラグイン固有のフック登録。 */
+    /** Plugin-specific hook registrations not expressible via the shared mechanisms above. */
     public function register(): void;
 }

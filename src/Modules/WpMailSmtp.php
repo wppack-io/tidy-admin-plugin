@@ -22,80 +22,148 @@ final class WpMailSmtp extends AbstractModule
         return 'wp-mail-smtp/wp_mail_smtp.php';
     }
 
-    public function submenuDenyList(): array
+    public function supportedMajorVersions(): array
+    {
+        return [4];
+    }
+
+    public function menuParent(): string
+    {
+        return 'wp-mail-smtp';
+    }
+
+    public function submenuRelocations(): array
     {
         return [
-            'wpmailsmtp.com',          // Upgrade to Pro（外部リンク）
-            'wp-mail-smtp-about',      // 私たちについて（Pro 比較ページ）
-            'wp-mail-smtp-recommended', // おすすめプラグイン枠（WPConsent 等、時期でローテーション）
-            'wp-mail-smtp-reports',     // メールレポート（Pro 機能。Lite ではサンプル表示＋Pro 誘導のみ）
-            'wp-mail-smtp-logs',        // メールログ（Pro 機能。Lite の送信記録は ツール > Debug Events が担当）
+            'upgrade' => [
+                'wpmailsmtp.com', // Upgrade to Pro (external link) — how to buy
+            ],
+            'premium' => [
+                'wp-mail-smtp-reports',     // Email Reports (Pro feature; Lite only shows a sample plus a Pro pitch)
+                'wp-mail-smtp-logs',        // Email Log (Pro feature; Lite send history is covered by Tools > Debug Events)
+                'wp-mail-smtp-recommended', // Recommended plugins slot (WPConsent etc. — other-product pages)
+            ],
+            'help' => [
+                'wp-mail-smtp-about', // About Us
+            ],
+        ];
+    }
+
+    public function extraScreenMetaContent(): array
+    {
+        // The plugin only links its documentation from plugins.php row meta
+        return [
+            [
+                'category' => 'help',
+                'parent' => $this->menuParent(),
+                'html' => '<p><a href="https://wpmailsmtp.com/docs/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation') . '</a></p>',
+            ],
         ];
     }
 
     public function upsellLinkUrls(): array
     {
         return [
-            'wpmailsmtp.com/lite-upgrade/', // Get WP Mail SMTP Pro（docs リンクとは別 URL）
+            'wpmailsmtp.com/lite-upgrade/', // Get WP Mail SMTP Pro (distinct from the docs link URL)
+        ];
+    }
+
+    public function noticeDenyByHook(): array
+    {
+        return [
+            // "Seems like you don't have a mailer setup yet!" banner on its own
+            // pages — the body is a SendLayer (sister product) ad with a signup
+            // button, not a functional notice
+            'wp_mail_smtp_admin_pages_before_content' => [
+                'WPMailSMTP\\Providers\\Sendlayer\\QuickConnect::display_sendlayer_education_banner',
+            ],
         ];
     }
 
     public function adminCss(): string
     {
         return <<<'CSS'
-        /* WP Mail SMTP: テスト送信成功画面のアップセル（成功メッセージ自体は残す） */
+        /* WP Mail SMTP: upsell on the successful test-email screen (keep the success message itself) */
         .wp-mail-smtp-test-success-banner--lite .wpms-test-email-success-banner__heading ~ p,
         .wp-mail-smtp-test-success-banner--lite ul,
         .wp-mail-smtp-test-success-banner--lite div:has(> .wp-mail-smtp-btn),
         .wp-mail-smtp-test-success-banner--lite div:has(> img) { display: none !important; }
-        /* WP Mail SMTP: 設定ページ下部の「Level Up Your Email Game - Get Pro Features Now」バナー */
+        /* WP Mail SMTP: "Level Up Your Email Game - Get Pro Features Now" banner at the bottom of the settings page */
         #wp-mail-smtp-pro-banner { display: none !important; }
-        /* WP Mail SMTP: ライセンス/Pro 案内バナーとフッターの宣伝リンク集 */
+        /* WP Mail SMTP: license/Pro pitch banner and the promotional link list in the footer */
         .wp-mail-smtp-upgrade-license-banner,
         .wp-mail-smtp-setting-row:has(.wp-mail-smtp-upgrade-license-banner),
         .wp-mail-smtp-footer-promotion { display: none !important; }
+        /* WP Mail SMTP: dashboard widget "View Detailed Email Stats" teaser
+           (dummy chart with an Upgrade to Pro modal on top; Lite has no real chart.
+           The stats rows below it are functional and stay) */
+        .wp-mail-smtp-dash-widget-chart-block-container { display: none !important; }
+        /* WP Mail SMTP: dashboard widget "Upgrade to Pro" footer (shown once the chart teaser is dismissed) */
+        #wp-mail-smtp-dash-widget-upgrade-footer { display: none !important; }
         CSS;
     }
 
     public function register(): void
     {
-        // 画面上部の通知バー（You're using WP Mail SMTP Lite …）
+        // Notice bar at the top of the screen ("You're using WP Mail SMTP Lite ...")
         add_filter('wp_mail_smtp_admin_education_notice_bar', '__return_false');
 
+        // Floating flyout menu at the bottom right of its own screens (upgrade/support quick links)
+        add_filter('wp_mail_smtp_admin_flyout_menu', '__return_false');
+
         /*
-         * 設定ページのナビから Pro 専用タブを除去。Lite ではいずれも中身が
-         * 機能紹介＋Upgrade ボタンだけの product-education ページで、実処理を持たない。
-         * 残るタブは「一般」（settings）と「その他」（misc）。
+         * Remove the Pro-only teaser mailers from the mailer selection grid.
+         * In Lite these are education stubs ('disabled' => true) whose only
+         * content is "... is not available on your plan. Please upgrade to
+         * the PRO plan" plus the "%name% is a PRO Feature" upgrade modal.
+         */
+        add_filter('wp_mail_smtp_providers_loader_get_providers', static function (array $providers): array {
+            unset(
+                $providers['amazonses'], // Amazon SES
+                $providers['outlook'],   // Microsoft 365 / Outlook
+                $providers['zoho'],      // Zoho Mail
+            );
+            return $providers;
+        });
+
+        /*
+         * Remove Pro-only tabs from the settings page nav. In Lite every one of
+         * them is a product-education page containing only a feature pitch and an
+         * Upgrade button, with no real functionality. The remaining tabs are
+         * "General" (settings) and "Misc" (misc).
          */
         add_filter('wp_mail_smtp_admin_get_pages', static function (array $pages): array {
             unset(
                 $pages['get-pro'],     // Get Pro
-                $pages['logs'],        // メールログ
-                $pages['alerts'],      // アラート
-                $pages['connections'], // 追加の接続
-                $pages['routing'],     // スマートルーティング
-                $pages['control'],     // メールコントロール
+                $pages['logs'],        // Email Log
+                $pages['alerts'],      // Alerts
+                $pages['connections'], // Additional Connections
+                $pages['routing'],     // Smart Routing
+                $pages['control'],     // Email Controls
             );
             return $pages;
         });
 
-        // ツールの「エクスポート」タブも同じく Pro 専用機能の product-education ページ
+        // The "Export" tab under Tools is likewise a Pro-only product-education page
         add_filter('wp_mail_smtp_admin_page_tools_tabs', static function (array $tabs): array {
             unset($tabs['export']);
             return $tabs;
         });
 
         /*
-         * WP Mail SMTP は Action Scheduler の管理画面（ツール > Scheduled Actions）を
-         * remove_submenu_page で隠す（スタンドアロン版/WooCommerce 有効時のみ例外）。
-         * キューの点検に使うため、例外条件に頼らず常に表示させる。
+         * WP Mail SMTP hides the Action Scheduler admin screen (Tools >
+         * Scheduled Actions) via remove_submenu_page (except when the
+         * standalone plugin or WooCommerce is active). We use it to inspect the
+         * queue, so always show it instead of relying on those exceptions.
          */
         add_filter('wp_mail_smtp_tasks_admin_hide_as_menu', '__return_false');
 
         /*
-         * 自画面で乗っ取る管理画面フッター（右下のバージョン表記・レビュー依頼）を
-         * WP 既定（Plugin 側で空文字化済み）に戻す。バージョン表記は PHP_INT_MAX 登録で
-         * mu-plugins の空文字化フィルタより後に走るため、除去しないと復活する。
+         * Restore the admin footer it hijacks on its own screens (version text
+         * and review request at bottom right) to the WP default (already emptied
+         * on the Plugin side). The version text is registered at PHP_INT_MAX so
+         * it runs after the mu-plugins empty-string filter and would reappear
+         * unless removed.
          */
         add_action('in_admin_footer', static function (): void {
             if (function_exists('wp_mail_smtp')) {

@@ -22,11 +22,17 @@ final class TaxonomyTermsOrder extends AbstractModule
         return 'taxonomy-terms-order/taxonomy-terms-order.php';
     }
 
+    public function supportedMajorVersions(): array
+    {
+        return [1];
+    }
+
     public function adminCss(): string
     {
         return <<<'CSS'
-        /* Taxonomy Terms Order: 設定・並び替え画面の宣伝枠「このプラグインの高機能版が…」
-           （Advanced 版＋他プラグインの導入誘導のみの info_box。テンプレート直書きでフックが無い） */
+        /* Taxonomy Terms Order: promo box "An advanced version of this plugin is available ..."
+           on the settings/reorder screens (an info_box that only pitches the Advanced version
+           and other plugins; hardcoded in the template with no hook) */
         #cpt_info_box { display: none !important; }
         CSS;
     }

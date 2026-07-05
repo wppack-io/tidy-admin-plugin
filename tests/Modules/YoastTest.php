@@ -19,7 +19,7 @@ use WPPack\Plugin\TidyAdminPlugin\Tests\TestCase;
 use WPPack\Plugin\TidyAdminPlugin\TidyAdminPlugin;
 
 /**
- * bootstrap で実物の Yoast SEO を読み込んだ状態での統合テスト。
+ * Integration tests with the real Yoast SEO loaded by the bootstrap.
  */
 final class YoastTest extends TestCase
 {
@@ -31,7 +31,7 @@ final class YoastTest extends TestCase
 
     public function test_real_yoast_is_loaded_in_the_test_environment(): void
     {
-        $this->assertTrue(defined('WPSEO_VERSION'), 'wordpress-seo が bootstrap で読み込まれていない');
+        $this->assertTrue(defined('WPSEO_VERSION'), 'wordpress-seo was not loaded by the bootstrap');
     }
 
     public function test_introductions_are_emptied(): void
