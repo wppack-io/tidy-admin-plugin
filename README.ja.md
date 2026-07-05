@@ -68,23 +68,25 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 ## 対応プラグイン
 
 各プラグインで何を整理するかは、**設定 › Tidy Admin** に機能単位でそのまま
-列挙されています(宣言は `src/Modules/`)。現在の対応と検証済みメジャー:
+列挙されています(宣言は `src/Modules/`)。今後の対応候補は
+[docs/roadmap.md](docs/roadmap.md) にまとめています。現在の対応と検証済み
+メジャー:
 
 | プラグイン | 検証済みメジャー |
 |---|---|
-| BNFW | 1.x |
-| Broken Link Checker | 2.x |
-| Contact Form CFDB7 | 1.x |
-| EmbedPress | 4.x |
-| Instagram Feed (Smash Balloon) | 6.x |
-| Location Weather | 3.x |
-| MC4WP (Mailchimp for WP) | 4.x |
-| Post Types Order | 2.x |
-| PublishPress Future | 4.x |
-| Taxonomy Terms Order | 1.x |
-| WP Mail SMTP | 4.x |
-| YARPP | 5.x |
-| Yoast SEO | 27.x |
+| [BNFW](https://wordpress.org/plugins/bnfw/) | 1.x |
+| [Broken Link Checker](https://wordpress.org/plugins/broken-link-checker/) | 2.x |
+| [Contact Form CFDB7](https://wordpress.org/plugins/contact-form-cfdb7/) | 1.x |
+| [EmbedPress](https://wordpress.org/plugins/embedpress/) | 4.x |
+| [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 6.x |
+| [Location Weather](https://wordpress.org/plugins/location-weather/) | 3.x |
+| [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 4.x |
+| [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 2.x |
+| [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 4.x |
+| [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 1.x |
+| [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 4.x |
+| [YARPP](https://wordpress.org/plugins/yet-another-related-posts-plugin/) | 5.x |
+| [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) | 27.x |
 
 ## インストール
 
