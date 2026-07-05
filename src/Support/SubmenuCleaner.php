@@ -213,7 +213,10 @@ final class SubmenuCleaner
                 .tidy-admin-help-back.tidy-admin-has-sidebar { right: 0; border-right: none; }
             }
             /* Left tab menu, replicated from the core Help panel (.contextual-help-tabs) */
-            .tidy-admin-help-tabs { float: left; width: 150px; margin: 0; }
+            /* Positioned like core's #contextual-help-columns so the tab column
+               (and the active tab's -1px bleed) paints above the absolutely
+               positioned back layer instead of under its border */
+            .tidy-admin-help-tabs { float: left; width: 150px; margin: 0; position: relative; z-index: 1; }
             .tidy-admin-help-tabs ul { margin: 1em 0; }
             .tidy-admin-help-tabs li { margin-bottom: 0; list-style-type: none; border-style: solid; border-width: 0 0 0 2px; border-color: transparent; }
             .tidy-admin-help-tabs a { display: block; padding: 5px 5px 5px 12px; line-height: 1.4; text-decoration: none; border: 1px solid transparent; border-right: none; border-left: none; }
