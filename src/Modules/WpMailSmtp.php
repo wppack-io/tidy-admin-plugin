@@ -66,14 +66,23 @@ final class WpMailSmtp extends AbstractModule
                         'wp-mail-smtp-about', // About Us
                     ],
                 ],
-                // The plugin only links its documentation from plugins.php row meta
+                // Documentation is only linked from plugins.php row meta; "Suggest a
+                // Mailer" comes from the mailer picker footer (hidden below)
                 'extraScreenMetaContent' => [
                     [
                         'category' => 'help',
                         'parent' => $this->menuParent(),
-                        'html' => '<p><a href="https://wpmailsmtp.com/docs/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation') . '</a></p>',
+                        'html' => '<ul class="tidy-admin-meta-links">'
+                            . '<li><a href="https://wpmailsmtp.com/docs/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation') . '</a></li>'
+                            . '<li><a href="https://wpmailsmtp.com/suggest-a-mailer/" target="_blank" rel="noopener noreferrer">' . esc_html__('Suggest a Mailer', 'wp-mail-smtp') . '</a></li>'
+                            . '</ul>',
                     ],
                 ],
+                'adminCss' => <<<'CSS'
+                /* WP Mail SMTP: "Don't see what you're looking for? Suggest a Mailer" line
+                   under the mailer picker — the link lives in the Help panel */
+                .wp-mail-smtp-suggest-new-mailer { display: none !important; }
+                CSS,
             ],
             'plugin-list-links' => [
                 'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
@@ -192,9 +201,23 @@ final class WpMailSmtp extends AbstractModule
                 #wp-mail-smtp-dash-widget-upgrade-footer { display: none !important; }
                 CSS,
             ],
+            'backup-connection' => [
+                'label' => __('Remove the Backup Connection teaser', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* WP Mail SMTP: "Backup Connection" education on the General tab — the whole
+                   section only pitches Pro (its radio is a hardcoded "None" stub) */
+                body[class*="page_wp-mail-smtp"] .wp-mail-smtp-setting-row.section-heading:has(.wp-mail-smtp-product-education__heading),
+                body[class*="page_wp-mail-smtp"] .wp-mail-smtp-setting-row:has(.wp-mail-smtp-connection-selector) { display: none !important; }
+                CSS,
+            ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
+                /* WP Mail SMTP: "Recommended" ribbon on the SendLayer mailer tile (vendor steering, not information) */
+                .wp-mail-smtp-mailer-image.is-recommended::before,
+                .wp-mail-smtp-mailer-image.is-recommended::after { display: none !important; content: none !important; }
+                .wp-mail-smtp-mailer-image.is-recommended img.is-recommended,
+                .wp-mail-smtp-mailer-image > .wp-mail-smtp-mailer-recommended { display: none !important; }
                 /* WP Mail SMTP: upsell on the successful test-email screen (keep the success message itself) */
                 .wp-mail-smtp-test-success-banner--lite .wpms-test-email-success-banner__heading ~ p,
                 .wp-mail-smtp-test-success-banner--lite ul,

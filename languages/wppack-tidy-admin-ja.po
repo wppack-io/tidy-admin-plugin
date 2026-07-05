@@ -151,6 +151,10 @@ msgid "Remove the \"You're using Lite\" notice bar"
 msgstr "「Lite を使用中」通知バーを除去"
 
 #: src/Modules/WpMailSmtp.php
+msgid "Remove the Backup Connection teaser"
+msgstr "Backup Connection のティーザーを除去"
+
+#: src/Modules/WpMailSmtp.php
 msgid "Remove the SendLayer setup banner"
 msgstr "SendLayer セットアップバナーを除去"
 

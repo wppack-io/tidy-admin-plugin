@@ -49,8 +49,11 @@ this plugin must never have.
 - The upgrade guidance always comes first; premium-page teasers never lead.
 - The Upgrades panel uses the same left tab menu as the core Help panel
   (`Upgrade` / `Premium features`); a single group renders as a flat list.
-- Every plugin gets a Help entry — every plugin has documentation somewhere.
-  If no docs submenu exists, add the link via `extraScreenMetaContent()`.
+- **The Help button is mandatory on every managed plugin's own screens**,
+  and it always carries the WordPress.org links — set `menuParent()` on
+  every module (using the `parent?page=slug` form for plugins under a
+  shared core parent such as Settings). If no docs submenu exists, add the
+  link via `extraScreenMetaContent`.
 - The Help panel always includes the standard WordPress.org links — plugin
   page, reviews, support forum — generated automatically from `menuParent()`
   and the plugin slug. The plugin page follows the site language (rosetta

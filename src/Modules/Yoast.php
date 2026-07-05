@@ -168,10 +168,12 @@ final class Yoast extends AbstractModule
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
                 /* Yoast: right column of React pages (Premium upsell only; rendered only when
-                   not purchased). Collapse the whole area so the main column gets the width */
-                body[class*="page_wpseo"] [class*="yst-min-w-[16rem]"] { display: none !important; }
-                /* Yoast: fixed right sidebar on the settings/support pages (Premium & Academy promo cards) */
-                body[class*="page_wpseo"] [class*="yst-w-[16rem]"] { display: none !important; }
+                   not purchased). Collapse the whole area so the main column gets the width.
+                   The relocated Support page keeps its right column — there it holds the
+                   functional "contact our support team" card */
+                body[class*="page_wpseo"]:not([class*="page_wpseo_page_support"]) [class*="yst-min-w-[16rem]"] { display: none !important; }
+                /* Yoast: fixed right sidebar on the settings pages (Premium & Academy promo cards) */
+                body[class*="page_wpseo"]:not([class*="page_wpseo_page_support"]) [class*="yst-w-[16rem]"] { display: none !important; }
                 /* Yoast: "Upgrade to Yoast SEO Premium" block (upsell-only class on both the settings and general pages) */
                 body[class*="page_wpseo"] .yst-max-w-4xl { display: none !important; }
                 /* Yoast: promo sidebar on classic pages such as Tools (Sidebar_Presenter; not output in the Premium version) */

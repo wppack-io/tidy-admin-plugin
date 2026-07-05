@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T06:18:18+09:00\n"
+"POT-Creation-Date: 2026-07-06T06:35:22+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -50,7 +50,7 @@ msgid "Move Premium feature pages to the Upgrades panel"
 msgstr ""
 
 #: src/Modules/Bnfw.php:56
-#: src/Modules/EmbedPress.php:73
+#: src/Modules/EmbedPress.php:78
 #: src/Modules/InstagramFeed.php:59
 #: src/Modules/LocationWeather.php:61
 #: src/Modules/Mc4wp.php:52
@@ -77,11 +77,11 @@ msgid "Hide the stray empty heading on its pages"
 msgstr ""
 
 #: src/Modules/BrokenLinkChecker.php:64
-#: src/Modules/EmbedPress.php:167
+#: src/Modules/EmbedPress.php:175
 #: src/Modules/InstagramFeed.php:146
-#: src/Modules/LocationWeather.php:173
+#: src/Modules/LocationWeather.php:174
 #: src/Modules/Mc4wp.php:144
-#: src/Modules/Yoast.php:226
+#: src/Modules/Yoast.php:228
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
@@ -92,34 +92,34 @@ msgstr ""
 msgid "Remove the review request"
 msgstr ""
 
-#: src/Modules/EmbedPress.php:106
+#: src/Modules/EmbedPress.php:111
 #: src/Modules/InstagramFeed.php:91
-#: src/Modules/LocationWeather.php:84
+#: src/Modules/LocationWeather.php:85
 #: src/Modules/Mc4wp.php:92
 #: src/Modules/PublishPressFuture.php:56
-#: src/Modules/WpMailSmtp.php:79
+#: src/Modules/WpMailSmtp.php:88
 #: src/Modules/Yoast.php:80
 msgid "Remove upgrade links from the plugin list"
 msgstr ""
 
-#: src/Modules/EmbedPress.php:112
-#: src/Modules/LocationWeather.php:101
+#: src/Modules/EmbedPress.php:117
+#: src/Modules/LocationWeather.php:102
 msgid "Show sale notices only in the Upgrades panel"
 msgstr ""
 
-#: src/Modules/EmbedPress.php:122
+#: src/Modules/EmbedPress.php:127
 msgid "Remove the milestone celebration popup"
 msgstr ""
 
-#: src/Modules/EmbedPress.php:135
-#: src/Modules/WpMailSmtp.php:149
+#: src/Modules/EmbedPress.php:140
+#: src/Modules/WpMailSmtp.php:158
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
-#: src/Modules/EmbedPress.php:145
+#: src/Modules/EmbedPress.php:150
 #: src/Modules/InstagramFeed.php:129
-#: src/Modules/LocationWeather.php:120
-#: src/Modules/WpMailSmtp.php:196
+#: src/Modules/LocationWeather.php:121
+#: src/Modules/WpMailSmtp.php:214
 #: src/Modules/Yoast.php:168
 msgid "Hide upsell promotions on its screens"
 msgstr ""
@@ -128,23 +128,23 @@ msgstr ""
 msgid "Remove marketing notices and announcements"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:90
+#: src/Modules/LocationWeather.php:91
 msgid "Remove promotional notices and popups"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:111
+#: src/Modules/LocationWeather.php:112
 #: src/Modules/Mc4wp.php:128
-#: src/Modules/PostTypesOrder.php:44
+#: src/Modules/PostTypesOrder.php:50
 #: src/Modules/Yoast.php:99
 msgid "Move the setup notice to the plugin screens and dashboard widget"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:135
-#: src/Modules/WpMailSmtp.php:168
+#: src/Modules/LocationWeather.php:136
+#: src/Modules/WpMailSmtp.php:177
 msgid "Restore the standard admin footer"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:152
+#: src/Modules/LocationWeather.php:153
 msgid "Skip the unused block-editor promo bundle"
 msgstr ""
 
@@ -165,13 +165,13 @@ msgstr ""
 msgid "Hide the \"You are here\" breadcrumb"
 msgstr ""
 
-#: src/Modules/PostTypesOrder.php:53
-#: src/Modules/TaxonomyTermsOrder.php:34
+#: src/Modules/PostTypesOrder.php:59
+#: src/Modules/TaxonomyTermsOrder.php:40
 msgid "Hide the advanced-version promo box"
 msgstr ""
 
-#: src/Modules/PostTypesOrder.php:62
-#: src/Modules/TaxonomyTermsOrder.php:43
+#: src/Modules/PostTypesOrder.php:68
+#: src/Modules/TaxonomyTermsOrder.php:49
 msgid "Remove the icon from its Settings menu item"
 msgstr ""
 
@@ -179,31 +179,35 @@ msgstr ""
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:85
+#: src/Modules/WpMailSmtp.php:94
 msgid "Remove the \"You're using Lite\" notice bar"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:91
+#: src/Modules/WpMailSmtp.php:100
 msgid "Remove the SendLayer setup banner"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:101
+#: src/Modules/WpMailSmtp.php:110
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:130
+#: src/Modules/WpMailSmtp.php:139
 msgid "Remove Pro-only teaser mailers from the mailer list"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:156
+#: src/Modules/WpMailSmtp.php:165
 msgid "Always show the Scheduled Actions tools page"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:185
+#: src/Modules/WpMailSmtp.php:194
 msgid "Remove the dashboard widget's Pro teaser chart"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:212
+#: src/Modules/WpMailSmtp.php:205
+msgid "Remove the Backup Connection teaser"
+msgstr ""
+
+#: src/Modules/WpMailSmtp.php:235
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
@@ -223,7 +227,7 @@ msgstr ""
 msgid "Stop the webinar promo notice"
 msgstr ""
 
-#: src/Modules/Yoast.php:196
+#: src/Modules/Yoast.php:198
 msgid "Use the freed upsell space for content"
 msgstr ""
 

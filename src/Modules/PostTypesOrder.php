@@ -27,6 +27,12 @@ final class PostTypesOrder extends AbstractModule
         return [2];
     }
 
+    public function menuParent(): string
+    {
+        // Lives under Settings; the ?page= key confines the panels to its page
+        return 'options-general.php?page=cpto-options';
+    }
+
     public function ownPagePrefixes(): array
     {
         // Settings > Post Types Order only. The Re-Order pages

@@ -27,6 +27,12 @@ final class TaxonomyTermsOrder extends AbstractModule
         return [1];
     }
 
+    public function menuParent(): string
+    {
+        // Lives under Settings; the ?page= key confines the panels to its page
+        return 'options-general.php?page=to-options';
+    }
+
     public function features(): array
     {
         return [
