@@ -276,6 +276,19 @@ final class WpMailSmtp extends AbstractModule
                 .wp-mail-smtp-footer-promotion { display: none !important; }
                 CSS,
             ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* WP Mail SMTP: its JS moves #screen-meta-links into the plugin's fixed
+                   header band and positions every toggle absolutely at the same right
+                   offset — built for core's single Help button, so our two buttons
+                   stack on top of each other. Lay the row out with flex inside the
+                   band instead (the .show() call sets inline display:block, hence the
+                   !important) */
+                #wp-mail-smtp-header-temp #screen-meta-links { display: flex !important; justify-content: flex-end; position: absolute; top: 0; right: 20px; }
+                #wp-mail-smtp-header-temp #screen-meta-links .screen-meta-toggle { position: static !important; float: none !important; margin: 0 0 0 6px; }
+                CSS,
+            ],
             'license-fields' => [
                 'label' => __('Hide the license fields (turn off while entering a key)', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
