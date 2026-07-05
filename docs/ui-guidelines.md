@@ -34,6 +34,7 @@ treatment with the matching mechanism:
 | Admin-footer branding hijacks ("Made with ♥ by …", version text) | **Remove**; the emptied core footer is the fallback | `register()` + core footer emptying |
 | plugins.php row links | Sales links **removed**; functional links (Docs, FAQ) kept | `upsellLinkUrls()` |
 | Behavior only reachable through the plugin's own filters (education tabs, teaser mailers, flyouts) | **Disable via the plugin's own filter** | `register()` |
+| License fields (key inputs, license headings) | **Hide by default**; the "Show plugins' license fields" setting lifts it while a key is being entered | `licenseCss()` |
 
 When in doubt whether something is promotional or functional, leave it and
 note the question — removing a functional element is the one failure mode
@@ -77,6 +78,33 @@ this plugin must never have.
 - Injected markup mirrors core markup and CSS (replicated where core scopes
   by ID); injected scripts are vanilla JS — never jQuery — and lean on core
   behavior (screenMeta.init) instead of rebinding it.
+
+## Per-screen QA checklist
+
+Walk every screen of a module's plugin after touching it — these are the
+recurring failure modes:
+
+- [ ] **No leftovers**: no upgrade/help/support entry remains in the WP
+  sidebar, the plugin's own header, its internal nav, or floating launchers.
+  Vendors' own help/support buttons are replaced by our Help panel — hide
+  them and carry **all** of their links over, not a subset. If a vendor
+  rewrites a menu item's href with JS, hide it by its stable class instead
+  of the slug.
+- [ ] **Relocated pages still work**: every link in the Help/Upgrades panels
+  opens a working page (no blank stubs, no "not allowed").
+- [ ] **Nothing overlaps or shrinks**: the buttons don't cover the plugin's
+  header controls and the main column keeps its position and width — pick
+  the right placement mode, and pad the plugin's first row only when
+  overlay mode requires it.
+- [ ] **Panel alignment**: on full-bleed pages that remove `#wpcontent`'s
+  left padding, give the region the standard 20px left gap so the opened
+  panel doesn't touch the admin menu; match the region's background to the
+  plugin's page chrome where it differs from the admin gray.
+- [ ] **Check both widths**: desktop and narrow (≤782px); the buttons must
+  stay visible and clickable in both.
+- [ ] **Teaser destinations stay intact**: pages relocated into "Premium
+  features" keep their own upsell CTAs — exclusion rules must not blank
+  them out.
 
 ## Setup notices
 

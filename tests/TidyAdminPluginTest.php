@@ -38,6 +38,19 @@ final class TidyAdminPluginTest extends TestCase
         $this->assertSame($intros, apply_filters('wpseo_introductions', $intros));
     }
 
+    public function test_settings_can_disable_a_module_entirely(): void
+    {
+        update_option('active_plugins', ['wordpress-seo/wp-seo.php']);
+        update_option(\WPPack\Plugin\TidyAdminPlugin\Support\Settings::OPTION, [
+            'modules' => ['wordpress-seo/wp-seo.php' => ['enabled' => false]],
+        ]);
+
+        (new TidyAdminPlugin())->register();
+
+        $intros = ['intro'];
+        $this->assertSame($intros, apply_filters('wpseo_introductions', $intros));
+    }
+
     public function test_empties_default_admin_footer_regardless_of_modules(): void
     {
         update_option('active_plugins', []);

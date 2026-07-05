@@ -53,6 +53,10 @@ plugins.
 - Each module pins the plugin major versions its removals were verified
   against (`supportedMajorVersions()`); a catalog test fails when a target
   plugin moves to an unverified major.
+- **Settings › Tidy Admin** lets you disable tidying per plugin — entirely or
+  per area (sidebar & panels, notices, setup notices, plugin list links,
+  cosmetic CSS) — and toggle the visibility of plugins' license fields, which
+  are hidden by default.
 
 ## Supported plugins
 

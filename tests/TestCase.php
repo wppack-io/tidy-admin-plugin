@@ -49,5 +49,6 @@ abstract class TestCase extends BaseTestCase
         }
 
         delete_option('active_plugins');
+        delete_option(\WPPack\Plugin\TidyAdminPlugin\Support\Settings::OPTION);
     }
 }

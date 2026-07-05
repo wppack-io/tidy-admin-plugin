@@ -107,6 +107,15 @@ final class WpMailSmtp extends AbstractModule
         CSS;
     }
 
+    public function licenseCss(): string
+    {
+        return <<<'CSS'
+        /* WP Mail SMTP: "License" heading and key field on the General tab */
+        #wp-mail-smtp-setting-row-license-heading,
+        #wp-mail-smtp-setting-row-license_key { display: none !important; }
+        CSS;
+    }
+
     public function register(): void
     {
         // Notice bar at the top of the screen ("You're using WP Mail SMTP Lite ...")

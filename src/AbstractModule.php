@@ -61,5 +61,10 @@ abstract class AbstractModule implements Module
         return '';
     }
 
+    public function licenseCss(): string
+    {
+        return '';
+    }
+
     public function register(): void {}
 }

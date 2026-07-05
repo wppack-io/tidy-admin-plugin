@@ -45,7 +45,10 @@ A single WordPress plugin (`wppack/tidy-admin`, entry point
   declarations: `SubmenuCleaner` (sidebar → "Help" / "Upgrades"
   screen-meta buttons), `PluginListLinkCleaner`, `NoticeHookCleaner`,
   `SetupNoticeRelocator` (setup notices → own screens + "Pending plugin
-  setup" dashboard widget), `AdminCss`, `CallbackMatcher`.
+  setup" dashboard widget), `AdminCss`, `CallbackMatcher`, `NoticeHtml`,
+  `WordPressOrgLinks`, and `Settings`/`SettingsPage` (Settings › Tidy
+  Admin: per-module/per-location toggles, license-field visibility;
+  everything defaults to ON with licenses hidden).
 - `src/TidyAdminPlugin.php` — lists all modules in `MODULES`, instantiates
   only those whose target plugin is in `active_plugins`, aggregates their
   declarations into the Support mechanisms, then calls each `register()`.

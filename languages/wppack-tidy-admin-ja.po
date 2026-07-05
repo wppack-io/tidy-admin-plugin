@@ -41,3 +41,43 @@ msgstr "サポートフォーラム"
 #: src/Modules/Mc4wp.php
 msgid "Report a bug (GitHub)"
 msgstr "バグ報告 (GitHub)"
+
+#: src/Support/SettingsPage.php
+msgid "Sidebar & panels"
+msgstr "サイドバーとパネル"
+
+#: src/Support/SettingsPage.php
+msgid "Promotional notices"
+msgstr "宣伝通知"
+
+#: src/Support/SettingsPage.php
+msgid "Setup notices"
+msgstr "セットアップ通知"
+
+#: src/Support/SettingsPage.php
+msgid "Plugin list links"
+msgstr "プラグイン一覧のリンク"
+
+#: src/Support/SettingsPage.php
+msgid "Cosmetic CSS"
+msgstr "表示調整 CSS"
+
+#: src/Support/SettingsPage.php
+msgid "License fields"
+msgstr "ライセンス項目"
+
+#: src/Support/SettingsPage.php
+msgid "Show plugins' license fields"
+msgstr "プラグインのライセンス項目を表示する"
+
+#: src/Support/SettingsPage.php
+msgid "License fields are hidden by default; enable this while entering or checking a license key."
+msgstr "ライセンス項目は標準で非表示です。ライセンスキーの入力や確認を行うときに有効にしてください。"
+
+#: src/Support/SettingsPage.php
+msgid "Disable tidying entirely per plugin, or only for specific areas."
+msgstr "プラグインごとに整理を完全に無効化するか、特定の箇所だけ無効化できます。"
+
+#: src/Support/SettingsPage.php
+msgid "Tidy this plugin"
+msgstr "このプラグインを整理する"

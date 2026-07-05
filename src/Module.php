@@ -143,6 +143,13 @@ interface Module
      */
     public function adminCss(): string;
 
+    /**
+     * Admin CSS that hides the plugin's license fields. Applied by default
+     * and lifted by the "Show plugins' license fields" setting — license
+     * inputs are only needed while entering or checking a key.
+     */
+    public function licenseCss(): string;
+
     /** Plugin-specific hook registrations not expressible via the shared mechanisms above. */
     public function register(): void;
 }

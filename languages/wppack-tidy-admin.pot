@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T04:33:59+09:00\n"
+"POT-Creation-Date: 2026-07-06T05:33:50+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -38,19 +38,59 @@ msgstr ""
 msgid "Report a bug (GitHub)"
 msgstr ""
 
+#: src/Support/SettingsPage.php:83
+msgid "Sidebar & panels"
+msgstr ""
+
+#: src/Support/SettingsPage.php:84
+msgid "Promotional notices"
+msgstr ""
+
+#: src/Support/SettingsPage.php:85
+msgid "Setup notices"
+msgstr ""
+
+#: src/Support/SettingsPage.php:86
+msgid "Plugin list links"
+msgstr ""
+
+#: src/Support/SettingsPage.php:87
+msgid "Cosmetic CSS"
+msgstr ""
+
+#: src/Support/SettingsPage.php:97
+msgid "License fields"
+msgstr ""
+
+#: src/Support/SettingsPage.php:101
+msgid "Show plugins' license fields"
+msgstr ""
+
+#: src/Support/SettingsPage.php:103
+msgid "License fields are hidden by default; enable this while entering or checking a license key."
+msgstr ""
+
+#: src/Support/SettingsPage.php:109
+msgid "Disable tidying entirely per plugin, or only for specific areas."
+msgstr ""
+
+#: src/Support/SettingsPage.php:120
+msgid "Tidy this plugin"
+msgstr ""
+
 #: src/Support/SetupNoticeRelocator.php:104
 msgid "Pending plugin setup"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:153
+#: src/Support/SubmenuCleaner.php:165
 msgid "Upgrades"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:315
+#: src/Support/SubmenuCleaner.php:336
 msgid "Upgrade"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:316
+#: src/Support/SubmenuCleaner.php:337
 msgid "Premium features"
 msgstr ""
 

@@ -80,38 +80,55 @@ final class TidyAdminPlugin
         $setupNoticePlugins = [];
         $adminCss = [self::BASE_ADMIN_CSS];
 
+        $settingsModules = [];
+
         foreach ($modules as $module) {
-            foreach ($module->submenuRelocations() as $category => $needles) {
-                $submenuRelocations[$category] = [...($submenuRelocations[$category] ?? []), ...$needles];
+            $file = $module->targetPluginFile();
+            $settingsModules[] = ['file' => $file, 'name' => self::pluginName($file)];
+            if (!Support\Settings::moduleEnabled($file)) {
+                continue;
             }
-            $extraMetaLinks = [...$extraMetaLinks, ...$module->extraScreenMetaContent()];
-            if ($module->menuParent() !== '') {
-                // Every plugin's Help panel carries the standard WordPress.org
-                // links (locale-aware plugin page, reviews, support forum) in
-                // its right sidebar, like core's "For more information:" column
-                $helpSidebars[] = [
-                    'parent' => $module->menuParent(),
-                    'html' => Support\WordPressOrgLinks::html(dirname($module->targetPluginFile())),
-                ];
+
+            if (Support\Settings::locationEnabled($file, 'submenu')) {
+                foreach ($module->submenuRelocations() as $category => $needles) {
+                    $submenuRelocations[$category] = [...($submenuRelocations[$category] ?? []), ...$needles];
+                }
+                $extraMetaLinks = [...$extraMetaLinks, ...$module->extraScreenMetaContent()];
+                if ($module->menuParent() !== '') {
+                    // Every plugin's Help panel carries the standard WordPress.org
+                    // links (locale-aware plugin page, reviews, support forum) in
+                    // its right sidebar, like core's "For more information:" column
+                    $helpSidebars[] = [
+                        'parent' => $module->menuParent(),
+                        'html' => Support\WordPressOrgLinks::html(dirname($file)),
+                    ];
+                }
             }
-            if ($module->saleNoticeRelocation() !== []) {
-                $saleNotices[] = $module->saleNoticeRelocation();
+            if (Support\Settings::locationEnabled($file, 'notices')) {
+                if ($module->saleNoticeRelocation() !== []) {
+                    $saleNotices[] = $module->saleNoticeRelocation();
+                }
+                foreach ($module->noticeDenyByHook() as $hook => $deny) {
+                    $noticeDenyByHook[$hook] = [...($noticeDenyByHook[$hook] ?? []), ...$deny];
+                }
             }
-            if ($module->upsellLinkUrls() !== []) {
-                $upsellLinkUrlsByPlugin[$module->targetPluginFile()] = $module->upsellLinkUrls();
+            if (Support\Settings::locationEnabled($file, 'links') && $module->upsellLinkUrls() !== []) {
+                $upsellLinkUrlsByPlugin[$file] = $module->upsellLinkUrls();
             }
-            foreach ($module->noticeDenyByHook() as $hook => $deny) {
-                $noticeDenyByHook[$hook] = [...($noticeDenyByHook[$hook] ?? []), ...$deny];
-            }
-            if ($module->setupNoticeByHook() !== []) {
+            if (Support\Settings::locationEnabled($file, 'setup') && $module->setupNoticeByHook() !== []) {
                 $setupNoticePlugins[] = [
-                    'file' => $module->targetPluginFile(),
+                    'file' => $file,
                     'pagePrefixes' => $module->ownPagePrefixes(),
                     'noticesByHook' => $module->setupNoticeByHook(),
                 ];
             }
-            if (trim($module->adminCss()) !== '') {
-                $adminCss[] = $module->adminCss();
+            if (Support\Settings::locationEnabled($file, 'css')) {
+                if (trim($module->adminCss()) !== '') {
+                    $adminCss[] = $module->adminCss();
+                }
+                if (!Support\Settings::showLicenses() && trim($module->licenseCss()) !== '') {
+                    $adminCss[] = $module->licenseCss();
+                }
             }
         }
 
@@ -120,12 +137,26 @@ final class TidyAdminPlugin
         (new Support\NoticeHookCleaner($noticeDenyByHook))->register();
         (new Support\SetupNoticeRelocator($setupNoticePlugins))->register();
         (new Support\AdminCss(implode("\n", $adminCss)))->register();
+        (new Support\SettingsPage($settingsModules))->register();
 
         foreach ($modules as $module) {
-            $module->register();
+            if (Support\Settings::moduleEnabled($module->targetPluginFile())) {
+                $module->register();
+            }
         }
 
         $this->emptyDefaultAdminFooter();
+    }
+
+    private static function pluginName(string $file): string
+    {
+        if (!function_exists('get_plugin_data')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+        $path = WP_PLUGIN_DIR . '/' . $file;
+        $name = is_file($path) ? get_plugin_data($path, false, false)['Name'] : '';
+
+        return $name !== '' ? $name : dirname($file);
     }
 
     /**
