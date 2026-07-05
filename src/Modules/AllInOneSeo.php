@@ -82,6 +82,9 @@ final class AllInOneSeo extends AbstractModule
                 ],
                 // The Support / Docs links from its in-app footer (hidden below),
                 // in the plugin's own text domain
+                // The in-app footer's Support/Docs links plus the dashboard
+                // Support card's links (both hidden below), in the plugin's own
+                // text domain
                 'extraScreenMetaContent' => [
                     [
                         'category' => 'help',
@@ -89,6 +92,10 @@ final class AllInOneSeo extends AbstractModule
                         'html' => '<ul class="tidy-admin-meta-links">'
                             . '<li><a href="https://aioseo.com/docs/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation', 'all-in-one-seo-pack') . '</a></li>'
                             . '<li><a href="https://aioseo.com/plugin/lite-support/" target="_blank" rel="noopener noreferrer">' . esc_html__('Support', 'all-in-one-seo-pack') . '</a></li>'
+                            . '<li><a href="https://aioseo.com/doc-categories/getting-started/" target="_blank" rel="noopener noreferrer">' . esc_html__('Read the All in One SEO user guide', 'all-in-one-seo-pack') . '</a></li>'
+                            . '<li><a href="https://aioseo.com/contact/" target="_blank" rel="noopener noreferrer">' . esc_html__('Access our Premium Support', 'all-in-one-seo-pack') . '</a></li>'
+                            . '<li><a href="https://aioseo.com/changelog/" target="_blank" rel="noopener noreferrer">' . esc_html__('View the Changelog', 'all-in-one-seo-pack') . '</a></li>'
+                            . '<li><a href="https://aioseo.com/docs/quick-start-guide/" target="_blank" rel="noopener noreferrer">' . esc_html__('Getting started? Read the Beginners Guide', 'all-in-one-seo-pack') . '</a></li>'
                             . '</ul>',
                     ],
                 ],
@@ -97,6 +104,26 @@ final class AllInOneSeo extends AbstractModule
                    Support / Docs (moved to the Help panel), a "Free Plugins" cross-sell
                    and social icons */
                 .aioseo-footer { display: none !important; }
+                /* AIOSEO: its own "?" help button in the header (docs/support links plus
+                   an upgrade pitch) — replaced by the standard Help panel; the
+                   notification bell next to it stays */
+                .aioseo-header .header-actions:has(.aioseo-circle-question-mark) { display: none !important; }
+                /* AIOSEO: "Support" card on its dashboard (user guide / Premium Support /
+                   Changelog / Beginners Guide — all moved to the Help panel) */
+                .aioseo-card.dashboard-support { display: none !important; }
+                CSS,
+            ],
+            'upsell-ui' => [
+                'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* AIOSEO: "Upgrade to Pro / Get more features in AIOSEO Pro" card on its dashboard */
+                .aioseo-cta.dashboard-cta { display: none !important; }
+                /* AIOSEO: Quicklinks tiles for Pro-only pages — the pages live in the
+                   Upgrades panel's Premium features tab */
+                .aioseo-feature-card:has(a[href*="aioseo-local-seo"]),
+                .aioseo-feature-card:has(a[href*="aioseo-search-statistics"]),
+                .aioseo-feature-card:has(a[href*="aioseo-link-assistant"]),
+                .aioseo-feature-card:has(a[href*="aioseo-redirects"]) { display: none !important; }
                 CSS,
             ],
             'plugin-list-links' => [
@@ -163,7 +190,10 @@ final class AllInOneSeo extends AbstractModule
                    (closed: buttons inside the header band, kept clear of its bell/help
                    icons; open: the panel covers the content) */
                 @media (min-width: 768px) {
-                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: absolute; top: 14px; left: 0; right: 0; z-index: 9990; }
+                    /* z-index between its fixed header (1051) and its slide-over
+                       drawers/backdrop (1052/1053), so the open notification drawer
+                       covers the buttons like it covers the rest of the header */
+                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: absolute; top: 14px; left: 0; right: 0; z-index: 1052; }
                     body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                     body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta-links { margin-right: 120px; }
                 }
