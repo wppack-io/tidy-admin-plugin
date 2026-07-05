@@ -13,10 +13,10 @@ WPPack Tidy Admin は wp-admin を整頓する WordPress プラグインです�
 ベンダーのアップセルメニュー・宣伝バナー・レビュー依頼・セットアップ催促を
 導線の外へ出し、WordPress 標準の UI に沿った一貫した場所へ移設します:
 アップグレードの案内とプレミアム機能のページは、各プラグイン自身の画面の
-標準 Help ボタン隣の **Upgrades** ボタンへ(割引キャンペーン中はその案内も
-ここに表示)。ドキュメントやサポートへのリンクはその隣の **Help** ボタンへ。
+標準「ヘルプ」ボタン隣の**アップグレード**ボタンへ(割引キャンペーン中はその案内も
+ここに表示)。ドキュメントやサポートへのリンクはその隣の**ヘルプ**ボタンへ。
 セットアップのリマインドは全画面で繰り返される代わりに、ダッシュボードの
-**Pending plugin setup** ウィジェット1か所へ。機能は何も削除しません。
+**セットアップが必要なプラグイン**ウィジェット1か所へ。機能は何も削除しません。
 すべてのページとリンクは引き続き到達可能で、整理内容はプラグインごと・
 機能ごとにオン/オフできます。
 
@@ -46,15 +46,15 @@ WPPack Tidy Admin は wp-admin を整頓する WordPress プラグインです�
   有効なサイトでのみ登録されます。
 - 共通機構(`src/Support/`)が各モジュールの宣言を受け取って動きます:
   - **サブメニューの移設** — アップセル系サブメニューはサイドバーから隠し、コアの
-    Help と同じ UI の「Upgrades」ボタンに集約。ドキュメント/サポート系は
-    「Help」ボタンへ。隠し方によらず、ページ自体は常に登録されたままで、
+    ヘルプと同じ UI の「アップグレード」ボタンに集約。ドキュメント/サポート系は
+    「ヘルプ」ボタンへ。隠し方によらず、ページ自体は常に登録されたままで、
     直接 URL も引き続き有効です。
   - **plugins.php のリンク整理** — プラグイン一覧の行から Pro/Premium 誘導リンクを
     除去(Docs や FAQ などの機能リンクは残します)。
   - **通知の除去** — 宣伝系通知(レビュー依頼・キャンペーン・クロスセル)を
     コールバック名で特定して外します。
   - **セットアップ通知の移設** — 機能的なセットアップ通知(API キー未設定・初期設定
-    未完了)は、プラグイン自身の画面とダッシュボードの「Pending plugin setup」
+    未完了)は、プラグイン自身の画面とダッシュボードの「セットアップが必要なプラグイン」
     ウィジェットにだけ表示。プラグイン側が設定完了と判断すれば自然に消えます。
   - **管理画面 CSS** — React/Vue バンドル内で描画され PHP フックでは制御できない
     宣伝 UI を CSS で非表示にします。
@@ -73,16 +73,16 @@ WPPack Tidy Admin は wp-admin を整頓する WordPress プラグインです�
 | BNFW | 1.x | アドオン/有償サポート/ライセンスのメニュー、他社 SMTP プラグイン推奨通知 |
 | Broken Link Checker | 2.x | 「Our Other Plugins」メニュー、Local ページヘッダの Cloud 誘導 |
 | Contact Form CFDB7 | 1.x | Extensions メニュー、レビュー依頼 |
-| EmbedPress | 4.x | Go Pro リンク/バナー/アップセルポップアップ、マイルストーンポップアップ、キャンペーン通知 → Upgrades パネル |
-| Instagram Feed (Smash Balloon) | 6.x | アップセル/クロスセルメニュー、宣伝通知、Pro CTA、Support メニュー → Plugin Help タブ |
-| Location Weather | 3.x | Lite vs Pro / Upgrade メニュー、宣伝カード、Get Help ドロップダウン → Help パネル、セールバナー → Upgrades パネル、API キー通知 → ダッシュボードウィジェット |
+| EmbedPress | 4.x | Go Pro リンク/バナー/アップセルポップアップ、マイルストーンポップアップ、キャンペーン通知 → アップグレードパネル |
+| Instagram Feed (Smash Balloon) | 6.x | アップセル/クロスセルメニュー、宣伝通知、Pro CTA、Support メニュー → ヘルプパネル |
+| Location Weather | 3.x | Lite vs Pro / Upgrade メニュー、宣伝カード、Get Help ドロップダウン → ヘルプパネル、セールバナー → アップグレードパネル、API キー通知 → ダッシュボードウィジェット |
 | MC4WP (Mailchimp for WP) | 4.x | Extensions メニュー、Premium 広告、レビュー依頼、API キー通知 → ダッシュボードウィジェット |
 | Post Types Order | 2.x | 上位版宣伝ボックス、設定要求通知 → ダッシュボードウィジェット |
-| PublishPress Future | 4.x | Upgrade メニュー/リンク、バージョン通知バー、ロックされた Pro 設定行、サポート/ドキュメントカードとフッター → Help パネル |
+| PublishPress Future | 4.x | Upgrade メニュー/リンク、バージョン通知バー、ロックされた Pro 設定行、サポート/ドキュメントカードとフッター → ヘルプパネル |
 | Taxonomy Terms Order | 1.x | 上位版宣伝ボックス |
 | WP Mail SMTP | 4.x | Pro タブ/メニュー、SendLayer バナー、ウィジェットのチャート teaser、Pro 専用 Mailer スタブ、flyout メニュー |
 | YARPP | 5.x | レビュー依頼 |
-| Yoast SEO | 27.x | Premium / Academy / AI メニュー、アップセル UI とサイドバー、HelpScout ビーコン、初期設定通知 → ダッシュボードウィジェット、Support メニュー → Plugin Help タブ |
+| Yoast SEO | 27.x | Premium / Academy / AI メニュー、アップセル UI とサイドバー、HelpScout ビーコン、初期設定通知 → ダッシュボードウィジェット、Support メニュー → ヘルプパネル |
 
 ## インストール
 
