@@ -90,6 +90,10 @@ msgstr "画面内のアップセル宣伝を非表示"
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr "ヘルプ / アップグレードボタンをページヘッダーに統合"
 
+#: src/Modules/AllInOneWpMigration.php
+msgid "Remove Pro-only export and import destinations"
+msgstr "Pro 専用のエクスポート/インポート先を除去"
+
 #: src/Modules/Bnfw.php
 msgid "Remove the third-party SMTP plugin recommendation"
 msgstr "他社 SMTP プラグインの推奨通知を除去"

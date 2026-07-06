@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T13:23:58+09:00\n"
+"POT-Creation-Date: 2026-07-06T14:00:31+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -43,6 +43,7 @@ msgid "Move upgrade menus to the Upgrades panel"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:55
+#: src/Modules/AllInOneWpMigration.php:44
 #: src/Modules/Bnfw.php:47
 #: src/Modules/EmbedPress.php:52
 #: src/Modules/InstagramFeed.php:47
@@ -52,6 +53,7 @@ msgid "Move Premium feature pages to the Upgrades panel"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:77
+#: src/Modules/AllInOneWpMigration.php:59
 #: src/Modules/Bnfw.php:56
 #: src/Modules/EmbedPress.php:80
 #: src/Modules/InstagramFeed.php:58
@@ -77,7 +79,7 @@ msgstr ""
 msgid "Hide upsell promotions on its screens"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:162
+#: src/Modules/AllInOneSeo.php:165
 #: src/Modules/EmbedPress.php:113
 #: src/Modules/InstagramFeed.php:91
 #: src/Modules/LocationWeather.php:85
@@ -88,12 +90,12 @@ msgstr ""
 msgid "Remove upgrade links from the plugin list"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:168
+#: src/Modules/AllInOneSeo.php:171
 #: src/Modules/PublishPressFuture.php:143
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:187
+#: src/Modules/AllInOneSeo.php:190
 #: src/Modules/Cfdb7.php:47
 #: src/Modules/Mc4wp.php:120
 #: src/Modules/PublishPressFuture.php:154
@@ -101,67 +103,67 @@ msgstr ""
 msgid "Remove the review request"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:199
+#: src/Modules/AllInOneSeo.php:202
 msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:244
+#: src/Modules/AllInOneSeo.php:247
 #: src/Modules/LocationWeather.php:171
 #: src/Modules/WpMailSmtp.php:227
 msgid "Restore the standard admin footer"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:264
+#: src/Modules/AllInOneSeo.php:267
 msgid "Fix styling conflicts with WordPress core"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:273
+#: src/Modules/AllInOneSeo.php:276
 #: src/Modules/PublishPressFuture.php:135
 msgid "Hide locked Pro settings rows"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:313
+#: src/Modules/AllInOneSeo.php:316
 #: src/Modules/WpMailSmtp.php:296
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:342
+#: src/Modules/AllInOneSeo.php:345
 #: src/Modules/WpMailSmtp.php:160
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:389
+#: src/Modules/AllInOneSeo.php:392
 msgid "Remove its news dashboard widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:402
+#: src/Modules/AllInOneSeo.php:405
 #: src/Modules/WpMailSmtp.php:215
 msgid "Always show the Scheduled Actions tools page"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:414
+#: src/Modules/AllInOneSeo.php:417
 msgid "Stop AIOSEO from adding AI buttons to the editor"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:446
+#: src/Modules/AllInOneSeo.php:449
 msgid "Disable all AI features"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:459
+#: src/Modules/AllInOneSeo.php:462
 msgid "Remove the border on its editor toolbar icons"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:470
+#: src/Modules/AllInOneSeo.php:473
 msgid "Hide the AI credits upsell"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:480
+#: src/Modules/AllInOneSeo.php:483
 #: src/Modules/EmbedPress.php:142
 #: src/Modules/WpMailSmtp.php:208
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:487
+#: src/Modules/AllInOneSeo.php:490
 #: src/Modules/BrokenLinkChecker.php:64
 #: src/Modules/EmbedPress.php:177
 #: src/Modules/InstagramFeed.php:146
@@ -172,9 +174,13 @@ msgstr ""
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:527
+#: src/Modules/AllInOneSeo.php:530
 #: src/Modules/Yoast.php:118
 msgid "Remove upgrade items from the admin bar"
+msgstr ""
+
+#: src/Modules/AllInOneWpMigration.php:81
+msgid "Remove Pro-only export and import destinations"
 msgstr ""
 
 #: src/Modules/Bnfw.php:64

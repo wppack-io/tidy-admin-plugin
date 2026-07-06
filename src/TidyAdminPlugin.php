@@ -33,6 +33,7 @@ final class TidyAdminPlugin
     /** @var list<class-string<Module>> */
     private const MODULES = [
         Modules\AllInOneSeo::class,
+        Modules\AllInOneWpMigration::class,
         Modules\Bnfw::class,
         Modules\BrokenLinkChecker::class,
         Modules\Cfdb7::class,
