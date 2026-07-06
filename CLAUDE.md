@@ -192,6 +192,9 @@ survive a reset). Two lessons baked into the script; keep them if editing:
   each time — but honor the granularity rules above, and present the file
   list before any bulk or destructive operation. Never `git push` without
   an explicit instruction.
+- **Per-plugin work happens on its own branch** (e.g. `plugin/aioseo`):
+  adding a module or iterating on one plugin's cleanups stays off `1.x`
+  until it is verified, then merges into `1.x`.
 
 ## Guideline self-evaluation
 
