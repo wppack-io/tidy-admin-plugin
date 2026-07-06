@@ -115,7 +115,7 @@ final class Yoast extends AbstractModule
                 ],
             ],
             'admin-bar' => [
-                'label' => __('Remove upgrade items from the admin bar', 'wppack-tidy-admin'),
+                'label' => __('Clean up its admin bar menu (upgrades, help, inspector)', 'wppack-tidy-admin'),
                 'register' => static function (): void {
                     add_action('admin_bar_menu', static function (WP_Admin_Bar $bar): void {
                         $bar->remove_node('wpseo-get-premium');
@@ -130,6 +130,12 @@ final class Yoast extends AbstractModule
                         $bar->remove_node('wpseo-redirects');
                         $bar->remove_node('wpseo-academy');
                         $bar->remove_node('wpseo-page-support');
+                        // Front-end admin bar clutter: the SEO inspector, the "How to"
+                        // (learn SEO / write better content) and "Help" submenus are
+                        // documentation/education links, out of place on the toolbar
+                        $bar->remove_node('wpseo-frontend-inspector');
+                        $bar->remove_node('wpseo-sub-howto');
+                        $bar->remove_node('wpseo-sub-get-help');
                     }, 999);
                 },
             ],

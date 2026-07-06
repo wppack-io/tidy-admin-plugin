@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-07T00:18:27+09:00\n"
+"POT-Creation-Date: 2026-07-07T00:24:33+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -75,7 +75,7 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:129
 #: src/Modules/LocationWeather.php:156
 #: src/Modules/WpMailSmtp.php:264
-#: src/Modules/Yoast.php:215
+#: src/Modules/Yoast.php:221
 msgid "Hide upsell promotions on its screens"
 msgstr ""
 
@@ -170,12 +170,11 @@ msgstr ""
 #: src/Modules/LocationWeather.php:209
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/WpMailSmtp.php:283
-#: src/Modules/Yoast.php:275
+#: src/Modules/Yoast.php:281
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:544
-#: src/Modules/Yoast.php:118
 msgid "Remove upgrade items from the admin bar"
 msgstr ""
 
@@ -307,19 +306,23 @@ msgstr ""
 msgid "Remove the HelpScout support beacon"
 msgstr ""
 
-#: src/Modules/Yoast.php:137
+#: src/Modules/Yoast.php:118
+msgid "Clean up its admin bar menu (upgrades, help, inspector)"
+msgstr ""
+
+#: src/Modules/Yoast.php:143
 msgid "Disable promotional introduction popups"
 msgstr ""
 
-#: src/Modules/Yoast.php:149
+#: src/Modules/Yoast.php:155
 msgid "Stop the \"set up a redirect\" upsell when trashing content"
 msgstr ""
 
-#: src/Modules/Yoast.php:178
+#: src/Modules/Yoast.php:184
 msgid "Stop the webinar promo notice"
 msgstr ""
 
-#: src/Modules/Yoast.php:245
+#: src/Modules/Yoast.php:251
 msgid "Use the freed upsell space for content"
 msgstr ""
 

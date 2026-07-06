@@ -247,8 +247,8 @@ msgid "Remove the HelpScout support beacon"
 msgstr "HelpScout サポートビーコンを除去"
 
 #: src/Modules/Yoast.php
-msgid "Remove upgrade items from the admin bar"
-msgstr "管理バーからアップグレード項目を除去"
+msgid "Clean up its admin bar menu (upgrades, help, inspector)"
+msgstr "管理バーメニューを整理（アップグレード・ヘルプ・インスペクター）"
 
 #: src/Modules/Yoast.php
 msgid "Disable promotional introduction popups"
