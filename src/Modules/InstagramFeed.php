@@ -154,11 +154,15 @@ final class InstagramFeed extends AbstractModule
             'wizard-plugin-installs' => [
                 'label' => __('Skip the recommended-plugin installs in its setup wizard', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
-                /* Instagram Feed: the sbi-setup wizard's install-plugins step recommends
-                   installing Facebook/Twitter/Reviews/WPChat/WPConsent feeds — a cross-sell
-                   whose toggles are checked by default. Hide the recommendation list (its
-                   GDPR info box is hidden by upsell-ui); the register below stops the
-                   installs regardless of the toggle state */
+                /* Instagram Feed: the sbi-setup wizard's "Configure features" step slips
+                   cross-sell items (Social Feed Collection, Customer Reviews, WPChat) in
+                   among the real features, each checked by default. They are the only
+                   feature rows that carry a plugin-chip list, so hide those; the genuine
+                   feature toggles (User Feed, Downtime Prevention, ...) stay */
+                .sb-onboarding-wizard-elem:has(.sb-onboarding-wizard-smash-list) { display: none !important; }
+                /* And the dedicated install-plugins step, when it appears (its GDPR info
+                   box is hidden by upsell-ui). The register below stops the installs
+                   regardless of the toggle state */
                 .sb-onboarding-wizard-step-installp .sb-onboarding-wizard-elements-list { display: none !important; }
                 CSS,
                 /*
@@ -187,6 +191,27 @@ final class InstagramFeed extends AbstractModule
                             $_POST['data'] = wp_slash($encoded);
                         }
                     }, 1);
+
+                    /*
+                     * Drop the whole "Install a GDPR plugin" / "You might also be
+                     * interested in..." cross-sell step from the wizard flow so it
+                     * never appears after Configure features. The step list lives in
+                     * the localized sbi_builder.onboardingWizardContent.steps; a
+                     * 'before' inline script runs after that global is defined but
+                     * before the builder app boots and reads it.
+                     */
+                    add_action('admin_enqueue_scripts', static function (): void {
+                        if (!wp_script_is('sbi-builder-app', 'enqueued')) {
+                            return;
+                        }
+                        wp_add_inline_script(
+                            'sbi-builder-app',
+                            '(function(){var c=window.sbi_builder&&window.sbi_builder.onboardingWizardContent;'
+                            . 'if(c&&Array.isArray(c.steps)){c.steps=c.steps.filter(function(s){'
+                            . "return !s||s.id!=='install-plugins';});}})();",
+                            'before',
+                        );
+                    }, 999);
                 },
             ],
             'panel-placement' => [
