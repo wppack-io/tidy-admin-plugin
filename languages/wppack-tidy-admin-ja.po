@@ -90,6 +90,10 @@ msgstr "画面内のアップセル宣伝を非表示"
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr "ヘルプ / アップグレードボタンをページヘッダーに統合"
 
+#: src/Modules
+msgid "Skip the recommended-plugin installs in its setup wizard"
+msgstr "セットアップウィザードの推奨プラグイン導入をスキップ"
+
 #: src/Modules/AllInOneWpMigration.php
 msgid "Upgrade to Pro"
 msgstr "Pro 版にアップグレード"

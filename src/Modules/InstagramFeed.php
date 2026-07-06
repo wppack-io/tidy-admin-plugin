@@ -151,6 +151,44 @@ final class InstagramFeed extends AbstractModule
                 .sb-onboarding-wizard-gdpr-info { display: none !important; }
                 CSS,
             ],
+            'wizard-plugin-installs' => [
+                'label' => __('Skip the recommended-plugin installs in its setup wizard', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Instagram Feed: the sbi-setup wizard's install-plugins step recommends
+                   installing Facebook/Twitter/Reviews/WPChat/WPConsent feeds — a cross-sell
+                   whose toggles are checked by default. Hide the recommendation list (its
+                   GDPR info box is hidden by upsell-ui); the register below stops the
+                   installs regardless of the toggle state */
+                .sb-onboarding-wizard-step-installp .sb-onboarding-wizard-elements-list { display: none !important; }
+                CSS,
+                /*
+                 * The wizard ships those recommendations active ('active' => true), so
+                 * finishing it installs and activates them. There is no filter on the
+                 * wizard content, so strip every install_plugins entry from the submitted
+                 * data before the plugin's own AJAX handler (default priority) reads it —
+                 * the plugins default to not-installed regardless of the checkbox state.
+                 */
+                'register' => static function (): void {
+                    add_action('wp_ajax_sbi_feed_saver_manager_process_wizard', static function (): void {
+                        $raw = $_POST['data'] ?? null;
+                        if (!is_string($raw)) {
+                            return;
+                        }
+                        $decoded = json_decode(stripslashes($raw), true);
+                        if (!is_array($decoded)) {
+                            return;
+                        }
+                        $kept = array_values(array_filter(
+                            $decoded,
+                            static fn(mixed $entry): bool => !is_array($entry) || ($entry['type'] ?? '') !== 'install_plugins',
+                        ));
+                        $encoded = wp_json_encode($kept);
+                        if ($encoded !== false) {
+                            $_POST['data'] = wp_slash($encoded);
+                        }
+                    }, 1);
+                },
+            ],
             'panel-placement' => [
                 'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
