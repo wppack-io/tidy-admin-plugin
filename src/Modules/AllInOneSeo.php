@@ -227,6 +227,10 @@ final class AllInOneSeo extends AbstractModule
                    Priority Score, ...) — editor screens carry no page_aioseo body class */
                 body:is(.post-php, .post-new-php) .aioseo-app .aioseo-settings-row:has(.aioseo-pro-badge),
                 body:is(.post-php, .post-new-php) .aioseo-app .aioseo-settings-row:has(.aioseo-alert.inline-upsell) { display: none !important; }
+                /* AIOSEO: the block-editor sidebar renders the same teasers as accordion
+                   cards with stable classes (Cornerstone Content, Additional Keywords) */
+                body:is(.post-php, .post-new-php) .aioseo-sidebar-card.card-cornerstone-content,
+                body:is(.post-php, .post-new-php) .aioseo-sidebar-card[class*="card-additional-keyphra"] { display: none !important; }
                 /* AIOSEO: whole cards whose HEADER carries the PRO pill (e.g. Image SEO
                    on Search Appearance > Media) — every row inside is a teaser. Cards
                    with the pill only in individual rows keep their functional rows */
@@ -254,7 +258,7 @@ final class AllInOneSeo extends AbstractModule
                             return;
                         }
                         echo '<script>(function () {'
-                            . 'function hide() { document.querySelectorAll(".var-tab").forEach(function (tab) {'
+                            . 'function hide() { document.querySelectorAll(".var-tab, .aioseo-sidepanel-button").forEach(function (tab) {'
                             . 'if (tab.textContent.trim() === "License") { tab.style.display = "none"; }'
                             . '}); }'
                             . 'new MutationObserver(hide).observe(document.getElementById("wpbody-content") || document.body, { childList: true, subtree: true });'
@@ -299,7 +303,7 @@ final class AllInOneSeo extends AbstractModule
                         echo '<script>(function () {'
                             . 'var labels = ' . $labels . ';'
                             // Prefix match: some tab labels carry a "NEW!" pill suffix
-                            . 'function hide() { document.querySelectorAll(".var-tab").forEach(function (tab) {'
+                            . 'function hide() { document.querySelectorAll(".var-tab, .aioseo-sidepanel-button").forEach(function (tab) {'
                             . 'var text = tab.textContent.trim();'
                             . 'if (labels.some(function (l) { return text.indexOf(l) === 0; })) { tab.style.display = "none"; }'
                             . '}); }'
