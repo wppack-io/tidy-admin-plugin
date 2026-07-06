@@ -345,6 +345,19 @@ final class AllInOneSeo extends AbstractModule
                     });
                 },
             ],
+            'dashboard-news-widget' => [
+                'label' => __('Remove its news dashboard widget', 'wppack-tidy-admin'),
+                /*
+                 * "SEO News" — an RSS feed of aioseo.com blog posts on the WP
+                 * dashboard (marketing content, not this site's data).
+                 */
+                'register' => static function (): void {
+                    add_action('wp_dashboard_setup', static function (): void {
+                        remove_meta_box('aioseo-rss-feed', 'dashboard', 'normal');
+                        remove_meta_box('aioseo-rss-feed', 'dashboard', 'side');
+                    }, PHP_INT_MAX);
+                },
+            ],
             'scheduled-actions-menu' => [
                 'label' => __('Always show the Scheduled Actions tools page', 'wppack-tidy-admin'),
                 /*

@@ -191,6 +191,10 @@ msgid "Hide the license fields (turn off while entering a key)"
 msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
 
 #: src/Modules/AllInOneSeo.php
+msgid "Remove its news dashboard widget"
+msgstr "ニュース系のダッシュボードウィジェットを除去"
+
+#: src/Modules/AllInOneSeo.php
 msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr "「複数の SEO プラグイン」警告をセットアップウィジェットへ移設"
 
