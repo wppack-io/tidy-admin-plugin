@@ -140,6 +140,15 @@ final class InstagramFeed extends AbstractModule
                 /* Instagram Feed: "Did You Know ... our other plugins" box at the bottom of the feed
                    builder screen (pitch to install Facebook/TikTok etc.) */
                 .sbi-fb-mr-feeds { display: none !important; }
+                /* Instagram Feed: promotional blocks in the sbi-setup onboarding wizard —
+                   the "Pro Features" list (matched by its heading; the free-features list
+                   above it has none), the "upgrade to Pro" CTA with its banner, the
+                   "already have a license?" key box, and the "install a GDPR plugin"
+                   consent-plugin info box */
+                .sb-onboarding-wizard-elements-list:has(.sb-onboarding-wizard-elements-list-hd),
+                .sb-onboarding-wizard-upgrade-ctn,
+                .sb-onboarding-wizard-license-ctn,
+                .sb-onboarding-wizard-gdpr-info { display: none !important; }
                 CSS,
             ],
             'panel-placement' => [
