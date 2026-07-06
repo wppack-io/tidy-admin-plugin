@@ -108,6 +108,10 @@ final class AllInOneSeo extends AbstractModule
                    an upgrade pitch) — replaced by the standard Help panel; the
                    notification bell inside the same .header-actions container stays */
                 .aioseo-header .header-actions .round:has(.aioseo-circle-question-mark) { display: none !important; }
+                /* AIOSEO: the help drawer that button opened (docs links + upgrade pitch,
+                   all relocated). At phone widths its mounted header bar renders as a
+                   blank 60px band on top of the page, covering the meta buttons */
+                .aioseo-help { display: none !important; }
                 /* AIOSEO: "Support" card on its dashboard (user guide / Premium Support /
                    Changelog / Beginners Guide — all moved to the Help panel) */
                 .aioseo-card.dashboard-support { display: none !important; }
@@ -121,12 +125,18 @@ final class AllInOneSeo extends AbstractModule
                 /* AIOSEO: "Get additional keywords and many more modules! Upgrade to Pro
                    Today!" strip inside the dashboard's Overview card */
                 .aioseo-overview .aioseo-alert.yellow { display: none !important; }
-                /* AIOSEO: Quicklinks tiles for Pro-only pages — the pages live in the
-                   Upgrades panel's Premium features tab */
-                .aioseo-feature-card:has(a[href*="aioseo-local-seo"]),
-                .aioseo-feature-card:has(a[href*="aioseo-search-statistics"]),
-                .aioseo-feature-card:has(a[href*="aioseo-link-assistant"]),
-                .aioseo-feature-card:has(a[href*="aioseo-redirects"]) { display: none !important; }
+                /* AIOSEO: inline upsell CTA boxes on functional screens (e.g. "Unlock
+                   Local SEO" under Knowledge Graph on Search Appearance). The relocated
+                   teaser pages are excluded — there the CTA is the page's purpose */
+                body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]) .aioseo-cta { display: none !important; }
+                /* AIOSEO: dashboard Quicklinks tiles for Pro-only pages — the pages live
+                   in the Upgrades panel's Premium features tab. Scoped to the Quicklinks
+                   grid so the relocated Feature Manager page keeps every one of its
+                   (.aioseo-feature-card) cards — teaser destinations stay intact */
+                body.toplevel_page_aioseo .aioseo-quicklinks-cards-row .aioseo-col:has(a[href*="aioseo-local-seo"]),
+                body.toplevel_page_aioseo .aioseo-quicklinks-cards-row .aioseo-col:has(a[href*="aioseo-search-statistics"]),
+                body.toplevel_page_aioseo .aioseo-quicklinks-cards-row .aioseo-col:has(a[href*="aioseo-link-assistant"]),
+                body.toplevel_page_aioseo .aioseo-quicklinks-cards-row .aioseo-col:has(a[href*="aioseo-redirects"]) { display: none !important; }
                 CSS,
             ],
             'plugin-list-links' => [
@@ -137,14 +147,22 @@ final class AllInOneSeo extends AbstractModule
             ],
             'upgrade-bar' => [
                 'label' => __('Remove the "You\'re using the Free version" bar', 'wppack-tidy-admin'),
-                'adminCss' => <<<'CSS'
-                /* AIOSEO: green "You're using All in One SEO Free. To unlock more features,
-                   consider upgrading to Pro" bar across the top of its screens. The fixed
-                   header reserves a fixed 112px including the 40px bar — let it size to
-                   its remaining content instead so no blank strip remains */
-                .aioseo-upgrade-bar { display: none !important; }
-                body[class*="page_aioseo"] .aioseo-header { height: auto !important; }
-                CSS,
+                /*
+                 * "You're using All in One SEO Free. To unlock more features,
+                 * consider upgrading to Pro" bar across the top of its screens.
+                 * The bar is dismissible through AIOSEO's own persisted
+                 * showUpgradeBar setting (the bar's own X button flips it), so
+                 * flip that instead of hiding with CSS: the bar never renders,
+                 * the aioseo-has-bar body class never bumps the header-height
+                 * variable, and the whole header lays out consistently.
+                 */
+                'register' => static function (): void {
+                    add_action('current_screen', static function (): void {
+                        if (function_exists('aioseo') && isset(aioseo()->settings) && aioseo()->settings->showUpgradeBar) {
+                            aioseo()->settings->showUpgradeBar = false;
+                        }
+                    });
+                },
             ],
             'review-request' => [
                 'label' => __('Remove the review request', 'wppack-tidy-admin'),
@@ -178,18 +196,30 @@ final class AllInOneSeo extends AbstractModule
                     }, 0);
                 },
             ],
+            'core-style-conflicts' => [
+                'label' => __('Fix styling conflicts with WordPress core', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* AIOSEO: WordPress 7.0's admin styles give every input a 40px
+                   min-height, stretching AIOSEO's compact .small inputs (e.g. on
+                   Tools > System Status) out of their designed proportions */
+                body[class*="page_aioseo"] .aioseo-input-container .aioseo-input input.small { min-height: 0 !important; }
+                CSS,
+            ],
             'pro-settings-rows' => [
                 'label' => __('Hide locked Pro settings rows', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
                 /* AIOSEO: settings rows whose control is a locked Pro teaser, marked by
                    the PRO pill (Taxonomy Columns, Admin Bar Menu, Dashboard Widgets,
-                   Breadcrumb Templates, llms-full.txt, Convert Posts to Markdown, ...) */
-                body[class*="page_aioseo"] .aioseo-settings-row:has(.aioseo-pro-badge) { display: none !important; }
+                   Breadcrumb Templates, llms-full.txt, Convert Posts to Markdown, ...).
+                   The relocated Pro teaser pages (Local SEO, Search Statistics, Link
+                   Assistant, Redirects, AI Suite, Feature Manager) are excluded: there
+                   the PRO-badged content IS the page — hiding it would blank them */
+                body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]) .aioseo-settings-row:has(.aioseo-pro-badge) { display: none !important; }
                 /* AIOSEO: whole cards whose HEADER carries the PRO pill (e.g. Image SEO
                    on Search Appearance > Media) — every row inside is a teaser. Cards
                    with the pill only in individual rows keep their functional rows */
-                body[class*="page_aioseo"] .aioseo-card:has(> .header .aioseo-pro-badge),
-                body[class*="page_aioseo"] .aioseo-card:has(> div > .header .aioseo-pro-badge) { display: none !important; }
+                body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]) .aioseo-card:has(> .header .aioseo-pro-badge),
+                body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]) .aioseo-card:has(> div > .header .aioseo-pro-badge) { display: none !important; }
                 CSS,
             ],
             'license-fields' => [
@@ -212,7 +242,7 @@ final class AllInOneSeo extends AbstractModule
                             return;
                         }
                         echo '<script>(function () {'
-                            . 'function hide() { document.querySelectorAll(".aioseo-tabs .var-tab").forEach(function (tab) {'
+                            . 'function hide() { document.querySelectorAll(".var-tab").forEach(function (tab) {'
                             . 'if (tab.textContent.trim() === "License") { tab.style.display = "none"; }'
                             . '}); }'
                             . 'new MutationObserver(hide).observe(document.getElementById("wpbody-content") || document.body, { childList: true, subtree: true });'
@@ -236,7 +266,9 @@ final class AllInOneSeo extends AbstractModule
                         $page = isset($_GET['page']) && is_string($_GET['page']) ? $_GET['page'] : '';
                         $labelsByPage = [
                             'aioseo-settings' => ['Access Control'],
-                            'aioseo-search-appearance' => ['Author SEO', 'Image SEO'],
+                            // Schema Markup / Custom Fields are inner tabs of each
+                            // Content Types card ("... is a PRO Feature" teasers)
+                            'aioseo-search-appearance' => ['Author SEO', 'Image SEO', 'Schema Markup', 'Custom Fields'],
                             'aioseo-sitemaps' => ['Video Sitemap', 'News Sitemap'],
                             'aioseo-seo-analysis' => ['Site Audit'],
                         ];
@@ -247,7 +279,7 @@ final class AllInOneSeo extends AbstractModule
                         echo '<script>(function () {'
                             . 'var labels = ' . $labels . ';'
                             // Prefix match: some tab labels carry a "NEW!" pill suffix
-                            . 'function hide() { document.querySelectorAll(".aioseo-tabs .var-tab").forEach(function (tab) {'
+                            . 'function hide() { document.querySelectorAll(".var-tab").forEach(function (tab) {'
                             . 'var text = tab.textContent.trim();'
                             . 'if (labels.some(function (l) { return text.indexOf(l) === 0; })) { tab.style.display = "none"; }'
                             . '}); }'
@@ -255,6 +287,18 @@ final class AllInOneSeo extends AbstractModule
                             . 'hide();'
                             . '})();</script>';
                     });
+                },
+            ],
+            'scheduled-actions-menu' => [
+                'label' => __('Always show the Scheduled Actions tools page', 'wppack-tidy-admin'),
+                /*
+                 * AIOSEO hides the Action Scheduler admin screen (Tools >
+                 * Scheduled Actions) unless another plugin re-registers it.
+                 * It is useful for inspecting the queue, so keep it visible
+                 * via AIOSEO's own filter.
+                 */
+                'register' => static function (): void {
+                    add_filter('aioseo_hide_action_scheduler_menu', '__return_false');
                 },
             ],
             'flyout' => [
@@ -307,6 +351,7 @@ final class AllInOneSeo extends AbstractModule
                         $bar->remove_node('aioseo-ai-insights');
                         $bar->remove_node('aioseo-local-seo');
                         $bar->remove_node('aioseo-search-statistics');
+                        $bar->remove_node('aioseo-feature-manager');
                         $bar->remove_node('aioseo-about');
                         // AIOSEO registers its admin bar at priority 1000
                     }, 1001);

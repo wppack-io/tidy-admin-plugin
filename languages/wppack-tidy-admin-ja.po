@@ -190,6 +190,10 @@ msgstr "ダッシュボードウィジェットの Pro ティーザーチャー�
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
 
+#: src/Modules/AllInOneSeo.php
+msgid "Fix styling conflicts with WordPress core"
+msgstr "WordPress コアとのスタイル競合を修正"
+
 #: src/Modules/Yoast.php
 msgid "Remove the HelpScout support beacon"
 msgstr "HelpScout サポートビーコンを除去"
