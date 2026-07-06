@@ -311,11 +311,18 @@ final class AllInOneSeo extends AbstractModule
             'panel-placement' => [
                 'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
-                /* AIOSEO: below the fixed-header widths the row sits in flow above the
-                   app — give it a solid white band (padding, not margin, so the
-                   background spans the full width) */
+                /* AIOSEO: at phone widths its breadcrumb header mounts as a FIXED bar
+                   (z-index 1051) once you scroll, so an in-flow row would scroll away
+                   under it — pin our band fixed under the 46px admin bar here too, as a
+                   solid white full-width strip (padding, not margin, so the background
+                   reaches the left edge), and reserve its height so it never covers the
+                   top of the app */
                 @media (max-width: 767px) {
-                    body[class*="page_aioseo"] #tidy-admin-meta-region { background: #fff; padding-left: 20px; }
+                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: fixed; top: 46px; left: 0; right: 0; z-index: 1052; background: #fff; padding-left: 20px; }
+                    body[class*="page_aioseo"] #wpbody { padding-top: 34px; }
+                    /* Its scroll-mounted fixed breadcrumb bar also anchors at 46px —
+                       slot it below our band instead of overlapping it */
+                    body[class*="page_aioseo"] .aioseo-header { top: 80px !important; }
                 }
                 /* AIOSEO: its breadcrumb header is FIXED (z-index 1051), so an absolutely
                    positioned row would scroll away while the header stays — fix the whole
