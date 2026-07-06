@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T11:16:52+09:00\n"
+"POT-Creation-Date: 2026-07-06T11:34:48+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -98,62 +98,62 @@ msgid "Remove the review request"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:180
-msgid "Confine the \"multiple SEO plugins\" warning to the Dashboard"
+msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:193
+#: src/Modules/AllInOneSeo.php:204
 #: src/Modules/LocationWeather.php:171
 #: src/Modules/WpMailSmtp.php:227
 msgid "Restore the standard admin footer"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:213
+#: src/Modules/AllInOneSeo.php:224
 msgid "Fix styling conflicts with WordPress core"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:222
+#: src/Modules/AllInOneSeo.php:233
 #: src/Modules/PublishPressFuture.php:135
 msgid "Hide locked Pro settings rows"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:262
+#: src/Modules/AllInOneSeo.php:273
 #: src/Modules/WpMailSmtp.php:296
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:291
+#: src/Modules/AllInOneSeo.php:302
 #: src/Modules/WpMailSmtp.php:160
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:338
+#: src/Modules/AllInOneSeo.php:349
 #: src/Modules/WpMailSmtp.php:215
 msgid "Always show the Scheduled Actions tools page"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:350
+#: src/Modules/AllInOneSeo.php:361
 msgid "Stop AIOSEO from adding AI buttons to the editor"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:374
+#: src/Modules/AllInOneSeo.php:385
 msgid "Disable all AI features"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:387
+#: src/Modules/AllInOneSeo.php:398
 msgid "Remove the border on its editor toolbar icons"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:398
+#: src/Modules/AllInOneSeo.php:409
 msgid "Hide the AI credits upsell"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:408
+#: src/Modules/AllInOneSeo.php:419
 #: src/Modules/EmbedPress.php:142
 #: src/Modules/WpMailSmtp.php:208
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:415
+#: src/Modules/AllInOneSeo.php:426
 #: src/Modules/BrokenLinkChecker.php:64
 #: src/Modules/EmbedPress.php:177
 #: src/Modules/InstagramFeed.php:146
@@ -164,7 +164,7 @@ msgstr ""
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:455
+#: src/Modules/AllInOneSeo.php:466
 #: src/Modules/Yoast.php:108
 msgid "Remove upgrade items from the admin bar"
 msgstr ""

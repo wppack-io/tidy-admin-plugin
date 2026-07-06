@@ -177,16 +177,27 @@ final class AllInOneSeo extends AbstractModule
                 CSS,
             ],
             'conflict-notice' => [
-                'label' => __('Confine the "multiple SEO plugins" warning to the Dashboard', 'wppack-tidy-admin'),
+                'label' => __('Move the "multiple SEO plugins" warning to the setup widget', 'wppack-tidy-admin'),
                 /*
                  * "Please keep only one SEO plugin active ..." is a functional
                  * warning, but AIOSEO repeats it on every admin screen. It shares
-                 * the Notices::notices() dispatcher with functional notices, so
-                 * the callback cannot be unhooked selectively — confine it to the
-                 * Dashboard (index.php) with CSS, where the reminder is enough.
+                 * the Notices::notices() dispatcher with other functional notices,
+                 * so the callback cannot be unhooked selectively — hide it
+                 * everywhere with CSS and reproduce it in the "Pending plugin
+                 * setup" dashboard widget instead (capture re-runs the notice's
+                 * own render, which self-suppresses when there is no conflict).
+                 * The widget copy is exempted from the hiding rule.
                  */
+                'setupNoticeByHook' => [],
+                'setupNoticeCapture' => static function (): void {
+                    $class = 'AIOSEO\\Plugin\\Common\\Admin\\Notices\\ConflictingPlugins';
+                    if (class_exists($class)) {
+                        (new $class())->maybeShowNotice();
+                    }
+                },
                 'adminCss' => <<<'CSS'
-                body:not(.index-php) .aioseo-conflicting-plugin-notice { display: none !important; }
+                .aioseo-conflicting-plugin-notice { display: none !important; }
+                #tidy_admin_pending_setup .aioseo-conflicting-plugin-notice { display: block !important; }
                 CSS,
             ],
             'footer' => [
