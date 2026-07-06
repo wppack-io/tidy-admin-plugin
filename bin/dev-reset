@@ -132,6 +132,20 @@ vendor/bin/wp option update sbi_db_version "${SBI_DBVERSION:-2.4}"
 
 vendor/bin/wp plugin activate --all
 
+# Wordfence resolves the site's host with dns_get_record() on every admin
+# request (wfUtils::serverIPs). It resolves `localhost:8082` — WP_HOME includes
+# the dev port, which is not a valid hostname — so the lookup stalls for the
+# full 30s (its max_execution_time) instead of failing fast, and on the
+# single-threaded dev server that takes the whole site down. It checks a cached
+# 'serverDNS' value first (format 'timestamp;ttl;ip') and skips the lookup when
+# still valid, so seed a long-lived one. The wfconfig table exists only after
+# activation, hence this runs last.
+PREFIX="$(vendor/bin/wp config get table_prefix)"
+vendor/bin/wp db query "INSERT INTO ${PREFIX}wfconfig (name, val, autoload) VALUES \
+  ('serverDNS', CONCAT(UNIX_TIMESTAMP(), ';315360000;127.0.0.1'), 'yes'), \
+  ('serverIP', CONCAT(UNIX_TIMESTAMP(), ';127.0.0.1'), 'yes') \
+  ON DUPLICATE KEY UPDATE val = VALUES(val)"
+
 echo
 echo "Reset complete: $URL/wp/wp-admin/ (admin / password)"
 echo "Server: vendor/bin/wp server"
