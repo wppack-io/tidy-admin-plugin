@@ -106,8 +106,8 @@ final class AllInOneSeo extends AbstractModule
                 .aioseo-footer { display: none !important; }
                 /* AIOSEO: its own "?" help button in the header (docs/support links plus
                    an upgrade pitch) — replaced by the standard Help panel; the
-                   notification bell next to it stays */
-                .aioseo-header .header-actions:has(.aioseo-circle-question-mark) { display: none !important; }
+                   notification bell inside the same .header-actions container stays */
+                .aioseo-header .header-actions .round:has(.aioseo-circle-question-mark) { display: none !important; }
                 /* AIOSEO: "Support" card on its dashboard (user guide / Premium Support /
                    Changelog / Beginners Guide — all moved to the Help panel) */
                 .aioseo-card.dashboard-support { display: none !important; }
@@ -136,8 +136,11 @@ final class AllInOneSeo extends AbstractModule
                 'label' => __('Remove the "You\'re using the Free version" bar', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
                 /* AIOSEO: green "You're using All in One SEO Free. To unlock more features,
-                   consider upgrading to Pro" bar across the top of its screens */
+                   consider upgrading to Pro" bar across the top of its screens. The fixed
+                   header reserves 112px including the 40px bar — shrink it to its real
+                   content height so no blank strip remains */
                 .aioseo-upgrade-bar { display: none !important; }
+                body[class*="page_aioseo"] .aioseo-header { height: 72px !important; }
                 CSS,
             ],
             'review-request' => [
@@ -172,6 +175,85 @@ final class AllInOneSeo extends AbstractModule
                     }, 0);
                 },
             ],
+            'pro-settings-rows' => [
+                'label' => __('Hide locked Pro settings rows', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* AIOSEO: settings rows whose control is a locked Pro teaser, marked by
+                   the PRO pill (Taxonomy Columns, Admin Bar Menu, Dashboard Widgets,
+                   Breadcrumb Templates, llms-full.txt, Convert Posts to Markdown, ...) */
+                body[class*="page_aioseo"] .aioseo-settings-row:has(.aioseo-pro-badge) { display: none !important; }
+                /* AIOSEO: whole cards whose HEADER carries the PRO pill (e.g. Image SEO
+                   on Search Appearance > Media) — every row inside is a teaser. Cards
+                   with the pill only in individual rows keep their functional rows */
+                body[class*="page_aioseo"] .aioseo-card:has(> .header .aioseo-pro-badge),
+                body[class*="page_aioseo"] .aioseo-card:has(> div > .header .aioseo-pro-badge) { display: none !important; }
+                CSS,
+            ],
+            'license-fields' => [
+                'label' => __('Hide the license fields (turn off while entering a key)', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* AIOSEO: "License" card on General Settings — a key input that Lite does
+                   not need ("You're using AIOSEO Lite - no license needed") plus an
+                   upgrade pitch */
+                body[class*="page_aioseo"] .aioseo-card:has([class*="license-key"]),
+                body[class*="page_aioseo"] .aioseo-settings-row:has([class*="license-key"]) { display: none !important; }
+                CSS,
+                /*
+                 * The License tab on General Settings holds nothing but that
+                 * card, so hide the (id-less Varlet) tab too — same fail-open
+                 * label matching as the pro-tabs feature.
+                 */
+                'register' => static function (): void {
+                    add_action('admin_footer', static function (): void {
+                        if (($_GET['page'] ?? '') !== 'aioseo-settings') {
+                            return;
+                        }
+                        echo '<script>(function () {'
+                            . 'function hide() { document.querySelectorAll(".aioseo-tabs .var-tab").forEach(function (tab) {'
+                            . 'if (tab.textContent.trim() === "License") { tab.style.display = "none"; }'
+                            . '}); }'
+                            . 'new MutationObserver(hide).observe(document.getElementById("wpbody-content") || document.body, { childList: true, subtree: true });'
+                            . 'hide();'
+                            . '})();</script>';
+                    });
+                },
+            ],
+            'pro-tabs' => [
+                'label' => __('Remove Pro-only education tabs', 'wppack-tidy-admin'),
+                /*
+                 * In-page tabs whose screens are Pro teasers. The Varlet tab
+                 * divs carry no ids, hrefs, or data attributes, so CSS cannot
+                 * address them — a small vanilla script matches the tab labels
+                 * instead. Labels are AIOSEO's msgids; if a localized AIOSEO
+                 * renders translated labels the match fails open and the tab
+                 * simply stays visible. The routes stay reachable by URL.
+                 */
+                'register' => static function (): void {
+                    add_action('admin_footer', static function (): void {
+                        $page = isset($_GET['page']) && is_string($_GET['page']) ? $_GET['page'] : '';
+                        $labelsByPage = [
+                            'aioseo-settings' => ['Access Control'],
+                            'aioseo-search-appearance' => ['Author SEO', 'Image SEO'],
+                            'aioseo-sitemaps' => ['Video Sitemap', 'News Sitemap'],
+                            'aioseo-seo-analysis' => ['Site Audit'],
+                        ];
+                        if (!isset($labelsByPage[$page])) {
+                            return;
+                        }
+                        $labels = wp_json_encode($labelsByPage[$page]);
+                        echo '<script>(function () {'
+                            . 'var labels = ' . $labels . ';'
+                            // Prefix match: some tab labels carry a "NEW!" pill suffix
+                            . 'function hide() { document.querySelectorAll(".aioseo-tabs .var-tab").forEach(function (tab) {'
+                            . 'var text = tab.textContent.trim();'
+                            . 'if (labels.some(function (l) { return text.indexOf(l) === 0; })) { tab.style.display = "none"; }'
+                            . '}); }'
+                            . 'new MutationObserver(hide).observe(document.getElementById("wpbody-content") || document.body, { childList: true, subtree: true });'
+                            . 'hide();'
+                            . '})();</script>';
+                    });
+                },
+            ],
             'flyout' => [
                 'label' => __('Remove the floating quick-links menu', 'wppack-tidy-admin'),
                 'register' => static function (): void {
@@ -193,7 +275,7 @@ final class AllInOneSeo extends AbstractModule
                     /* z-index between its fixed header (1051) and its slide-over
                        drawers/backdrop (1052/1053), so the open notification drawer
                        covers the buttons like it covers the rest of the header */
-                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: absolute; top: 14px; left: 0; right: 0; z-index: 1052; }
+                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: absolute; top: 20px; left: 0; right: 0; z-index: 1052; }
                     body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                     body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta-links { margin-right: 120px; }
                 }
