@@ -54,6 +54,23 @@ final class AllInOneWpMigration extends AbstractModule
                         'ai1wm_schedules', // Schedules (Premium)
                     ],
                 ],
+                /*
+                 * The plugin's actual purchase guidance, surfaced in the Upgrades
+                 * panel: the Pro edition (which every hidden export/import
+                 * destination linked to) and the Unlimited Extension (the import
+                 * size-limit upsell). Relocated here so the guidance is available
+                 * but out of the working flow.
+                 */
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'upgrade',
+                        'parent' => 'ai1wm_export',
+                        'html' => '<ul class="tidy-admin-meta-links">'
+                            . '<li><a href="https://servmask.com/products/all-in-one-wp-migration-pro" target="_blank" rel="noopener noreferrer">' . esc_html__('Upgrade to Pro', 'wppack-tidy-admin') . '</a></li>'
+                            . '<li><a href="https://servmask.com/products/unlimited-extension" target="_blank" rel="noopener noreferrer">Unlimited Extension</a></li>'
+                            . '</ul>',
+                    ],
+                ],
             ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
@@ -94,6 +111,57 @@ final class AllInOneWpMigration extends AbstractModule
                    it size to its remaining content */
                 .ai1wm-button-group.ai1wm-open > .ai1wm-dropdown-menu { height: auto !important; }
                 CSS,
+            ],
+            'import-upload-limit' => [
+                'label' => __('Tidy the import upload-limit notice', 'wppack-tidy-admin'),
+                /*
+                 * The import screen's upload-limit notice mixes functional info
+                 * with an upsell in one paragraph. Keep "Your host restricts
+                 * uploads to X MB." on the page (the minimum useful info), move
+                 * the "raising your upload limit" how-to to the Help panel, and
+                 * drop the "Our Unlimited Extension bypasses this!" sentence — its
+                 * purchase link lives in the Upgrades panel (premium-pages).
+                 */
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'help',
+                        'parent' => 'ai1wm_export',
+                        'html' => '<p>' . wp_kses(
+                            sprintf(
+                                // The plugin's own sentence, kept verbatim
+                                __('If you prefer a manual fix, follow our step-by-step guide on <a href="%s" target="_blank">raising your upload limit</a>.', 'all-in-one-wp-migration'),
+                                'https://help.servmask.com/2018/10/27/how-to-increase-maximum-upload-file-size-in-wordpress/',
+                            ),
+                            ['a' => ['href' => [], 'target' => []]],
+                        ) . '</p>',
+                    ],
+                ],
+                'adminCss' => <<<'CSS'
+                /* AI1WM: the "raising your upload limit" how-to below the import drop
+                   zone — relocated to the Help panel */
+                .max-upload-size + p { display: none !important; }
+                CSS,
+                /*
+                 * The upsell ("Our Unlimited Extension bypasses this!") sits in the
+                 * same paragraph as the functional size info, as separate text
+                 * nodes CSS cannot target. Trim it in the DOM: keep the size
+                 * sentence (up to its first period), drop the sales link and the
+                 * text after it.
+                 */
+                'register' => static function (): void {
+                    add_action('admin_print_footer_scripts', static function (): void {
+                        if (($_GET['page'] ?? '') !== 'ai1wm_import') {
+                            return;
+                        }
+                        echo '<script>document.addEventListener("DOMContentLoaded",function(){'
+                            . 'var p=document.querySelector(".max-upload-size");if(!p)return;'
+                            . 'var a=p.querySelector(\'a[href*="unlimited-extension"]\');if(!a)return;'
+                            . 'var prev=a.previousSibling;'
+                            . 'if(prev&&prev.nodeType===3){var m=prev.textContent.match(/^[^.]*\\./);prev.textContent=m?m[0]:"";}'
+                            . 'while(a.nextSibling){a.nextSibling.remove();}a.remove();'
+                            . '});</script>';
+                    });
+                },
             ],
         ];
     }

@@ -91,6 +91,14 @@ msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr "ヘルプ / アップグレードボタンをページヘッダーに統合"
 
 #: src/Modules/AllInOneWpMigration.php
+msgid "Upgrade to Pro"
+msgstr "Pro 版にアップグレード"
+
+#: src/Modules/AllInOneWpMigration.php
+msgid "Tidy the import upload-limit notice"
+msgstr "インポートの容量制限通知を整理"
+
+#: src/Modules/AllInOneWpMigration.php
 msgid "Remove Pro-only export and import destinations"
 msgstr "Pro 専用のエクスポート/インポート先を除去"
 
