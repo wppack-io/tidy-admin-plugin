@@ -278,7 +278,8 @@ final class AllInOneSeo extends AbstractModule
                    Above 782px the admin bar is 32px and the admin menu 160px (36px when
                    folded) */
                 @media (min-width: 783px) {
-                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: fixed; top: 52px; left: 160px; right: 0; z-index: 1052; margin-left: 0; }
+                    /* Flush under the 32px admin bar, like core's screen-meta toggles */
+                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: fixed; top: 32px; left: 160px; right: 0; z-index: 1052; margin-left: 0; }
                     body.folded[class*="page_aioseo"] #tidy-admin-meta-region { left: 36px; }
                     body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); margin-left: 20px; }
                     body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta-links { margin-right: 120px; }
