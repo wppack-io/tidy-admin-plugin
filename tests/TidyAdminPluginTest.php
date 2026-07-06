@@ -128,12 +128,20 @@ final class TidyAdminPluginTest extends TestCase
         }
     }
 
-    /** @return list<Module> */
+    /**
+     * Plugin modules only — core modules (empty target) are not backed by an
+     * installed plugin file or a version, so the catalog tests skip them.
+     *
+     * @return list<Module>
+     */
     private function modules(): array
     {
         /** @var list<class-string<Module>> $classes */
         $classes = (new ReflectionClassConstant(TidyAdminPlugin::class, 'MODULES'))->getValue();
 
-        return array_map(static fn(string $class): Module => new $class(), $classes);
+        return array_values(array_filter(
+            array_map(static fn(string $class): Module => new $class(), $classes),
+            static fn(Module $module): bool => $module->targetPluginFile() !== '',
+        ));
     }
 }

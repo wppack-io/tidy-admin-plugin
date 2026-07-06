@@ -32,7 +32,6 @@ final class TidyAdminPlugin
 
     /** @var list<class-string<Module>> */
     private const MODULES = [
-        Modules\AllInOneSeo::class,
         Modules\Bnfw::class,
         Modules\BrokenLinkChecker::class,
         Modules\Cfdb7::class,
@@ -43,6 +42,7 @@ final class TidyAdminPlugin
         Modules\PostTypesOrder::class,
         Modules\PublishPressFuture::class,
         Modules\TaxonomyTermsOrder::class,
+        Modules\WordPressCore::class,
         Modules\WpMailSmtp::class,
         Modules\Yarpp::class,
         Modules\Yoast::class,
@@ -85,13 +85,23 @@ final class TidyAdminPlugin
 
         foreach ($modules as $module) {
             $file = $module->targetPluginFile();
+            // Settings key: the plugin basename, or a stable slug for the core
+            // module (an empty key would become a numeric array index in the
+            // settings form's name="...[modules][]" and never persist)
+            $settingsKey = $file !== '' ? $file : 'wordpress-core';
             $features = $module->features();
             $settingsModules[] = [
-                'file' => $file,
+                'file' => $settingsKey,
                 'name' => self::pluginName($file),
-                'features' => array_map(static fn(array $feature): string => $feature['label'], $features),
+                'features' => array_map(
+                    static fn(array $feature): array => [
+                        'label' => $feature['label'],
+                        'default' => $feature['default'] ?? true,
+                    ],
+                    $features,
+                ),
             ];
-            if (!Support\Settings::moduleEnabled($file)) {
+            if (!Support\Settings::moduleEnabled($settingsKey)) {
                 continue;
             }
 
@@ -106,7 +116,7 @@ final class TidyAdminPlugin
             }
 
             foreach ($features as $key => $feature) {
-                if (!Support\Settings::featureEnabled($file, $key)) {
+                if (!Support\Settings::featureEnabled($settingsKey, $key, $feature['default'] ?? true)) {
                     continue;
                 }
 
@@ -157,6 +167,10 @@ final class TidyAdminPlugin
 
     private static function pluginName(string $file): string
     {
+        // The WordPressCore module targets no plugin file
+        if ($file === '') {
+            return 'WordPress';
+        }
         if (!function_exists('get_plugin_data')) {
             require_once ABSPATH . 'wp-admin/includes/plugin.php';
         }
@@ -167,7 +181,8 @@ final class TidyAdminPlugin
     }
 
     /**
-     * Returns only the modules whose target plugin is active.
+     * Returns the modules that apply: core modules (empty target, always on)
+     * plus the plugin modules whose target plugin is active.
      *
      * @return list<Module>
      */
@@ -180,7 +195,8 @@ final class TidyAdminPlugin
                 static fn(string $class): Module => new $class(),
                 self::MODULES,
             ),
-            static fn(Module $module): bool => in_array($module->targetPluginFile(), $activePlugins, true),
+            static fn(Module $module): bool => $module->targetPluginFile() === ''
+                || in_array($module->targetPluginFile(), $activePlugins, true),
         ));
     }
 

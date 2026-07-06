@@ -92,6 +92,15 @@ A single WordPress plugin (`wppack/tidy-admin-plugin`, entry point
 Modules for plugins that are currently uninstalled stay in the codebase so
 they take effect again on reinstall.
 
+A module whose `targetPluginFile()` is `''` targets WordPress core itself
+(e.g. `WordPressCore`); it is always active. Core cleanups touch WordPress's
+own UI rather than a vendor's promotions, so each feature defaults to OFF —
+they are opt-in on Settings › Tidy Admin. The catalog tests skip `''`
+targets, and the settings key falls back to a stable slug (`wordpress-core`).
+
+Features may declare `'default' => false` to ship off; the setting reads that
+default when the flag is unset. Everything else defaults to ON.
+
 ### Conventions that matter here
 
 - Every removal is documented with an inline comment saying what the removed

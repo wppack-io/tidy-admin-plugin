@@ -25,6 +25,14 @@ final class SettingsTest extends TestCase
         $this->assertTrue(Settings::featureEnabled('wordpress-seo/wp-seo.php', 'upsell-ui'));
     }
 
+    public function test_features_can_declare_a_default_of_off(): void
+    {
+        // An unset flag honors the passed default (used by opt-in features)
+        // The WordPressCore module's news-events-widget declares default false
+        $this->assertFalse(Settings::featureEnabled('wordpress-core', 'news-events-widget', false));
+        $this->assertTrue(Settings::featureEnabled('wordpress-core', 'some-on-by-default', true));
+    }
+
     public function test_stored_overrides_win(): void
     {
         update_option(Settings::OPTION, [

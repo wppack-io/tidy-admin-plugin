@@ -25,8 +25,8 @@ final class SettingsPage
     private const PAGE = 'wppack-tidy-admin';
 
     /**
-     * @param list<array{file: string, name: string, features: array<string, string>}> $modules
-     *        Active modules: plugin basename, display name, and feature key => label
+     * @param list<array{file: string, name: string, features: array<string, array{label: string, default: bool}>}> $modules
+     *        Active modules: plugin basename, display name, and feature key => {label, default}
      */
     public function __construct(private readonly array $modules) {}
 
@@ -109,11 +109,11 @@ final class SettingsPage
                                         <strong><?php esc_html_e('Enable', 'wppack-tidy-admin'); ?></strong>
                                     </label>
                                     <br>
-                                    <?php foreach ($module['features'] as $key => $label) : ?>
+                                    <?php foreach ($module['features'] as $key => $feature) : ?>
                                         <label style="margin-inline-start: 24px;">
                                             <input type="checkbox" name="<?php echo esc_attr($group); ?>[<?php echo esc_attr($key); ?>]"
-                                                value="1" <?php checked(Settings::featureEnabled($module['file'], $key)); ?>>
-                                            <?php echo esc_html($label); ?>
+                                                value="1" <?php checked(Settings::featureEnabled($module['file'], $key, $feature['default'])); ?>>
+                                            <?php echo esc_html($feature['label']); ?>
                                         </label>
                                         <br>
                                     <?php endforeach; ?>
