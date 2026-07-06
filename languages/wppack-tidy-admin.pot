@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T15:43:05+09:00\n"
+"POT-Creation-Date: 2026-07-06T23:10:34+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -60,7 +60,7 @@ msgstr ""
 #: src/Modules/LocationWeather.php:61
 #: src/Modules/Mc4wp.php:52
 #: src/Modules/PublishPressFuture.php:100
-#: src/Modules/Wordfence.php:73
+#: src/Modules/Wordfence.php:75
 #: src/Modules/WpMailSmtp.php:68
 #: src/Modules/Yarpp.php:49
 #: src/Modules/Yoast.php:65
@@ -280,12 +280,12 @@ msgstr ""
 msgid "Move the upgrade menu to the Upgrades panel"
 msgstr ""
 
-#: src/Modules/Wordfence.php:96
+#: src/Modules/Wordfence.php:103
 msgid "Hide upsell cards and ads on its screens"
 msgstr ""
 
-#: src/Modules/Wordfence.php:109
-msgid "Remove its onboarding banner and upgrade link from the plugin list"
+#: src/Modules/Wordfence.php:116
+msgid "Show the setup banner only on the Dashboard"
 msgstr ""
 
 #: src/Modules/WordPressCore.php:44

@@ -112,14 +112,18 @@ final class Wordfence extends AbstractModule
                 li:has(> a.wf-btn[href*="wordfence.com/gnl1"]) { display: none !important; }
                 CSS,
             ],
-            'plugin-list-onboarding' => [
-                'label' => __('Remove its onboarding banner and upgrade link from the plugin list', 'wppack-tidy-admin'),
+            'onboarding' => [
+                'label' => __('Show the setup banner only on the Dashboard', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
-                /* Wordfence injects an onboarding overlay/banner/header into the plugins
-                   page pushing account registration — its setup still lives on the
-                   Wordfence menu, so drop the plugins-page hijack */
+                /* Wordfence's "Wordfence installation is incomplete" banner
+                   (ul#wf-onboarding-banner) is an admin_notices item, so it repeats on
+                   every admin screen. Confine it to the WordPress Dashboard (index.php),
+                   where a setup reminder belongs — the inline "complete installation"
+                   registration box is left in place on the plugins page */
+                body:not(.index-php) #wf-onboarding-banner { display: none !important; }
+                /* Wordfence: the full-screen onboarding overlay it throws over the
+                   plugins page pushing registration (distinct from the inline box) */
                 .wf-onboarding-plugin-overlay,
-                .wf-onboarding-banner,
                 .wf-onboarding-plugin-header { display: none !important; }
                 /* Wordfence: "Upgrade To Premium" link in its plugins.php row */
                 tr[data-plugin*="wordfence"] a[href*="wordfence.com/zz12"] { display: none !important; }
