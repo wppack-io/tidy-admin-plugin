@@ -146,8 +146,11 @@ final class AllInOneSeo extends AbstractModule
                 .aioseo-overview .aioseo-alert.yellow { display: none !important; }
                 /* AIOSEO: inline upsell CTA boxes on functional screens (e.g. "Unlock
                    Local SEO" under Knowledge Graph on Search Appearance). The relocated
-                   teaser pages are excluded — there the CTA is the page's purpose */
-                body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]) .aioseo-cta { display: none !important; }
+                   teaser pages are excluded — there the CTA is the page's purpose. The
+                   Tools page is excluded too: its Snippets tab renders a functional
+                   .aioseo-cta banner ("Install WPCode to load the Snippet Library") that
+                   is the page's own content, not an upsell */
+                body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]):not([class*="page_aioseo-tools"]) .aioseo-cta { display: none !important; }
                 /* AIOSEO: dashboard Quicklinks tiles for Pro-only pages — the pages live
                    in the Upgrades panel's Premium features tab. Scoped to the Quicklinks
                    grid so the relocated Feature Manager page keeps every one of its
