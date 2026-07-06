@@ -197,6 +197,20 @@ final class AllInOneSeo extends AbstractModule
                 'adminCss' => <<<'CSS'
                 .aioseo-review-plugin-cta { display: none !important; }
                 CSS,
+                /*
+                 * The five-star "rate us" link AIOSEO appends to its plugins.php
+                 * row meta. Drop the meta item entirely (rather than CSS-hiding
+                 * the link) so no dangling " | " separator is left behind.
+                 */
+                'register' => static function (): void {
+                    add_filter('plugin_row_meta', static function (array $meta, string $file): array {
+                        if ($file === 'all-in-one-seo-pack/all_in_one_seo_pack.php') {
+                            $meta = array_filter($meta, static fn(string $item): bool => !str_contains($item, 'dashicons-star-filled'));
+                        }
+
+                        return array_values($meta);
+                    }, 100, 2);
+                },
             ],
             'conflict-notice' => [
                 'label' => __('Move the "multiple SEO plugins" warning to the setup widget', 'wppack-tidy-admin'),
