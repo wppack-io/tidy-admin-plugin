@@ -231,6 +231,13 @@ final class AllInOneSeo extends AbstractModule
                    cards with stable classes (Cornerstone Content, Additional Keywords) */
                 body:is(.post-php, .post-new-php) .aioseo-sidebar-card.card-cornerstone-content,
                 body:is(.post-php, .post-new-php) .aioseo-sidebar-card[class*="card-additional-keyphra"] { display: none !important; }
+                /* AIOSEO: the sidebar's Pro menu entries, hidden by CSS so they cannot
+                   flash before the label-matching script runs on re-renders — matched
+                   by their icons (Link Assistant, Redirects; SEO Revisions' icon has
+                   the bare "icon" class, hence the exact attribute match) */
+                body:is(.post-php, .post-new-php) .aioseo-sidepanel-button:has(svg.aioseo-link-suggestion),
+                body:is(.post-php, .post-new-php) .aioseo-sidepanel-button:has(svg.aioseo-crossed-arrows),
+                body:is(.post-php, .post-new-php) .aioseo-sidepanel-button:has(svg[class="icon"]) { display: none !important; }
                 /* AIOSEO: whole cards whose HEADER carries the PRO pill (e.g. Image SEO
                    on Search Appearance > Media) — every row inside is a teaser. Cards
                    with the pill only in individual rows keep their functional rows */
@@ -290,8 +297,10 @@ final class AllInOneSeo extends AbstractModule
                             'aioseo-seo-analysis' => ['Site Audit'],
                         ];
                         if ($page === '' && in_array($pagenow, ['post.php', 'post-new.php'], true)) {
-                            // The editor metabox's Pro teaser tabs
-                            $labelsByPage[''] = ['Link Assistant', 'Redirects', 'SEO Revisions'];
+                            // The editor metabox/sidebar Pro teaser tabs. AI Content
+                            // is caught here as a fallback for whichever surface the
+                            // aioseo_ai_disabled filter (ai-features) does not cover
+                            $labelsByPage[''] = ['Link Assistant', 'Redirects', 'SEO Revisions', 'AI Content'];
                             $page = '';
                         } elseif (!isset($labelsByPage[$page])) {
                             return;
@@ -323,6 +332,20 @@ final class AllInOneSeo extends AbstractModule
                  */
                 'register' => static function (): void {
                     add_filter('aioseo_hide_action_scheduler_menu', '__return_false');
+                },
+            ],
+            'ai-features' => [
+                'label' => __('Disable the promotional AI features', 'wppack-tidy-admin'),
+                /*
+                 * AIOSEO's AI features are a paid-credits upsell: the AI Content
+                 * tab, the block-editor "AI Assistant" block it injects into the
+                 * content toolbar, and the "purchase PAYG credits" pitches. Turn
+                 * them off at the source with the plugin's own filter — the AI
+                 * Assistant block is not even registered, so nothing is hidden
+                 * with CSS.
+                 */
+                'register' => static function (): void {
+                    add_filter('aioseo_ai_disabled', '__return_true');
                 },
             ],
             'flyout' => [

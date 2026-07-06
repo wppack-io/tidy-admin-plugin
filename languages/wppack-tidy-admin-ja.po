@@ -191,6 +191,10 @@ msgid "Hide the license fields (turn off while entering a key)"
 msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
 
 #: src/Modules/AllInOneSeo.php
+msgid "Disable the promotional AI features"
+msgstr "宣伝目的の AI 機能を無効化"
+
+#: src/Modules/AllInOneSeo.php
 msgid "Fix styling conflicts with WordPress core"
 msgstr "WordPress コアとのスタイル競合を修正"
 
