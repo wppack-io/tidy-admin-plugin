@@ -75,6 +75,9 @@ final class AllInOneWpMigration extends AbstractModule
                    share icons (X / Facebook / YouTube) plus "I have an idea" and
                    "I need help", all relocated to the Help panel */
                 .ai1wm-sidebar { display: none !important; }
+                /* AI1WM: the content row reserves a 399px right margin for that
+                   sidebar (at >=855px). With the sidebar gone, reclaim the space */
+                .ai1wm-row { margin-right: 0 !important; }
                 CSS,
             ],
             'destination-teasers' => [
@@ -86,6 +89,10 @@ final class AllInOneWpMigration extends AbstractModule
                    teasers, like WP Mail SMTP's locked mailers. Hide the teasers by
                    their sales-page link; "File" stays */
                 .ai1wm-dropdown-menu li:has(> a[href*="servmask.com/products"]) { display: none !important; }
+                /* AI1WM: the open dropdown is a fixed 484px tall (sized for all 16
+                   destinations). With only "File" left it leaves a large gap — let
+                   it size to its remaining content */
+                .ai1wm-button-group.ai1wm-open > .ai1wm-dropdown-menu { height: auto !important; }
                 CSS,
             ],
         ];
