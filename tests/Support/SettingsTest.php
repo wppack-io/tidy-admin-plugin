@@ -31,6 +31,9 @@ final class SettingsTest extends TestCase
         // The WordPressCore module's news-events-widget declares default false
         $this->assertFalse(Settings::featureEnabled('wordpress-core', 'news-events-widget', false));
         $this->assertTrue(Settings::featureEnabled('wordpress-core', 'some-on-by-default', true));
+        // AIOSEO's ai-disable-all declares default false; ai-editor-buttons default true
+        $this->assertFalse(Settings::featureEnabled('all-in-one-seo-pack/all_in_one_seo_pack.php', 'ai-disable-all', false));
+        $this->assertTrue(Settings::featureEnabled('all-in-one-seo-pack/all_in_one_seo_pack.php', 'ai-editor-buttons', true));
     }
 
     public function test_stored_overrides_win(): void

@@ -78,6 +78,10 @@ msgstr "セール通知はアップグレードパネル内のみに表示"
 msgid "Move the setup notice to the plugin screens and dashboard widget"
 msgstr "セットアップ通知をプラグイン画面とダッシュボードウィジェットへ移設"
 
+#: src/Modules/AllInOneSeo.php
+msgid "Keep the post-list title column readable beside its SEO column"
+msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に保つ"
+
 #: src/Modules
 msgid "Hide upsell promotions on its screens"
 msgstr "画面内のアップセル宣伝を非表示"
@@ -193,6 +197,34 @@ msgstr "ライセンス項目を非表示（キー入力・確認時はオフに
 #: src/Modules/Yoast.php
 msgid "Remove the Yoast.com blog feed from its dashboard widget"
 msgstr "ダッシュボードウィジェットから Yoast.com のブログフィードを除去"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Remove its news dashboard widget"
+msgstr "ニュース系のダッシュボードウィジェットを除去"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
+msgstr "「複数の SEO プラグイン」警告をセットアップウィジェットへ移設"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Stop AIOSEO from adding AI buttons to the editor"
+msgstr "エディターへの AI ボタン自動追加を防止"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Disable all AI features"
+msgstr "すべての AI 機能を無効化"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Remove the border on its editor toolbar icons"
+msgstr "エディターツールバーのアイコンの枠線を除去"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Hide the AI credits upsell"
+msgstr "AI クレジットのアップセルを非表示"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Fix styling conflicts with WordPress core"
+msgstr "WordPress コアとのスタイル競合を修正"
 
 #: src/Modules/Yoast.php
 msgid "Remove the HelpScout support beacon"
