@@ -75,6 +75,7 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 | プラグイン | 検証済みメジャー |
 |---|---|
 | [All in One SEO](https://wordpress.org/plugins/all-in-one-seo-pack/) | 4.x |
+| [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) | 7.x |
 | [BNFW](https://wordpress.org/plugins/bnfw/) | 1.x |
 | [Broken Link Checker](https://wordpress.org/plugins/broken-link-checker/) | 2.x |
 | [Contact Form CFDB7](https://wordpress.org/plugins/contact-form-cfdb7/) | 1.x |
