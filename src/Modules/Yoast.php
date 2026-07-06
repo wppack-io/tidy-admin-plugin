@@ -145,6 +145,35 @@ final class Yoast extends AbstractModule
                     add_filter('wpseo_introductions', '__return_empty_array');
                 },
             ],
+            'trash-redirect-notice' => [
+                'label' => __('Stop the "set up a redirect" upsell when trashing content', 'wppack-tidy-admin'),
+                /*
+                 * Trashing or deleting a post, page or term makes
+                 * WPSEO_Slug_Change_Watcher add a "search engines can still send
+                 * traffic to your trashed content — Yoast SEO Premium lets you
+                 * create redirects" notification. Its callbacks are instance
+                 * methods registered on plugins_loaded (before this runs on
+                 * init), so find them by the watcher's class name and unhook
+                 * them — the upsell notification is never created.
+                 */
+                'register' => static function (): void {
+                    global $wp_filter;
+                    foreach (['wp_trash_post', 'before_delete_post', 'delete_term_taxonomy'] as $hook) {
+                        $registered = $wp_filter[$hook] ?? null;
+                        if (!$registered instanceof \WP_Hook) {
+                            continue;
+                        }
+                        foreach ($registered->callbacks as $priority => $callbacks) {
+                            foreach ($callbacks as $callback) {
+                                $fn = $callback['function'];
+                                if (is_array($fn) && is_object($fn[0]) && str_contains(get_class($fn[0]), 'Slug_Change_Watcher')) {
+                                    remove_action($hook, $fn, (int) $priority);
+                                }
+                            }
+                        }
+                    }
+                },
+            ],
             'webinar-notice' => [
                 'label' => __('Stop the webinar promo notice', 'wppack-tidy-admin'),
                 /*

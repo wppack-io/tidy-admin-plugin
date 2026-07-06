@@ -255,6 +255,10 @@ msgid "Disable promotional introduction popups"
 msgstr "宣伝の紹介ポップアップを無効化"
 
 #: src/Modules/Yoast.php
+msgid "Stop the \"set up a redirect\" upsell when trashing content"
+msgstr "ゴミ箱移動時の「リダイレクト設定」アップセルを停止"
+
+#: src/Modules/Yoast.php
 msgid "Stop the webinar promo notice"
 msgstr "ウェビナー宣伝通知を停止"
 
