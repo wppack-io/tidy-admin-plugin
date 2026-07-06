@@ -311,9 +311,12 @@ final class AllInOneSeo extends AbstractModule
             'panel-placement' => [
                 'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
-                /* AIOSEO: it removes #wpcontent's left padding; restore the standard gap
-                   so the opened panels align with the admin menu like core Help */
-                body[class*="page_aioseo"] #tidy-admin-meta-region { margin-left: 20px; }
+                /* AIOSEO: below the fixed-header widths the row sits in flow above the
+                   app — give it a solid white band (padding, not margin, so the
+                   background spans the full width) */
+                @media (max-width: 767px) {
+                    body[class*="page_aioseo"] #tidy-admin-meta-region { background: #fff; padding-left: 20px; }
+                }
                 /* AIOSEO: its breadcrumb header is FIXED (z-index 1051), so an absolutely
                    positioned row would scroll away while the header stays — fix the whole
                    screen-meta region into the header band instead (closed: buttons sit in
