@@ -191,6 +191,10 @@ msgid "Hide the license fields (turn off while entering a key)"
 msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
 
 #: src/Modules/AllInOneSeo.php
+msgid "Confine the \"multiple SEO plugins\" warning to the Dashboard"
+msgstr "「複数の SEO プラグイン」警告をダッシュボードだけに表示"
+
+#: src/Modules/AllInOneSeo.php
 msgid "Stop AIOSEO from adding AI buttons to the editor"
 msgstr "エディターへの AI ボタン自動追加を防止"
 

@@ -176,6 +176,19 @@ final class AllInOneSeo extends AbstractModule
                 .aioseo-review-plugin-cta { display: none !important; }
                 CSS,
             ],
+            'conflict-notice' => [
+                'label' => __('Confine the "multiple SEO plugins" warning to the Dashboard', 'wppack-tidy-admin'),
+                /*
+                 * "Please keep only one SEO plugin active ..." is a functional
+                 * warning, but AIOSEO repeats it on every admin screen. It shares
+                 * the Notices::notices() dispatcher with functional notices, so
+                 * the callback cannot be unhooked selectively — confine it to the
+                 * Dashboard (index.php) with CSS, where the reminder is enough.
+                 */
+                'adminCss' => <<<'CSS'
+                body:not(.index-php) .aioseo-conflicting-plugin-notice { display: none !important; }
+                CSS,
+            ],
             'footer' => [
                 'label' => __('Restore the standard admin footer', 'wppack-tidy-admin'),
                 /*
