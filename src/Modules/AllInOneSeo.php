@@ -117,6 +117,25 @@ final class AllInOneSeo extends AbstractModule
                 .aioseo-card.dashboard-support { display: none !important; }
                 CSS,
             ],
+            'post-list-title-width' => [
+                'label' => __('Keep the post-list title column readable beside its SEO column', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* AIOSEO: its "Details" column on post-type list tables squeezes the title
+                   column (it drops to ~176px and wraps to one character per line). Post-list
+                   tables carry the `fixed` class (table-layout: fixed), where min-width on
+                   cells is ignored and only `width` on the header cell sizes the column —
+                   set both so it also holds if a screen uses auto layout. Only above 782px:
+                   at 782px and below WordPress collapses the table to a stacked, single-column
+                   view where a width would force a horizontal scroll. Scoped via
+                   :has(.column-aioseo-details) to tables carrying the AIOSEO column; high
+                   specificity + !important keeps core's per-column width rules from
+                   overriding it. */
+                @media (min-width: 783px) {
+                    body.wp-admin .wp-list-table:has(.column-aioseo-details) th.column-title,
+                    body.wp-admin .wp-list-table:has(.column-aioseo-details) td.column-title { width: 340px !important; min-width: 340px !important; }
+                }
+                CSS,
+            ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'

@@ -78,6 +78,10 @@ msgstr "セール通知はアップグレードパネル内のみに表示"
 msgid "Move the setup notice to the plugin screens and dashboard widget"
 msgstr "セットアップ通知をプラグイン画面とダッシュボードウィジェットへ移設"
 
+#: src/Modules/AllInOneSeo.php
+msgid "Keep the post-list title column readable beside its SEO column"
+msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に保つ"
+
 #: src/Modules
 msgid "Hide upsell promotions on its screens"
 msgstr "画面内のアップセル宣伝を非表示"
