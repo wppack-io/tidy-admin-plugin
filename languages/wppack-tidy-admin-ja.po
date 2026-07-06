@@ -183,6 +183,10 @@ msgid "Move the upgrade menu to the Upgrades panel"
 msgstr "アップグレードメニューをアップグレードパネルへ移設"
 
 #: src/Modules/Wordfence.php
+msgid "Overlay the Help and Upgrades buttons onto the page title"
+msgstr "ヘルプ / アップグレードボタンをページタイトルに重ねて表示"
+
+#: src/Modules/Wordfence.php
 msgid "Show the setup banner only on the Dashboard"
 msgstr "セットアップバナーをダッシュボードのみに表示"
 
