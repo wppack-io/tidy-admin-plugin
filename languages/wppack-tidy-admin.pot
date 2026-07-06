@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T09:23:18+09:00\n"
+"POT-Creation-Date: 2026-07-06T12:25:16+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -64,16 +64,16 @@ msgstr ""
 msgid "Move documentation and support links to the Help panel"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:117
+#: src/Modules/AllInOneSeo.php:121
 #: src/Modules/EmbedPress.php:152
 #: src/Modules/InstagramFeed.php:129
 #: src/Modules/LocationWeather.php:156
 #: src/Modules/WpMailSmtp.php:264
-#: src/Modules/Yoast.php:176
+#: src/Modules/Yoast.php:186
 msgid "Hide upsell promotions on its screens"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:133
+#: src/Modules/AllInOneSeo.php:143
 #: src/Modules/EmbedPress.php:113
 #: src/Modules/InstagramFeed.php:91
 #: src/Modules/LocationWeather.php:85
@@ -84,12 +84,12 @@ msgstr ""
 msgid "Remove upgrade links from the plugin list"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:139
+#: src/Modules/AllInOneSeo.php:149
 #: src/Modules/PublishPressFuture.php:143
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:150
+#: src/Modules/AllInOneSeo.php:168
 #: src/Modules/Cfdb7.php:47
 #: src/Modules/Mc4wp.php:120
 #: src/Modules/PublishPressFuture.php:154
@@ -97,50 +97,55 @@ msgstr ""
 msgid "Remove the review request"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:162
+#: src/Modules/AllInOneSeo.php:180
 #: src/Modules/LocationWeather.php:171
 #: src/Modules/WpMailSmtp.php:227
 msgid "Restore the standard admin footer"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:182
+#: src/Modules/AllInOneSeo.php:200
 msgid "Fix styling conflicts with WordPress core"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:191
+#: src/Modules/AllInOneSeo.php:209
 #: src/Modules/PublishPressFuture.php:135
 msgid "Hide locked Pro settings rows"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:205
+#: src/Modules/AllInOneSeo.php:226
 #: src/Modules/WpMailSmtp.php:296
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:234
+#: src/Modules/AllInOneSeo.php:255
 #: src/Modules/WpMailSmtp.php:160
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:270
+#: src/Modules/AllInOneSeo.php:293
+#: src/Modules/WpMailSmtp.php:215
+msgid "Always show the Scheduled Actions tools page"
+msgstr ""
+
+#: src/Modules/AllInOneSeo.php:305
 #: src/Modules/EmbedPress.php:142
 #: src/Modules/WpMailSmtp.php:208
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:277
+#: src/Modules/AllInOneSeo.php:312
 #: src/Modules/BrokenLinkChecker.php:64
 #: src/Modules/EmbedPress.php:177
 #: src/Modules/InstagramFeed.php:146
 #: src/Modules/LocationWeather.php:209
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/WpMailSmtp.php:283
-#: src/Modules/Yoast.php:236
+#: src/Modules/Yoast.php:246
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:309
-#: src/Modules/Yoast.php:108
+#: src/Modules/AllInOneSeo.php:347
+#: src/Modules/Yoast.php:118
 msgid "Remove upgrade items from the admin bar"
 msgstr ""
 
@@ -181,7 +186,7 @@ msgstr ""
 #: src/Modules/Mc4wp.php:128
 #: src/Modules/PostTypesOrder.php:50
 #: src/Modules/WpMailSmtp.php:104
-#: src/Modules/Yoast.php:99
+#: src/Modules/Yoast.php:109
 msgid "Move the setup notice to the plugin screens and dashboard widget"
 msgstr ""
 
@@ -236,10 +241,6 @@ msgstr ""
 msgid "Remove Pro-only teaser mailers from the mailer list"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:215
-msgid "Always show the Scheduled Actions tools page"
-msgstr ""
-
 #: src/Modules/WpMailSmtp.php:244
 msgid "Remove the dashboard widget's Pro teaser chart"
 msgstr ""
@@ -249,18 +250,22 @@ msgid "Remove the Backup Connection teaser"
 msgstr ""
 
 #: src/Modules/Yoast.php:86
+msgid "Remove the Yoast.com blog feed from its dashboard widget"
+msgstr ""
+
+#: src/Modules/Yoast.php:96
 msgid "Remove the HelpScout support beacon"
 msgstr ""
 
-#: src/Modules/Yoast.php:127
+#: src/Modules/Yoast.php:137
 msgid "Disable promotional introduction popups"
 msgstr ""
 
-#: src/Modules/Yoast.php:139
+#: src/Modules/Yoast.php:149
 msgid "Stop the webinar promo notice"
 msgstr ""
 
-#: src/Modules/Yoast.php:206
+#: src/Modules/Yoast.php:216
 msgid "Use the freed upsell space for content"
 msgstr ""
 

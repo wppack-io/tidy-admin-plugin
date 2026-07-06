@@ -195,6 +195,10 @@ msgid "Fix styling conflicts with WordPress core"
 msgstr "WordPress コアとのスタイル競合を修正"
 
 #: src/Modules/Yoast.php
+msgid "Remove the Yoast.com blog feed from its dashboard widget"
+msgstr "ダッシュボードウィジェットから Yoast.com のブログフィードを除去"
+
+#: src/Modules/Yoast.php
 msgid "Remove the HelpScout support beacon"
 msgstr "HelpScout サポートビーコンを除去"
 

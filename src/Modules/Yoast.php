@@ -82,6 +82,16 @@ final class Yoast extends AbstractModule
                     'yoa.st/1yb', // Get Premium (distinct from the FAQ URL, 1yc)
                 ],
             ],
+            'dashboard-blog-feed' => [
+                'label' => __('Remove the Yoast.com blog feed from its dashboard widget', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Yoast: "Latest blog posts on Yoast.com" RSS feed and its "Read more on
+                   our SEO blog" footer inside the Posts Overview dashboard widget
+                   (marketing content); the SEO score assessment above it stays */
+                #wpseo-dashboard-overview .wordpress-feed,
+                #wpseo-dashboard-overview .wordpress-feed__footer { display: none !important; }
+                CSS,
+            ],
             'helpscout-beacon' => [
                 'label' => __('Remove the HelpScout support beacon', 'wppack-tidy-admin'),
                 // Floating help button on Yoast's own screens; loads an external
