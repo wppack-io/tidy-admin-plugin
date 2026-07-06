@@ -333,32 +333,24 @@ final class AllInOneSeo extends AbstractModule
                     add_filter('aioseo_hide_action_scheduler_menu', '__return_false');
                 },
             ],
-            'ai-editor-block' => [
-                'label' => __('Remove the AI Assistant block from the content editor', 'wppack-tidy-admin'),
+            'ai-editor-buttons' => [
+                'label' => __('Stop AIOSEO from adding AI buttons to the editor', 'wppack-tidy-admin'),
                 /*
-                 * AIOSEO injects an "AI Assistant" block (aioseo/ai-assistant)
-                 * into the editor's content toolbar/inserter — it interrupts
-                 * writing to pitch paid AI credits. Unregister the block and
-                 * dequeue the script that extends the editor with it, so it is
-                 * gone by logic rather than hidden. AIOSEO's other AI surfaces
-                 * (the AI Content tab) are left intact. Default ON.
+                 * AIOSEO extends the block editor with unsolicited "AI" buttons
+                 * — an inserter entry and a paragraph-placeholder prompt that
+                 * interrupt writing to pitch paid AI credits. Dequeue only the
+                 * editor-extend script that injects them; the aioseo/ai-assistant
+                 * block itself stays registered, so a user can still insert it on
+                 * purpose, and the AI Content tab is untouched. Default ON.
                  */
                 'register' => static function (): void {
-                    add_action('init', static function (): void {
-                        if (function_exists('unregister_block_type') && \WP_Block_Type_Registry::get_instance()->is_registered('aioseo/ai-assistant')) {
-                            unregister_block_type('aioseo/ai-assistant');
-                        }
-                    }, PHP_INT_MAX);
                     add_action('enqueue_block_editor_assets', static function (): void {
-                        if (\WP_Block_Type_Registry::get_instance()->is_registered('aioseo/ai-assistant')) {
-                            unregister_block_type('aioseo/ai-assistant');
-                        }
                         global $wp_scripts;
                         if (!$wp_scripts instanceof \WP_Scripts) {
                             return;
                         }
                         foreach ($wp_scripts->queue as $handle) {
-                            if (str_contains($handle, 'ai-assistant') || str_contains($handle, 'extend-block-editor')) {
+                            if (str_contains($handle, 'extend-block-editor')) {
                                 wp_dequeue_script($handle);
                             }
                         }

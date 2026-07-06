@@ -29,7 +29,7 @@ final class SettingsTest extends TestCase
     {
         // An unset flag honors the passed default (used by opt-in features)
         $this->assertFalse(Settings::featureEnabled('all-in-one-seo-pack/all_in_one_seo_pack.php', 'ai-disable-all', false));
-        $this->assertTrue(Settings::featureEnabled('all-in-one-seo-pack/all_in_one_seo_pack.php', 'ai-editor-block', true));
+        $this->assertTrue(Settings::featureEnabled('all-in-one-seo-pack/all_in_one_seo_pack.php', 'ai-editor-buttons', true));
     }
 
     public function test_stored_overrides_win(): void

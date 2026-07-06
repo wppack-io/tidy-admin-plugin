@@ -191,8 +191,8 @@ msgid "Hide the license fields (turn off while entering a key)"
 msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
 
 #: src/Modules/AllInOneSeo.php
-msgid "Remove the AI Assistant block from the content editor"
-msgstr "コンテンツエディターから AI アシスタントブロックを除去"
+msgid "Stop AIOSEO from adding AI buttons to the editor"
+msgstr "エディターへの AI ボタン自動追加を防止"
 
 #: src/Modules/AllInOneSeo.php
 msgid "Disable all AI features"
