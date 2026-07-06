@@ -140,10 +140,10 @@ final class AllInOneSeo extends AbstractModule
                 'adminCss' => <<<'CSS'
                 /* AIOSEO: green "You're using All in One SEO Free. To unlock more features,
                    consider upgrading to Pro" bar across the top of its screens. The fixed
-                   header reserves 112px including the 40px bar — shrink it to its real
-                   content height so no blank strip remains */
+                   header reserves a fixed 112px including the 40px bar — let it size to
+                   its remaining content instead so no blank strip remains */
                 .aioseo-upgrade-bar { display: none !important; }
-                body[class*="page_aioseo"] .aioseo-header { height: 72px !important; }
+                body[class*="page_aioseo"] .aioseo-header { height: auto !important; }
                 CSS,
             ],
             'review-request' => [
@@ -287,6 +287,12 @@ final class AllInOneSeo extends AbstractModule
                 @media (min-width: 783px) and (max-width: 960px) {
                     /* WP auto-folds the admin menu in this range */
                     body[class*="page_aioseo"] #tidy-admin-meta-region { left: 36px; }
+                }
+                /* Its header turns fixed before WP's 783px breakpoint — cover the gap
+                   (admin bar is 46px and the admin menu hidden below 783px) */
+                @media (min-width: 768px) and (max-width: 782px) {
+                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: fixed; top: 46px; left: 0; right: 0; z-index: 1052; margin-left: 0; }
+                    body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta-links { margin-right: 120px; }
                 }
                 CSS,
             ],
