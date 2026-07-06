@@ -63,6 +63,8 @@ interface Module
      * does to this plugin. A feature bundles whichever declarations it needs:
      *
      *  - 'label': translated, user-facing description of the cleanup.
+     *  - 'default': whether the feature is ON out of the box (default true).
+     *    Set false for aggressive cleanups a user should opt into.
      *  - 'submenuRelocations': submenu slugs (substring match) to hide from
      *    the sidebar, categorized — 'upgrade' (purchase guidance ONLY),
      *    'premium' (what paying gets you: locked/teaser pages, paid support,
@@ -89,6 +91,7 @@ interface Module
      *
      * @return array<string, array{
      *     label: string,
+     *     default?: bool,
      *     submenuRelocations?: array{upgrade?: list<string>, premium?: list<string>, help?: list<string>},
      *     extraScreenMetaContent?: list<array{category: 'upgrade'|'premium'|'help', parent: string, html: string}>,
      *     saleNoticeRelocation?: array{parent: string, byHook: array<string, list<string>>},

@@ -30,24 +30,26 @@ final class Settings
 
     /**
      * Per-feature toggle (a key of Module::features()). Combine with
-     * moduleEnabled(); this reads the feature flag on its own.
+     * moduleEnabled(); this reads the feature flag on its own. Most features
+     * default to ON; a few (e.g. the more aggressive AIOSEO options) declare
+     * a `default` of false, passed here so an unset flag honors it.
      */
-    public static function featureEnabled(string $pluginFile, string $feature): bool
+    public static function featureEnabled(string $pluginFile, string $feature, bool $default = true): bool
     {
-        return self::read(['modules', $pluginFile, $feature]);
+        return self::read(['modules', $pluginFile, $feature], $default);
     }
 
     /**
-     * Module toggles default to ON when unset.
+     * Reads a nested flag, returning $default when the path is unset.
      *
      * @param list<string> $path
      */
-    private static function read(array $path): bool
+    private static function read(array $path, bool $default = true): bool
     {
         $value = get_option(self::OPTION, []);
         foreach ($path as $key) {
             if (!is_array($value) || !array_key_exists($key, $value)) {
-                return true;
+                return $default;
             }
             $value = $value[$key];
         }

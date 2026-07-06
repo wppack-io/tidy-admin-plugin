@@ -297,10 +297,9 @@ final class AllInOneSeo extends AbstractModule
                             'aioseo-seo-analysis' => ['Site Audit'],
                         ];
                         if ($page === '' && in_array($pagenow, ['post.php', 'post-new.php'], true)) {
-                            // The editor metabox/sidebar Pro teaser tabs. AI Content
-                            // is caught here as a fallback for whichever surface the
-                            // aioseo_ai_disabled filter (ai-features) does not cover
-                            $labelsByPage[''] = ['Link Assistant', 'Redirects', 'SEO Revisions', 'AI Content'];
+                            // The editor metabox/sidebar Pro teaser tabs (AI Content
+                            // stays — the AI features themselves are functional)
+                            $labelsByPage[''] = ['Link Assistant', 'Redirects', 'SEO Revisions'];
                             $page = '';
                         } elseif (!isset($labelsByPage[$page])) {
                             return;
@@ -334,19 +333,71 @@ final class AllInOneSeo extends AbstractModule
                     add_filter('aioseo_hide_action_scheduler_menu', '__return_false');
                 },
             ],
-            'ai-features' => [
-                'label' => __('Disable the promotional AI features', 'wppack-tidy-admin'),
+            'ai-editor-block' => [
+                'label' => __('Remove the AI Assistant block from the content editor', 'wppack-tidy-admin'),
                 /*
-                 * AIOSEO's AI features are a paid-credits upsell: the AI Content
-                 * tab, the block-editor "AI Assistant" block it injects into the
-                 * content toolbar, and the "purchase PAYG credits" pitches. Turn
-                 * them off at the source with the plugin's own filter — the AI
-                 * Assistant block is not even registered, so nothing is hidden
-                 * with CSS.
+                 * AIOSEO injects an "AI Assistant" block (aioseo/ai-assistant)
+                 * into the editor's content toolbar/inserter — it interrupts
+                 * writing to pitch paid AI credits. Unregister the block and
+                 * dequeue the script that extends the editor with it, so it is
+                 * gone by logic rather than hidden. AIOSEO's other AI surfaces
+                 * (the AI Content tab) are left intact. Default ON.
+                 */
+                'register' => static function (): void {
+                    add_action('init', static function (): void {
+                        if (function_exists('unregister_block_type') && \WP_Block_Type_Registry::get_instance()->is_registered('aioseo/ai-assistant')) {
+                            unregister_block_type('aioseo/ai-assistant');
+                        }
+                    }, PHP_INT_MAX);
+                    add_action('enqueue_block_editor_assets', static function (): void {
+                        if (\WP_Block_Type_Registry::get_instance()->is_registered('aioseo/ai-assistant')) {
+                            unregister_block_type('aioseo/ai-assistant');
+                        }
+                        global $wp_scripts;
+                        if (!$wp_scripts instanceof \WP_Scripts) {
+                            return;
+                        }
+                        foreach ($wp_scripts->queue as $handle) {
+                            if (str_contains($handle, 'ai-assistant') || str_contains($handle, 'extend-block-editor')) {
+                                wp_dequeue_script($handle);
+                            }
+                        }
+                    }, PHP_INT_MAX);
+                },
+            ],
+            'ai-disable-all' => [
+                'label' => __('Disable all AI features', 'wppack-tidy-admin'),
+                'default' => false,
+                /*
+                 * Turns off every AIOSEO AI surface at the source via the
+                 * plugin's own filter (the AI Content tab, the editor block,
+                 * the "purchase PAYG credits" pitches). Off by default — the AI
+                 * features are functional; enable this to opt out entirely.
                  */
                 'register' => static function (): void {
                     add_filter('aioseo_ai_disabled', '__return_true');
                 },
+            ],
+            'toolbar-icons' => [
+                'label' => __('Remove the border on its editor toolbar icons', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* AIOSEO: the Headline Analyzer and AIOSEO score badges in the editor's
+                   top toolbar draw a 1px box around the icon; core's pinned toolbar
+                   buttons have none, so drop it for a consistent look */
+                #aioseo-headline-analyzer-sidebar-button,
+                .interface-pinned-items button .score-disabled,
+                .interface-pinned-items button [id*="aioseo-score"] { border: 0 !important; }
+                CSS,
+            ],
+            'ai-credits-upsell' => [
+                'label' => __('Hide the AI credits upsell', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* AIOSEO: "You can try out our AI features for free ... upgrade to Pro or
+                   purchase PAYG credits" pitch on the AI Content tab */
+                .aioseo-ai-credits-cta,
+                .aioseo-app .aioseo-alert.inline-upsell:has(a[href*="payg"]),
+                .aioseo-app .aioseo-credits-upsell { display: none !important; }
+                CSS,
             ],
             'flyout' => [
                 'label' => __('Remove the floating quick-links menu', 'wppack-tidy-admin'),

@@ -89,7 +89,13 @@ final class TidyAdminPlugin
             $settingsModules[] = [
                 'file' => $file,
                 'name' => self::pluginName($file),
-                'features' => array_map(static fn(array $feature): string => $feature['label'], $features),
+                'features' => array_map(
+                    static fn(array $feature): array => [
+                        'label' => $feature['label'],
+                        'default' => $feature['default'] ?? true,
+                    ],
+                    $features,
+                ),
             ];
             if (!Support\Settings::moduleEnabled($file)) {
                 continue;
@@ -106,7 +112,7 @@ final class TidyAdminPlugin
             }
 
             foreach ($features as $key => $feature) {
-                if (!Support\Settings::featureEnabled($file, $key)) {
+                if (!Support\Settings::featureEnabled($file, $key, $feature['default'] ?? true)) {
                     continue;
                 }
 

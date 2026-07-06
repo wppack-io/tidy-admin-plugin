@@ -191,8 +191,20 @@ msgid "Hide the license fields (turn off while entering a key)"
 msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
 
 #: src/Modules/AllInOneSeo.php
-msgid "Disable the promotional AI features"
-msgstr "宣伝目的の AI 機能を無効化"
+msgid "Remove the AI Assistant block from the content editor"
+msgstr "コンテンツエディターから AI アシスタントブロックを除去"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Disable all AI features"
+msgstr "すべての AI 機能を無効化"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Remove the border on its editor toolbar icons"
+msgstr "エディターツールバーのアイコンの枠線を除去"
+
+#: src/Modules/AllInOneSeo.php
+msgid "Hide the AI credits upsell"
+msgstr "AI クレジットのアップセルを非表示"
 
 #: src/Modules/AllInOneSeo.php
 msgid "Fix styling conflicts with WordPress core"

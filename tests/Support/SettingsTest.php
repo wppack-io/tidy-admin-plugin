@@ -25,6 +25,13 @@ final class SettingsTest extends TestCase
         $this->assertTrue(Settings::featureEnabled('wordpress-seo/wp-seo.php', 'upsell-ui'));
     }
 
+    public function test_features_can_declare_a_default_of_off(): void
+    {
+        // An unset flag honors the passed default (used by opt-in features)
+        $this->assertFalse(Settings::featureEnabled('all-in-one-seo-pack/all_in_one_seo_pack.php', 'ai-disable-all', false));
+        $this->assertTrue(Settings::featureEnabled('all-in-one-seo-pack/all_in_one_seo_pack.php', 'ai-editor-block', true));
+    }
+
     public function test_stored_overrides_win(): void
     {
         update_option(Settings::OPTION, [
