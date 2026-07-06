@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63c60b2caee3cb6a00aeb03bed096e4c",
+    "content-hash": "b7ca1b937c70f0f747acb005ad4a0283",
     "packages": [
         {
             "name": "composer/installers",
@@ -6248,6 +6248,37 @@
                 "source": "https://plugins.svn.wordpress.org/all-in-one-seo-pack"
             },
             "time": "2026-06-24T16:35:39+00:00"
+        },
+        {
+            "name": "wp-plugin/all-in-one-wp-migration",
+            "version": "7.106",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/all-in-one-wp-migration/",
+                "reference": "tags/7.106"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/all-in-one-wp-migration.7.106.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "ServMask"
+                }
+            ],
+            "description": "Trusted by 60M+ sites: The gold standard for WordPress migration and backup. Migrate, backup, and restore your WordPress site with one click.",
+            "homepage": "https://servmask.com/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/all-in-one-wp-migration/#developers",
+                "issues": "https://wordpress.org/support/plugin/all-in-one-wp-migration",
+                "source": "https://plugins.svn.wordpress.org/all-in-one-wp-migration"
+            },
+            "time": "2026-06-24T12:16:46+00:00"
         },
         {
             "name": "wp-plugin/bnfw",
