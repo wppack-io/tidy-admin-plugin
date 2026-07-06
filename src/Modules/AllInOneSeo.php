@@ -222,6 +222,11 @@ final class AllInOneSeo extends AbstractModule
                 /* AIOSEO: "Unlock Local SEO" addon pitch row under Knowledge Graph on
                    Search Appearance (an unbadged upsell row of its own) */
                 body[class*="page_aioseo"] .aioseo-settings-row.local-seo { display: none !important; }
+                /* AIOSEO: the same teaser markers inside the post editor's metabox and
+                   sidebar (Cornerstone Content, Additional Keywords, Breadcrumbs,
+                   Priority Score, ...) — editor screens carry no page_aioseo body class */
+                body:is(.post-php, .post-new-php) .aioseo-app .aioseo-settings-row:has(.aioseo-pro-badge),
+                body:is(.post-php, .post-new-php) .aioseo-app .aioseo-settings-row:has(.aioseo-alert.inline-upsell) { display: none !important; }
                 /* AIOSEO: whole cards whose HEADER carries the PRO pill (e.g. Image SEO
                    on Search Appearance > Media) — every row inside is a teaser. Cards
                    with the pill only in individual rows keep their functional rows */
@@ -270,6 +275,7 @@ final class AllInOneSeo extends AbstractModule
                  */
                 'register' => static function (): void {
                     add_action('admin_footer', static function (): void {
+                        global $pagenow;
                         $page = isset($_GET['page']) && is_string($_GET['page']) ? $_GET['page'] : '';
                         $labelsByPage = [
                             'aioseo-settings' => ['Access Control'],
@@ -279,6 +285,13 @@ final class AllInOneSeo extends AbstractModule
                             'aioseo-sitemaps' => ['Video Sitemap', 'News Sitemap'],
                             'aioseo-seo-analysis' => ['Site Audit'],
                         ];
+                        if ($page === '' && in_array($pagenow, ['post.php', 'post-new.php'], true)) {
+                            // The editor metabox's Pro teaser tabs
+                            $labelsByPage[''] = ['Link Assistant', 'Redirects', 'SEO Revisions'];
+                            $page = '';
+                        } elseif (!isset($labelsByPage[$page])) {
+                            return;
+                        }
                         if (!isset($labelsByPage[$page])) {
                             return;
                         }
