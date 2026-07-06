@@ -360,24 +360,32 @@ final class AllInOneSeo extends AbstractModule
             'ai-editor-buttons' => [
                 'label' => __('Stop AIOSEO from adding AI buttons to the editor', 'wppack-tidy-admin'),
                 /*
-                 * AIOSEO extends the block editor with unsolicited "AI" buttons
-                 * — an inserter entry and a paragraph-placeholder prompt that
-                 * interrupt writing to pitch paid AI credits. Dequeue only the
-                 * editor-extend script that injects them; the aioseo/ai-assistant
-                 * block itself stays registered, so a user can still insert it on
-                 * purpose, and the AI Content tab is untouched. Default ON.
+                 * AIOSEO pushes its AI Assistant into the writing flow — a
+                 * paragraph-placeholder prompt (from an editor-extend script)
+                 * and a "/ Use AI Assistant" slash-inserter entry. Both pitch
+                 * paid AI credits. The block is registered client-side by its
+                 * own editor script, so a PHP block filter can't reach it —
+                 * unregister it in the editor (JS) to drop it from the inserter
+                 * and slash command, and dequeue the extend script for the
+                 * placeholder prompt. Lite can't use the block, so no content is
+                 * affected, and the AI Content tab is untouched. Default ON.
                  */
                 'register' => static function (): void {
                     add_action('enqueue_block_editor_assets', static function (): void {
                         global $wp_scripts;
-                        if (!$wp_scripts instanceof \WP_Scripts) {
-                            return;
-                        }
-                        foreach ($wp_scripts->queue as $handle) {
-                            if (str_contains($handle, 'extend-block-editor')) {
-                                wp_dequeue_script($handle);
+                        if ($wp_scripts instanceof \WP_Scripts) {
+                            foreach ($wp_scripts->queue as $handle) {
+                                if (str_contains($handle, 'extend-block-editor')) {
+                                    wp_dequeue_script($handle);
+                                }
                             }
                         }
+                        wp_add_inline_script(
+                            'wp-blocks',
+                            'wp.domReady(function(){'
+                            . 'if(wp.blocks.getBlockType&&wp.blocks.getBlockType("aioseo/ai-assistant")){'
+                            . 'wp.blocks.unregisterBlockType("aioseo/ai-assistant");}});',
+                        );
                     }, PHP_INT_MAX);
                 },
             ],
