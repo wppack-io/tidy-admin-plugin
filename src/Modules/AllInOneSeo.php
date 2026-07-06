@@ -313,16 +313,14 @@ final class AllInOneSeo extends AbstractModule
                 'adminCss' => <<<'CSS'
                 /* AIOSEO: at phone widths its breadcrumb header mounts as a FIXED bar
                    (z-index 1051) once you scroll, so an in-flow row would scroll away
-                   under it — pin our band fixed under the 46px admin bar here too, as a
-                   solid white full-width strip (padding, not margin, so the background
-                   reaches the left edge), and reserve its height so it never covers the
-                   top of the app */
+                   under it — overlay here too: the region stays transparent (a solid
+                   background would bleed around the opened panel), the buttons pin
+                   under the 46px admin bar, and the scroll-mounted bar makes room for
+                   them with padding instead of being displaced */
                 @media (max-width: 767px) {
-                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: fixed; top: 46px; left: 0; right: 0; z-index: 1052; background: #fff; padding-left: 20px; }
+                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: fixed; top: 46px; left: 0; right: 0; z-index: 1052; padding-left: 20px; }
                     body[class*="page_aioseo"] #wpbody { padding-top: 34px; }
-                    /* Its scroll-mounted fixed breadcrumb bar also anchors at 46px —
-                       slot it below our band instead of overlapping it */
-                    body[class*="page_aioseo"] .aioseo-header { top: 80px !important; }
+                    body[class*="page_aioseo"] .aioseo-header { padding-top: 34px !important; height: auto !important; }
                 }
                 /* AIOSEO: its breadcrumb header is FIXED (z-index 1051), so an absolutely
                    positioned row would scroll away while the header stays — fix the whole
