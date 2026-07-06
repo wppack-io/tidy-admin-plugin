@@ -118,6 +118,9 @@ final class AllInOneSeo extends AbstractModule
                 'adminCss' => <<<'CSS'
                 /* AIOSEO: "Upgrade to Pro / Get more features in AIOSEO Pro" card on its dashboard */
                 .aioseo-cta.dashboard-cta { display: none !important; }
+                /* AIOSEO: "Get additional keywords and many more modules! Upgrade to Pro
+                   Today!" strip inside the dashboard's Overview card */
+                .aioseo-overview .aioseo-alert.yellow { display: none !important; }
                 /* AIOSEO: Quicklinks tiles for Pro-only pages — the pages live in the
                    Upgrades panel's Premium features tab */
                 .aioseo-feature-card:has(a[href*="aioseo-local-seo"]),
@@ -267,17 +270,22 @@ final class AllInOneSeo extends AbstractModule
                 /* AIOSEO: it removes #wpcontent's left padding; restore the standard gap
                    so the opened panels align with the admin menu like core Help */
                 body[class*="page_aioseo"] #tidy-admin-meta-region { margin-left: 20px; }
-                /* AIOSEO: its breadcrumb header is fixed with z-index 1051 and covers the
-                   normal-flow button row — overlay the whole screen-meta region above it
-                   (closed: buttons inside the header band, kept clear of its bell/help
-                   icons; open: the panel covers the content) */
-                @media (min-width: 768px) {
-                    /* z-index between its fixed header (1051) and its slide-over
-                       drawers/backdrop (1052/1053), so the open notification drawer
-                       covers the buttons like it covers the rest of the header */
-                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: absolute; top: 20px; left: 0; right: 0; z-index: 1052; }
-                    body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* AIOSEO: its breadcrumb header is FIXED (z-index 1051), so an absolutely
+                   positioned row would scroll away while the header stays — fix the whole
+                   screen-meta region into the header band instead (closed: buttons sit in
+                   the band, clear of the notification bell; open: the panel drops over the
+                   content). z-index 1052 keeps it under the notification drawer (1053).
+                   Above 782px the admin bar is 32px and the admin menu 160px (36px when
+                   folded) */
+                @media (min-width: 783px) {
+                    body[class*="page_aioseo"] #tidy-admin-meta-region { position: fixed; top: 52px; left: 160px; right: 0; z-index: 1052; margin-left: 0; }
+                    body.folded[class*="page_aioseo"] #tidy-admin-meta-region { left: 36px; }
+                    body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); margin-left: 20px; }
                     body[class*="page_aioseo"] #tidy-admin-meta-region #screen-meta-links { margin-right: 120px; }
+                }
+                @media (min-width: 783px) and (max-width: 960px) {
+                    /* WP auto-folds the admin menu in this range */
+                    body[class*="page_aioseo"] #tidy-admin-meta-region { left: 36px; }
                 }
                 CSS,
             ],
