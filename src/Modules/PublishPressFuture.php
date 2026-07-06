@@ -157,6 +157,26 @@ final class PublishPressFuture extends AbstractModule
                 .pp-rating { display: none !important; }
                 CSS,
             ],
+            'post-list-column-width' => [
+                'label' => __('Keep the post-list expiration column readable', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* PublishPress Future: its "Post Expiration" column on list tables holds a
+                   date, time and edit/delete links that wrap when squeezed by other
+                   plugins' columns (it renders at ~116px). Give it a fixed width so the
+                   layout holds. Post-list tables carry the `fixed` class (table-layout:
+                   fixed), where min-width on cells is ignored and only `width` on the
+                   header cell sizes the column — set both so it also holds if a screen
+                   uses auto layout. Only above 782px: at 782px and below WordPress
+                   collapses the table to a stacked, single-column view where a width
+                   would force a horizontal scroll. The high-specificity selector (body
+                   class + table + column) plus !important keeps core's per-column width
+                   rules from overriding it. */
+                @media (min-width: 783px) {
+                    body.wp-admin .wp-list-table th.column-expirationdate,
+                    body.wp-admin .wp-list-table td.column-expirationdate { width: 200px !important; min-width: 200px !important; }
+                }
+                CSS,
+            ],
         ];
     }
 }
