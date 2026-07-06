@@ -218,6 +218,27 @@ final class AllInOneSeo extends AbstractModule
                 .aioseo-conflicting-plugin-notice { display: none !important; }
                 #tidy_admin_pending_setup .aioseo-conflicting-plugin-notice { display: block !important; }
                 CSS,
+                /*
+                 * AIOSEO's notice script binds the "Click here to Deactivate"
+                 * handler to document.querySelector('.aioseo-conflicting-plugin-
+                 * notice .deactivate-conflicting-plugins') — the FIRST match,
+                 * which is the original admin_notices copy (hidden by the CSS
+                 * above) rather than the widget copy, so the visible link does
+                 * nothing. On the dashboard, drop the non-widget copies from the
+                 * DOM before that load handler runs (DOMContentLoaded fires
+                 * first) so it binds to the widget copy. Other screens keep the
+                 * hidden copy so the script's querySelector is never null.
+                 */
+                'register' => static function (): void {
+                    add_action('admin_print_footer_scripts', static function (): void {
+                        echo '<script>document.addEventListener("DOMContentLoaded",function(){'
+                            . 'var w=document.getElementById("tidy_admin_pending_setup");'
+                            . 'if(!w)return;'
+                            . 'document.querySelectorAll(".aioseo-conflicting-plugin-notice").forEach(function(n){'
+                            . 'if(!w.contains(n)){n.remove();}});'
+                            . '});</script>';
+                    });
+                },
             ],
             'footer' => [
                 'label' => __('Restore the standard admin footer', 'wppack-tidy-admin'),
