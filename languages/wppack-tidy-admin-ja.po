@@ -151,6 +151,10 @@ msgid "Show Scheduled Actions in the sidebar instead of a page button"
 msgstr "Scheduled Actions をページ内ボタンではなくサイドバーに表示"
 
 #: src/Modules/PublishPressFuture.php
+msgid "Keep the post-list expiration column readable"
+msgstr "投稿一覧の有効期限列を読みやすい幅に保つ"
+
+#: src/Modules/PublishPressFuture.php
 msgid "Hide locked Pro settings rows"
 msgstr "ロックされた Pro 設定行を非表示"
 
