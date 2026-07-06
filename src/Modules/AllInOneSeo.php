@@ -215,6 +215,13 @@ final class AllInOneSeo extends AbstractModule
                    Assistant, Redirects, AI Suite, Feature Manager) are excluded: there
                    the PRO-badged content IS the page — hiding it would blank them */
                 body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]) .aioseo-settings-row:has(.aioseo-pro-badge) { display: none !important; }
+                /* AIOSEO: teaser rows without the pill, marked by an inline-upsell note
+                   ("... is a PRO feature. Learn More") — e.g. Default Term Image Source
+                   and Default Taxonomy Object Types on Social Networks */
+                body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]) .aioseo-settings-row:has(.aioseo-alert.inline-upsell) { display: none !important; }
+                /* AIOSEO: "Unlock Local SEO" addon pitch row under Knowledge Graph on
+                   Search Appearance (an unbadged upsell row of its own) */
+                body[class*="page_aioseo"] .aioseo-settings-row.local-seo { display: none !important; }
                 /* AIOSEO: whole cards whose HEADER carries the PRO pill (e.g. Image SEO
                    on Search Appearance > Media) — every row inside is a teaser. Cards
                    with the pill only in individual rows keep their functional rows */
