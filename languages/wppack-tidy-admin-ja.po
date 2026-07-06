@@ -178,6 +178,18 @@ msgstr "ロックされた Pro 設定行を非表示"
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr "「無料版を使用中」バーを除去"
 
+#: src/Modules/Wordfence.php
+msgid "Move the upgrade menu to the Upgrades panel"
+msgstr "アップグレードメニューをアップグレードパネルへ移設"
+
+#: src/Modules/Wordfence.php
+msgid "Remove its onboarding banner and upgrade link from the plugin list"
+msgstr "プラグイン一覧からオンボーディング表示とアップグレードリンクを除去"
+
+#: src/Modules/Wordfence.php
+msgid "Hide upsell cards and ads on its screens"
+msgstr "画面内のアップセルカード・広告を非表示"
+
 #: src/Modules/WpMailSmtp.php
 msgid "Remove the \"You're using Lite\" notice bar"
 msgstr "「Lite を使用中」通知バーを除去"

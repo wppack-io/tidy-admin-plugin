@@ -45,6 +45,7 @@ final class TidyAdminPlugin
         Modules\PublishPressFuture::class,
         Modules\TaxonomyTermsOrder::class,
         Modules\WordPressCore::class,
+        Modules\Wordfence::class,
         Modules\WpMailSmtp::class,
         Modules\Yarpp::class,
         Modules\Yoast::class,

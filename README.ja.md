@@ -86,6 +86,7 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 | [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 2.x |
 | [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 4.x |
 | [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 1.x |
+| [Wordfence](https://wordpress.org/plugins/wordfence/) | 8.x |
 | [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 4.x |
 | [YARPP](https://wordpress.org/plugins/yet-another-related-posts-plugin/) | 5.x |
 | [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) | 27.x |
