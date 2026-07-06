@@ -190,6 +190,10 @@ msgstr "ダッシュボードウィジェットの Pro ティーザーチャー�
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
 
+#: src/Modules/WordPressCore.php
+msgid "Remove the \"WordPress Events and News\" dashboard widget"
+msgstr "「WordPress イベントとニュース」ダッシュボードウィジェットを除去"
+
 #: src/Modules/AllInOneSeo.php
 msgid "Remove its news dashboard widget"
 msgstr "ニュース系のダッシュボードウィジェットを除去"
