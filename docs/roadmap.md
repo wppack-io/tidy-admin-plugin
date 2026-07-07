@@ -34,6 +34,7 @@ time and are listed only to explain prioritization.
 | [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 3M+ | WP Mail SMTP Pro |
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 2M+ | MC4WP Premium |
 | [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 1M+ | Instagram Feed Pro |
+| [Duplicator](https://wordpress.org/plugins/duplicator/) | 1M+ | Duplicator Pro |
 | [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 800k+ | PublishPress Future Pro |
 | [Broken Link Checker](https://wordpress.org/plugins/broken-link-checker/) | 700k+ | Cloud Link Checker (paid service) |
 | [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 600k+ | Advanced Post Types Order |
@@ -68,7 +69,6 @@ smaller promotion surface than tier 1.
 | Plugin | Active installs | Commercial edition | Free-version promotion surface |
 |---|---|---|---|
 | [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) | 2M+ | Essential Addons Pro | Locked (Pro) elements, upgrade menus, notices |
-| [Duplicator](https://wordpress.org/plugins/duplicator/) | 1M+ | Duplicator Pro | Upgrade submenu, teaser features, notices |
 | [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) | 1M+ | W3 Total Cache Pro | Pro-badged settings, upgrade prompts |
 | [Smush](https://wordpress.org/plugins/wp-smushit/) | 1M+ | Smush Pro (WPMU DEV) | Pro teasers, cross-sells for other WPMU DEV plugins |
 | [WP-Optimize](https://wordpress.org/plugins/wp-optimize/) | 1M+ | WP-Optimize Premium | Premium tabs, teaser features, notices |

@@ -80,6 +80,7 @@ supported, with the major versions the cleanups were verified against:
 | [BNFW](https://wordpress.org/plugins/bnfw/) | 1.x |
 | [Broken Link Checker](https://wordpress.org/plugins/broken-link-checker/) | 2.x |
 | [Contact Form CFDB7](https://wordpress.org/plugins/contact-form-cfdb7/) | 1.x |
+| [Duplicator](https://wordpress.org/plugins/duplicator/) | 1.x |
 | [EmbedPress](https://wordpress.org/plugins/embedpress/) | 4.x |
 | [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 6.x |
 | [Location Weather](https://wordpress.org/plugins/location-weather/) | 3.x |

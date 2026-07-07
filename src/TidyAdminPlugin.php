@@ -37,6 +37,7 @@ final class TidyAdminPlugin
         Modules\Bnfw::class,
         Modules\BrokenLinkChecker::class,
         Modules\Cfdb7::class,
+        Modules\Duplicator::class,
         Modules\EmbedPress::class,
         Modules\InstagramFeed::class,
         Modules\LocationWeather::class,

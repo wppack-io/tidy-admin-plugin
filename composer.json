@@ -41,6 +41,7 @@
         "wp-plugin/broken-link-checker": "*",
         "wp-plugin/contact-form-7": "^6.1",
         "wp-plugin/contact-form-cfdb7": "*",
+        "wp-plugin/duplicator": "*",
         "wp-plugin/embedpress": "*",
         "wp-plugin/instagram-feed": "*",
         "wp-plugin/location-weather": "*",
@@ -48,8 +49,8 @@
         "wp-plugin/post-expirator": "*",
         "wp-plugin/post-types-order": "*",
         "wp-plugin/taxonomy-terms-order": "*",
-        "wp-plugin/wordpress-seo": "*",
         "wp-plugin/wordfence": "*",
+        "wp-plugin/wordpress-seo": "*",
         "wp-plugin/wp-mail-smtp": "*",
         "wp-plugin/yet-another-related-posts-plugin": "*",
         "yoast/phpunit-polyfills": "^4.0"

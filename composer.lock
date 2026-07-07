@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "365bf9fb343a6e1fd1d052401670127a",
+    "content-hash": "26bf3eaa767ba94d2340d2662491e6e2",
     "packages": [
         {
             "name": "composer/installers",
@@ -6526,6 +6526,37 @@
                 "source": "https://plugins.svn.wordpress.org/contact-form-cfdb7"
             },
             "time": "2026-05-20T11:11:47+00:00"
+        },
+        {
+            "name": "wp-plugin/duplicator",
+            "version": "1.5.16.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/duplicator/",
+                "reference": "tags/1.5.16.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/duplicator.1.5.16.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "The best WordPress backup and migration plugin. Quickly and easily backup ,migrate, copy, move, or clone your site from one location to another.",
+            "homepage": "https://duplicator.com/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/duplicator/#developers",
+                "issues": "https://wordpress.org/support/plugin/duplicator",
+                "source": "https://plugins.svn.wordpress.org/duplicator"
+            },
+            "time": "2026-05-22T21:11:21+00:00"
         },
         {
             "name": "wp-plugin/embedpress",

@@ -126,6 +126,18 @@ msgstr "Cloud Link Checker のクロスセルを除去"
 msgid "Hide the stray empty heading on its pages"
 msgstr "ページ内の余分な空見出しを非表示"
 
+#: src/Modules/Duplicator.php
+msgid "Troubleshooting"
+msgstr "トラブルシューティング"
+
+#: src/Modules/Duplicator.php
+msgid "Remove the recommended-plugin cross-sell from its dashboard widget"
+msgstr "ダッシュボードウィジェットの推奨プラグイン枠を除去"
+
+#: src/Modules/Duplicator.php
+msgid "Hide the license pitch on its settings screen"
+msgstr "設定画面のライセンス勧誘を非表示"
+
 #: src/Modules/EmbedPress.php
 msgid "Remove the milestone celebration popup"
 msgstr "マイルストーン祝賀ポップアップを除去"
