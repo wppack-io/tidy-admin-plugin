@@ -113,14 +113,29 @@ final class Wordfence extends AbstractModule
                 CSS,
             ],
             'onboarding' => [
-                'label' => __('Show the setup banner only on the Dashboard', 'wppack-tidy-admin'),
+                'label' => __('Move the setup notice to the plugin screens and dashboard widget', 'wppack-tidy-admin'),
+                /*
+                 * "Wordfence installation is incomplete" (ul#wf-onboarding-banner) is an
+                 * admin_notices item, so it repeats on every admin screen. Relocate it
+                 * into the "Pending plugin setup" dashboard widget.
+                 */
+                'setupNoticeByHook' => [
+                    'admin_notices' => [
+                        'wordfence::showOnboardingBanner',
+                    ],
+                ],
                 'adminCss' => <<<'CSS'
-                /* Wordfence's "Wordfence installation is incomplete" banner
-                   (ul#wf-onboarding-banner) is an admin_notices item, so it repeats on
-                   every admin screen. Confine it to the WordPress Dashboard (index.php),
-                   where a setup reminder belongs — the inline "complete installation"
-                   registration box is left in place on the plugins page */
+                /* The banner also renders raw on Wordfence's own screens (the relocator
+                   keeps it there), where it duplicates the blue registration box — hide
+                   it; the dashboard widget's copy (index.php) stays visible */
                 body:not(.index-php) #wf-onboarding-banner { display: none !important; }
+                /* Inside the widget, drop the -20px margin the banner uses to bleed
+                   across the notices area — it would poke out of the widget box — and
+                   keep the 15px bottom rhythm the sibling notices have. Its "Remind Me
+                   Later" delay button makes no sense in a status widget; the widget
+                   entry disappears by itself once setup completes */
+                #tidy_admin_pending_setup #wf-onboarding-banner { margin: 0 0 15px !important; }
+                #tidy_admin_pending_setup #wf-onboarding-delay { display: none !important; }
                 /* Wordfence: the full-screen onboarding overlay it throws over the
                    plugins page pushing registration (distinct from the inline box) */
                 .wf-onboarding-plugin-overlay,

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-06T23:22:59+09:00\n"
+"POT-Creation-Date: 2026-07-07T09:09:40+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -228,6 +228,7 @@ msgstr ""
 #: src/Modules/LocationWeather.php:112
 #: src/Modules/Mc4wp.php:128
 #: src/Modules/PostTypesOrder.php:50
+#: src/Modules/Wordfence.php:116
 #: src/Modules/WpMailSmtp.php:104
 #: src/Modules/Yoast.php:109
 msgid "Move the setup notice to the plugin screens and dashboard widget"
@@ -284,11 +285,7 @@ msgstr ""
 msgid "Hide upsell cards and ads on its screens"
 msgstr ""
 
-#: src/Modules/Wordfence.php:116
-msgid "Show the setup banner only on the Dashboard"
-msgstr ""
-
-#: src/Modules/Wordfence.php:133
+#: src/Modules/Wordfence.php:141
 msgid "Overlay the Help and Upgrades buttons onto the page title"
 msgstr ""
 
