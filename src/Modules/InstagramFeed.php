@@ -125,6 +125,41 @@ final class InstagramFeed extends AbstractModule
                     });
                 },
             ],
+            'select-fields' => [
+                'label' => __('Fix the squeezed select fields on its screens', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Instagram Feed: its select boxes ship with uneven padding that
+                   crowds the text against the dropdown arrow */
+                .sb-form-field .sbi-select { padding: 0 24px 0 12px !important; }
+                CSS,
+            ],
+            'pro-feed-types' => [
+                'label' => __('Hide Pro-only feed types from the feed builder', 'wppack-tidy-admin'),
+                /*
+                 * The "select feed type" step lists Public Hashtag and Tagged Posts
+                 * (Pro features in Lite — picking one only pitches the upgrade) and
+                 * Social Wall (a separate plugin's cross-sell) beside the working
+                 * User Timeline type, in both its main and advanced groups. The
+                 * lists are localized as sbi_builder.feedTypes/advancedFeedTypes
+                 * with no PHP filter, so a 'before' inline script trims them ahead
+                 * of the builder app reading them.
+                 */
+                'register' => static function (): void {
+                    add_action('admin_enqueue_scripts', static function (): void {
+                        if (!wp_script_is('sbi-builder-app', 'enqueued')) {
+                            return;
+                        }
+                        wp_add_inline_script(
+                            'sbi-builder-app',
+                            '(function(){var b=window.sbi_builder;if(!b){return;}'
+                            . '["feedTypes","advancedFeedTypes"].forEach(function(k){'
+                            . 'if(Array.isArray(b[k])){b[k]=b[k].filter(function(t){'
+                            . "return !t||['hashtag','tagged','socialwall'].indexOf(t.type)===-1;});}});})();",
+                            'before',
+                        );
+                    }, 999);
+                },
+            ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'

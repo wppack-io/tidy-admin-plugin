@@ -143,6 +143,14 @@ msgid "Remove the floating quick-links menu"
 msgstr "フローティングのクイックリンクメニューを除去"
 
 #: src/Modules/InstagramFeed.php
+msgid "Hide Pro-only feed types from the feed builder"
+msgstr "フィードビルダーから Pro 専用フィードタイプを非表示"
+
+#: src/Modules/InstagramFeed.php
+msgid "Fix the squeezed select fields on its screens"
+msgstr "画面内のセレクトボックスの詰まった余白を修正"
+
+#: src/Modules/InstagramFeed.php
 msgid "Remove marketing notices and announcements"
 msgstr "マーケティング通知・お知らせを除去"
 

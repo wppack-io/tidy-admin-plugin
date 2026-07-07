@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-07T11:00:33+09:00\n"
+"POT-Creation-Date: 2026-07-07T12:01:19+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -46,7 +46,7 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:55
 #: src/Modules/AllInOneWpMigration.php:52
 #: src/Modules/Bnfw.php:47
-#: src/Modules/Duplicator.php:103
+#: src/Modules/Duplicator.php:125
 #: src/Modules/EmbedPress.php:60
 #: src/Modules/InstagramFeed.php:47
 #: src/Modules/WpMailSmtp.php:58
@@ -57,7 +57,7 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:77
 #: src/Modules/AllInOneWpMigration.php:84
 #: src/Modules/Bnfw.php:56
-#: src/Modules/Duplicator.php:158
+#: src/Modules/Duplicator.php:180
 #: src/Modules/EmbedPress.php:88
 #: src/Modules/InstagramFeed.php:58
 #: src/Modules/LocationWeather.php:69
@@ -75,9 +75,9 @@ msgid "Keep the post-list title column readable beside its SEO column"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:140
-#: src/Modules/Duplicator.php:242
+#: src/Modules/Duplicator.php:264
 #: src/Modules/EmbedPress.php:160
-#: src/Modules/InstagramFeed.php:129
+#: src/Modules/InstagramFeed.php:164
 #: src/Modules/LocationWeather.php:164
 #: src/Modules/WpMailSmtp.php:264
 #: src/Modules/Yoast.php:221
@@ -85,7 +85,7 @@ msgid "Hide upsell promotions on its screens"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:165
-#: src/Modules/Duplicator.php:226
+#: src/Modules/Duplicator.php:248
 #: src/Modules/EmbedPress.php:121
 #: src/Modules/InstagramFeed.php:91
 #: src/Modules/LocationWeather.php:93
@@ -114,7 +114,7 @@ msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:261
-#: src/Modules/Duplicator.php:325
+#: src/Modules/Duplicator.php:350
 #: src/Modules/LocationWeather.php:179
 #: src/Modules/WpMailSmtp.php:227
 msgid "Restore the standard admin footer"
@@ -173,7 +173,7 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:504
 #: src/Modules/BrokenLinkChecker.php:64
 #: src/Modules/EmbedPress.php:185
-#: src/Modules/InstagramFeed.php:218
+#: src/Modules/InstagramFeed.php:253
 #: src/Modules/LocationWeather.php:217
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/WpMailSmtp.php:283
@@ -193,7 +193,7 @@ msgid "Make its admin menu icon white like the core icons"
 msgstr ""
 
 #: src/Modules/AllInOneWpMigration.php:77
-#: src/Modules/Duplicator.php:69
+#: src/Modules/Duplicator.php:76
 msgid "Upgrade to Pro"
 msgstr ""
 
@@ -221,26 +221,26 @@ msgstr ""
 msgid "Hide the stray empty heading on its pages"
 msgstr ""
 
-#: src/Modules/Duplicator.php:232
+#: src/Modules/Duplicator.php:254
 #: src/Modules/WpMailSmtp.php:144
 msgid "Remove the \"You're using Lite\" notice bar"
 msgstr ""
 
-#: src/Modules/Duplicator.php:293
+#: src/Modules/Duplicator.php:318
 #: src/Modules/EmbedPress.php:127
 #: src/Modules/LocationWeather.php:110
 msgid "Show sale notices only in the Upgrades panel"
 msgstr ""
 
-#: src/Modules/Duplicator.php:304
+#: src/Modules/Duplicator.php:329
 msgid "Remove the recommended-plugin cross-sell from its dashboard widget"
 msgstr ""
 
-#: src/Modules/Duplicator.php:313
+#: src/Modules/Duplicator.php:338
 msgid "Hide the license pitch on its settings screen"
 msgstr ""
 
-#: src/Modules/Duplicator.php:340
+#: src/Modules/Duplicator.php:365
 #: src/Modules/Wordfence.php:158
 msgid "Overlay the Help and Upgrades buttons onto the page title"
 msgstr ""
@@ -253,7 +253,15 @@ msgstr ""
 msgid "Remove marketing notices and announcements"
 msgstr ""
 
-#: src/Modules/InstagramFeed.php:155
+#: src/Modules/InstagramFeed.php:129
+msgid "Fix the squeezed select fields on its screens"
+msgstr ""
+
+#: src/Modules/InstagramFeed.php:137
+msgid "Hide Pro-only feed types from the feed builder"
+msgstr ""
+
+#: src/Modules/InstagramFeed.php:190
 msgid "Skip the recommended-plugin installs in its setup wizard"
 msgstr ""
 
