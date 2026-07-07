@@ -145,6 +145,9 @@ final class ReviewsFeed extends AbstractModule
                  * the color the core dashicons use.
                  */
                 'adminCss' => <<<'CSS'
+                #toplevel_page_sbr:hover .wp-menu-image::before,
+                #toplevel_page_sbr.current .wp-menu-image::before,
+                #toplevel_page_sbr.wp-has-current-submenu .wp-menu-image::before { background-color: #fff; }
                 #toplevel_page_sbr .wp-menu-image::before {
                     content: "" !important;
                     display: block;
