@@ -123,6 +123,9 @@ final class OptinMonster extends AbstractModule
                 /* OptinMonster: the "?" help icon in its header bar (the Help panel
                    carries its documentation and support links) */
                 body[class*="page_optin-monster"] .omapi-plugin-header .omapi-plugin-banner__icon { display: none !important; }
+                /* OptinMonster: its sidebar notification counter jiggles every few
+                   seconds to draw the eye — stop the animation (the badge stays) */
+                #adminmenu .om-notifications-count { animation: none !important; }
                 /* OptinMonster: the Settings page's "Upgrade to OptinMonster Pro and
                    unlock even more conversion features!" card and the "To unlock more
                    features consider upgrading to PRO" action box */
@@ -152,6 +155,13 @@ final class OptinMonster extends AbstractModule
                    centre at every width; no responsive override needed */
                 body[class*="page_optin-monster"] #tidy-admin-meta-region { position: absolute; top: -74px; left: 20px; right: 0; z-index: 100; }
                 body[class*="page_optin-monster"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* Below 600px WordPress makes the admin bar overlap the top of the
+                   content instead of reserving space for it, so the full-bleed header
+                   (and the buttons overlaid on it) would hide behind the bar. Restore
+                   46px of top padding to clear it — the logo and buttons drop below */
+                @media (max-width: 600px) {
+                    body[class*="page_optin-monster"] .omapi-plugin-header { padding-top: 46px !important; }
+                }
                 CSS,
             ],
         ];
