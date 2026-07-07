@@ -200,8 +200,11 @@ final class WpConsent extends AbstractModule
                 /* Full-bleed admin app: overlay the whole screen-meta region on the
                    plugin's own header instead of letting it push the page down
                    (closed: buttons over the header's top-right; open: the panel covers
-                   the content, with the buttons on its bottom edge) */
-                body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
+                   the content, with the buttons on its bottom edge). A 20px left inset
+                   keeps the open panel off the admin menu — its tab column would
+                   otherwise sit flush against it; the right-aligned closed buttons are
+                   unaffected */
+                body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 9990; }
                 body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                 /* Below 783px the 46px admin bar overlaps the top of #wpbody */
                 @media (max-width: 782px) {
