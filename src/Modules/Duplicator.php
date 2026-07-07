@@ -292,6 +292,9 @@ final class Duplicator extends AbstractModule
                 label.disabled[for="dup-component-shortcut-action-media"],
                 label.disabled[for="dup-component-shortcut-action-custom"],
                 #dup-upgrade-license-info { display: none !important; }
+                /* The Database Only overview reserved 40px of top padding to clear
+                   those teaser labels; with them gone, none is needed */
+                .db-only-message { padding-top: 0 !important; }
                 /* Duplicator, step 1 Archive box: the third nested tab, "File Backup
                    Encryption", only pitches AES-256 as a Pro upgrade */
                 #dup-pack-archive-panel div[data-dup-tabs] > ul > li:nth-child(3) { display: none !important; }
