@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-07T12:19:51+09:00\n"
+"POT-Creation-Date: 2026-07-07T13:11:00+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -29,20 +29,17 @@ msgstr ""
 msgid "WPPack"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:45
-#: src/Modules/Bnfw.php:39
-#: src/Modules/Cfdb7.php:39
-#: src/Modules/Duplicator.php:44
-#: src/Modules/EmbedPress.php:47
-#: src/Modules/InstagramFeed.php:39
-#: src/Modules/LocationWeather.php:52
-#: src/Modules/Mc4wp.php:44
-#: src/Modules/PublishPressFuture.php:39
-#: src/Modules/WpMailSmtp.php:44
-#: src/Modules/Yoast.php:45
-msgid "Move upgrade menus to the Upgrades panel"
+#: src/Modules/AdvancedCustomFields.php:44
+msgid "Move the header upgrade button to the Upgrades panel"
 msgstr ""
 
+#: src/Modules/AdvancedCustomFields.php:56
+#: src/Modules/AllInOneWpMigration.php:77
+#: src/Modules/Duplicator.php:76
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: src/Modules/AdvancedCustomFields.php:61
 #: src/Modules/AllInOneSeo.php:55
 #: src/Modules/AllInOneWpMigration.php:52
 #: src/Modules/Bnfw.php:47
@@ -54,6 +51,26 @@ msgstr ""
 msgid "Move Premium feature pages to the Upgrades panel"
 msgstr ""
 
+#: src/Modules/AdvancedCustomFields.php:80
+msgid "Hide Pro-only field types from the field pickers"
+msgstr ""
+
+#: src/Modules/AdvancedCustomFields.php:103
+#: src/Modules/AllInOneSeo.php:140
+#: src/Modules/Duplicator.php:264
+#: src/Modules/EmbedPress.php:160
+#: src/Modules/InstagramFeed.php:164
+#: src/Modules/LocationWeather.php:164
+#: src/Modules/WpMailSmtp.php:264
+#: src/Modules/Yoast.php:221
+msgid "Hide upsell promotions on its screens"
+msgstr ""
+
+#: src/Modules/AdvancedCustomFields.php:114
+msgid "Remove the WP Engine promotions"
+msgstr ""
+
+#: src/Modules/AdvancedCustomFields.php:124
 #: src/Modules/AllInOneSeo.php:77
 #: src/Modules/AllInOneWpMigration.php:84
 #: src/Modules/Bnfw.php:56
@@ -70,18 +87,22 @@ msgstr ""
 msgid "Move documentation and support links to the Help panel"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:121
-msgid "Keep the post-list title column readable beside its SEO column"
+#: src/Modules/AllInOneSeo.php:45
+#: src/Modules/Bnfw.php:39
+#: src/Modules/Cfdb7.php:39
+#: src/Modules/Duplicator.php:44
+#: src/Modules/EmbedPress.php:47
+#: src/Modules/InstagramFeed.php:39
+#: src/Modules/LocationWeather.php:52
+#: src/Modules/Mc4wp.php:44
+#: src/Modules/PublishPressFuture.php:39
+#: src/Modules/WpMailSmtp.php:44
+#: src/Modules/Yoast.php:45
+msgid "Move upgrade menus to the Upgrades panel"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:140
-#: src/Modules/Duplicator.php:264
-#: src/Modules/EmbedPress.php:160
-#: src/Modules/InstagramFeed.php:164
-#: src/Modules/LocationWeather.php:164
-#: src/Modules/WpMailSmtp.php:264
-#: src/Modules/Yoast.php:221
-msgid "Hide upsell promotions on its screens"
+#: src/Modules/AllInOneSeo.php:121
+msgid "Keep the post-list title column readable beside its SEO column"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:165
@@ -173,7 +194,7 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:504
 #: src/Modules/BrokenLinkChecker.php:64
 #: src/Modules/EmbedPress.php:185
-#: src/Modules/InstagramFeed.php:253
+#: src/Modules/InstagramFeed.php:286
 #: src/Modules/LocationWeather.php:217
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/WpMailSmtp.php:283
@@ -190,11 +211,6 @@ msgstr ""
 #: src/Modules/LocationWeather.php:44
 #: src/Modules/Wordfence.php:150
 msgid "Make its admin menu icon white like the core icons"
-msgstr ""
-
-#: src/Modules/AllInOneWpMigration.php:77
-#: src/Modules/Duplicator.php:76
-msgid "Upgrade to Pro"
 msgstr ""
 
 #: src/Modules/AllInOneWpMigration.php:109

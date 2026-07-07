@@ -75,6 +75,7 @@ supported, with the major versions the cleanups were verified against:
 
 | Plugin | Verified major |
 |---|---|
+| [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) | 6.x |
 | [All in One SEO](https://wordpress.org/plugins/all-in-one-seo-pack/) | 4.x |
 | [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) | 7.x |
 | [BNFW](https://wordpress.org/plugins/bnfw/) | 1.x |

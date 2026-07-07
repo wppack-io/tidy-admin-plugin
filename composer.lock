@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26bf3eaa767ba94d2340d2662491e6e2",
+    "content-hash": "575b94dfdcfd02a47632eefb0e35ce37",
     "packages": [
         {
             "name": "composer/installers",
@@ -6340,6 +6340,37 @@
                 "source": "https://github.com/wp-phpunit/wp-phpunit"
             },
             "time": "2026-05-21T02:56:35+00:00"
+        },
+        {
+            "name": "wp-plugin/advanced-custom-fields",
+            "version": "6.8.5",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/advanced-custom-fields/",
+                "reference": "tags/6.8.5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/advanced-custom-fields.6.8.5.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "WP Engine"
+                }
+            ],
+            "description": "ACF helps customize WordPress with powerful, professional and intuitive fields. Proudly powering over 2 million sites, WordPress developers love ACF.",
+            "homepage": "https://www.advancedcustomfields.com",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/advanced-custom-fields/#developers",
+                "issues": "https://wordpress.org/support/plugin/advanced-custom-fields",
+                "source": "https://plugins.svn.wordpress.org/advanced-custom-fields"
+            },
+            "time": "2026-06-30T15:56:14+00:00"
         },
         {
             "name": "wp-plugin/all-in-one-seo-pack",

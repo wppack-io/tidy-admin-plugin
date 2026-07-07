@@ -78,6 +78,18 @@ msgstr "セール通知はアップグレードパネル内のみに表示"
 msgid "Move the setup notice to the plugin screens and dashboard widget"
 msgstr "セットアップ通知をプラグイン画面とダッシュボードウィジェットへ移設"
 
+#: src/Modules/AdvancedCustomFields.php
+msgid "Move the header upgrade button to the Upgrades panel"
+msgstr "ヘッダーのアップグレードボタンをアップグレードパネルへ移設"
+
+#: src/Modules/AdvancedCustomFields.php
+msgid "Hide Pro-only field types from the field pickers"
+msgstr "フィールド選択から Pro 専用フィールドタイプを非表示"
+
+#: src/Modules/AdvancedCustomFields.php
+msgid "Remove the WP Engine promotions"
+msgstr "WP Engine の宣伝を除去"
+
 #: src/Modules/AllInOneSeo.php
 msgid "Keep the post-list title column readable beside its SEO column"
 msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に保つ"
