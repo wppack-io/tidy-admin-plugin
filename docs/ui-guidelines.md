@@ -62,6 +62,12 @@ this plugin must never have.
 - Relocated prose may be kept verbatim (e.g. a developer note from a hidden
   footer); pure link labels use plain, standard words — "Documentation",
   "Support" — not vendor branding like "Knowledge Base".
+- **Promotional links and offers ride along into the Upgrades panel, wording
+  included.** When hidden vendor UI carries real buying information — a
+  standing discount ("As a valued Lite user you receive 50% off, automatically
+  applied at checkout!"), a promotional purchase link — reproduce the sentence
+  and link verbatim (the vendor's own text domain) in the panel's Upgrade tab,
+  like Duplicator's License pitch. It helps at purchase time; don't discard it.
 - External links open in a new tab with `rel="noopener noreferrer"`.
 
 ## Layout invariants
