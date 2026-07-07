@@ -62,6 +62,12 @@ final class WpConsent extends AbstractModule
                     ],
                 ],
             ],
+            'plugin-list-links' => [
+                'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
+                'upsellLinkUrls' => [
+                    'wpconsent.com/lite', // "Get WPConsent Pro" action link in its plugins.php row
+                ],
+            ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
                 /*
@@ -73,7 +79,10 @@ final class WpConsent extends AbstractModule
                         'category' => 'help',
                         'parent' => 'wpconsent',
                         'html' => '<p><a href="https://wpconsent.com/docs/" target="_blank" rel="noopener noreferrer">'
-                            . esc_html__('Documentation') . '</a></p>',
+                            . esc_html__('Documentation') . '</a></p>'
+                            // The "What's New" dashboard widget's blog link (hidden below)
+                            . '<p><a href="https://wpconsent.com/blog/" target="_blank" rel="noopener noreferrer">'
+                            . esc_html__('Visit our blog', 'wpconsent-cookies-banner-privacy-suite') . '</a></p>',
                     ],
                 ],
                 'adminCss' => <<<'CSS'
@@ -83,6 +92,9 @@ final class WpConsent extends AbstractModule
                 /* WPConsent: "Help & Documentation" dashboard widget (a docs-article
                    list) — the documentation link lives in the Help panel */
                 body[class*="page_wpconsent"] .wpconsent-docs-widget { display: none !important; }
+                /* WPConsent: "What's New" dashboard widget (a wpconsent.com blog feed) —
+                   the blog link lives in the Help panel */
+                body[class*="page_wpconsent"] .wpconsent-blog-feed-widget { display: none !important; }
                 /* WPConsent: "Made with ♥ by the WPConsent team" page footer (branding,
                    Docs, Support and Facebook links) — the docs link is in the Help
                    panel and the WordPress.org support forum is added automatically */
@@ -167,6 +179,35 @@ final class WpConsent extends AbstractModule
                 body[class*="page_wpconsent-scanner"] .wpconsent-admin-tabs li:has(> a[href*="view=inspector"]),
                 body[class*="page_wpconsent-scanner"] .wpconsent-admin-tabs li:has(> a[href*="view=history"]),
                 body[class*="page_wpconsent-scanner"] .wpconsent-admin-tabs li:has(> a[href*="view=settings"]) { display: none !important; }
+                /* WPConsent: the "Modal Banner" layout option on the Banner Design page
+                   is PRO-only (its label carries the pro class); hide the card and its
+                   hidden radio input, leaving the Long and Floating layouts */
+                body[class*="page_wpconsent"] .wpconsent-image-radio-label-pro,
+                body[class*="page_wpconsent"] input:has(+ .wpconsent-image-radio-label-pro) { display: none !important; }
+                /* WPConsent: the "License" metabox on the cookies Settings tab — Lite
+                   needs no license ("You're using WPConsent Lite - no license needed") */
+                body[class*="page_wpconsent"] .wpconsent-metabox:has(.wpconsent-license-key-container) { display: none !important; }
+                /* WPConsent: PRO-gated settings rows (a PRO pill, no usable control in
+                   Lite) — e.g. "Consent Logs" on the cookies Settings tab */
+                body[class*="page_wpconsent"] .wpconsent-form-row-pro { display: none !important; }
+                CSS,
+            ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Full-bleed admin app: overlay the whole screen-meta region on the
+                   plugin's own header instead of letting it push the page down
+                   (closed: buttons over the header's top-right; open: the panel covers
+                   the content, with the buttons on its bottom edge) */
+                body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
+                body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* Below 783px the 46px admin bar overlaps the top of #wpbody */
+                @media (max-width: 782px) {
+                    body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region { top: 46px; }
+                }
+                /* The onboarding wizard is its own full-screen flow with a "Back to the
+                   Dashboard" link — no Help/Upgrades buttons there */
+                body[class*="page_wpconsent-onboarding"] #tidy-admin-meta-region { display: none !important; }
                 CSS,
             ],
         ];
