@@ -29,7 +29,9 @@ final class FeedsForYoutube extends AbstractModule
 
     public function menuParent(): string
     {
-        return 'youtube-feed-setup';
+        // SBY_MENU_SLUG — the sidebar's top link shows youtube-feed-setup only
+        // because the Setup submenu sorts first
+        return 'sby-feed-builder';
     }
 
     public function features(): array
@@ -125,6 +127,28 @@ final class FeedsForYoutube extends AbstractModule
             ],
             'marketing-notices' => [
                 'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
+                /*
+                 * "You're using YouTube Feeds Lite. To unlock more features
+                 * consider upgrading to Pro" — the bar over its own screens
+                 * (the only callback this class puts on the hook; the license
+                 * service's renewal notices on the same hook stay). Its
+                 * sentence rides into the Upgrades panel in the plugin's own
+                 * words.
+                 */
+                'noticeDenyByHook' => [
+                    'sby_admin_header_notices' => [
+                        'SmashBalloon\\YouTubeFeed\\Admin\\SBY_Admin_Notice',
+                    ],
+                ],
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'upgrade',
+                        'parent' => $this->menuParent(),
+                        'html' => '<p>' . esc_html__("You're using YouTube Feeds Lite. To unlock more features consider", 'feeds-for-youtube') . ' '
+                            . '<a href="https://smashballoon.com/youtube-feed/youtube-lite-upgrade/" target="_blank" rel="noopener noreferrer"><strong>'
+                            . esc_html__('upgrading to Pro', 'feeds-for-youtube') . '</strong></a></p>',
+                    ],
+                ],
                 'register' => static function (): void {
                     // Remotely served announcements (plugin.smashballoon.com feed)
                     add_filter('sby_admin_notifications_has_access', '__return_false');
@@ -139,6 +163,9 @@ final class FeedsForYoutube extends AbstractModule
                 /* YouTube Feeds: "License key" row on the settings General tab (Lite
                    needs no license — only a Pro pitch plus an upgrade button) */
                 .sb-license-box { display: none !important; }
+                /* YouTube Feeds: "Help" button in its screen header — it leads to the
+                   Support page relocated into the Help panel */
+                .sbc-yt-hd-btn[href*="youtube-feed-support"] { display: none !important; }
                 CSS,
             ],
             'panel-placement' => [
