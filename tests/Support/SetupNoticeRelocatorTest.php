@@ -43,6 +43,23 @@ final class SetupNoticeRelocatorTest extends TestCase
         $this->assertSame('', ob_get_clean());
     }
 
+    /** WP also accepts static-method callbacks as plain "Class::method" strings (e.g. Wordfence). */
+    public function test_removes_setup_notice_registered_as_a_string_callback(): void
+    {
+        add_action('admin_notices', StaticSetupNotice::class . '::render');
+        (new SetupNoticeRelocator([[
+            'file' => 'post-types-order/post-types-order.php',
+            'pagePrefixes' => ['fake-plugin'],
+            'noticesByHook' => ['admin_notices' => [StaticSetupNotice::class . '::render']],
+        ]]))->register();
+
+        $_GET['page'] = 'somewhere-else';
+        ob_start();
+        do_action('admin_notices');
+
+        $this->assertSame('', ob_get_clean());
+    }
+
     public function test_keeps_setup_notice_on_own_screens(): void
     {
         add_action('admin_notices', [new SetupNotice(), 'render']);
@@ -159,6 +176,14 @@ final class SetupNotice
         }
         echo '<div class="notice notice-warning is-dismissible"><p>Please finish the setup.</p>'
             . '<form method="post"><button type="submit" class="notice-dismiss"><span class="screen-reader-text">Dismiss</span></button></form></div>';
+    }
+}
+
+final class StaticSetupNotice
+{
+    public static function render(): void
+    {
+        echo '<div class="notice notice-warning"><p>Please finish the setup.</p></div>';
     }
 }
 

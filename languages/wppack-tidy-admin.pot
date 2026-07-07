@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-07T09:35:19+09:00\n"
+"POT-Creation-Date: 2026-07-07T09:50:49+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -60,6 +60,7 @@ msgstr ""
 #: src/Modules/LocationWeather.php:69
 #: src/Modules/Mc4wp.php:52
 #: src/Modules/PublishPressFuture.php:100
+#: src/Modules/Wordfence.php:75
 #: src/Modules/WpMailSmtp.php:68
 #: src/Modules/Yarpp.php:49
 #: src/Modules/Yoast.php:65
@@ -181,6 +182,7 @@ msgstr ""
 #: src/Modules/AllInOneWpMigration.php:44
 #: src/Modules/EmbedPress.php:39
 #: src/Modules/LocationWeather.php:44
+#: src/Modules/Wordfence.php:148
 msgid "Make its admin menu icon white like the core icons"
 msgstr ""
 
@@ -236,6 +238,7 @@ msgstr ""
 #: src/Modules/LocationWeather.php:120
 #: src/Modules/Mc4wp.php:128
 #: src/Modules/PostTypesOrder.php:50
+#: src/Modules/Wordfence.php:116
 #: src/Modules/WpMailSmtp.php:104
 #: src/Modules/Yoast.php:109
 msgid "Move the setup notice to the plugin screens and dashboard widget"
@@ -282,6 +285,18 @@ msgstr ""
 
 #: src/Modules/PublishPressFuture.php:161
 msgid "Keep the post-list expiration column readable"
+msgstr ""
+
+#: src/Modules/Wordfence.php:44
+msgid "Move the upgrade menu to the Upgrades panel"
+msgstr ""
+
+#: src/Modules/Wordfence.php:103
+msgid "Hide upsell cards and ads on its screens"
+msgstr ""
+
+#: src/Modules/Wordfence.php:156
+msgid "Overlay the Help and Upgrades buttons onto the page title"
 msgstr ""
 
 #: src/Modules/WordPressCore.php:44

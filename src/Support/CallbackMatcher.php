@@ -22,10 +22,12 @@ final class CallbackMatcher
     public static function matches(mixed $fn, string $needle): bool
     {
         [$class, $method] = match (true) {
-            is_array($fn) && is_object($fn[0]) => [get_class($fn[0]), (string) $fn[1]],
-            is_array($fn)                      => [(string) $fn[0], (string) $fn[1]],
-            is_string($fn)                     => ['', $fn],
-            default                            => ['', ''], // Closures etc. are out of scope
+            is_array($fn) && is_object($fn[0])          => [get_class($fn[0]), (string) $fn[1]],
+            is_array($fn)                               => [(string) $fn[0], (string) $fn[1]],
+            // WP accepts static methods as "Class::method" strings too
+            is_string($fn) && str_contains($fn, '::')   => explode('::', $fn, 2),
+            is_string($fn)                              => ['', $fn],
+            default                                     => ['', ''], // Closures etc. are out of scope
         };
 
         return str_contains($needle, '::')
