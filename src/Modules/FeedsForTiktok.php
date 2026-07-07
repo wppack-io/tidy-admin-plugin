@@ -37,16 +37,28 @@ final class FeedsForTiktok extends AbstractModule
         return [
             'upgrade-menus' => [
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
-                // Lite ships no upgrade menu item; the panel still carries the
-                // purchase link its in-page upsells point at
+                /*
+                 * Lite ships no upgrade menu item; the panel carries the purchase
+                 * link its in-page upsells point at, with the discount offer from
+                 * the settings-page bottom banner riding along verbatim (the
+                 * banner itself is hidden below).
+                 */
                 'extraScreenMetaContent' => [
                     [
                         'category' => 'upgrade',
                         'parent' => $this->menuParent(),
-                        'html' => '<p><a href="https://smashballoon.com/tiktok-feeds/tiktok-lite-upgrade/" target="_blank" rel="noopener noreferrer">'
+                        'html' => '<p><strong>Get more features with TikTok Feeds Pro</strong><br>'
+                            . 'Lite Plugin Users get 50% OFF (auto-applied at checkout)<br>'
+                            . '<a href="https://smashballoon.com/tiktok-feeds/tiktok-lite-upgrade/" target="_blank" rel="noopener noreferrer">'
                             . esc_html__('Upgrade to Pro', 'wppack-tidy-admin') . '</a></p>',
                     ],
                 ],
+                // "Get more features with TikTok Feeds Pro / Lite Plugin Users get
+                // 50% OFF" banner at the bottom of its settings page — reproduced
+                // in the Upgrades panel above
+                'adminCss' => <<<'CSS'
+                body[class*="page_sbtt"] .sb-bottom-banner-ctn { display: none !important; }
+                CSS,
             ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),

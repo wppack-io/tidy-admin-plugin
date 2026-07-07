@@ -42,6 +42,22 @@ final class ReviewsFeed extends AbstractModule
                         'reviews-lite-upgrade', // Upgrade to Pro (redirects to smashballoon.com)
                     ],
                 ],
+                // The discount offer from the settings-page bottom banner rides
+                // along verbatim (the banner itself is hidden below)
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'upgrade',
+                        'parent' => $this->menuParent(),
+                        'html' => '<p><strong>Get more features with Reviews Feed Pro</strong><br>'
+                            . 'Lite Plugin Users get 50% OFF (auto-applied at checkout)</p>',
+                    ],
+                ],
+                // "Get more features with Reviews Feed Pro / Lite Plugin Users get
+                // 50% OFF" banner at the bottom of its settings page — reproduced
+                // in the Upgrades panel above
+                'adminCss' => <<<'CSS'
+                body[class*="page_sbr"] .sb-bottom-banner-ctn { display: none !important; }
+                CSS,
             ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
