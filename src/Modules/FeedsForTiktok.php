@@ -71,10 +71,44 @@ final class FeedsForTiktok extends AbstractModule
             ],
             'marketing-notices' => [
                 'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
+                /*
+                 * "You're using TikTok Feeds Lite. To unlock more features
+                 * consider upgrading to Pro" — the blue bar its admin app
+                 * renders over every screen, built client-side with no PHP
+                 * filter; hidden, with its sentence riding into the Upgrades
+                 * panel in the plugin's own words.
+                 */
+                'adminCss' => <<<'CSS'
+                body[class*="page_sbtt"] .sb-noticebar-ctn { display: none !important; }
+                CSS,
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'upgrade',
+                        'parent' => 'sbtt',
+                        'html' => '<p>' . esc_html__("You're using TikTok Feeds Lite. To unlock more features consider", 'feeds-for-tiktok') . ' '
+                            . '<a href="https://smashballoon.com/tiktok-feeds/tiktok-lite-upgrade/" target="_blank" rel="noopener noreferrer"><strong>'
+                            . esc_html__('upgrading to Pro', 'feeds-for-tiktok') . '</strong></a></p>',
+                    ],
+                ],
                 'register' => static function (): void {
                     // Remotely served announcements (plugin.smashballoon.com feed)
                     add_filter('sbtt_admin_notifications_has_access', '__return_false');
                 },
+            ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Full-bleed admin app: overlay the whole screen-meta region instead of
+                   letting it push the page down (closed: buttons over the header; open:
+                   the panel covers the content, with the buttons on its bottom edge) */
+                body[class*="page_sbtt"] #tidy-admin-meta-region { position: absolute; top: 0; left: 0; right: 0; z-index: 9990; }
+                body[class*="page_sbtt"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* Below 783px the 46px admin bar overlaps the top of #wpbody — keep
+                   the overlaid buttons clear of it */
+                @media (max-width: 782px) {
+                    body[class*="page_sbtt"] #tidy-admin-meta-region { top: 46px; }
+                }
+                CSS,
             ],
         ];
     }
