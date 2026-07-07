@@ -62,6 +62,12 @@ final class FeedsForYoutube extends AbstractModule
                     ],
                 ],
             ],
+            'plugin-list-links' => [
+                'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
+                'upsellLinkUrls' => [
+                    'youtube-feed/demo', // "Try the Pro version demo" link in its plugins.php row
+                ],
+            ],
             'marketing-notices' => [
                 'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
                 'register' => static function (): void {

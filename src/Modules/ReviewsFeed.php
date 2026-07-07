@@ -79,6 +79,12 @@ final class ReviewsFeed extends AbstractModule
                     ],
                 ],
             ],
+            'plugin-list-links' => [
+                'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
+                'upsellLinkUrls' => [
+                    'reviews-lite-upgrade', // "Upgrade to Pro" link in its plugins.php row
+                ],
+            ],
             'marketing-notices' => [
                 'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
                 'register' => static function (): void {
