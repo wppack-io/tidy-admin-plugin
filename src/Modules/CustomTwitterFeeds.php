@@ -77,6 +77,10 @@ final class CustomTwitterFeeds extends AbstractModule
                 /* Twitter Feeds: "Update Feeds more often with Twitter Feed Pro" CTA on
                    the settings Feeds tab — its sentence rides into the Upgrades panel */
                 .ctf-caching-pro-cta { display: none !important; }
+                /* Twitter Feeds: "Help" button in its screen header — it leads to the
+                   Support page relocated into the Help panel, and it sat glued right
+                   under the overlaid panel buttons */
+                .ctf-fb-hd-btn[href*="ctf-support"] { display: none !important; }
                 CSS,
                 'extraScreenMetaContent' => [
                     [
