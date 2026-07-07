@@ -104,8 +104,16 @@ final class OptinMonster extends AbstractModule
                    in the Help panel now) */
                 body[class*="page_optin-monster"] .omapi-dash__resources { display: none !important; }
                 /* Restore the two-column width the remaining dashboard cards lose once
-                   the Helpful Resources card is out of their flex-wrap row */
-                body[class*="page_optin-monster"] .omapi-screen .omapi-dash__cards-wrapper { width: calc(50% - 8px) !important; }
+                   the Helpful Resources card is out of their flex-wrap row. NB: the
+                   plugin's .omapi-screen class sits on <body> itself, so it must not go
+                   between the body scope and the target (that would demand a descendant
+                   omapi-screen, which doesn't exist) */
+                body[class*="page_optin-monster"] .omapi-dash__cards-wrapper { width: calc(50% - 8px) !important; }
+                /* The plugin styles #wpbody-content p/a at 16px, which bleeds into our
+                   Help/Upgrades panels (e.g. the WordPress.org links, "Upgrade to Pro")
+                   — reset the panel text to the native screen-meta 13px */
+                body[class*="page_optin-monster"] #tidy-admin-plugin-help-wrap *,
+                body[class*="page_optin-monster"] #tidy-admin-upgrades-wrap * { font-size: 13px !important; line-height: 1.6 !important; }
                 /* OptinMonster: the "?" help icon in its header bar (the Help panel
                    carries its documentation and support links) */
                 body[class*="page_optin-monster"] .omapi-plugin-header .omapi-plugin-banner__icon { display: none !important; }
