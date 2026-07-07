@@ -136,7 +136,7 @@ final class OptinMonster extends AbstractModule
                    desktop, 46px on mobile — the header shifts with it but keeps its
                    height), so the same -53px lifts the buttons to the header's vertical
                    centre at every width; no responsive override needed */
-                body[class*="page_optin-monster"] #tidy-admin-meta-region { position: absolute; top: -53px; left: 20px; right: 0; z-index: 100; }
+                body[class*="page_optin-monster"] #tidy-admin-meta-region { position: absolute; top: -74px; left: 20px; right: 0; z-index: 100; }
                 body[class*="page_optin-monster"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                 CSS,
             ],
