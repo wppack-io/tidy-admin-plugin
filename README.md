@@ -88,6 +88,7 @@ supported, with the major versions the cleanups were verified against:
 | [TikTok Feeds (Smash Balloon)](https://wordpress.org/plugins/feeds-for-tiktok/) | 1.x |
 | [Twitter Feeds (Smash Balloon)](https://wordpress.org/plugins/custom-twitter-feeds/) | 2.x |
 | [YouTube Feeds (Smash Balloon)](https://wordpress.org/plugins/feeds-for-youtube/) | 2.x |
+| [WPChat (Smash Balloon)](https://wordpress.org/plugins/smashballoon-wpchat-livechat-customer-support/) | 1.x |
 | [Location Weather](https://wordpress.org/plugins/location-weather/) | 3.x |
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 4.x |
 | [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 2.x |
