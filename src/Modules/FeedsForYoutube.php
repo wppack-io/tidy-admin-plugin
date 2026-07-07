@@ -95,19 +95,19 @@ final class FeedsForYoutube extends AbstractModule
                  * short-circuited server-side as a backstop).
                  */
                 'adminCss' => <<<'CSS'
-                /* Cross-sell install rows: the Configure step's carry an install
-                   tooltip; the "You might also be interested in" step's carry a
-                   plugin-logo image in their icon (WPForms/MonsterInsights/
-                   OptinMonster). The plugin's own functional rows use SVG icons and
-                   no tooltip, so they stay */
+                /* A whole step that is nothing but cross-sell plugin installs (its
+                   rows carry a plugin-logo image and there is no functional row with
+                   an SVG icon) — the "You might also be interested in" step and the
+                   GDPR-plugin pitch: hide the entire content block, heading and all.
+                   The Configure step keeps its functional (SVG-icon) rows, so it has
+                   an SVG-icon row and is never matched here */
+                body[class*="page_youtube-feed"] .sby-obw-steps-wrap:has(.sby-obw-radio-icon img):not(:has(.sby-obw-radio-icon svg)) { display: none !important; }
+                /* On the Configure step (functional rows kept), remove only its own
+                   cross-sell install rows (an install tooltip) and the "Pro Features"
+                   teaser list */
                 body[class*="page_youtube-feed"] .sby-obw-radio-component:has(.sby-obw-plugin-info-wrap),
-                body[class*="page_youtube-feed"] .sby-obw-radio-component:has(.sby-obw-radio-icon img) { display: none !important; }
-                /* "Pro Features" heading and the teaser toggles under it */
                 body[class*="page_youtube-feed"] h2.sby-obw-sub-heading,
                 body[class*="page_youtube-feed"] h2.sby-obw-sub-heading ~ .sby-obw-radio-component { display: none !important; }
-                /* GDPR step: the WPConsent install pitch and its explainer */
-                body[class*="page_youtube-feed"] .sby-obw-radio-component-wp-consent,
-                body[class*="page_youtube-feed"] .sb-onboarding-wizard-gdpr-info { display: none !important; }
                 /* The "Upgrade to Unlock playlists, livestreams ..." Pro banner */
                 body[class*="page_youtube-feed"] .sby-obw-up-sell-banner { display: none !important; }
                 CSS,
@@ -143,17 +143,13 @@ final class FeedsForYoutube extends AbstractModule
                             . '.sby-obw-radio-component:has(.sby-obw-radio-icon img) input[type=checkbox]:checked,'
                             . '.sby-obw-radio-component-wp-consent input[type=checkbox]:checked"'
                             . ').forEach(function(cb){pending=true;cb.click();});'
-                            // A step whose rows are ALL hidden cross-sells has nothing
-                            // left to show (just its heading) — hide the whole wizard
-                            // body while it is passed through, and restore it on any
-                            // real step. A visible functional row (Configure features)
-                            // or no rows at all (the success screen) keeps it shown, so
-                            // the success screen is never blanked.
-                            . 'var rows=document.querySelectorAll(".sby-obw-radio-component");'
-                            . 'var inner=document.querySelector(".sby-obw-full-inner");'
-                            . 'var crossSellOnly=rows.length>0&&![].some.call(rows,function(r){return r.offsetParent!==null;});'
-                            . 'if(!crossSellOnly){if(inner){inner.style.visibility="visible";}return;}'
-                            . 'if(inner){inner.style.visibility="hidden";}'
+                            // The CSS above hides the whole content block of a
+                            // cross-sell-only step; when it is hidden there is nothing
+                            // left to see, so pass straight through to the next step. A
+                            // real step (Configure features, the success screen) keeps
+                            // its block visible and is left alone.
+                            . 'var wrap=document.querySelector(".sby-obw-steps-wrap");'
+                            . 'if(!wrap||wrap.offsetParent!==null){return;}'
                             . 'if(pending){return;}'
                             . 'var step=new URLSearchParams(location.search).get("step");'
                             . 'var btn=document.querySelector("button.sby-obw-btn-primary");'
