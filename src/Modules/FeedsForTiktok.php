@@ -95,6 +95,34 @@ final class FeedsForTiktok extends AbstractModule
                     add_filter('sbtt_admin_notifications_has_access', '__return_false');
                 },
             ],
+            'upsell-ui' => [
+                'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* TikTok Feeds: "License Key" section on the settings General tab — Lite
+                   needs no license; the section only pitches Pro with the 50%-off offer,
+                   which already rides in the Upgrades panel */
+                body[class*="page_sbtt"] .sb-settings-section-ctn:has(a[href*="tiktok-lite-upgrade"]) { display: none !important; }
+                /* TikTok Feeds: "Upgrade to Pro to check for TikToks more often" line
+                   under the caching setting (the setting itself stays) */
+                body[class*="page_sbtt"] .sb-feed-update-upsell { display: none !important; }
+                /* TikTok Feeds: "Install WPConsent for GDPR" banner — installs another
+                   plugin; the functional GDPR setting above it stays */
+                body[class*="page_sbtt"] .sb-wpconsent-banner { display: none !important; }
+                /* TikTok Feeds: the whole "Code Snippets" settings tab is a WPCode
+                   cross-sell ("Install WPCode to use Smash Balloon Snippet library"
+                   plus a one-click installer) — tab (4th, verified against 1.x) and pane */
+                body[class*="page_sbtt"] .sb-settings-tabs .sb-settings-tab:nth-child(4) { display: none !important; }
+                body[class*="page_sbtt"] .sb-wpcode-snippets { display: none !important; }
+                CSS,
+            ],
+            'button-labels' => [
+                'label' => __('Keep its buttons from wrapping mid-label', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* TikTok Feeds: the settings Export button renders two lines
+                   ("エクスポ/ート") — the shared button style lacks nowrap */
+                body[class*="page_sbtt"] .sb-btn { white-space: nowrap; }
+                CSS,
+            ],
             'panel-placement' => [
                 'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'

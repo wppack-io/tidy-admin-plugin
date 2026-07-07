@@ -126,6 +126,10 @@ msgstr "Cloud Link Checker のクロスセルを除去"
 msgid "Hide the stray empty heading on its pages"
 msgstr "ページ内の余分な空見出しを非表示"
 
+#: src/Modules/FeedsForTiktok.php
+msgid "Keep its buttons from wrapping mid-label"
+msgstr "ボタンラベルの途中改行を防止"
+
 #: src/Modules/Duplicator.php
 msgid "Stop the post-install welcome-page redirect"
 msgstr "インストール直後のウェルカムページへのリダイレクトを停止"
