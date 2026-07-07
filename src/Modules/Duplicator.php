@@ -332,6 +332,9 @@ final class Duplicator extends AbstractModule
                    its dashboard widget (rotating cross-sell; the backup status and
                    actions above it stay) */
                 .dup-section-recommended { display: none !important; }
+                /* Duplicator: the "Recovery Point" row is a Pro-only teaser (its link
+                   carries "recovery"); the Schedules/Storage/Template rows stay */
+                #duplicator_dashboard_widget li.dup-flex-content:has(a[href*="recovery"]) { display: none !important; }
                 CSS,
             ],
             'license-pitch' => [
