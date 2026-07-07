@@ -178,6 +178,10 @@ msgstr "ロックされた Pro 設定行を非表示"
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr "「無料版を使用中」バーを除去"
 
+#: src/Modules
+msgid "Make its admin menu icon white like the core icons"
+msgstr "管理メニューのアイコンをコアのアイコンと同じ白色に"
+
 #: src/Modules/Wordfence.php
 msgid "Move the upgrade menu to the Upgrades panel"
 msgstr "アップグレードメニューをアップグレードパネルへ移設"

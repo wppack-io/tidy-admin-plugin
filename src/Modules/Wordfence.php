@@ -144,6 +144,14 @@ final class Wordfence extends AbstractModule
                 tr[data-plugin*="wordfence"] a[href*="wordfence.com/zz12"] { display: none !important; }
                 CSS,
             ],
+            'menu-icon' => [
+                'label' => __('Make its admin menu icon white like the core icons', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Wordfence: the sidebar icon is a brand-colored SVG (data URI on the
+                   ::before); flatten it to white so it sits with the core icons */
+                #toplevel_page_Wordfence .wp-menu-image::before { filter: brightness(0) invert(1); }
+                CSS,
+            ],
             'panel-placement' => [
                 'label' => __('Overlay the Help and Upgrades buttons onto the page title', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
