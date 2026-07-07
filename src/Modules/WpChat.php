@@ -54,6 +54,24 @@ final class WpChat extends AbstractModule
                     ],
                 ],
             ],
+            'marketing-notices' => [
+                'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
+                /*
+                 * "You Are using WPChat Lite. Unlock more features when you
+                 * upgrade" — the green bar over its admin app. The app shows it
+                 * unless the stored proUpsellStatus flag marks it dismissed, and
+                 * its layout re-flows on the same flag, so the flag is forced at
+                 * option-read time (stored settings stay untouched; the upgrade
+                 * link already lives in the Upgrades panel).
+                 */
+                'register' => static function (): void {
+                    $dismiss = static fn($value) => is_array($value)
+                        ? array_merge($value, ['proUpsellStatus' => true])
+                        : $value;
+                    add_filter('option_wpchat_global_settings', $dismiss);
+                    add_filter('default_option_wpchat_global_settings', static fn() => ['proUpsellStatus' => true]);
+                },
+            ],
         ];
     }
 }
