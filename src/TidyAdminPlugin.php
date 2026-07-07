@@ -32,6 +32,7 @@ final class TidyAdminPlugin
 
     /** @var list<class-string<Module>> */
     private const MODULES = [
+        Modules\AdvancedCustomFields::class,
         Modules\AllInOneSeo::class,
         Modules\AllInOneWpMigration::class,
         Modules\Bnfw::class,
@@ -109,10 +110,12 @@ final class TidyAdminPlugin
                 continue;
             }
 
-            if ($module->menuParent() !== '') {
+            if ($module->menuParent() !== '' && $module->providesHelpPanel()) {
                 // Every plugin's Help panel carries the standard WordPress.org
                 // links (locale-aware plugin page, reviews, support forum) in
-                // its right sidebar, like core's "For more information:" column
+                // its right sidebar, like core's "For more information:" column.
+                // Modules whose plugin fills core's contextual Help itself opt
+                // out — the native panel stays the single Help button there.
                 $helpSidebars[] = [
                     'parent' => $module->menuParent(),
                     'html' => Support\WordPressOrgLinks::html(dirname($file)),

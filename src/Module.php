@@ -57,6 +57,14 @@ interface Module
     public function ownPagePrefixes(): array;
 
     /**
+     * Whether the module ships the Help panel (with the automatic
+     * WordPress.org links). Return false only when the plugin already
+     * populates core's contextual Help tabs itself (e.g. ACF) — the native
+     * panel then stays the single Help button on its screens.
+     */
+    public function providesHelpPanel(): bool;
+
+    /**
      * The module's cleanups, one entry per user-visible feature. Every
      * feature is individually toggleable on the Settings > Tidy Admin page,
      * so keys must stay stable and labels must say what the feature actually

@@ -26,6 +26,11 @@ abstract class AbstractModule implements Module
         return [];
     }
 
+    public function providesHelpPanel(): bool
+    {
+        return true;
+    }
+
     public function features(): array
     {
         return [];

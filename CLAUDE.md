@@ -132,7 +132,10 @@ default when the flag is unset. Everything else defaults to ON.
 3. **A Help panel is mandatory**: every module ships a `help-links` feature
    with the vendor's real documentation/support links (quick start, docs,
    troubleshooting — whatever the plugin actually offers), on top of the
-   automatic WordPress.org sidebar.
+   automatic WordPress.org sidebar. Exception: when the plugin already
+   fills core's contextual Help tabs itself (e.g. ACF), keep the native
+   panel as the single Help button — override `providesHelpPanel()` to
+   return false instead of adding a second one.
 4. Register the class in `TidyAdminPlugin::MODULES` (alphabetical order).
 5. Add it to the supported-plugins tables in `README.md` and `README.ja.md`.
 6. Run the full suite — catalog tests validate the target file exists and
