@@ -99,6 +99,8 @@ final class FeedsForYoutube extends AbstractModule
                 /* GDPR step: the WPConsent install pitch and its explainer */
                 body[class*="page_youtube-feed"] .sby-obw-radio-component-wp-consent,
                 body[class*="page_youtube-feed"] .sb-onboarding-wizard-gdpr-info { display: none !important; }
+                /* Step 4's "Upgrade to Unlock playlists, livestreams ..." Pro banner */
+                body[class*="page_youtube-feed"] .sby-obw-up-sell-banner { display: none !important; }
                 CSS,
                 'register' => static function (): void {
                     // The wizard's other-plugin installers: report success without
@@ -128,6 +130,13 @@ final class FeedsForYoutube extends AbstractModule
                             . 'var wrap=document.querySelector(".sby-obw-steps-wrap");'
                             . 'if(step!=="3"&&step!=="4"){if(wrap){wrap.style.visibility="";}return;}'
                             . 'if(wrap){wrap.style.visibility="hidden";}'
+                            // Uncheck the checked-by-default cross-sell install toggles
+                            // first, so the primary button submits nothing and the
+                            // success screen lists no plugins as "installed". React
+                            // onChange fires on the native click; wait a tick to settle.
+                            . 'var pending=false;'
+                            . 'document.querySelectorAll(".sby-obw-radio-component input[type=checkbox]:checked").forEach(function(cb){pending=true;cb.click();});'
+                            . 'if(pending){return;}'
                             . 'var btn=document.querySelector("button.sby-obw-btn-primary");'
                             . 'if(btn&&clickedFor!==step){clickedFor=step;btn.click();}'
                             . '},300);'
