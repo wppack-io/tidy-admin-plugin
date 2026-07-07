@@ -80,6 +80,13 @@ final class WpConsent extends AbstractModule
                 /* WPConsent: header "Help" button — its documentation lives in the
                    Help panel */
                 body[class*="page_wpconsent"] .wpconsent-show-help { display: none !important; }
+                /* WPConsent: "Help & Documentation" dashboard widget (a docs-article
+                   list) — the documentation link lives in the Help panel */
+                body[class*="page_wpconsent"] .wpconsent-docs-widget { display: none !important; }
+                /* WPConsent: "Made with ♥ by the WPConsent team" page footer (branding,
+                   Docs, Support and Facebook links) — the docs link is in the Help
+                   panel and the WordPress.org support forum is added automatically */
+                body[class*="page_wpconsent"] .wpconsent-footer { display: none !important; }
                 CSS,
             ],
             'marketing-notices' => [
@@ -145,6 +152,21 @@ final class WpConsent extends AbstractModule
                    upgrade link — Pro feature pitches (rows with real actions,
                    like enabling the banner, link within wp-admin and stay) */
                 body[class*="page_wpconsent"] .wpconsent-score-item:has(a[href*="wpconsent.com"]) { display: none !important; }
+                /* WPConsent: the globe language-picker button in the header — its Lite
+                   variant only opens a Pro upsell */
+                body[class*="page_wpconsent"] .wpconsent-language-picker-container { display: none !important; }
+                /* WPConsent: the Advanced tab's "Custom Scripts/iFrames is a PRO
+                   feature" and "Hide Banner Rules is a PRO feature" blocks — each is a
+                   blurred fake preview plus an upsell box; hide the whole wrapper */
+                body[class*="page_wpconsent"] div:has(> .wpconsent-upsell-box) { display: none !important; }
+                /* WPConsent: the "IAB TCF" cookies tab — a PRO-only feature */
+                body[class*="page_wpconsent-cookies"] .wpconsent-admin-tabs li:has(> a[href*="view=iabtcf"]) { display: none !important; }
+                /* WPConsent: the scanner's Inspector, History and Auto Scanning tabs —
+                   all PRO-only (the functional "Scanner" tab stays). Scoped to the
+                   scanner page so the cookies page's own "settings" tab is untouched */
+                body[class*="page_wpconsent-scanner"] .wpconsent-admin-tabs li:has(> a[href*="view=inspector"]),
+                body[class*="page_wpconsent-scanner"] .wpconsent-admin-tabs li:has(> a[href*="view=history"]),
+                body[class*="page_wpconsent-scanner"] .wpconsent-admin-tabs li:has(> a[href*="view=settings"]) { display: none !important; }
                 CSS,
             ],
         ];
