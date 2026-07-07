@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26bf3eaa767ba94d2340d2662491e6e2",
+    "content-hash": "39afe4eead62aad71d6300d9732d187d",
     "packages": [
         {
             "name": "composer/installers",
@@ -6528,6 +6528,68 @@
             "time": "2026-05-20T11:11:47+00:00"
         },
         {
+            "name": "wp-plugin/custom-facebook-feed",
+            "version": "4.8.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/custom-facebook-feed/",
+                "reference": "tags/4.8.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/custom-facebook-feed.4.8.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "Formerly \"Custom Facebook Feed\". Display completely customizable Facebook feeds of a Facebook page. Supports Facebook oEmbeds.",
+            "homepage": "https://smashballoon.com/custom-facebook-feed",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/custom-facebook-feed/#developers",
+                "issues": "https://wordpress.org/support/plugin/custom-facebook-feed",
+                "source": "https://plugins.svn.wordpress.org/custom-facebook-feed"
+            },
+            "time": "2026-06-10T14:15:46+00:00"
+        },
+        {
+            "name": "wp-plugin/custom-twitter-feeds",
+            "version": "2.6.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/custom-twitter-feeds/",
+                "reference": "tags/2.6.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/custom-twitter-feeds.2.6.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "Display X posts (Twitter tweets) from any public user account in a clean, attractive looking feed that updates weekly.",
+            "homepage": "https://smashballoon.com/custom-twitter-feeds",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/custom-twitter-feeds/#developers",
+                "issues": "https://wordpress.org/support/plugin/custom-twitter-feeds",
+                "source": "https://plugins.svn.wordpress.org/custom-twitter-feeds"
+            },
+            "time": "2026-06-10T13:40:58+00:00"
+        },
+        {
             "name": "wp-plugin/duplicator",
             "version": "1.5.16.1",
             "source": {
@@ -6588,6 +6650,68 @@
                 "source": "https://plugins.svn.wordpress.org/embedpress"
             },
             "time": "2026-06-24T10:35:49+00:00"
+        },
+        {
+            "name": "wp-plugin/feeds-for-tiktok",
+            "version": "1.6.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/feeds-for-tiktok/",
+                "reference": "tags/1.6.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/feeds-for-tiktok.1.6.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "The best way to display TikTok videos on your WordPress website. Display clean, customizable, and responsive TikTok feeds from your TikTok account.",
+            "homepage": "https://smashballoon.com/tiktok-feeds/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/feeds-for-tiktok/#developers",
+                "issues": "https://wordpress.org/support/plugin/feeds-for-tiktok",
+                "source": "https://plugins.svn.wordpress.org/feeds-for-tiktok"
+            },
+            "time": "2026-06-15T19:05:43+00:00"
+        },
+        {
+            "name": "wp-plugin/feeds-for-youtube",
+            "version": "2.7.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/feeds-for-youtube/",
+                "reference": "tags/2.7.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/feeds-for-youtube.2.7.0.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "The Feeds for YouTube plugin allows you to display customizable YouTube feeds from any YouTube channel.",
+            "homepage": "https://smashballoon.com/youtube-feed",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/feeds-for-youtube/#developers",
+                "issues": "https://wordpress.org/support/plugin/feeds-for-youtube",
+                "source": "https://plugins.svn.wordpress.org/feeds-for-youtube"
+            },
+            "time": "2026-06-10T13:10:44+00:00"
         },
         {
             "name": "wp-plugin/instagram-feed",
@@ -6743,6 +6867,68 @@
                 "source": "https://plugins.svn.wordpress.org/post-types-order"
             },
             "time": "2026-06-18T10:51:22+00:00"
+        },
+        {
+            "name": "wp-plugin/reviews-feed",
+            "version": "2.6.7",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/reviews-feed/",
+                "reference": "tags/2.6.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/reviews-feed.2.6.7.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "No API key required. Display Yelp and Google reviews for any business in a clean, customizable feed on your site.",
+            "homepage": "https://smashballoon.com/reviews-feed",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/reviews-feed/#developers",
+                "issues": "https://wordpress.org/support/plugin/reviews-feed",
+                "source": "https://plugins.svn.wordpress.org/reviews-feed"
+            },
+            "time": "2026-06-30T19:10:59+00:00"
+        },
+        {
+            "name": "wp-plugin/smashballoon-wpchat-livechat-customer-support",
+            "version": "1.4.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/smashballoon-wpchat-livechat-customer-support/",
+                "reference": "tags/1.4.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/smashballoon-wpchat-livechat-customer-support.1.4.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "WordPress WhatsApp chat plugin with a live chat widget for WhatsApp, Messenger, Telegram & Instagram. Includes smart FAQs and chat funnels.",
+            "homepage": "https://wpchat.com",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/smashballoon-wpchat-livechat-customer-support/#developers",
+                "issues": "https://wordpress.org/support/plugin/smashballoon-wpchat-livechat-customer-support",
+                "source": "https://plugins.svn.wordpress.org/smashballoon-wpchat-livechat-customer-support"
+            },
+            "time": "2026-06-24T08:50:50+00:00"
         },
         {
             "name": "wp-plugin/taxonomy-terms-order",
