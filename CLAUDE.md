@@ -129,9 +129,13 @@ default when the flag is unset. Everything else defaults to ON.
    item per [docs/ui-guidelines.md](docs/ui-guidelines.md) and comment each
    entry with what it is and why the treatment is safe. Declare
    `supportedMajorVersions()` with the major you verified against.
-3. Register the class in `TidyAdminPlugin::MODULES` (alphabetical order).
-4. Add it to the supported-plugins tables in `README.md` and `README.ja.md`.
-5. Run the full suite — catalog tests validate the target file exists and
+3. **A Help panel is mandatory**: every module ships a `help-links` feature
+   with the vendor's real documentation/support links (quick start, docs,
+   troubleshooting — whatever the plugin actually offers), on top of the
+   automatic WordPress.org sidebar.
+4. Register the class in `TidyAdminPlugin::MODULES` (alphabetical order).
+5. Add it to the supported-plugins tables in `README.md` and `README.ja.md`.
+6. Run the full suite — catalog tests validate the target file exists and
    the installed major is verified.
 
 ## Toolchain Quick Reference
