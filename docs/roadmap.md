@@ -29,6 +29,7 @@ time and are listed only to explain prioritization.
 |---|---|---|
 | [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) | 10M+ | Yoast SEO Premium, Academy, add-ons |
 | [Advanced Custom Fields](https://wordpress.org/plugins/advanced-custom-fields/) | 2M+ | ACF PRO (WP Engine) |
+| [WPConsent](https://wordpress.org/plugins/wpconsent-cookies-banner-privacy-suite/) | 100k+ | WPConsent Pro (Awesome Motive) |
 | [All in One SEO](https://wordpress.org/plugins/all-in-one-seo-pack/) | 3M+ | AIOSEO Pro |
 | [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) | 5M+ | Paid extensions |
 | [Wordfence](https://wordpress.org/plugins/wordfence/) | 4M+ | Wordfence Premium / Care / Response |

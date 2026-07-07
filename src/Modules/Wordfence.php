@@ -150,8 +150,12 @@ final class Wordfence extends AbstractModule
                 'label' => __('Make its admin menu icon white like the core icons', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
                 /* Wordfence: the sidebar icon is a brand-colored SVG (data URI on the
-                   ::before); flatten it to white so it sits with the core icons */
-                #toplevel_page_Wordfence .wp-menu-image::before { filter: brightness(0) invert(1); }
+                   ::before); flatten it to the core icons' palette — #f3f1f1 at rest
+                   (invert(.95) ≈ it), white on hover and on the current item */
+                #toplevel_page_Wordfence .wp-menu-image::before { filter: brightness(0) invert(0.95); }
+                #toplevel_page_Wordfence:hover .wp-menu-image::before,
+                #toplevel_page_Wordfence.current .wp-menu-image::before,
+                #toplevel_page_Wordfence.wp-has-current-submenu .wp-menu-image::before { filter: brightness(0) invert(1); }
                 CSS,
             ],
             'panel-placement' => [
