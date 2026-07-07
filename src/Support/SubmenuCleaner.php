@@ -116,7 +116,13 @@ final class SubmenuCleaner
                             continue;
                         }
                         $matched["{$parent}|{$index}"] = true;
-                        $this->hiddenSlugs[] = $slug;
+                        // Hide by the needle, not the full slug: the DOM href is
+                        // what the CSS matches, and a vendor's esc_url()/utm filters
+                        // can reshape the query string so the stored slug is no
+                        // longer a substring of it — but the needle always is (it's
+                        // why this item matched). Same substring, same precision as
+                        // the PHP match above.
+                        $this->hiddenSlugs[] = $needle;
                         // Duplicates under foreign (core) parents are hidden only —
                         // their panel home is the plugin's own parent menu
                         if ($this->panelParents !== [] && !in_array((string) $parent, $this->panelParents, true)) {
@@ -142,11 +148,13 @@ final class SubmenuCleaner
         if ($this->hiddenSlugs !== []) {
             add_action('admin_head', function (): void {
                 $selectors = array_map(
-                    // CSS-string escaping, not esc_attr(): attribute selectors match
-                    // the DOM value, where "&" stays "&" — esc_attr()'s "&amp;" would
-                    // silently unmatch every slug containing an ampersand
+                    // Attribute selectors match the DOM value: the HTML parser has
+                    // already decoded entities, so an "&#038;" or "&amp;" that a
+                    // vendor's esc_url() baked into the slug is a plain "&" in the
+                    // DOM href — decode first, or the selector silently never
+                    // matches. Then CSS-string-escape (not esc_attr()).
                     static fn(string $slug): string => '#adminmenu li:has(> a[href*="'
-                        . str_replace(['\\', '"'], ['\\\\', '\\"'], $slug) . '"])',
+                        . str_replace(['\\', '"'], ['\\\\', '\\"'], html_entity_decode($slug, ENT_QUOTES)) . '"])',
                     $this->hiddenSlugs,
                 );
                 echo '<style>' . implode(",\n", array_unique($selectors)) . " { display: none; }</style>\n";

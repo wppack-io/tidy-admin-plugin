@@ -80,22 +80,49 @@ final class SubmenuCleanerTest extends TestCase
     {
         global $submenu;
         $submenu = [
-            'edit.php?post_type=location_weather' => [
-                0 => ['Lite vs Pro', 'read', 'edit.php?post_type=location_weather&page=splw_admin_dashboard#lite_vs_pro'],
+            'youtube-feed' => [
+                0 => ['Single Videos', 'read', 'admin.php?page=sby-feed-builder&tab=more'],
             ],
         ];
 
         $GLOBALS['wp_filter']['admin_head'] = new \WP_Hook();
-        (new SubmenuCleaner(['upgrade' => ['splw_admin_dashboard#lite_vs_pro']]))->register();
+        // A needle can itself carry an ampersand (a &tab= query); it must reach
+        // the selector literal, because attribute selectors compare against the
+        // DOM value where the HTML parser has already turned entities back into &
+        (new SubmenuCleaner(['premium' => ['sby-feed-builder&tab=more']]))->register();
         do_action('admin_menu');
 
         ob_start();
         do_action('admin_head');
         $css = (string) ob_get_clean();
 
-        // Attribute selectors compare against the DOM value, where & is literal
-        $this->assertStringContainsString('&page=splw_admin_dashboard#lite_vs_pro', $css);
+        $this->assertStringContainsString('sby-feed-builder&tab=more', $css);
         $this->assertStringNotContainsString('&amp;', $css);
+    }
+
+    public function test_hides_by_needle_when_esc_url_reshaped_the_slug(): void
+    {
+        global $submenu;
+        // WPConsent registers its upgrade item with esc_url(), which encodes the
+        // query "&" as "&#038;" and can reorder/append utm params — so the stored
+        // slug is no longer a substring of the DOM href. The clean needle still is.
+        $submenu = [
+            'wpconsent' => [
+                0 => ['Upgrade to Pro', 'manage_options', 'https://wpconsent.com/lite/?utm_source=liteplugin&#038;utm_medium=admin-side-menu'],
+            ],
+        ];
+
+        $GLOBALS['wp_filter']['admin_head'] = new \WP_Hook();
+        (new SubmenuCleaner(['upgrade' => ['wpconsent.com/lite']]))->register();
+        do_action('admin_menu');
+
+        ob_start();
+        do_action('admin_head');
+        $css = (string) ob_get_clean();
+
+        // The selector carries the clean needle, not the entity-mangled full slug
+        $this->assertStringContainsString('a[href*="wpconsent.com/lite"]', $css);
+        $this->assertStringNotContainsString('&#038;', $css);
     }
 
     public function test_registers_nothing_for_empty_deny_list(): void
