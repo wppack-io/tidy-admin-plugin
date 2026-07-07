@@ -103,6 +103,9 @@ final class OptinMonster extends AbstractModule
                 /* OptinMonster: the "Helpful Resources" dashboard card (its links live
                    in the Help panel now) */
                 body[class*="page_optin-monster"] .omapi-dash__resources { display: none !important; }
+                /* Restore the two-column width the remaining dashboard cards lose once
+                   the Helpful Resources card is out of their flex-wrap row */
+                body[class*="page_optin-monster"] .omapi-screen .omapi-dash__cards-wrapper { width: calc(50% - 8px) !important; }
                 /* OptinMonster: the "?" help icon in its header bar (the Help panel
                    carries its documentation and support links) */
                 body[class*="page_optin-monster"] .omapi-plugin-header .omapi-plugin-banner__icon { display: none !important; }
@@ -120,19 +123,21 @@ final class OptinMonster extends AbstractModule
             'panel-placement' => [
                 'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
+                /* With the alert bar hidden, drop the 38px top padding the header kept
+                   reserved for it — otherwise it leaves an empty strip above the logo */
+                body[class*="page_optin-monster"] .omapi-plugin-header { padding-top: 0 !important; }
                 /* Full-bleed admin app: overlay the whole screen-meta region on the
                    plugin's own blue header bar instead of letting it push the page
-                   down. #wpbody (the region's offset parent) starts below that 112px
+                   down. #wpbody (the region's offset parent) starts below the 74px
                    header, and both scroll together, so a negative top lifts the buttons
                    onto the bar's right — where the now-hidden help icon sat. pointer
                    events already pass through the region except on the buttons */
-                body[class*="page_optin-monster"] #tidy-admin-meta-region { position: absolute; top: -72px; left: 20px; right: 0; z-index: 100; }
+                /* #wpbody always begins right below the 74px header (32px admin bar on
+                   desktop, 46px on mobile — the header shifts with it but keeps its
+                   height), so the same -53px lifts the buttons to the header's vertical
+                   centre at every width; no responsive override needed */
+                body[class*="page_optin-monster"] #tidy-admin-meta-region { position: absolute; top: -53px; left: 20px; right: 0; z-index: 100; }
                 body[class*="page_optin-monster"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
-                @media (max-width: 782px) {
-                    /* Below 783px the app drops its fixed-height header; keep the
-                       buttons under the 46px admin bar instead */
-                    body[class*="page_optin-monster"] #tidy-admin-meta-region { top: 46px; left: 0; }
-                }
                 CSS,
             ],
         ];
