@@ -199,6 +199,10 @@ final class InstagramFeed extends AbstractModule
                    box is hidden by upsell-ui). The register below stops the installs
                    regardless of the toggle state */
                 .sb-onboarding-wizard-step-installp .sb-onboarding-wizard-elements-list { display: none !important; }
+                /* The register's auto-advance passes straight through the step; keep it
+                   invisible for the moment it is technically current (visibility, not
+                   display — the advance clicks its hidden next button) */
+                .sb-onboarding-wizard-step-installp { visibility: hidden; }
                 CSS,
                 /*
                  * The wizard ships those recommendations active ('active' => true), so
@@ -208,6 +212,29 @@ final class InstagramFeed extends AbstractModule
                  * the plugins default to not-installed regardless of the checkbox state.
                  */
                 'register' => static function (): void {
+                    /*
+                     * Pre-deactivate every install_plugins entry in the localized
+                     * wizard data (flags only — the templates address steps by
+                     * hardcoded index, so the arrays must keep their shape). The
+                     * wizard then neither submits install entries nor lists fake
+                     * "... Installed" rows on its success screen.
+                     */
+                    add_action('admin_enqueue_scripts', static function (): void {
+                        if (!wp_script_is('sbi-builder-app', 'enqueued')) {
+                            return;
+                        }
+                        wp_add_inline_script(
+                            'sbi-builder-app',
+                            '(function(){var c=window.sbi_builder&&sbi_builder.onboardingWizardContent;'
+                            . 'if(!c||!Array.isArray(c.steps)){return;}'
+                            . 'c.steps.forEach(function(s){if(!s){return;}'
+                            . '["featuresList","proFeaturesList","pluginsList"].forEach(function(k){'
+                            . '(Array.isArray(s[k])?s[k]:[]).forEach(function(e){'
+                            . 'if(e&&e.data&&e.data.type==="install_plugins"){e.active=false;}});});});})();',
+                            'before',
+                        );
+                    }, 999);
+
                     add_action('wp_ajax_sbi_feed_saver_manager_process_wizard', static function (): void {
                         $raw = $_POST['data'] ?? null;
                         if (!is_string($raw)) {
@@ -228,25 +255,31 @@ final class InstagramFeed extends AbstractModule
                     }, 1);
 
                     /*
-                     * Drop the whole "Install a GDPR plugin" / "You might also be
-                     * interested in..." cross-sell step from the wizard flow so it
-                     * never appears after Configure features. The step list lives in
-                     * the localized sbi_builder.onboardingWizardContent.steps; a
-                     * 'before' inline script runs after that global is defined but
-                     * before the builder app boots and reads it.
+                     * Skip the "Install a GDPR plugin" / "You might also be
+                     * interested in..." cross-sell step: when the wizard reaches it,
+                     * its own next action is triggered immediately (the AJAX filter
+                     * above already strips every install), so the flow lands straight
+                     * on the success screen. The step cannot be dropped from the
+                     * localized steps array — the wizard's templates address steps by
+                     * hardcoded index, and shortening the array strands the flow on a
+                     * stuck spinner after Configure features.
                      */
-                    add_action('admin_enqueue_scripts', static function (): void {
-                        if (!wp_script_is('sbi-builder-app', 'enqueued')) {
+                    add_action('admin_print_footer_scripts', static function (): void {
+                        if (($_GET['page'] ?? '') !== 'sbi-setup') {
                             return;
                         }
-                        wp_add_inline_script(
-                            'sbi-builder-app',
-                            '(function(){var c=window.sbi_builder&&window.sbi_builder.onboardingWizardContent;'
-                            . 'if(c&&Array.isArray(c.steps)){c.steps=c.steps.filter(function(s){'
-                            . "return !s||s.id!=='install-plugins';});}})();",
-                            'before',
-                        );
-                    }, 999);
+                        echo '<script>document.addEventListener("DOMContentLoaded",function(){'
+                            . 'var done=false;'
+                            . 'setInterval(function(){'
+                            . 'if(done||!window.sbiBuilder){return;}'
+                            . 'var steps=(sbiBuilder.onboardingWizardContent||{}).steps||[];'
+                            . 'var idx=steps.findIndex(function(s){return s&&s.id==="install-plugins";});'
+                            . 'if(idx<0||sbiBuilder.currentOnboardingWizardStep!==idx){return;}'
+                            . 'var btn=document.querySelector(".sb-onboarding-wizard-step-installp .sb-btn-wizard-install, .sb-btn-wizard-install");'
+                            . 'if(btn){done=true;btn.dispatchEvent(new MouseEvent("click",{bubbles:true,cancelable:true}));}'
+                            . '},250);'
+                            . '});</script>';
+                    });
                 },
             ],
             'panel-placement' => [
