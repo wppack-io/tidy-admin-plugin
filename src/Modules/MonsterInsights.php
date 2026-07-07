@@ -1,0 +1,77 @@
+<?php
+
+/*
+ * This file is part of the WPPack package.
+ *
+ * (c) Tsuyoshi Tsurushima
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace WPPack\Plugin\TidyAdminPlugin\Modules;
+
+use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+
+final class MonsterInsights extends AbstractModule
+{
+    public function targetPluginFile(): string
+    {
+        return 'google-analytics-for-wordpress/googleanalytics.php';
+    }
+
+    public function supportedMajorVersions(): array
+    {
+        return [10];
+    }
+
+    public function menuParent(): string
+    {
+        return 'monsterinsights_reports';
+    }
+
+    public function ownPagePrefixes(): array
+    {
+        return ['monsterinsights'];
+    }
+
+    public function features(): array
+    {
+        return [
+            'upgrade-menus' => [
+                'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
+                'submenuRelocations' => [
+                    'upgrade' => [
+                        'monsterinsights.com/lite/',   // Upgrade to Pro (redirects to monsterinsights.com)
+                        'monsterinsights.com/lite-promo', // "Earth Day" seasonal sale menu item
+                    ],
+                ],
+            ],
+            'premium-pages' => [
+                'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
+                // "UserFeedback" is a cross-sell menu item for another plugin
+                'submenuRelocations' => [
+                    'premium' => [
+                        'monsterinsights_settings#/userfeedback',
+                    ],
+                ],
+            ],
+            'help-links' => [
+                'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
+                'submenuRelocations' => [
+                    'help' => [
+                        'monsterinsights_settings#/about', // About Us (team/product background — a resource)
+                    ],
+                ],
+            ],
+            'plugin-list-links' => [
+                'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
+                'upsellLinkUrls' => [
+                    'monsterinsights.com/lite', // "Get MonsterInsights Pro" link in its plugins.php row
+                ],
+            ],
+        ];
+    }
+}

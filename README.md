@@ -85,6 +85,8 @@ supported, with the major versions the cleanups were verified against:
 | [EmbedPress](https://wordpress.org/plugins/embedpress/) | 4.x |
 | [Facebook Feed (Smash Balloon)](https://wordpress.org/plugins/custom-facebook-feed/) | 4.x |
 | [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 6.x |
+| [MonsterInsights (Google Analytics)](https://wordpress.org/plugins/google-analytics-for-wordpress/) | 10.x |
+| [OptinMonster](https://wordpress.org/plugins/optinmonster/) | 2.x |
 | [Reviews Feed (Smash Balloon)](https://wordpress.org/plugins/reviews-feed/) | 2.x |
 | [TikTok Feeds (Smash Balloon)](https://wordpress.org/plugins/feeds-for-tiktok/) | 1.x |
 | [Twitter Feeds (Smash Balloon)](https://wordpress.org/plugins/custom-twitter-feeds/) | 2.x |

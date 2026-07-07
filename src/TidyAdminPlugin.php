@@ -47,6 +47,8 @@ final class TidyAdminPlugin
         Modules\InstagramFeed::class,
         Modules\LocationWeather::class,
         Modules\Mc4wp::class,
+        Modules\MonsterInsights::class,
+        Modules\OptinMonster::class,
         Modules\PostTypesOrder::class,
         Modules\PublishPressFuture::class,
         Modules\ReviewsFeed::class,

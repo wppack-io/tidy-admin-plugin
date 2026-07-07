@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "30ead8a567f1872f2086fce1196b26de",
+    "content-hash": "24ae25e7055a826791db3777fad84281",
     "packages": [
         {
             "name": "composer/installers",
@@ -6745,6 +6745,37 @@
             "time": "2026-06-10T13:10:44+00:00"
         },
         {
+            "name": "wp-plugin/google-analytics-for-wordpress",
+            "version": "10.2.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/google-analytics-for-wordpress/",
+                "reference": "tags/10.2.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/google-analytics-for-wordpress.10.2.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "chriscct7"
+                }
+            ],
+            "description": "The best free Google Analytics plugin for WordPress. See how visitors find and use your website so you can grow your business with powerful analytics.",
+            "homepage": "https://www.monsterinsights.com/?utm_source=liteplugin&utm_medium=pluginheader&utm_campaign=pluginurl&utm_content=7%2E0%2E0",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/google-analytics-for-wordpress/#developers",
+                "issues": "https://wordpress.org/support/plugin/google-analytics-for-wordpress",
+                "source": "https://plugins.svn.wordpress.org/google-analytics-for-wordpress"
+            },
+            "time": "2026-05-29T19:40:48+00:00"
+        },
+        {
             "name": "wp-plugin/instagram-feed",
             "version": "6.11.3",
             "source": {
@@ -6836,6 +6867,37 @@
                 "source": "https://plugins.svn.wordpress.org/mailchimp-for-wp"
             },
             "time": "2026-06-22T10:30:53+00:00"
+        },
+        {
+            "name": "wp-plugin/optinmonster",
+            "version": "2.16.24",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/optinmonster/",
+                "reference": "tags/2.16.24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/optinmonster.2.16.24.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "🤩 Make popups & optin forms to get more email newsletter subscribers, leads, and sales - #1 most popular popup builder plugin! 🚀",
+            "homepage": "https://optinmonster.com",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/optinmonster/#developers",
+                "issues": "https://wordpress.org/support/plugin/optinmonster",
+                "source": "https://plugins.svn.wordpress.org/optinmonster"
+            },
+            "time": "2026-05-22T16:36:05+00:00"
         },
         {
             "name": "wp-plugin/post-expirator",
