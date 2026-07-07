@@ -81,30 +81,39 @@ final class FeedsForYoutube extends AbstractModule
                 ],
             ],
             'wizard-plugin-installs' => [
-                'label' => __('Skip the recommended-plugin installs in its setup wizard', 'wppack-tidy-admin'),
+                'label' => __('Remove the recommended-plugin installs from its setup wizard', 'wppack-tidy-admin'),
                 /*
                  * The setup wizard's Configure features step mixes cross-sell
                  * install toggles (Reviews Feed, WPChat — checked by default,
                  * they install other plugins) and a "Pro Features" teaser list
                  * under the functional toggles; its GDPR step pitches installing
-                 * WPConsent. All hidden, and the wizard's install endpoint is
-                 * short-circuited so nothing installs even if submitted.
+                 * WPConsent; its last step offers WPForms/MonsterInsights/
+                 * OptinMonster. Only those promo rows are hidden — the wizard and
+                 * every functional step stay visible and work normally — and the
+                 * hidden install toggles are unchecked so the "Install Selected
+                 * Plugins" button submits nothing and installs nothing (also
+                 * short-circuited server-side as a backstop).
                  */
                 'adminCss' => <<<'CSS'
-                /* Cross-sell install rows (identified by their install tooltip) */
-                body[class*="page_youtube-feed"] .sby-obw-radio-component:has(.sby-obw-plugin-info-wrap) { display: none !important; }
+                /* Cross-sell install rows: the Configure step's carry an install
+                   tooltip; the "You might also be interested in" step's carry a
+                   plugin-logo image in their icon (WPForms/MonsterInsights/
+                   OptinMonster). The plugin's own functional rows use SVG icons and
+                   no tooltip, so they stay */
+                body[class*="page_youtube-feed"] .sby-obw-radio-component:has(.sby-obw-plugin-info-wrap),
+                body[class*="page_youtube-feed"] .sby-obw-radio-component:has(.sby-obw-radio-icon img) { display: none !important; }
                 /* "Pro Features" heading and the teaser toggles under it */
                 body[class*="page_youtube-feed"] h2.sby-obw-sub-heading,
                 body[class*="page_youtube-feed"] h2.sby-obw-sub-heading ~ .sby-obw-radio-component { display: none !important; }
                 /* GDPR step: the WPConsent install pitch and its explainer */
                 body[class*="page_youtube-feed"] .sby-obw-radio-component-wp-consent,
                 body[class*="page_youtube-feed"] .sb-onboarding-wizard-gdpr-info { display: none !important; }
-                /* Step 4's "Upgrade to Unlock playlists, livestreams ..." Pro banner */
+                /* The "Upgrade to Unlock playlists, livestreams ..." Pro banner */
                 body[class*="page_youtube-feed"] .sby-obw-up-sell-banner { display: none !important; }
                 CSS,
                 'register' => static function (): void {
                     // The wizard's other-plugin installers: report success without
-                    // installing anything, so the flow continues untouched
+                    // installing anything, as a server-side backstop
                     add_action('wp_ajax_sby_install_other_plugins', static function (): void {
                         check_ajax_referer('sby-admin', 'nonce');
                         wp_send_json_success();
@@ -113,33 +122,24 @@ final class FeedsForYoutube extends AbstractModule
                         wp_send_json_success();
                     }, 1);
 
-                    // Step 3 (GDPR/WPConsent pitch) and step 4 ("You might also be
-                    // interested in..." — WPForms, MonsterInsights, OptinMonster
-                    // install offers) sell plugins, nothing else; with their
-                    // installers blocked, pass straight through both. The wizard
-                    // navigates client-side, so the current step is read from the
-                    // URL on every tick.
+                    // Keep the hidden cross-sell install toggles unchecked (they
+                    // ship checked). Their rows are hidden, so the user can't
+                    // re-check them; this only ensures the wizard's "Install
+                    // Selected Plugins" button submits nothing and its success
+                    // screen lists no plugin as "installed". React's onChange
+                    // fires on the native click.
                     add_action('admin_print_footer_scripts', static function (): void {
                         if (($_GET['page'] ?? '') !== 'youtube-feed-setup') {
                             return;
                         }
                         echo '<script>document.addEventListener("DOMContentLoaded",function(){'
-                            . 'var clickedFor="";'
                             . 'setInterval(function(){'
-                            . 'var step=new URLSearchParams(location.search).get("step");'
-                            . 'var wrap=document.querySelector(".sby-obw-steps-wrap");'
-                            . 'if(step!=="3"&&step!=="4"){if(wrap){wrap.style.visibility="";}return;}'
-                            . 'if(wrap){wrap.style.visibility="hidden";}'
-                            // Uncheck the checked-by-default cross-sell install toggles
-                            // first, so the primary button submits nothing and the
-                            // success screen lists no plugins as "installed". React
-                            // onChange fires on the native click; wait a tick to settle.
-                            . 'var pending=false;'
-                            . 'document.querySelectorAll(".sby-obw-radio-component input[type=checkbox]:checked").forEach(function(cb){pending=true;cb.click();});'
-                            . 'if(pending){return;}'
-                            . 'var btn=document.querySelector("button.sby-obw-btn-primary");'
-                            . 'if(btn&&clickedFor!==step){clickedFor=step;btn.click();}'
-                            . '},300);'
+                            . 'document.querySelectorAll('
+                            . '".sby-obw-radio-component:has(.sby-obw-plugin-info-wrap) input[type=checkbox]:checked,'
+                            . '.sby-obw-radio-component:has(.sby-obw-radio-icon img) input[type=checkbox]:checked,'
+                            . '.sby-obw-radio-component-wp-consent input[type=checkbox]:checked"'
+                            . ').forEach(function(cb){cb.click();});'
+                            . '},250);'
                             . '});</script>';
                     });
                 },

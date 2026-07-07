@@ -142,6 +142,10 @@ msgstr "ページ内の余分な空見出しを非表示"
 msgid "Keep its buttons from wrapping mid-label"
 msgstr "ボタンラベルの途中改行を防止"
 
+#: src/Modules/FeedsForYoutube.php
+msgid "Remove the recommended-plugin installs from its setup wizard"
+msgstr "セットアップウィザードから推奨プラグインのインストールを除去"
+
 #: src/Modules/Duplicator.php
 msgid "Stop the post-install welcome-page redirect"
 msgstr "インストール直後のウェルカムページへのリダイレクトを停止"
