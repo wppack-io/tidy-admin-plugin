@@ -109,9 +109,9 @@ final class WpConsent extends AbstractModule
                  * "Get WPConsent Pro and Unlock all the Powerful Features" block
                  * at the bottom of the Settings page — both plain functions on
                  * the plugin's own hooks. The Lite sentence rides into the
-                 * Upgrades panel in the plugin's own words; the remote
-                 * notification feed (plugin.wpconsent.com) is turned off and its
-                 * emptied header inbox hidden.
+                 * Upgrades panel in the plugin's own words. The header
+                 * Notifications inbox is left alone — it carries functional
+                 * alerts, not just promotions.
                  */
                 'noticeDenyByHook' => [
                     'wpconsent_admin_page' => [
@@ -135,12 +135,6 @@ final class WpConsent extends AbstractModule
                         ) . '</p>',
                     ],
                 ],
-                'adminCss' => <<<'CSS'
-                body[class*="page_wpconsent"] #wpconsent-notifications-button { display: none !important; }
-                CSS,
-                'register' => static function (): void {
-                    add_filter('wpconsent_admin_notifications_has_access', '__return_false');
-                },
             ],
             'cross-sells' => [
                 'label' => __('Remove the recommended-plugin cross-sell from its dashboard widget', 'wppack-tidy-admin'),
@@ -169,10 +163,16 @@ final class WpConsent extends AbstractModule
                 body[class*="page_wpconsent"] .wpconsent-language-picker-container { display: none !important; }
                 /* WPConsent: the Advanced tab's "Custom Scripts/iFrames is a PRO
                    feature" and "Hide Banner Rules is a PRO feature" blocks — each is a
-                   blurred fake preview plus an upsell box; hide the whole wrapper */
-                body[class*="page_wpconsent"] div:has(> .wpconsent-upsell-box) { display: none !important; }
-                /* WPConsent: the "IAB TCF" cookies tab — a PRO-only feature */
-                body[class*="page_wpconsent-cookies"] .wpconsent-admin-tabs li:has(> a[href*="view=iabtcf"]) { display: none !important; }
+                   blurred fake preview plus an upsell box; hide the whole wrapper.
+                   Scoped to the cookies page: the Geolocation/Consent Logs/Do Not Sell
+                   pages are whole-page teasers already hidden from the menu, so their
+                   own upsell content must render rather than blank out */
+                body[class*="page_wpconsent-cookies"] div:has(> .wpconsent-upsell-box) { display: none !important; }
+                /* WPConsent: the "IAB TCF" and "Languages" cookies tabs — both PRO-only
+                   (their views are nothing but an upsell box in Lite, hidden above,
+                   which would otherwise leave the tab pointing at a blank page) */
+                body[class*="page_wpconsent-cookies"] .wpconsent-admin-tabs li:has(> a[href*="view=iabtcf"]),
+                body[class*="page_wpconsent-cookies"] .wpconsent-admin-tabs li:has(> a[href*="view=languages"]) { display: none !important; }
                 /* WPConsent: the scanner's Inspector, History and Auto Scanning tabs —
                    all PRO-only (the functional "Scanner" tab stays). Scoped to the
                    scanner page so the cookies page's own "settings" tab is untouched */
@@ -186,10 +186,12 @@ final class WpConsent extends AbstractModule
                 body[class*="page_wpconsent"] input:has(+ .wpconsent-image-radio-label-pro) { display: none !important; }
                 /* WPConsent: the "License" metabox on the cookies Settings tab — Lite
                    needs no license ("You're using WPConsent Lite - no license needed") */
-                body[class*="page_wpconsent"] .wpconsent-metabox:has(.wpconsent-license-key-container) { display: none !important; }
+                body[class*="page_wpconsent-cookies"] .wpconsent-metabox:has(.wpconsent-license-key-container) { display: none !important; }
                 /* WPConsent: PRO-gated settings rows (a PRO pill, no usable control in
-                   Lite) — e.g. "Consent Logs" on the cookies Settings tab */
-                body[class*="page_wpconsent"] .wpconsent-form-row-pro { display: none !important; }
+                   Lite) — e.g. "Consent Logs" on the cookies Settings tab. Scoped to
+                   the cookies page so the whole-page Do Not Sell / Geolocation teasers
+                   (hidden from the menu) still render their own content */
+                body[class*="page_wpconsent-cookies"] .wpconsent-form-row-pro { display: none !important; }
                 CSS,
             ],
             'panel-placement' => [
