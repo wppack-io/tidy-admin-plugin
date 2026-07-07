@@ -137,9 +137,11 @@ final class Wordfence extends AbstractModule
                 #tidy_admin_pending_setup #wf-onboarding-banner { margin: 0 0 15px !important; }
                 #tidy_admin_pending_setup #wf-onboarding-delay { display: none !important; }
                 /* Wordfence: the full-screen onboarding overlay it throws over the
-                   plugins page pushing registration (distinct from the inline box) */
-                .wf-onboarding-plugin-overlay,
-                .wf-onboarding-plugin-header { display: none !important; }
+                   plugins page pushing registration, and the "Please Complete Wordfence
+                   Installation" registration box atop the plugin list (ids, not
+                   classes) — setup guidance lives in the pending-setup widget */
+                #wf-onboarding-plugin-overlay,
+                #wf-onboarding-plugin-header { display: none !important; }
                 /* Wordfence: "Upgrade To Premium" link in its plugins.php row */
                 tr[data-plugin*="wordfence"] a[href*="wordfence.com/zz12"] { display: none !important; }
                 CSS,
