@@ -147,13 +147,6 @@ final class Wordfence extends AbstractModule
             'panel-placement' => [
                 'label' => __('Overlay the Help and Upgrades buttons onto the page title', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
-                /* TEMP — dev-only while iterating on the header layout; REMOVE before
-                   merge: hide the license nag (its page-dimming veil and its fixed
-                   "install a license" box) so the layout is inspectable at full
-                   contrast */
-                #wf-install-incomplete-overlay,
-                #wf-install-incomplete-message,
-                .wf-install-incomplete-overlay { display: none !important; }
                 /* Wordfence caps its content at max-width: 1170px; drop it so the page
                    uses the full width like core screens. Its All Options form and the
                    Diagnostics page carry their own caps too */
