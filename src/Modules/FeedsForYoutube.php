@@ -123,22 +123,41 @@ final class FeedsForYoutube extends AbstractModule
                     }, 1);
 
                     // Keep the hidden cross-sell install toggles unchecked (they
-                    // ship checked). Their rows are hidden, so the user can't
-                    // re-check them; this only ensures the wizard's "Install
-                    // Selected Plugins" button submits nothing and its success
-                    // screen lists no plugin as "installed". React's onChange
-                    // fires on the native click.
+                    // ship checked) so "Install Selected Plugins" submits nothing,
+                    // then auto-advance any step whose rows are ALL hidden
+                    // cross-sells — the "You might also be interested in" step is
+                    // left with just its heading, so move straight past it. A step
+                    // with a visible functional row (Configure features) is not
+                    // touched, and the success screen (no rows at all) is not
+                    // either. React's onChange fires on the native click.
                     add_action('admin_print_footer_scripts', static function (): void {
                         if (($_GET['page'] ?? '') !== 'youtube-feed-setup') {
                             return;
                         }
                         echo '<script>document.addEventListener("DOMContentLoaded",function(){'
+                            . 'var advancedFor="";'
                             . 'setInterval(function(){'
+                            . 'var pending=false;'
                             . 'document.querySelectorAll('
                             . '".sby-obw-radio-component:has(.sby-obw-plugin-info-wrap) input[type=checkbox]:checked,'
                             . '.sby-obw-radio-component:has(.sby-obw-radio-icon img) input[type=checkbox]:checked,'
                             . '.sby-obw-radio-component-wp-consent input[type=checkbox]:checked"'
-                            . ').forEach(function(cb){cb.click();});'
+                            . ').forEach(function(cb){pending=true;cb.click();});'
+                            // A step whose rows are ALL hidden cross-sells has nothing
+                            // left to show (just its heading) — hide the whole wizard
+                            // body while it is passed through, and restore it on any
+                            // real step. A visible functional row (Configure features)
+                            // or no rows at all (the success screen) keeps it shown, so
+                            // the success screen is never blanked.
+                            . 'var rows=document.querySelectorAll(".sby-obw-radio-component");'
+                            . 'var inner=document.querySelector(".sby-obw-full-inner");'
+                            . 'var crossSellOnly=rows.length>0&&![].some.call(rows,function(r){return r.offsetParent!==null;});'
+                            . 'if(!crossSellOnly){if(inner){inner.style.visibility="visible";}return;}'
+                            . 'if(inner){inner.style.visibility="hidden";}'
+                            . 'if(pending){return;}'
+                            . 'var step=new URLSearchParams(location.search).get("step");'
+                            . 'var btn=document.querySelector("button.sby-obw-btn-primary");'
+                            . 'if(btn&&advancedFor!==step){advancedFor=step;btn.click();}'
                             . '},250);'
                             . '});</script>';
                     });
