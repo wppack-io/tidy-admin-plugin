@@ -87,6 +87,74 @@ final class CustomFacebookFeed extends AbstractModule
                     add_filter('cff_admin_notifications_has_access', '__return_false');
                 },
             ],
+            'wizard-plugin-installs' => [
+                'label' => __('Skip the recommended-plugin installs in its setup wizard', 'wppack-tidy-admin'),
+                /*
+                 * Same wizard as Instagram Feed's: an install-plugins cross-sell
+                 * step and install entries submitted with the wizard data. Same
+                 * treatment, verified there end to end: strip install entries
+                 * server-side, pre-deactivate them in the localized data (flags
+                 * only — the templates address steps by hardcoded index, so the
+                 * array must keep its shape), and pass straight through the
+                 * visually suppressed step by triggering its own next action.
+                 */
+                'adminCss' => <<<'CSS'
+                .sb-onboarding-wizard-step-installp { visibility: hidden; }
+                CSS,
+                'register' => static function (): void {
+                    add_action('admin_enqueue_scripts', static function (): void {
+                        if (!wp_script_is('feed-builder-app', 'enqueued')) {
+                            return;
+                        }
+                        wp_add_inline_script(
+                            'feed-builder-app',
+                            '(function(){var c=window.cff_builder&&cff_builder.onboardingWizardContent;'
+                            . 'if(!c||!Array.isArray(c.steps)){return;}'
+                            . 'c.steps.forEach(function(s){if(!s){return;}'
+                            . '["featuresList","proFeaturesList","pluginsList"].forEach(function(k){'
+                            . '(Array.isArray(s[k])?s[k]:[]).forEach(function(e){'
+                            . 'if(e&&e.data&&e.data.type==="install_plugins"){e.active=false;}});});});})();',
+                            'before',
+                        );
+                    }, 999);
+
+                    add_action('admin_print_footer_scripts', static function (): void {
+                        if (($_GET['page'] ?? '') !== 'cff-setup') {
+                            return;
+                        }
+                        echo '<script>document.addEventListener("DOMContentLoaded",function(){'
+                            . 'var done=false;'
+                            . 'setInterval(function(){'
+                            . 'if(done||!window.cffBuilder){return;}'
+                            . 'var steps=(cffBuilder.onboardingWizardContent||{}).steps||[];'
+                            . 'var idx=steps.findIndex(function(s){return s&&s.id==="install-plugins";});'
+                            . 'if(idx<0||cffBuilder.currentOnboardingWizardStep!==idx){return;}'
+                            . 'var btn=document.querySelector(".sb-onboarding-wizard-step-installp .sb-btn-wizard-install, .sb-btn-wizard-install");'
+                            . 'if(btn){done=true;btn.dispatchEvent(new MouseEvent("click",{bubbles:true,cancelable:true}));}'
+                            . '},250);'
+                            . '});</script>';
+                    });
+
+                    add_action('wp_ajax_cff_feed_saver_manager_process_wizard', static function (): void {
+                        $raw = $_POST['data'] ?? null;
+                        if (!is_string($raw)) {
+                            return;
+                        }
+                        $decoded = json_decode(stripslashes($raw), true);
+                        if (!is_array($decoded)) {
+                            return;
+                        }
+                        $kept = array_values(array_filter(
+                            $decoded,
+                            static fn(mixed $entry): bool => !is_array($entry) || ($entry['type'] ?? '') !== 'install_plugins',
+                        ));
+                        $encoded = wp_json_encode($kept);
+                        if ($encoded !== false) {
+                            $_POST['data'] = wp_slash($encoded);
+                        }
+                    }, 1);
+                },
+            ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
