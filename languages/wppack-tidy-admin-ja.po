@@ -127,10 +127,6 @@ msgid "Hide the stray empty heading on its pages"
 msgstr "ページ内の余分な空見出しを非表示"
 
 #: src/Modules/Duplicator.php
-msgid "Troubleshooting"
-msgstr "トラブルシューティング"
-
-#: src/Modules/Duplicator.php
 msgid "Remove the recommended-plugin cross-sell from its dashboard widget"
 msgstr "ダッシュボードウィジェットの推奨プラグイン枠を除去"
 

@@ -48,24 +48,78 @@ final class Duplicator extends AbstractModule
                         'duplicator.com/lite-upgrade',
                     ],
                 ],
-                // The purchase link plus the discount sentence from the hidden
-                // settings License pitch — real buying information, kept verbatim
-                // (50 mirrors DUP_Constants::UPSELL_DEFAULT_DISCOUNT)
+                /*
+                 * The Lite notice bar, reproduced verbatim (sentence, bold lead,
+                 * orange link and arrow, band colors) as the head of the Upgrades
+                 * panel — the lite-bar feature removes it from the screens.
+                 */
                 'extraScreenMetaContent' => [
                     [
                         'category' => 'upgrade',
                         'parent' => $this->menuParent(),
-                        'html' => '<p><a href="https://duplicator.com/lite-upgrade/" target="_blank" rel="noopener noreferrer">'
-                            . esc_html__('Upgrade to Pro', 'wppack-tidy-admin') . '</a></p>'
-                            . '<p>' . wp_kses(
+                        'html' => '<p class="tidy-admin-dup-lite-bar">'
+                            . wp_kses(
                                 sprintf(
-                                    __('As a valued Duplicator Lite user you receive <strong>%1$d%% off</strong>, automatically applied at checkout!', 'duplicator'),
-                                    50,
+                                    // The notice bar's own sentence: bold lead, orange link
+                                    __(
+                                        '<strong>You\'re using Duplicator Lite.</strong> To unlock more features consider '
+                                        . '<a href="%s" target="_blank" rel="noopener noreferrer">upgrading to Pro</a>',
+                                        'duplicator',
+                                    ),
+                                    'https://duplicator.com/lite-upgrade/',
                                 ),
-                                ['strong' => []],
-                            ) . '</p>',
+                                ['a' => ['href' => [], 'rel' => [], 'target' => []], 'strong' => []],
+                            )
+                            . ' <a class="tidy-admin-dup-upgrade-arrow" href="https://duplicator.com/lite-upgrade/" target="_blank" rel="noopener noreferrer">&rarr;</a>'
+                            . '</p>'
+                            . '<p><a href="https://duplicator.com/lite-upgrade/" target="_blank" rel="noopener noreferrer">'
+                            . esc_html__('Upgrade to Pro', 'wppack-tidy-admin') . '</a></p>',
                     ],
                 ],
+                'adminCss' => <<<'CSS'
+                /* The reproduced Lite bar (#dup-notice-bar: centered gray strip
+                   under an orange rule) across the top of the opened Upgrades panel.
+                   Centered as a block — the original's flex would split our text
+                   nodes into separate items and skew the inter-word spacing */
+                .tidy-admin-dup-lite-bar {
+                    display: block;
+                    background-color: #dddddd; color: #777777; text-align: center;
+                    padding: 7px; margin: 0; border-top: #fe4716 3px solid;
+                    /* Above the panel's absolutely-positioned tint layer (the register
+                       script pushes that layer below the band, this covers the paint
+                       order while the panel is opening) */
+                    position: relative; z-index: 5;
+                }
+                /* Links and arrow exactly as the bar styles them */
+                .tidy-admin-dup-lite-bar a { color: #fe4716; }
+                .tidy-admin-dup-upgrade-arrow { font-weight: bold; text-decoration: none; }
+                CSS,
+                /*
+                 * Module content can only land inside the panel's Upgrade tab; hoist
+                 * the band to the very top of the panel, above the tab columns. The
+                 * panel's tinted content layer (.tidy-admin-help-back) is absolutely
+                 * positioned from the panel's top, so it is pushed down by the band's
+                 * height — measured when the panel actually opens (it is display:none
+                 * until then) and again on resize, since the band can wrap.
+                 */
+                'register' => static function (): void {
+                    add_action('admin_print_footer_scripts', static function (): void {
+                        if (!str_starts_with((string) ($_GET['page'] ?? ''), 'duplicator')) {
+                            return;
+                        }
+                        echo '<script>document.addEventListener("DOMContentLoaded",function(){'
+                            . 'var n=document.querySelector(".tidy-admin-dup-lite-bar");'
+                            . 'var w=document.getElementById("tidy-admin-upgrades-wrap");'
+                            . 'if(!n||!w){return;}'
+                            . 'w.insertBefore(n,w.firstChild);'
+                            . 'var back=w.querySelector(".tidy-admin-help-back");'
+                            . 'var fit=function(){if(back){back.style.top=n.offsetHeight+"px";}};'
+                            . 'new MutationObserver(fit).observe(w,{attributes:true,attributeFilter:["class"]});'
+                            . 'window.addEventListener("resize",fit);'
+                            . 'fit();'
+                            . '});</script>';
+                    });
+                },
             ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
