@@ -72,6 +72,20 @@ final class MonsterInsights extends AbstractModule
                     'monsterinsights.com/lite', // "Get MonsterInsights Pro" link in its plugins.php row
                 ],
             ],
+            'setup-notice' => [
+                'label' => __('Move the setup notice to the plugin screens and dashboard widget', 'wppack-tidy-admin'),
+                /*
+                 * "Please Setup Website Analytics to See Audience Insights" — a
+                 * functional connect-your-analytics prompt on admin_notices, so it
+                 * repeats on every admin screen. Confine it to MonsterInsights'
+                 * own screens and the "Pending plugin setup" dashboard widget.
+                 */
+                'setupNoticeByHook' => [
+                    'admin_notices' => [
+                        'monsterinsights_admin_setup_notices',
+                    ],
+                ],
+            ],
         ];
     }
 }

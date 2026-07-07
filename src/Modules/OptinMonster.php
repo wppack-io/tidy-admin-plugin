@@ -106,6 +106,15 @@ final class OptinMonster extends AbstractModule
                 /* OptinMonster: the "?" help icon in its header bar (the Help panel
                    carries its documentation and support links) */
                 body[class*="page_optin-monster"] .omapi-plugin-header .omapi-plugin-banner__icon { display: none !important; }
+                /* OptinMonster: the Settings page's "Upgrade to OptinMonster Pro and
+                   unlock even more conversion features!" card and the "To unlock more
+                   features consider upgrading to PRO" action box */
+                body[class*="page_optin-monster"] .omapi-settings-upgrade,
+                body[class*="page_optin-monster"] .omapi-action-box:has(a[href*="optinmonster.com"]) { display: none !important; }
+                /* OptinMonster: the "Important: claim your free OptinMonster account"
+                   top alert bar — the dashboard's own "Connect Your Site" card already
+                   carries the same setup prompt */
+                body[class*="page_optin-monster"] .omapi-alert-bar-wrapper { display: none !important; }
                 CSS,
             ],
             'panel-placement' => [
