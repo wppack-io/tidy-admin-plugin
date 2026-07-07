@@ -163,11 +163,12 @@ final class WpConsent extends AbstractModule
                 body[class*="page_wpconsent"] .wpconsent-language-picker-container { display: none !important; }
                 /* WPConsent: the Advanced tab's "Custom Scripts/iFrames is a PRO
                    feature" and "Hide Banner Rules is a PRO feature" blocks — each is a
-                   blurred fake preview plus an upsell box; hide the whole wrapper.
-                   Scoped to the cookies page: the Geolocation/Consent Logs/Do Not Sell
-                   pages are whole-page teasers already hidden from the menu, so their
-                   own upsell content must render rather than blank out */
-                body[class*="page_wpconsent-cookies"] div:has(> .wpconsent-upsell-box) { display: none !important; }
+                   sub-section (a positioned wrapper) with a blurred fake preview plus
+                   an upsell box; hide the wrapper. The :not(.wpconsent-content) keeps
+                   the whole-view PRO teasers (Languages, IAB TCF — their tabs are
+                   hidden) from blanking out: there the view's own .wpconsent-content is
+                   the upsell wrapper, and it must render its content */
+                body[class*="page_wpconsent-cookies"] div:has(> .wpconsent-upsell-box):not(.wpconsent-content) { display: none !important; }
                 /* WPConsent: the "IAB TCF" and "Languages" cookies tabs — both PRO-only
                    (their views are nothing but an upsell box in Lite, hidden above,
                    which would otherwise leave the tab pointing at a blank page) */
@@ -192,6 +193,14 @@ final class WpConsent extends AbstractModule
                    the cookies page so the whole-page Do Not Sell / Geolocation teasers
                    (hidden from the menu) still render their own content */
                 body[class*="page_wpconsent-cookies"] .wpconsent-form-row-pro { display: none !important; }
+                /* WPConsent Tools: whole PRO metaboxes — "Export Logs" (Consent Logs
+                   Export), "Clear Consent Logs" and "Clear Do Not Sell Logs" — each
+                   carries a PRO row and, unlike the functional Export Settings box, no
+                   export-options block, so it is hidden entirely */
+                body[class*="page_wpconsent-tools"] .wpconsent-metabox:has(.wpconsent-form-row-pro):not(:has(.wpconsent-export-options)) { display: none !important; }
+                /* WPConsent Tools: the PRO "Custom Scripts" row inside the functional
+                   Export Settings box (the settings export beside it stays) */
+                body[class*="page_wpconsent-tools"] .wpconsent-export-options .wpconsent-form-row-pro { display: none !important; }
                 CSS,
             ],
             'panel-placement' => [
