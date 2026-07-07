@@ -107,8 +107,14 @@ final class OptinMonster extends AbstractModule
                    the Helpful Resources card is out of their flex-wrap row. NB: the
                    plugin's .omapi-screen class sits on <body> itself, so it must not go
                    between the body scope and the target (that would demand a descendant
-                   omapi-screen, which doesn't exist) */
+                   omapi-screen, which doesn't exist). The base rule applies at every
+                   width; the plugin's own 969px breakpoint (below which it stacks the
+                   cards full-width) is re-asserted here so there is no gap — using
+                   min-width:970px would leave 969–970px on the plugin's broken default */
                 body[class*="page_optin-monster"] .omapi-dash__cards-wrapper { width: calc(50% - 8px) !important; }
+                @media (max-width: 969px) {
+                    body[class*="page_optin-monster"] .omapi-dash__cards-wrapper { width: 100% !important; }
+                }
                 /* The plugin styles #wpbody-content p/a at 16px, which bleeds into our
                    Help/Upgrades panels (e.g. the WordPress.org links, "Upgrade to Pro")
                    — reset the panel text to the native screen-meta 13px */
