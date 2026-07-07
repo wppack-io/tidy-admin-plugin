@@ -55,6 +55,22 @@ final class FeedsForYoutube extends AbstractModule
                     ],
                 ],
             ],
+            'premium-pages' => [
+                'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
+                /*
+                 * "Single Videos" (converting videos to posts) is a Pro feature;
+                 * in Lite its menu item carries the sby-single-videos-upsell class
+                 * and its slug is redirected to the upgrade tab. The same
+                 * &tab=more slug also backs the cross-plugin teaser items
+                 * (Instagram/Twitter/TikTok/Reviews Feed) that only show when the
+                 * sibling plugin is not active. All are relocated to the panel.
+                 */
+                'submenuRelocations' => [
+                    'premium' => [
+                        'sby-feed-builder&tab=more',
+                    ],
+                ],
+            ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
                 'submenuRelocations' => [
@@ -166,6 +182,14 @@ final class FeedsForYoutube extends AbstractModule
                 /* YouTube Feeds: "Help" button in its screen header — it leads to the
                    Support page relocated into the Help panel */
                 .sbc-yt-hd-btn[href*="youtube-feed-support"] { display: none !important; }
+                CSS,
+            ],
+            'select-fields' => [
+                'label' => __('Fix the squeezed select fields on its screens', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* YouTube Feeds: its select boxes ship with uneven padding that
+                   crowds the text against the dropdown arrow */
+                .sb-form-field .sby-select { padding: 0 24px 0 12px !important; }
                 CSS,
             ],
             'panel-placement' => [
