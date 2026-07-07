@@ -94,6 +94,10 @@ msgstr "ヘルプ / アップグレードボタンをページヘッダーに統
 msgid "Skip the recommended-plugin installs in its setup wizard"
 msgstr "セットアップウィザードの推奨プラグイン導入をスキップ"
 
+#: src/Modules
+msgid "Make its admin menu icon white like the core icons"
+msgstr "管理メニューのアイコンをコアのアイコンと同じ白色に"
+
 #: src/Modules/AllInOneWpMigration.php
 msgid "Upgrade to Pro"
 msgstr "Pro 版にアップグレード"

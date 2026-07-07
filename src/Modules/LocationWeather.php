@@ -40,6 +40,14 @@ final class LocationWeather extends AbstractModule
     public function features(): array
     {
         return [
+            'menu-icon' => [
+                'label' => __('Make its admin menu icon white like the core icons', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Location Weather: the sidebar icon is a gray SVG (background image on
+                   the menu-image div); flatten it to white like the core icons */
+                #menu-posts-location_weather .wp-menu-image { filter: brightness(0) invert(1); }
+                CSS,
+            ],
             'upgrade-menus' => [
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
                 'submenuRelocations' => [

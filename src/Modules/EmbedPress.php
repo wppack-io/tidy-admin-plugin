@@ -35,6 +35,14 @@ final class EmbedPress extends AbstractModule
     public function features(): array
     {
         return [
+            'menu-icon' => [
+                'label' => __('Make its admin menu icon white like the core icons', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* EmbedPress: the sidebar icon is a brand-colored SVG (an <img> in the
+                   menu item); flatten it to white like the core icons */
+                #toplevel_page_embedpress .wp-menu-image img { filter: brightness(0) invert(1); }
+                CSS,
+            ],
             'upgrade-menus' => [
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
                 // From the floating "sponsored" quick links (hidden by the quick-links feature)

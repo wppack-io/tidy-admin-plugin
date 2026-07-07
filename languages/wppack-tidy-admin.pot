@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-07T00:40:49+09:00\n"
+"POT-Creation-Date: 2026-07-07T09:35:19+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -32,9 +32,9 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:45
 #: src/Modules/Bnfw.php:39
 #: src/Modules/Cfdb7.php:39
-#: src/Modules/EmbedPress.php:39
+#: src/Modules/EmbedPress.php:47
 #: src/Modules/InstagramFeed.php:39
-#: src/Modules/LocationWeather.php:44
+#: src/Modules/LocationWeather.php:52
 #: src/Modules/Mc4wp.php:44
 #: src/Modules/PublishPressFuture.php:39
 #: src/Modules/WpMailSmtp.php:44
@@ -43,9 +43,9 @@ msgid "Move upgrade menus to the Upgrades panel"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:55
-#: src/Modules/AllInOneWpMigration.php:44
+#: src/Modules/AllInOneWpMigration.php:52
 #: src/Modules/Bnfw.php:47
-#: src/Modules/EmbedPress.php:52
+#: src/Modules/EmbedPress.php:60
 #: src/Modules/InstagramFeed.php:47
 #: src/Modules/WpMailSmtp.php:58
 #: src/Modules/Yoast.php:54
@@ -53,11 +53,11 @@ msgid "Move Premium feature pages to the Upgrades panel"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:77
-#: src/Modules/AllInOneWpMigration.php:76
+#: src/Modules/AllInOneWpMigration.php:84
 #: src/Modules/Bnfw.php:56
-#: src/Modules/EmbedPress.php:80
+#: src/Modules/EmbedPress.php:88
 #: src/Modules/InstagramFeed.php:58
-#: src/Modules/LocationWeather.php:61
+#: src/Modules/LocationWeather.php:69
 #: src/Modules/Mc4wp.php:52
 #: src/Modules/PublishPressFuture.php:100
 #: src/Modules/WpMailSmtp.php:68
@@ -71,18 +71,18 @@ msgid "Keep the post-list title column readable beside its SEO column"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:140
-#: src/Modules/EmbedPress.php:152
+#: src/Modules/EmbedPress.php:160
 #: src/Modules/InstagramFeed.php:129
-#: src/Modules/LocationWeather.php:156
+#: src/Modules/LocationWeather.php:164
 #: src/Modules/WpMailSmtp.php:264
 #: src/Modules/Yoast.php:221
 msgid "Hide upsell promotions on its screens"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:165
-#: src/Modules/EmbedPress.php:113
+#: src/Modules/EmbedPress.php:121
 #: src/Modules/InstagramFeed.php:91
-#: src/Modules/LocationWeather.php:85
+#: src/Modules/LocationWeather.php:93
 #: src/Modules/Mc4wp.php:92
 #: src/Modules/PublishPressFuture.php:129
 #: src/Modules/WpMailSmtp.php:98
@@ -108,7 +108,7 @@ msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:261
-#: src/Modules/LocationWeather.php:171
+#: src/Modules/LocationWeather.php:179
 #: src/Modules/WpMailSmtp.php:227
 msgid "Restore the standard admin footer"
 msgstr ""
@@ -158,16 +158,16 @@ msgid "Hide the AI credits upsell"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:497
-#: src/Modules/EmbedPress.php:142
+#: src/Modules/EmbedPress.php:150
 #: src/Modules/WpMailSmtp.php:208
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:504
 #: src/Modules/BrokenLinkChecker.php:64
-#: src/Modules/EmbedPress.php:177
-#: src/Modules/InstagramFeed.php:193
-#: src/Modules/LocationWeather.php:209
+#: src/Modules/EmbedPress.php:185
+#: src/Modules/InstagramFeed.php:218
+#: src/Modules/LocationWeather.php:217
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/WpMailSmtp.php:283
 #: src/Modules/Yoast.php:281
@@ -178,15 +178,21 @@ msgstr ""
 msgid "Remove upgrade items from the admin bar"
 msgstr ""
 
-#: src/Modules/AllInOneWpMigration.php:69
+#: src/Modules/AllInOneWpMigration.php:44
+#: src/Modules/EmbedPress.php:39
+#: src/Modules/LocationWeather.php:44
+msgid "Make its admin menu icon white like the core icons"
+msgstr ""
+
+#: src/Modules/AllInOneWpMigration.php:77
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: src/Modules/AllInOneWpMigration.php:101
+#: src/Modules/AllInOneWpMigration.php:109
 msgid "Remove Pro-only export and import destinations"
 msgstr ""
 
-#: src/Modules/AllInOneWpMigration.php:116
+#: src/Modules/AllInOneWpMigration.php:124
 msgid "Tidy the import upload-limit notice"
 msgstr ""
 
@@ -206,12 +212,12 @@ msgstr ""
 msgid "Hide the stray empty heading on its pages"
 msgstr ""
 
-#: src/Modules/EmbedPress.php:119
-#: src/Modules/LocationWeather.php:102
+#: src/Modules/EmbedPress.php:127
+#: src/Modules/LocationWeather.php:110
 msgid "Show sale notices only in the Upgrades panel"
 msgstr ""
 
-#: src/Modules/EmbedPress.php:129
+#: src/Modules/EmbedPress.php:137
 msgid "Remove the milestone celebration popup"
 msgstr ""
 
@@ -223,11 +229,11 @@ msgstr ""
 msgid "Skip the recommended-plugin installs in its setup wizard"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:91
+#: src/Modules/LocationWeather.php:99
 msgid "Remove promotional notices and popups"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:112
+#: src/Modules/LocationWeather.php:120
 #: src/Modules/Mc4wp.php:128
 #: src/Modules/PostTypesOrder.php:50
 #: src/Modules/WpMailSmtp.php:104
@@ -235,11 +241,11 @@ msgstr ""
 msgid "Move the setup notice to the plugin screens and dashboard widget"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:121
+#: src/Modules/LocationWeather.php:129
 msgid "Move the weather editor's Pro pitches to the Upgrades panel"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:188
+#: src/Modules/LocationWeather.php:196
 msgid "Skip the unused block-editor promo bundle"
 msgstr ""
 

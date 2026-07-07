@@ -40,6 +40,14 @@ final class AllInOneWpMigration extends AbstractModule
     public function features(): array
     {
         return [
+            'menu-icon' => [
+                'label' => __('Make its admin menu icon white like the core icons', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* AI1WM: the sidebar icon is a brand-colored image (background on the
+                   ::before); flatten it to white like the core icons */
+                #toplevel_page_ai1wm_export .wp-menu-image::before { filter: brightness(0) invert(1); }
+                CSS,
+            ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
                 /*
