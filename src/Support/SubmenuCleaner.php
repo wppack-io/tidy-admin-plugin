@@ -301,6 +301,20 @@ final class SubmenuCleaner
                 buttonWrap.appendChild(button);
                 links.appendChild(buttonWrap);
             });
+
+            // Some plugin apps rebuild the page container at boot and sweep the
+            // buttons out with it — YouTube Feed's builder replaces the whole
+            // #wpbody-content node — so watch a stable ancestor and put them
+            // back wherever the container ends up.
+            var anchorEl = document.getElementById('tidy-admin-meta-region') || links;
+            var watchRoot = document.getElementById('wpbody') || document.body;
+            new MutationObserver(function () {
+                if (document.body.contains(anchorEl)) {
+                    return;
+                }
+                var target = document.getElementById('wpbody-content') || watchRoot;
+                target.insertBefore(anchorEl, target.firstChild);
+            }).observe(watchRoot, { childList: true, subtree: true });
         })();
         </script>
         <?php
