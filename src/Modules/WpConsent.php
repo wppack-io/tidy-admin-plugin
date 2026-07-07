@@ -206,6 +206,11 @@ final class WpConsent extends AbstractModule
                    unaffected */
                 body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 9990; }
                 body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* Pull the closed buttons left of the header's Notifications bell so
+                   they don't cover it (like the AIOSEO overlay clears its bell) */
+                @media (min-width: 783px) {
+                    body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region #screen-meta-links { margin-right: 70px; }
+                }
                 /* Below 783px the 46px admin bar overlaps the top of #wpbody */
                 @media (max-width: 782px) {
                     body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region { top: 46px; }
