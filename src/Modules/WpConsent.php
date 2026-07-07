@@ -213,7 +213,10 @@ final class WpConsent extends AbstractModule
                    keeps the open panel off the admin menu — its tab column would
                    otherwise sit flush against it; the right-aligned closed buttons are
                    unaffected */
-                body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 9990; }
+                /* z-index 1000 sits above the plugin's static header but below its
+                   Notifications drawer (1100), so the drawer slides out over the
+                   buttons instead of under them */
+                body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 1000; }
                 body[class*="page_wpconsent"]:not([class*="onboarding"]) #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                 /* Pull the closed buttons left of the header's Notifications bell so
                    they don't cover it (like the AIOSEO overlay clears its bell) */
