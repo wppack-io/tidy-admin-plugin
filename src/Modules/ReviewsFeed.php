@@ -78,6 +78,29 @@ final class ReviewsFeed extends AbstractModule
                         'sbr-about',   // About Us (team/product background — a resource)
                     ],
                 ],
+                // The documentation its page footer links out to, in core's
+                // wording (the footer itself is hidden by upsell-ui)
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'help',
+                        'parent' => 'sbr',
+                        'html' => '<p><a href="https://smashballoon.com/docs/reviews/" target="_blank" rel="noopener noreferrer">'
+                            . esc_html__('Documentation') . '</a></p>',
+                    ],
+                ],
+            ],
+            'upsell-ui' => [
+                'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Reviews Feed: "License Key" section on the settings General tab — Lite
+                   needs no license; the section only pitches Pro with the 50%-off offer,
+                   which already rides in the Upgrades panel */
+                body[class*="page_sbr"] .sb-settings-section-ctn:has(a[href*="reviews-lite-upgrade"]) { display: none !important; }
+                /* Reviews Feed: "Made with ♥ by the Smash Balloon Team" footer under its
+                   screens (branding, social profiles, a plugins showcase link); its
+                   documentation link lives in the Help panel */
+                body[class*="page_sbr"] .sb-bottom-footer-social-ctn { display: none !important; }
+                CSS,
             ],
             'plugin-list-links' => [
                 'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
