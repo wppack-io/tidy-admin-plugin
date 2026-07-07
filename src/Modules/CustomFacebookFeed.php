@@ -66,6 +66,16 @@ final class CustomFacebookFeed extends AbstractModule
                         'cff-about-us', // About Us (team/product background — a resource)
                     ],
                 ],
+                // The documentation its page footer links out to, in core's
+                // wording (footer and header Help button are hidden by upsell-ui)
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'help',
+                        'parent' => 'cff-top',
+                        'html' => '<p><a href="https://smashballoon.com/docs/facebook/" target="_blank" rel="noopener noreferrer">'
+                            . esc_html__('Documentation') . '</a></p>',
+                    ],
+                ],
             ],
             'plugin-list-links' => [
                 'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
@@ -164,6 +174,24 @@ final class CustomFacebookFeed extends AbstractModule
                 /* Facebook Feed: "License key" row on the settings General tab (Lite
                    needs no license — only a Pro pitch plus an upgrade button) */
                 .sb-license-box { display: none !important; }
+                /* Facebook Feed: "Help" button in its screen header — it leads to the
+                   Support page relocated into the Help panel */
+                body[class*="page_cff"] .cff-fb-header .cff-fb-hd-btn[href*="cff-support"] { display: none !important; }
+                /* Facebook Feed: "Made with ♥ by the Smash Balloon Team" footer under
+                   its screens (branding, social profiles, a plugins showcase link); its
+                   documentation link lives in the Help panel */
+                body[class*="page_cff"] .sb-bottom-footer-social-ctn { display: none !important; }
+                /* Facebook Feed: "Optimize images with Facebook Feed Pro" pitch on the
+                   settings Advanced tab */
+                body[class*="page_cff"] .cff-caching-pro-cta { display: none !important; }
+                CSS,
+            ],
+            'select-fields' => [
+                'label' => __('Fix the squeezed select fields on its screens', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Facebook Feed: its select boxes ship with uneven padding that
+                   crowds the text against the dropdown arrow */
+                .sb-form-field .cff-select { padding: 0 24px 0 12px !important; }
                 CSS,
             ],
             'panel-placement' => [
