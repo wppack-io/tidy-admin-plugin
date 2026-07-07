@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "39afe4eead62aad71d6300d9732d187d",
+    "content-hash": "3fbea3c8c08ae96bf6967052a5ae33d3",
     "packages": [
         {
             "name": "composer/installers",
@@ -7053,6 +7053,36 @@
                 "source": "https://plugins.svn.wordpress.org/wp-mail-smtp"
             },
             "time": "2026-06-25T08:56:20+00:00"
+        },
+        {
+            "name": "wp-plugin/wpconsent-cookies-banner-privacy-suite",
+            "version": "1.1.7",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wpconsent-cookies-banner-privacy-suite/",
+                "reference": "tags/1.1.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wpconsent-cookies-banner-privacy-suite.1.1.7.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "Cookie consent banner with cookie scanner & script blocking. Manage cookie consent, cookie notice & cookie policy for GDPR, CCPA & privacy compliance.",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/wpconsent-cookies-banner-privacy-suite/#developers",
+                "issues": "https://wordpress.org/support/plugin/wpconsent-cookies-banner-privacy-suite",
+                "source": "https://plugins.svn.wordpress.org/wpconsent-cookies-banner-privacy-suite"
+            },
+            "time": "2026-06-24T10:26:14+00:00"
         },
         {
             "name": "wp-plugin/yet-another-related-posts-plugin",

@@ -52,6 +52,7 @@ final class TidyAdminPlugin
         Modules\TaxonomyTermsOrder::class,
         Modules\WordPressCore::class,
         Modules\WpChat::class,
+        Modules\WpConsent::class,
         Modules\Wordfence::class,
         Modules\WpMailSmtp::class,
         Modules\Yarpp::class,

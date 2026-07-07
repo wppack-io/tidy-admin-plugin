@@ -58,6 +58,7 @@
         "wp-plugin/wordfence": "*",
         "wp-plugin/wordpress-seo": "*",
         "wp-plugin/wp-mail-smtp": "*",
+        "wp-plugin/wpconsent-cookies-banner-privacy-suite": "*",
         "wp-plugin/yet-another-related-posts-plugin": "*",
         "yoast/phpunit-polyfills": "^4.0"
     },
