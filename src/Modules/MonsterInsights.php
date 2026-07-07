@@ -86,6 +86,19 @@ final class MonsterInsights extends AbstractModule
                     ],
                 ],
             ],
+            'dashboard-widget' => [
+                'label' => __('Hide the setup pitch in the analytics dashboard widget', 'wppack-tidy-admin'),
+                /*
+                 * The "MonsterInsights" dashboard widget keeps its place, but its
+                 * unconfigured-state headline "Your website analytics dashboard is
+                 * not currently configured. Please use our setup wizard to get
+                 * started." is dropped — the same setup pitch already rides in the
+                 * "Pending plugin setup" widget. The connect button below it stays.
+                 */
+                'adminCss' => <<<'CSS'
+                #monsterinsights_reports_widget .mi-dw-not-authed h2 { display: none !important; }
+                CSS,
+            ],
         ];
     }
 }
