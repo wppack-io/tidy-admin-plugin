@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-07T12:01:19+09:00\n"
+"POT-Creation-Date: 2026-07-07T12:19:51+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -114,7 +114,7 @@ msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:261
-#: src/Modules/Duplicator.php:350
+#: src/Modules/Duplicator.php:364
 #: src/Modules/LocationWeather.php:179
 #: src/Modules/WpMailSmtp.php:227
 msgid "Restore the standard admin footer"
@@ -240,7 +240,11 @@ msgstr ""
 msgid "Hide the license pitch on its settings screen"
 msgstr ""
 
-#: src/Modules/Duplicator.php:365
+#: src/Modules/Duplicator.php:350
+msgid "Stop the post-install welcome-page redirect"
+msgstr ""
+
+#: src/Modules/Duplicator.php:379
 #: src/Modules/Wordfence.php:158
 msgid "Overlay the Help and Upgrades buttons onto the page title"
 msgstr ""

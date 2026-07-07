@@ -346,6 +346,20 @@ final class Duplicator extends AbstractModule
                 body[class*="_page_duplicator-settings"] table.licenses-table { display: none !important; }
                 CSS,
             ],
+            'welcome-redirect' => [
+                'label' => __('Stop the post-install welcome-page redirect', 'wppack-tidy-admin'),
+                /*
+                 * Activating the plugin redirects the next admin request to a hidden
+                 * "Welcome to Duplicator" tour (newsletter/telemetry opt-in plus a
+                 * feature pitch). Only the redirect callback hangs on admin_init from
+                 * this class; the page itself stays reachable by URL.
+                 */
+                'noticeDenyByHook' => [
+                    'admin_init' => [
+                        'Duplicator\\Controllers\\WelcomeController',
+                    ],
+                ],
+            ],
             'footer' => [
                 'label' => __('Restore the standard admin footer', 'wppack-tidy-admin'),
                 /*
