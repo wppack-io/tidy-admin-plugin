@@ -62,6 +62,61 @@ final class FeedsForYoutube extends AbstractModule
                     ],
                 ],
             ],
+            'wizard-plugin-installs' => [
+                'label' => __('Skip the recommended-plugin installs in its setup wizard', 'wppack-tidy-admin'),
+                /*
+                 * The setup wizard's Configure features step mixes cross-sell
+                 * install toggles (Reviews Feed, WPChat — checked by default,
+                 * they install other plugins) and a "Pro Features" teaser list
+                 * under the functional toggles; its GDPR step pitches installing
+                 * WPConsent. All hidden, and the wizard's install endpoint is
+                 * short-circuited so nothing installs even if submitted.
+                 */
+                'adminCss' => <<<'CSS'
+                /* Cross-sell install rows (identified by their install tooltip) */
+                body[class*="page_youtube-feed"] .sby-obw-radio-component:has(.sby-obw-plugin-info-wrap) { display: none !important; }
+                /* "Pro Features" heading and the teaser toggles under it */
+                body[class*="page_youtube-feed"] h2.sby-obw-sub-heading,
+                body[class*="page_youtube-feed"] h2.sby-obw-sub-heading ~ .sby-obw-radio-component { display: none !important; }
+                /* GDPR step: the WPConsent install pitch and its explainer */
+                body[class*="page_youtube-feed"] .sby-obw-radio-component-wp-consent,
+                body[class*="page_youtube-feed"] .sb-onboarding-wizard-gdpr-info { display: none !important; }
+                CSS,
+                'register' => static function (): void {
+                    // The wizard's other-plugin installers: report success without
+                    // installing anything, so the flow continues untouched
+                    add_action('wp_ajax_sby_install_other_plugins', static function (): void {
+                        check_ajax_referer('sby-admin', 'nonce');
+                        wp_send_json_success();
+                    }, 1);
+                    add_action('wp_ajax_sby_install_wpconsent', static function (): void {
+                        wp_send_json_success();
+                    }, 1);
+
+                    // Step 3 (GDPR/WPConsent pitch) and step 4 ("You might also be
+                    // interested in..." — WPForms, MonsterInsights, OptinMonster
+                    // install offers) sell plugins, nothing else; with their
+                    // installers blocked, pass straight through both. The wizard
+                    // navigates client-side, so the current step is read from the
+                    // URL on every tick.
+                    add_action('admin_print_footer_scripts', static function (): void {
+                        if (($_GET['page'] ?? '') !== 'youtube-feed-setup') {
+                            return;
+                        }
+                        echo '<script>document.addEventListener("DOMContentLoaded",function(){'
+                            . 'var clickedFor="";'
+                            . 'setInterval(function(){'
+                            . 'var step=new URLSearchParams(location.search).get("step");'
+                            . 'var wrap=document.querySelector(".sby-obw-steps-wrap");'
+                            . 'if(step!=="3"&&step!=="4"){if(wrap){wrap.style.visibility="";}return;}'
+                            . 'if(wrap){wrap.style.visibility="hidden";}'
+                            . 'var btn=document.querySelector("button.sby-obw-btn-primary");'
+                            . 'if(btn&&clickedFor!==step){clickedFor=step;btn.click();}'
+                            . '},300);'
+                            . '});</script>';
+                    });
+                },
+            ],
             'plugin-list-links' => [
                 'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
                 'upsellLinkUrls' => [
