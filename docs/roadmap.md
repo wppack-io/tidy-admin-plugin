@@ -38,6 +38,12 @@ time and are listed only to explain prioritization.
 | [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 3M+ | WP Mail SMTP Pro |
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 2M+ | MC4WP Premium |
 | [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 1M+ | Instagram Feed Pro |
+| [Facebook Feed (Smash Balloon)](https://wordpress.org/plugins/custom-facebook-feed/) | 200k+ | Custom Facebook Feed Pro |
+| [YouTube Feeds (Smash Balloon)](https://wordpress.org/plugins/feeds-for-youtube/) | 100k+ | YouTube Feed Pro |
+| [Twitter Feeds (Smash Balloon)](https://wordpress.org/plugins/custom-twitter-feeds/) | 100k+ | Custom Twitter Feeds Pro |
+| [Reviews Feed (Smash Balloon)](https://wordpress.org/plugins/reviews-feed/) | 40k+ | Reviews Feed Pro |
+| [TikTok Feeds (Smash Balloon)](https://wordpress.org/plugins/feeds-for-tiktok/) | 20k+ | TikTok Feeds Pro |
+| [WPChat (Smash Balloon)](https://wordpress.org/plugins/smashballoon-wpchat-livechat-customer-support/) | 10k+ | WPChat paid tiers |
 | [Duplicator](https://wordpress.org/plugins/duplicator/) | 1M+ | Duplicator Pro |
 | [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 800k+ | PublishPress Future Pro |
 | [Broken Link Checker](https://wordpress.org/plugins/broken-link-checker/) | 700k+ | Cloud Link Checker (paid service) |
@@ -48,6 +54,11 @@ time and are listed only to explain prioritization.
 | [BNFW](https://wordpress.org/plugins/bnfw/) | 200k+ | Paid add-ons, priority support |
 | [EmbedPress](https://wordpress.org/plugins/embedpress/) | 100k+ | EmbedPress Pro |
 | [Location Weather](https://wordpress.org/plugins/location-weather/) | 10k+ | Location Weather Pro |
+
+Plus a **WordPress core** module (`WordPressCore`, always active) whose
+features clean up core's own admin-UI nudges — every feature ships **off by
+default**, opt-in on Settings › Tidy Admin, since these touch WordPress
+itself rather than a vendor's promotions.
 
 ## Candidates — tier 1
 
