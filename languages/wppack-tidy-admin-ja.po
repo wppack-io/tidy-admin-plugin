@@ -398,3 +398,6 @@ msgstr "セットアップガイド"
 
 msgid "Match its menu notification badge to the admin colour scheme"
 msgstr "メニューの通知バッジを管理カラースキームに合わせる"
+
+msgid "Open the Help and Upgrades panels below its toolbar"
+msgstr "ヘルプとアップグレードのパネルをツールバーの下に開く"

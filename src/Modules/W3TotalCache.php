@@ -144,6 +144,29 @@ final class W3TotalCache extends AbstractModule
                 #w3tc-wizard-container { max-width: none !important; }
                 CSS,
             ],
+            'panel-placement' => [
+                'label' => __('Open the Help and Upgrades panels below its toolbar', 'wppack-tidy-admin'),
+                // Core prints #screen-meta (the Help/Upgrades panel) above W3TC's
+                // own top nav bar, so opening a panel shoves the toolbar down the
+                // page. CSS can't reorder it without breaking core's screen-meta
+                // positioning, so move the panel and its toggle buttons to sit just
+                // after the toolbar in the DOM. Runs while the footer parses, before
+                // screenMeta.init() binds on DOM-ready, so the toggles still work.
+                'register' => static function (): void {
+                    add_action('admin_footer', static function (): void {
+                        $screen = get_current_screen();
+                        if (!$screen instanceof WP_Screen || !str_contains($screen->id, 'w3tc')) {
+                            return;
+                        }
+                        wp_print_inline_script_tag(
+                            '(function(){var b=document.getElementById("w3tc-top-nav-bar"),'
+                            . 'm=document.getElementById("screen-meta"),'
+                            . 'l=document.getElementById("screen-meta-links");'
+                            . 'if(b&&m&&l){b.after(m,l);}})();',
+                        );
+                    });
+                },
+            ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 // The "gopro" call-to-action buttons scattered beside Pro-only
