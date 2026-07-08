@@ -27,7 +27,7 @@ final class UpgradesDirectory
     /**
      * @param array<string, list<string>>                                 $needlesByCategory category => slug substrings (only the "upgrade" category is shown here)
      * @param list<array{category: string, parent: string, html: string}> $extraContent      module-declared panel HTML
-     * @param list<array{parent: string, name: string, slug: string, license: array{action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|null}> $plugins active plugins that own a menu parent
+     * @param list<array{parent: string, name: string, slug: string, license: array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|array{mode: 'redirect', urlTemplate: string}|null}> $plugins active plugins that own a menu parent
      */
     public function __construct(
         private readonly array $needlesByCategory,
@@ -131,7 +131,7 @@ final class UpgradesDirectory
      * for it here, and the response shape ride on data-attributes; the modal
      * script (printed once) fires the action and follows the returned URL.
      *
-     * @param array{action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|null $license
+     * @param array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|array{mode: 'redirect', urlTemplate: string}|null $license
      */
     private function licenseButton(?array $license): string
     {
@@ -139,13 +139,24 @@ final class UpgradesDirectory
             return '';
         }
 
+        if ($license['mode'] === 'redirect') {
+            // The plugin's own seamless-upgrade URL; {key} is filled in by the
+            // modal script and the browser is sent there.
+            $data = sprintf('data-mode="redirect" data-url="%s"', esc_attr($license['urlTemplate']));
+        } else {
+            $data = sprintf(
+                'data-mode="ajax" data-action="%s" data-nonce="%s" data-nonce-param="%s" data-key-param="%s" data-redirect="%s"',
+                esc_attr($license['action']),
+                esc_attr(wp_create_nonce($license['nonceAction'])),
+                esc_attr($license['nonceParam']),
+                esc_attr($license['keyParam']),
+                esc_attr($license['redirectPath']),
+            );
+        }
+
         return sprintf(
-            '<p class="tidy-admin-upgrades-card__license"><button type="button" class="button-link tidy-admin-upgrades-license" data-action="%s" data-nonce="%s" data-nonce-param="%s" data-key-param="%s" data-redirect="%s">%s</button></p>',
-            esc_attr($license['action']),
-            esc_attr(wp_create_nonce($license['nonceAction'])),
-            esc_attr($license['nonceParam']),
-            esc_attr($license['keyParam']),
-            esc_attr($license['redirectPath']),
+            '<p class="tidy-admin-upgrades-card__license"><button type="button" class="button-link tidy-admin-upgrades-license" %s>%s</button></p>',
+            $data,
             esc_html__('Already have a license key? Enter it to install Pro', 'wppack-tidy-admin'),
         );
     }
@@ -288,7 +299,7 @@ final class UpgradesDirectory
                 function showError(msg) { errorEl.textContent = msg; errorEl.hidden = false; }
                 function close() { modal.hidden = true; }
                 function open(btn) {
-                    cfg = { action: btn.dataset.action, nonce: btn.dataset.nonce, nonceParam: btn.dataset.nonceParam, keyParam: btn.dataset.keyParam, redirect: btn.dataset.redirect };
+                    cfg = { mode: btn.dataset.mode, url: btn.dataset.url, action: btn.dataset.action, nonce: btn.dataset.nonce, nonceParam: btn.dataset.nonceParam, keyParam: btn.dataset.keyParam, redirect: btn.dataset.redirect };
                     keyInput.value = ''; errorEl.hidden = true; submitBtn.disabled = false;
                     modal.hidden = false; keyInput.focus();
                 }
@@ -301,6 +312,7 @@ final class UpgradesDirectory
                 submitBtn.addEventListener('click', function () {
                     var key = keyInput.value.trim();
                     if (!key) { showError('{$enterKey}'); return; }
+                    if (cfg.mode === 'redirect') { window.location.href = cfg.url.replace('{key}', encodeURIComponent(key)); return; }
                     submitBtn.disabled = true; errorEl.hidden = true;
                     var body = new URLSearchParams();
                     body.set('action', cfg.action);

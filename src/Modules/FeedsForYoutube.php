@@ -34,6 +34,17 @@ final class FeedsForYoutube extends AbstractModule
         return 'sby-feed-builder';
     }
 
+    /** @return array{mode: 'redirect', urlTemplate: string} */
+    public function licenseConnect(): array
+    {
+        // Lite ships an "already have a license?" key box; Smash Balloon's own
+        // seamless-upgrade URL takes the key and installs Pro from the account.
+        return [
+            'mode' => 'redirect',
+            'urlTemplate' => 'https://smashballoon.com/youtube-feed/youtube-lite-upgrade/?license_key={key}&upgrade=true',
+        ];
+    }
+
     public function features(): array
     {
         return [

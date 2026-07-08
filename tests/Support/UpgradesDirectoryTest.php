@@ -138,6 +138,7 @@ final class UpgradesDirectoryTest extends TestCase
                 'name' => 'WP Mail SMTP',
                 'slug' => 'wp-mail-smtp',
                 'license' => [
+                    'mode' => 'ajax',
                     'action' => 'wp_mail_smtp_vue_upgrade_plugin',
                     'nonceAction' => 'wpms-admin-nonce',
                     'nonceParam' => 'nonce',
@@ -151,12 +152,43 @@ final class UpgradesDirectoryTest extends TestCase
 
         // The trigger carries the plugin's own AJAX action and param names
         $this->assertStringContainsString('tidy-admin-upgrades-license', $html);
+        $this->assertStringContainsString('data-mode="ajax"', $html);
         $this->assertStringContainsString('data-action="wp_mail_smtp_vue_upgrade_plugin"', $html);
         $this->assertStringContainsString('data-key-param="license_key"', $html);
         $this->assertStringContainsString('data-redirect="redirect_url"', $html);
         // The shared modal and its script are printed once
         $this->assertStringContainsString('id="tidy-admin-license-modal"', $html);
         $this->assertStringContainsString('window.ajaxurl', $html);
+    }
+
+    public function test_renders_a_redirect_mode_license_button(): void
+    {
+        global $submenu;
+        $submenu = [];
+
+        $directory = new UpgradesDirectory(
+            ['upgrade' => []],
+            [['category' => 'upgrade', 'parent' => 'sb-instagram-feed', 'html' => '<p><a href="https://smashballoon.com/">Upgrade</a></p>']],
+            [[
+                'parent' => 'sb-instagram-feed',
+                'name' => 'Instagram Feed',
+                'slug' => 'instagram-feed',
+                'license' => [
+                    'mode' => 'redirect',
+                    'urlTemplate' => 'https://smashballoon.com/instagram-feed/instagram-lite-upgrade/?license_key={key}&upgrade=true',
+                ],
+            ]],
+        );
+
+        $html = $this->render($directory);
+
+        // A redirect trigger carries the vendor's own upgrade URL with the {key}
+        // placeholder left for the script to fill in — no AJAX action/nonce.
+        $this->assertStringContainsString('data-mode="redirect"', $html);
+        $this->assertStringContainsString('instagram-lite-upgrade', $html);
+        $this->assertStringContainsString('{key}', $html);
+        $this->assertStringNotContainsString('data-action=', $html);
+        $this->assertStringContainsString('id="tidy-admin-license-modal"', $html);
     }
 
     public function test_no_license_modal_when_no_plugin_offers_a_connect_flow(): void

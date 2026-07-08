@@ -65,15 +65,18 @@ interface Module
     public function providesHelpPanel(): bool;
 
     /**
-     * How this plugin's own "enter your license key" flow installs the paid
-     * version — when the free plugin ships a real one. Many only show a
-     * "no license needed" placeholder; those return null. When present, the
-     * Plugin Upgrades screen offers a key-entry modal that fires the plugin's
-     * own AJAX connect handler (with a nonce created for `nonceAction`), then
-     * follows the URL at `redirectPath` in the response so the plugin performs
-     * the real Pro install.
+     * How this plugin's own "enter your license key" flow reaches the paid
+     * version — when the free plugin ships a real one (many only show a
+     * "no license needed" placeholder; those return null). The Plugin Upgrades
+     * screen then offers a key-entry modal in one of two modes:
      *
-     * @return array{action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|null
+     *  - 'ajax': post the key to the plugin's own AJAX action (with a nonce
+     *    created here for `nonceAction`) and follow the URL at `redirectPath`
+     *    in the response, so the plugin performs the real Pro install.
+     *  - 'redirect': send the browser to `urlTemplate` with `{key}` replaced by
+     *    the entered key — the vendor's own seamless-upgrade URL.
+     *
+     * @return array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|array{mode: 'redirect', urlTemplate: string}|null
      */
     public function licenseConnect(): ?array;
 

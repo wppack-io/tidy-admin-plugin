@@ -32,6 +32,18 @@ final class CustomTwitterFeeds extends AbstractModule
         return 'custom-twitter-feeds';
     }
 
+    /** @return array{mode: 'redirect', urlTemplate: string} */
+    public function licenseConnect(): array
+    {
+        // Lite ships an "already have a license?" key box; Smash Balloon's own
+        // seamless-upgrade URL takes the key and installs Pro from the account.
+        // Twitter Feeds carries the key in edd_license_key, not license_key.
+        return [
+            'mode' => 'redirect',
+            'urlTemplate' => 'https://smashballoon.com/custom-twitter-feeds/twitter-lite-upgrade/?edd_license_key={key}&upgrade=true',
+        ];
+    }
+
     public function features(): array
     {
         return [

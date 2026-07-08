@@ -32,6 +32,17 @@ final class CustomFacebookFeed extends AbstractModule
         return 'cff-top';
     }
 
+    /** @return array{mode: 'redirect', urlTemplate: string} */
+    public function licenseConnect(): array
+    {
+        // Lite ships an "already have a license?" key box; Smash Balloon's own
+        // seamless-upgrade URL takes the key and installs Pro from the account.
+        return [
+            'mode' => 'redirect',
+            'urlTemplate' => 'https://smashballoon.com/custom-facebook-feed/facebook-lite-upgrade/?license_key={key}&upgrade=true',
+        ];
+    }
+
     public function features(): array
     {
         return [
