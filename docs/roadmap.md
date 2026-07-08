@@ -49,6 +49,7 @@ time and are listed only to explain prioritization.
 | [Broken Link Checker](https://wordpress.org/plugins/broken-link-checker/) | 700k+ | Cloud Link Checker (paid service) |
 | [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 600k+ | Advanced Post Types Order |
 | [Contact Form CFDB7](https://wordpress.org/plugins/contact-form-cfdb7/) | 500k+ | Paid extensions |
+| [Custom Post Type UI](https://wordpress.org/plugins/custom-post-type-ui/) | 1M+ | CPT UI Pro (Pluginize / WebDevStudios) |
 | [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 500k+ | Advanced Taxonomy Terms Order |
 | [YARPP](https://wordpress.org/plugins/yet-another-related-posts-plugin/) | 200k+ | — (review requests only) |
 | [BNFW](https://wordpress.org/plugins/bnfw/) | 200k+ | Paid add-ons, priority support |

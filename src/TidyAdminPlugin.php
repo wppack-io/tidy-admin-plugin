@@ -38,6 +38,7 @@ final class TidyAdminPlugin
         Modules\Bnfw::class,
         Modules\BrokenLinkChecker::class,
         Modules\Cfdb7::class,
+        Modules\CustomPostTypeUi::class,
         Modules\CustomFacebookFeed::class,
         Modules\CustomTwitterFeeds::class,
         Modules\Duplicator::class,

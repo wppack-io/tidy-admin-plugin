@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24ae25e7055a826791db3777fad84281",
+    "content-hash": "368abad2802f745b705ccdda034dca79",
     "packages": [
         {
             "name": "composer/installers",
@@ -6588,6 +6588,37 @@
                 "source": "https://plugins.svn.wordpress.org/custom-facebook-feed"
             },
             "time": "2026-06-10T14:15:46+00:00"
+        },
+        {
+            "name": "wp-plugin/custom-post-type-ui",
+            "version": "1.19.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/custom-post-type-ui/",
+                "reference": "tags/1.19.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/custom-post-type-ui.1.19.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "webdevstudios"
+                }
+            ],
+            "description": "Admin UI for creating custom content types like post types and taxonomies",
+            "homepage": "https://github.com/WebDevStudios/custom-post-type-ui/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/custom-post-type-ui/#developers",
+                "issues": "https://wordpress.org/support/plugin/custom-post-type-ui",
+                "source": "https://plugins.svn.wordpress.org/custom-post-type-ui"
+            },
+            "time": "2026-05-11T13:15:49+00:00"
         },
         {
             "name": "wp-plugin/custom-twitter-feeds",
