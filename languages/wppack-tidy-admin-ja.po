@@ -395,3 +395,6 @@ msgstr "サポート"
 
 msgid "Setup Guide"
 msgstr "セットアップガイド"
+
+msgid "Match its menu notification badge to the admin colour scheme"
+msgstr "メニューの通知バッジを管理カラースキームに合わせる"

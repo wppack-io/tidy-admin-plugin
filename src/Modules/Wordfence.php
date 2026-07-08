@@ -192,6 +192,28 @@ final class Wordfence extends AbstractModule
                 #adminmenu #toplevel_page_Wordfence .wp-submenu a:focus { color: var(--tidy-admin-wf-submenu, #228fc8) !important; }
                 CSS,
             ],
+            'menu-badge-colour' => [
+                'label' => __('Match its menu notification badge to the admin colour scheme', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Wordfence paints its sidebar notification bubble (.wf-menu-badge)
+                   its own brand orange (#fcb214), ignoring the admin colour scheme,
+                   so it clashes with every other menu's blue count. Publish each
+                   built-in scheme's real notification colour as a variable and
+                   re-assert it — same pattern as menu-active-colour. An unknown
+                   scheme sets no variable, so the fallback keeps Wordfence's orange */
+                body.admin-color-fresh { --tidy-admin-wf-badge: #d63638; }
+                body.admin-color-light { --tidy-admin-wf-badge: #d64e07; }
+                body.admin-color-modern { --tidy-admin-wf-badge: #3858e9; }
+                body.admin-color-blue { --tidy-admin-wf-badge: #e1a948; }
+                body.admin-color-coffee { --tidy-admin-wf-badge: #9ea476; }
+                body.admin-color-ectoplasm { --tidy-admin-wf-badge: #d46f15; }
+                body.admin-color-midnight { --tidy-admin-wf-badge: #69a8bb; }
+                body.admin-color-ocean { --tidy-admin-wf-badge: #aa9d88; }
+                body.admin-color-sunrise { --tidy-admin-wf-badge: #ccaf0b; }
+                /* Two ids to outrank Wordfence's own #adminmenu .update-plugins.wf-menu-badge */
+                #adminmenu #toplevel_page_Wordfence .wf-menu-badge { background-color: var(--tidy-admin-wf-badge, #fcb214) !important; }
+                CSS,
+            ],
             'panel-placement' => [
                 'label' => __('Overlay the Help and Upgrades buttons onto the page title', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
