@@ -120,6 +120,10 @@ final class MonsterInsights extends AbstractModule
                 body[class*="page_monsterinsights"] .monsterinsights-prettylinks-flow-ad { display: none !important; }
                 /* The floating "AI Charlie" assistant widget (a Pro/AI upsell prompt) */
                 body[class*="page_monsterinsights"] .monsterinsights-ai-charlie { display: none !important; }
+                /* Setup Checklist: the Pro-feature milestones (one-click eCommerce,
+                   Search Console, form conversions, Custom Dimensions, ...) whose
+                   action is an Upgrade link; the functional setup steps stay */
+                body[class*="page_monsterinsights"] .monsterinsights-setup-checklist-milestone:has(a[href*="monsterinsights.com/lite"]) { display: none !important; }
                 CSS,
             ],
             'panel-placement' => [
