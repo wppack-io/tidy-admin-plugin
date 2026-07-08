@@ -72,11 +72,15 @@ final class W3TotalCache extends AbstractModule
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
                 // "Feature Showcase" is a catalogue of Pro extensions; "About" is a
-                // product page — both belong under the Upgrades panel's Premium tab.
+                // product page; "Statistics" is a Pro-only feature whose free page
+                // is a full-screen "upgrade to unlock" teaser — all belong under
+                // the Upgrades panel's Premium tab. (On W3TC Pro, Statistics is a
+                // real page; a Pro user can switch this feature off to keep it.)
                 'submenuRelocations' => [
                     'premium' => [
                         'w3tc_feature_showcase',
                         'w3tc_about',
+                        'w3tc_stats',
                     ],
                 ],
             ],
