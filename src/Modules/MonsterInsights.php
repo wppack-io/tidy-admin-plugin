@@ -44,19 +44,22 @@ final class MonsterInsights extends AbstractModule
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
                 'submenuRelocations' => [
                     'upgrade' => [
-                        'monsterinsights.com/lite/',   // Upgrade to Pro (redirects to monsterinsights.com)
-                        'monsterinsights.com/lite-promo', // "Earth Day" seasonal sale menu item
+                        'monsterinsights.com/lite/', // Upgrade to Pro (redirects to monsterinsights.com)
                     ],
                 ],
             ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
                 // "UserFeedback" cross-sells another plugin; "Addons" is a Pro
-                // addon marketplace (every addon needs Pro in Lite)
+                // addon marketplace (every addon needs Pro in Lite). The
+                // "Earth Day"/seasonal sale menu item is a rotating promo whose
+                // label means nothing out of season, so it rides here rather than
+                // standing in as an upgrade button on the Plugin Upgrades screen.
                 'submenuRelocations' => [
                     'premium' => [
                         'monsterinsights_settings#/userfeedback',
                         'monsterinsights_settings#/addons',
+                        'monsterinsights.com/lite-promo', // seasonal sale menu item ("Earth Day", etc.)
                     ],
                 ],
             ],

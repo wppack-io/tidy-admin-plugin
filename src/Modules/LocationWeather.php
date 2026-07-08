@@ -52,8 +52,11 @@ final class LocationWeather extends AbstractModule
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
                 'submenuRelocations' => [
                     'upgrade' => [
-                        'splw_admin_dashboard#lite_vs_pro', // Lite vs Pro
+                        // The main upgrade leads (first = the primary action on the
+                        // Upgrades panel and the Plugin Upgrades screen); the
+                        // Lite-vs-Pro comparison follows it.
                         'splw_upgrade_to_pro',              // Upgrade to Pro (redirects to locationweather.io)
+                        'splw_admin_dashboard#lite_vs_pro', // Lite vs Pro
                     ],
                 ],
                 'adminCss' => <<<'CSS'

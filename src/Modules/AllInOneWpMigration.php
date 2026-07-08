@@ -65,9 +65,11 @@ final class AllInOneWpMigration extends AbstractModule
                 /*
                  * The plugin's actual purchase guidance, surfaced in the Upgrades
                  * panel: the Pro edition (which every hidden export/import
-                 * destination linked to) and the Unlimited Extension (the import
-                 * size-limit upsell). Relocated here so the guidance is available
-                 * but out of the working flow.
+                 * destination linked to) leads the Upgrade tab. The Unlimited
+                 * Extension is one specific add-on among many (the import
+                 * size-limit upsell), so it sits under Premium features rather
+                 * than standing in for the main upgrade on the consolidated
+                 * Plugin Upgrades screen.
                  */
                 'extraScreenMetaContent' => [
                     [
@@ -75,6 +77,12 @@ final class AllInOneWpMigration extends AbstractModule
                         'parent' => 'ai1wm_export',
                         'html' => '<ul class="tidy-admin-meta-links">'
                             . '<li><a href="https://servmask.com/products/all-in-one-wp-migration-pro" target="_blank" rel="noopener noreferrer">' . esc_html__('Upgrade to Pro', 'wppack-tidy-admin') . '</a></li>'
+                            . '</ul>',
+                    ],
+                    [
+                        'category' => 'premium',
+                        'parent' => 'ai1wm_export',
+                        'html' => '<ul class="tidy-admin-meta-links">'
                             . '<li><a href="https://servmask.com/products/unlimited-extension" target="_blank" rel="noopener noreferrer">Unlimited Extension</a></li>'
                             . '</ul>',
                     ],
