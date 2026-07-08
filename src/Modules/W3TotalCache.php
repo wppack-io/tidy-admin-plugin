@@ -54,10 +54,13 @@ final class W3TotalCache extends AbstractModule
         return [
             'upgrade-menus' => [
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
-                // The green "Upgrade" button in the plugin's own top nav bar is a
-                // .button-buy-plugin input that opens a Pro-checkout lightbox (the
-                // licensing_upgrade message action); hide it and surface the Pro
-                // pitch in the Upgrades panel instead.
+                // The green "Upgrade" button in the plugin's own top nav bar (and a
+                // "Learn more about Pro!" twin in the footer) is a .button-buy-plugin
+                // input that opens a Pro-checkout lightbox (the licensing_upgrade
+                // message action); hide it and surface the Pro pitch in the Upgrades
+                // panel instead. Not scoped to W3TC's screens: W3TC prints its
+                // toolbar and footer on every admin page (e.g. the plugin-delete
+                // confirmation), so these must be hidden wherever they surface.
                 'extraScreenMetaContent' => [
                     [
                         'category' => 'upgrade',
@@ -66,24 +69,41 @@ final class W3TotalCache extends AbstractModule
                             . esc_html__('Upgrade to Pro', 'wppack-tidy-admin') . '</a></p>',
                     ],
                 ],
+                // The red "Premium Support" link W3TC prepends to its plugins.php
+                // row (a paid-support pitch pointing at admin.php?page=w3tc_support);
+                // drop it via the plugin_action_links filter. The Support page stays
+                // reachable from the toolbar.
+                'upsellLinkUrls' => [
+                    'page=w3tc_support',
+                ],
                 'adminCss' => <<<'CSS'
-                body[class*="page_w3tc"] .button-buy-plugin,
-                body[class*="page_w3tc"] a[href*="licensing_upgrade"] { display: none !important; }
+                .button-buy-plugin,
+                a[href*="licensing_upgrade"] { display: none !important; }
                 CSS,
             ],
             'marketing-notices' => [
                 'label' => __('Silence its fetched marketing notices', 'wppack-tidy-admin'),
-                // Seasonal-sale/coupon notices (e.g. "Get 50% off … flash-sale")
-                // are pulled from W3TC's API into the w3tc_cached_notices option
-                // and injected client-side by the w3tc-admin-notices script.
-                // Dequeue that script so the marketing channel stays quiet — the
-                // plugin's own functional notices are separate PHP admin_notices
-                // and are left untouched.
+                // Two marketing channels, both handled in PHP:
+                // - Seasonal-sale/coupon notices (e.g. "Get 50% off … flash-sale")
+                //   are pulled from W3TC's API into the w3tc_cached_notices option
+                //   and injected client-side by the w3tc-admin-notices script;
+                //   dequeue that script so the channel stays quiet.
+                // - "Activating the Yoast SEO extension …" and its siblings are
+                //   cross-plugin extension pitches pushed into W3TC's own notes via
+                //   the w3tc_notes filter (keyed by extension id); drop that entry.
+                // The plugin's functional notices are separate PHP admin_notices and
+                // are left untouched.
                 'register' => static function (): void {
                     add_action('admin_enqueue_scripts', static function (): void {
                         wp_dequeue_script('w3tc-admin-notices');
                         wp_deregister_script('w3tc-admin-notices');
                     }, 100);
+
+                    add_filter('w3tc_notes', static function (array $notes): array {
+                        unset($notes['wordpress-seo']);
+
+                        return $notes;
+                    }, 999);
                 },
             ],
             'premium-pages' => [
@@ -192,14 +212,24 @@ final class W3TotalCache extends AbstractModule
                 // widget is left alone — it reports real license status. The
                 // General Settings and CDN pages carry their own inline BunnyCDN
                 // sign-up ads (#w3tc-bunnycdn-ad-*).
+                //
+                // The footer and the BunnyCDN ads are NOT scoped to W3TC's own
+                // screens: W3TC prints its footer (and toolbar) on every admin page
+                // via admin_notices/footer — surfacing e.g. on the plugin-delete
+                // confirmation — so they must be hidden wherever they appear. The
+                // gopro buttons and Premium Services tabs only render inside the
+                // cache-setting screens, so those stay scoped. And the toolbar is
+                // real navigation on W3TC's pages, so only the branded copy printed
+                // on every OTHER admin screen is hidden.
                 'adminCss' => <<<'CSS'
-                body[class*="page_w3tc"] .w3tc-gopro,
-                body[class*="page_w3tc"] .nav-tab[data-tab-type="premium-services"],
-                body[class*="page_w3tc"] #w3tc-footer,
-                body[class*="page_w3tc"] [id^="w3tc-bunnycdn-ad"],
+                #w3tc-footer,
+                [id^="w3tc-bunnycdn-ad"],
                 #w3tc_partners,
                 #w3tc_bunnycdn,
                 #w3tc_services { display: none !important; }
+                body:not([class*="page_w3tc"]) #w3tc-top-nav-bar { display: none !important; }
+                body[class*="page_w3tc"] .w3tc-gopro,
+                body[class*="page_w3tc"] .nav-tab[data-tab-type="premium-services"] { display: none !important; }
                 CSS,
             ],
         ];
