@@ -124,11 +124,12 @@ final class MonsterInsights extends AbstractModule
                    Search Console, form conversions, Custom Dimensions, ...) whose
                    action is an Upgrade link; the functional setup steps stay */
                 body[class*="page_monsterinsights"] .monsterinsights-setup-checklist-milestone:has(a[href*="monsterinsights.com/lite"]) { display: none !important; }
-                /* A visible milestone sitting right before a hidden Pro one keeps its
-                   separator border with nothing below it — drop that dangling border.
-                   (:has() cannot be nested, so match the Pro sibling by its lite link
-                   directly rather than with an inner :has().) */
-                body[class*="page_monsterinsights"] .monsterinsights-setup-checklist-milestone:has(+ .monsterinsights-setup-checklist-milestone a[href*="monsterinsights.com/lite"]) { border-bottom: none !important; }
+                /* A visible milestone sitting right before a hidden Pro one keeps the
+                   separator border and inter-item padding a genuine last child sheds —
+                   match a real last milestone (no border, no bottom padding) so the
+                   step ends flush. (:has() cannot be nested, so match the Pro sibling
+                   by its lite link directly rather than with an inner :has().) */
+                body[class*="page_monsterinsights"] .monsterinsights-setup-checklist-milestone:has(+ .monsterinsights-setup-checklist-milestone a[href*="monsterinsights.com/lite"]) { border-bottom: none !important; padding-bottom: 0 !important; }
                 CSS,
             ],
             'panel-placement' => [
