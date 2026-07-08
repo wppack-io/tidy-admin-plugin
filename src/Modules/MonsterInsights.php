@@ -51,10 +51,12 @@ final class MonsterInsights extends AbstractModule
             ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
-                // "UserFeedback" is a cross-sell menu item for another plugin
+                // "UserFeedback" cross-sells another plugin; "Addons" is a Pro
+                // addon marketplace (every addon needs Pro in Lite)
                 'submenuRelocations' => [
                     'premium' => [
                         'monsterinsights_settings#/userfeedback',
+                        'monsterinsights_settings#/addons',
                     ],
                 ],
             ],
