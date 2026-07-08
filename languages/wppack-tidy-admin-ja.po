@@ -380,3 +380,18 @@ msgstr "WordPress.org リンクをプラグインの Help タブに追加"
 
 msgid "Silence its fetched marketing notices"
 msgstr "外部から取得するマーケティング通知を止める"
+
+msgid "Fold documentation links into the native Help"
+msgstr "ドキュメントリンクを標準ヘルプに統合"
+
+msgid "Resources"
+msgstr "リソース"
+
+msgid "FAQ"
+msgstr "よくある質問"
+
+msgid "Support"
+msgstr "サポート"
+
+msgid "Setup Guide"
+msgstr "セットアップガイド"

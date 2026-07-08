@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
+use WP_Screen;
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+use WPPack\Plugin\TidyAdminPlugin\Support\WordPressOrgLinks;
 
 final class W3TotalCache extends AbstractModule
 {
@@ -40,10 +42,10 @@ final class W3TotalCache extends AbstractModule
 
     public function providesHelpPanel(): bool
     {
-        // W3 Total Cache fills core's contextual Help with a dozen tabs of its
-        // own (General, Usage, Compatibility, CDN, …), so keep that as the single
-        // Help button rather than adding a second one. Its FAQ/Support submenus
-        // stay in the sidebar next to the functional cache pages.
+        // W3TC fills core's contextual Help with its own tabs; rather than add a
+        // second Help button, the help-links feature folds our extras (a
+        // Resources tab with FAQ/Support/Setup Guide, plus the WordPress.org
+        // sidebar) into that native Help. So no separate panel here.
         return false;
     }
 
@@ -98,6 +100,49 @@ final class W3TotalCache extends AbstractModule
                         'w3tc_stats',
                     ],
                 ],
+            ],
+            'help-links' => [
+                'label' => __('Fold documentation links into the native Help', 'wppack-tidy-admin'),
+                // W3TC already fills core's contextual Help, so rather than add a
+                // second Help button we fold our extras into that native panel: a
+                // "Resources" tab (FAQ, Support, Setup Guide) plus the standard
+                // WordPress.org links in its sidebar. Their sidebar menu entries
+                // are hidden with CSS — unregistering them (remove_submenu_page)
+                // would revoke access to the pages the Resources tab links to.
+                'register' => static function (): void {
+                    add_action('current_screen', static function (WP_Screen $screen): void {
+                        if (!str_contains($screen->id, 'w3tc')) {
+                            return;
+                        }
+                        $resources = sprintf(
+                            '<p><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></p>'
+                            . '<p><a href="%s">%s</a></p>'
+                            . '<p><a href="%s">%s</a></p>',
+                            esc_url('https://api.w3-edge.com/v1/redirects/faq'),
+                            esc_html__('FAQ', 'wppack-tidy-admin'),
+                            esc_url(admin_url('admin.php?page=w3tc_support')),
+                            esc_html__('Support', 'wppack-tidy-admin'),
+                            esc_url(admin_url('admin.php?page=w3tc_setup_guide')),
+                            esc_html__('Setup Guide', 'wppack-tidy-admin'),
+                        );
+                        $screen->add_help_tab([
+                            'id' => 'tidy-admin-w3tc-resources',
+                            'title' => __('Resources', 'wppack-tidy-admin'),
+                            'content' => $resources,
+                        ]);
+                        $screen->set_help_sidebar(
+                            $screen->get_help_sidebar() . WordPressOrgLinks::html('w3-total-cache'),
+                        );
+                    }, 100);
+                },
+                'adminCss' => <<<'CSS'
+                #adminmenu li:has(> a[href*="redirects/faq"]),
+                #adminmenu li:has(> a[href*="page=w3tc_support"]),
+                #adminmenu li:has(> a[href*="page=w3tc_setup_guide"]) { display: none !important; }
+                /* The Setup Guide wizard is boxed to 900px, stranding it in a
+                   corner of the full-width screen; let it use the width. */
+                #w3tc-wizard-container { max-width: none !important; }
+                CSS,
             ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),

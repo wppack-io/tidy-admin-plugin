@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-08T23:02:00+09:00\n"
+"POT-Creation-Date: 2026-07-08T23:29:42+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -39,7 +39,7 @@ msgstr ""
 #: src/Modules/FeedsForTiktok.php:65
 #: src/Modules/FeedsForYoutube.php:68
 #: src/Modules/OptinMonster.php:59
-#: src/Modules/W3TotalCache.php:64
+#: src/Modules/W3TotalCache.php:66
 #: src/Modules/WpChat.php:126
 msgid "Upgrade to Pro"
 msgstr ""
@@ -57,7 +57,7 @@ msgstr ""
 #: src/Modules/MonsterInsights.php:52
 #: src/Modules/OptinMonster.php:79
 #: src/Modules/ReviewsFeed.php:63
-#: src/Modules/W3TotalCache.php:88
+#: src/Modules/W3TotalCache.php:90
 #: src/Modules/WpConsent.php:54
 #: src/Modules/WpMailSmtp.php:75
 #: src/Modules/Yoast.php:54
@@ -83,7 +83,7 @@ msgstr ""
 #: src/Modules/OptinMonster.php:128
 #: src/Modules/Redirection.php:88
 #: src/Modules/ReviewsFeed.php:93
-#: src/Modules/W3TotalCache.php:103
+#: src/Modules/W3TotalCache.php:148
 #: src/Modules/WpChat.php:107
 #: src/Modules/WpConsent.php:155
 #: src/Modules/WpMailSmtp.php:281
@@ -112,7 +112,7 @@ msgstr ""
 #: src/Modules/OptinMonster.php:44
 #: src/Modules/PublishPressFuture.php:39
 #: src/Modules/ReviewsFeed.php:39
-#: src/Modules/W3TotalCache.php:54
+#: src/Modules/W3TotalCache.php:56
 #: src/Modules/WpChat.php:39
 #: src/Modules/WpConsent.php:44
 #: src/Modules/WpMailSmtp.php:61
@@ -441,8 +441,28 @@ msgstr ""
 msgid "Add the WordPress.org links to the plugin's Help tab"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:73
+#: src/Modules/W3TotalCache.php:75
 msgid "Silence its fetched marketing notices"
+msgstr ""
+
+#: src/Modules/W3TotalCache.php:105
+msgid "Fold documentation links into the native Help"
+msgstr ""
+
+#: src/Modules/W3TotalCache.php:122
+msgid "FAQ"
+msgstr ""
+
+#: src/Modules/W3TotalCache.php:124
+msgid "Support"
+msgstr ""
+
+#: src/Modules/W3TotalCache.php:126
+msgid "Setup Guide"
+msgstr ""
+
+#: src/Modules/W3TotalCache.php:130
+msgid "Resources"
 msgstr ""
 
 #: src/Modules/Wordfence.php:44
