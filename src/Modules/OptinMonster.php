@@ -85,6 +85,18 @@ final class OptinMonster extends AbstractModule
                     ],
                 ],
             ],
+            'dashboard-menu-item' => [
+                'label' => __('Remove the Marketing Education item from the Dashboard menu', 'wppack-tidy-admin'),
+                /*
+                 * OptinMonster injects a "Marketing Education" item under the core
+                 * Dashboard menu that links out to its OptinMonster University
+                 * cross-sell. Hide it, scoped to #menu-dashboard so nothing else
+                 * is touched.
+                 */
+                'adminCss' => <<<'CSS'
+                #adminmenu #menu-dashboard li:has(> a[href*="optin-monster-university"]) { display: none !important; }
+                CSS,
+            ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
                 'submenuRelocations' => [

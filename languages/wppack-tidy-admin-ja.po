@@ -371,3 +371,6 @@ msgstr "ライセンスキーを入力してください。"
 
 msgid "Could not start the upgrade. Please try again."
 msgstr "アップグレードを開始できませんでした。もう一度お試しください。"
+
+msgid "Remove the Marketing Education item from the Dashboard menu"
+msgstr "ダッシュボードメニューの「Marketing Education」項目を除去"

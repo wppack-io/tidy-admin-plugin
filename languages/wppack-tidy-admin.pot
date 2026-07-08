@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-08T12:28:06+09:00\n"
+"POT-Creation-Date: 2026-07-08T14:53:33+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -34,10 +34,10 @@ msgid "Move the header upgrade button to the Upgrades panel"
 msgstr ""
 
 #: src/Modules/AdvancedCustomFields.php:66
-#: src/Modules/AllInOneWpMigration.php:77
+#: src/Modules/AllInOneWpMigration.php:79
 #: src/Modules/Duplicator.php:76
-#: src/Modules/FeedsForTiktok.php:53
-#: src/Modules/FeedsForYoutube.php:54
+#: src/Modules/FeedsForTiktok.php:65
+#: src/Modules/FeedsForYoutube.php:65
 #: src/Modules/OptinMonster.php:59
 #: src/Modules/WpChat.php:126
 msgid "Upgrade to Pro"
@@ -47,16 +47,16 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:55
 #: src/Modules/AllInOneWpMigration.php:52
 #: src/Modules/Bnfw.php:47
-#: src/Modules/CustomFacebookFeed.php:47
+#: src/Modules/CustomFacebookFeed.php:58
 #: src/Modules/Duplicator.php:125
 #: src/Modules/EmbedPress.php:60
-#: src/Modules/FeedsForYoutube.php:59
-#: src/Modules/InstagramFeed.php:47
-#: src/Modules/MonsterInsights.php:53
+#: src/Modules/FeedsForYoutube.php:70
+#: src/Modules/InstagramFeed.php:58
+#: src/Modules/MonsterInsights.php:52
 #: src/Modules/OptinMonster.php:79
 #: src/Modules/ReviewsFeed.php:63
 #: src/Modules/WpConsent.php:54
-#: src/Modules/WpMailSmtp.php:73
+#: src/Modules/WpMailSmtp.php:75
 #: src/Modules/Yoast.php:54
 msgid "Move Premium feature pages to the Upgrades panel"
 msgstr ""
@@ -67,20 +67,20 @@ msgstr ""
 
 #: src/Modules/AdvancedCustomFields.php:129
 #: src/Modules/AllInOneSeo.php:140
-#: src/Modules/CustomFacebookFeed.php:169
-#: src/Modules/CustomTwitterFeeds.php:69
+#: src/Modules/CustomFacebookFeed.php:180
+#: src/Modules/CustomTwitterFeeds.php:81
 #: src/Modules/Duplicator.php:264
 #: src/Modules/EmbedPress.php:160
-#: src/Modules/FeedsForTiktok.php:99
-#: src/Modules/FeedsForYoutube.php:198
-#: src/Modules/InstagramFeed.php:164
-#: src/Modules/LocationWeather.php:164
-#: src/Modules/MonsterInsights.php:92
-#: src/Modules/OptinMonster.php:116
+#: src/Modules/FeedsForTiktok.php:111
+#: src/Modules/FeedsForYoutube.php:209
+#: src/Modules/InstagramFeed.php:175
+#: src/Modules/LocationWeather.php:167
+#: src/Modules/MonsterInsights.php:95
+#: src/Modules/OptinMonster.php:128
 #: src/Modules/ReviewsFeed.php:93
 #: src/Modules/WpChat.php:107
 #: src/Modules/WpConsent.php:155
-#: src/Modules/WpMailSmtp.php:279
+#: src/Modules/WpMailSmtp.php:281
 #: src/Modules/Yoast.php:221
 msgid "Hide upsell promotions on its screens"
 msgstr ""
@@ -92,13 +92,13 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:45
 #: src/Modules/Bnfw.php:39
 #: src/Modules/Cfdb7.php:39
-#: src/Modules/CustomFacebookFeed.php:39
-#: src/Modules/CustomTwitterFeeds.php:39
+#: src/Modules/CustomFacebookFeed.php:50
+#: src/Modules/CustomTwitterFeeds.php:51
 #: src/Modules/Duplicator.php:44
 #: src/Modules/EmbedPress.php:47
-#: src/Modules/FeedsForTiktok.php:39
-#: src/Modules/FeedsForYoutube.php:41
-#: src/Modules/InstagramFeed.php:39
+#: src/Modules/FeedsForTiktok.php:51
+#: src/Modules/FeedsForYoutube.php:52
+#: src/Modules/InstagramFeed.php:50
 #: src/Modules/LocationWeather.php:52
 #: src/Modules/Mc4wp.php:44
 #: src/Modules/MonsterInsights.php:44
@@ -107,31 +107,31 @@ msgstr ""
 #: src/Modules/ReviewsFeed.php:39
 #: src/Modules/WpChat.php:39
 #: src/Modules/WpConsent.php:44
-#: src/Modules/WpMailSmtp.php:59
+#: src/Modules/WpMailSmtp.php:61
 #: src/Modules/Yoast.php:45
 msgid "Move upgrade menus to the Upgrades panel"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:77
-#: src/Modules/AllInOneWpMigration.php:84
+#: src/Modules/AllInOneWpMigration.php:92
 #: src/Modules/Bnfw.php:56
-#: src/Modules/CustomFacebookFeed.php:62
-#: src/Modules/CustomTwitterFeeds.php:47
+#: src/Modules/CustomFacebookFeed.php:73
+#: src/Modules/CustomTwitterFeeds.php:59
 #: src/Modules/Duplicator.php:180
 #: src/Modules/EmbedPress.php:88
-#: src/Modules/FeedsForTiktok.php:64
-#: src/Modules/FeedsForYoutube.php:75
-#: src/Modules/InstagramFeed.php:58
-#: src/Modules/LocationWeather.php:69
+#: src/Modules/FeedsForTiktok.php:76
+#: src/Modules/FeedsForYoutube.php:86
+#: src/Modules/InstagramFeed.php:69
+#: src/Modules/LocationWeather.php:72
 #: src/Modules/Mc4wp.php:52
-#: src/Modules/MonsterInsights.php:64
-#: src/Modules/OptinMonster.php:89
+#: src/Modules/MonsterInsights.php:67
+#: src/Modules/OptinMonster.php:101
 #: src/Modules/PublishPressFuture.php:100
 #: src/Modules/ReviewsFeed.php:74
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:49
 #: src/Modules/WpConsent.php:72
-#: src/Modules/WpMailSmtp.php:83
+#: src/Modules/WpMailSmtp.php:85
 #: src/Modules/Yarpp.php:49
 #: src/Modules/Yoast.php:65
 msgid "Move documentation and support links to the Help panel"
@@ -142,19 +142,19 @@ msgid "Keep the post-list title column readable beside its SEO column"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:165
-#: src/Modules/CustomFacebookFeed.php:81
-#: src/Modules/CustomTwitterFeeds.php:56
+#: src/Modules/CustomFacebookFeed.php:92
+#: src/Modules/CustomTwitterFeeds.php:68
 #: src/Modules/Duplicator.php:248
 #: src/Modules/EmbedPress.php:121
-#: src/Modules/FeedsForYoutube.php:163
-#: src/Modules/InstagramFeed.php:91
-#: src/Modules/LocationWeather.php:93
+#: src/Modules/FeedsForYoutube.php:174
+#: src/Modules/InstagramFeed.php:102
+#: src/Modules/LocationWeather.php:96
 #: src/Modules/Mc4wp.php:92
-#: src/Modules/MonsterInsights.php:72
+#: src/Modules/MonsterInsights.php:75
 #: src/Modules/PublishPressFuture.php:129
 #: src/Modules/ReviewsFeed.php:106
 #: src/Modules/WpConsent.php:66
-#: src/Modules/WpMailSmtp.php:113
+#: src/Modules/WpMailSmtp.php:115
 #: src/Modules/Yoast.php:80
 msgid "Remove upgrade links from the plugin list"
 msgstr ""
@@ -178,8 +178,8 @@ msgstr ""
 
 #: src/Modules/AllInOneSeo.php:261
 #: src/Modules/Duplicator.php:367
-#: src/Modules/LocationWeather.php:179
-#: src/Modules/WpMailSmtp.php:242
+#: src/Modules/LocationWeather.php:182
+#: src/Modules/WpMailSmtp.php:244
 msgid "Restore the standard admin footer"
 msgstr ""
 
@@ -193,12 +193,12 @@ msgid "Hide locked Pro settings rows"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:330
-#: src/Modules/WpMailSmtp.php:311
+#: src/Modules/WpMailSmtp.php:313
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:359
-#: src/Modules/WpMailSmtp.php:175
+#: src/Modules/WpMailSmtp.php:177
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
@@ -207,7 +207,7 @@ msgid "Remove its news dashboard widget"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:419
-#: src/Modules/WpMailSmtp.php:230
+#: src/Modules/WpMailSmtp.php:232
 msgid "Always show the Scheduled Actions tools page"
 msgstr ""
 
@@ -229,26 +229,26 @@ msgstr ""
 
 #: src/Modules/AllInOneSeo.php:497
 #: src/Modules/EmbedPress.php:150
-#: src/Modules/WpMailSmtp.php:223
+#: src/Modules/WpMailSmtp.php:225
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:504
 #: src/Modules/BrokenLinkChecker.php:64
-#: src/Modules/CustomFacebookFeed.php:198
-#: src/Modules/CustomTwitterFeeds.php:104
+#: src/Modules/CustomFacebookFeed.php:209
+#: src/Modules/CustomTwitterFeeds.php:116
 #: src/Modules/EmbedPress.php:185
-#: src/Modules/FeedsForTiktok.php:127
-#: src/Modules/FeedsForYoutube.php:220
-#: src/Modules/InstagramFeed.php:286
-#: src/Modules/LocationWeather.php:217
+#: src/Modules/FeedsForTiktok.php:139
+#: src/Modules/FeedsForYoutube.php:231
+#: src/Modules/InstagramFeed.php:297
+#: src/Modules/LocationWeather.php:220
 #: src/Modules/Mc4wp.php:144
-#: src/Modules/MonsterInsights.php:154
-#: src/Modules/OptinMonster.php:156
+#: src/Modules/MonsterInsights.php:157
+#: src/Modules/OptinMonster.php:168
 #: src/Modules/ReviewsFeed.php:172
 #: src/Modules/WpChat.php:148
 #: src/Modules/WpConsent.php:207
-#: src/Modules/WpMailSmtp.php:298
+#: src/Modules/WpMailSmtp.php:300
 #: src/Modules/Yoast.php:281
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
@@ -265,11 +265,11 @@ msgstr ""
 msgid "Make its admin menu icon white like the core icons"
 msgstr ""
 
-#: src/Modules/AllInOneWpMigration.php:109
+#: src/Modules/AllInOneWpMigration.php:117
 msgid "Remove Pro-only export and import destinations"
 msgstr ""
 
-#: src/Modules/AllInOneWpMigration.php:124
+#: src/Modules/AllInOneWpMigration.php:132
 msgid "Tidy the import upload-limit notice"
 msgstr ""
 
@@ -289,11 +289,11 @@ msgstr ""
 msgid "Hide the stray empty heading on its pages"
 msgstr ""
 
-#: src/Modules/CustomFacebookFeed.php:87
-#: src/Modules/CustomTwitterFeeds.php:62
-#: src/Modules/FeedsForTiktok.php:73
-#: src/Modules/FeedsForYoutube.php:169
-#: src/Modules/InstagramFeed.php:97
+#: src/Modules/CustomFacebookFeed.php:98
+#: src/Modules/CustomTwitterFeeds.php:74
+#: src/Modules/FeedsForTiktok.php:85
+#: src/Modules/FeedsForYoutube.php:180
+#: src/Modules/InstagramFeed.php:108
 #: src/Modules/OptinMonster.php:64
 #: src/Modules/ReviewsFeed.php:112
 #: src/Modules/WpChat.php:89
@@ -301,26 +301,26 @@ msgstr ""
 msgid "Remove marketing notices and announcements"
 msgstr ""
 
-#: src/Modules/CustomFacebookFeed.php:101
-#: src/Modules/InstagramFeed.php:190
+#: src/Modules/CustomFacebookFeed.php:112
+#: src/Modules/InstagramFeed.php:201
 msgid "Skip the recommended-plugin installs in its setup wizard"
 msgstr ""
 
-#: src/Modules/CustomFacebookFeed.php:190
-#: src/Modules/CustomTwitterFeeds.php:96
-#: src/Modules/FeedsForYoutube.php:212
-#: src/Modules/InstagramFeed.php:129
+#: src/Modules/CustomFacebookFeed.php:201
+#: src/Modules/CustomTwitterFeeds.php:108
+#: src/Modules/FeedsForYoutube.php:223
+#: src/Modules/InstagramFeed.php:140
 msgid "Fix the squeezed select fields on its screens"
 msgstr ""
 
 #: src/Modules/Duplicator.php:254
-#: src/Modules/WpMailSmtp.php:159
+#: src/Modules/WpMailSmtp.php:161
 msgid "Remove the \"You're using Lite\" notice bar"
 msgstr ""
 
 #: src/Modules/Duplicator.php:318
 #: src/Modules/EmbedPress.php:127
-#: src/Modules/LocationWeather.php:110
+#: src/Modules/LocationWeather.php:113
 msgid "Show sale notices only in the Upgrades panel"
 msgstr ""
 
@@ -346,37 +346,37 @@ msgstr ""
 msgid "Remove the milestone celebration popup"
 msgstr ""
 
-#: src/Modules/FeedsForTiktok.php:119
+#: src/Modules/FeedsForTiktok.php:131
 msgid "Keep its buttons from wrapping mid-label"
 msgstr ""
 
-#: src/Modules/FeedsForYoutube.php:84
+#: src/Modules/FeedsForYoutube.php:95
 msgid "Remove the recommended-plugin installs from its setup wizard"
 msgstr ""
 
-#: src/Modules/InstagramFeed.php:137
+#: src/Modules/InstagramFeed.php:148
 msgid "Hide Pro-only feed types from the feed builder"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:99
+#: src/Modules/LocationWeather.php:102
 msgid "Remove promotional notices and popups"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:120
+#: src/Modules/LocationWeather.php:123
 #: src/Modules/Mc4wp.php:128
-#: src/Modules/MonsterInsights.php:78
+#: src/Modules/MonsterInsights.php:81
 #: src/Modules/PostTypesOrder.php:50
 #: src/Modules/Wordfence.php:116
-#: src/Modules/WpMailSmtp.php:119
+#: src/Modules/WpMailSmtp.php:121
 #: src/Modules/Yoast.php:109
 msgid "Move the setup notice to the plugin screens and dashboard widget"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:129
+#: src/Modules/LocationWeather.php:132
 msgid "Move the weather editor's Pro pitches to the Upgrades panel"
 msgstr ""
 
-#: src/Modules/LocationWeather.php:196
+#: src/Modules/LocationWeather.php:199
 msgid "Skip the unused block-editor promo bundle"
 msgstr ""
 
@@ -397,12 +397,16 @@ msgstr ""
 msgid "Hide the \"You are here\" breadcrumb"
 msgstr ""
 
-#: src/Modules/MonsterInsights.php:174
+#: src/Modules/MonsterInsights.php:177
 msgid "Hide the setup pitch in the analytics dashboard widget"
 msgstr ""
 
-#: src/Modules/MonsterInsights.php:187
+#: src/Modules/MonsterInsights.php:190
 msgid "Remove the duplicate Insights item from the Dashboard menu"
+msgstr ""
+
+#: src/Modules/OptinMonster.php:89
+msgid "Remove the Marketing Education item from the Dashboard menu"
 msgstr ""
 
 #: src/Modules/PostTypesOrder.php:59
@@ -439,19 +443,19 @@ msgstr ""
 msgid "Remove the \"WordPress Events and News\" dashboard widget"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:165
+#: src/Modules/WpMailSmtp.php:167
 msgid "Remove the SendLayer setup banner"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:204
+#: src/Modules/WpMailSmtp.php:206
 msgid "Remove Pro-only teaser mailers from the mailer list"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:259
+#: src/Modules/WpMailSmtp.php:261
 msgid "Remove the dashboard widget's Pro teaser chart"
 msgstr ""
 
-#: src/Modules/WpMailSmtp.php:270
+#: src/Modules/WpMailSmtp.php:272
 msgid "Remove the Backup Connection teaser"
 msgstr ""
 
@@ -500,7 +504,7 @@ msgid "Upgrades"
 msgstr ""
 
 #: src/Support/SubmenuCleaner.php:404
-#: src/Support/UpgradesDirectory.php:244
+#: src/Support/UpgradesDirectory.php:288
 msgid "Upgrade"
 msgstr ""
 
@@ -522,35 +526,35 @@ msgstr ""
 msgid "None of your active plugins offer a Pro upgrade."
 msgstr ""
 
-#: src/Support/UpgradesDirectory.php:149
+#: src/Support/UpgradesDirectory.php:193
 msgid "Already have a license key? Enter it to install Pro"
 msgstr ""
 
-#: src/Support/UpgradesDirectory.php:266
+#: src/Support/UpgradesDirectory.php:310
 msgid "Please enter your license key."
 msgstr ""
 
-#: src/Support/UpgradesDirectory.php:267
+#: src/Support/UpgradesDirectory.php:311
 msgid "Could not start the upgrade. Please try again."
 msgstr ""
 
-#: src/Support/UpgradesDirectory.php:271
+#: src/Support/UpgradesDirectory.php:315
 msgid "Install the Pro version"
 msgstr ""
 
-#: src/Support/UpgradesDirectory.php:272
+#: src/Support/UpgradesDirectory.php:316
 msgid "Enter your license key to download and install the Pro plugin automatically."
 msgstr ""
 
-#: src/Support/UpgradesDirectory.php:273
+#: src/Support/UpgradesDirectory.php:317
 msgid "License key"
 msgstr ""
 
-#: src/Support/UpgradesDirectory.php:276
+#: src/Support/UpgradesDirectory.php:320
 msgid "Cancel"
 msgstr ""
 
-#: src/Support/UpgradesDirectory.php:277
+#: src/Support/UpgradesDirectory.php:321
 msgid "Connect & install Pro"
 msgstr ""
 
