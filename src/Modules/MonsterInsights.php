@@ -86,6 +86,31 @@ final class MonsterInsights extends AbstractModule
                     ],
                 ],
             ],
+            'upsell-ui' => [
+                'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* MonsterInsights: the "You're using MonsterInsights Lite. To unlock
+                   all reports, consider upgrading to Pro." floating bar */
+                body[class*="page_monsterinsights"] .monsterinsights-floating-bar { display: none !important; }
+                /* The "Thank you for being a loyal MonsterInsights Lite user. Upgrade
+                   to Pro and unlock all the awesome features." callout (settings tabs) */
+                body[class*="page_monsterinsights"] .monsterinsights-upsell { display: none !important; }
+                /* Per-tab Pro-feature blocks whose only control is an "Upgrade" button
+                   (Google AMP, Media Tracking, the EU-consent / compliance addons,
+                   ...) — hide the whole settings block so no empty heading is left
+                   behind; functional blocks alongside them keep their controls */
+                body[class*="page_monsterinsights"] .monsterinsights-settings-block:has(.monsterinsights-settings-addon-upgrade) { display: none !important; }
+                /* Fallback for any upgrade row not wrapped in a settings block */
+                body[class*="page_monsterinsights"] .monsterinsights-settings-addon-upgrade { display: none !important; }
+                /* "Made with ♥ by the MonsterInsights Team" footer (its Support, Docs
+                   and Free Plugins links; the Help panel carries support links) */
+                body[class*="page_monsterinsights"] .monsterinsights-footer-love { display: none !important; }
+                /* The eCommerce and Conversions settings tabs are Pro-only — in Lite
+                   they show nothing but upgrade teasers, so hide the tab links */
+                body[class*="page_monsterinsights"] nav.monsterinsights-main-navigation a[href*="#/ecommerce"],
+                body[class*="page_monsterinsights"] nav.monsterinsights-main-navigation a[href*="#/conversions"] { display: none !important; }
+                CSS,
+            ],
             'dashboard-widget' => [
                 'label' => __('Hide the setup pitch in the analytics dashboard widget', 'wppack-tidy-admin'),
                 /*
