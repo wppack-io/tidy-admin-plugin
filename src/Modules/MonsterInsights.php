@@ -115,6 +115,17 @@ final class MonsterInsights extends AbstractModule
                 body[class*="page_monsterinsights"] nav.monsterinsights-main-navigation a[href*="#/conversions"] { display: none !important; }
                 /* The Tools › Report Export sub-tab is a Pro-only export */
                 body[class*="page_monsterinsights"] a.monsterinsights-navigation-tab-link[href*="#/tools/report-export"] { display: none !important; }
+                /* Pro-only sub-tabs marked with a PRO pill — Site Notes'
+                   Categories/Export/Integrations, Popular Posts' Automated + Curated */
+                body[class*="page_monsterinsights"] .monsterinsights-navigation-tab-link:has(.monsterinsights-pro-pill) { display: none !important; }
+                /* Popular Posts: the "Automated + Curated" section (auto-add the top
+                   posts from Google Analytics via Custom Dimensions) is Pro-only; the
+                   functional Behavior / Widget Styling settings beside it stay. It is
+                   wrapped in a ga-settings block on the Widget tab and an unclassed
+                   paragraph on the Inline tab, so also match a settings paragraph that
+                   carries a PRO pill (its neighbours have none) */
+                body[class*="page_monsterinsights"] .monsterinsights-popular-posts-ga-settings,
+                body[class*="page_monsterinsights"] .monsterinsights-settings-block-content p:has(.monsterinsights-pro-pill) { display: none !important; }
                 /* Tools › URL Builder: the "Make your campaign links prettier!"
                    PrettyLinks cross-sell ad (the URL builder itself stays) */
                 body[class*="page_monsterinsights"] .monsterinsights-prettylinks-flow-ad { display: none !important; }
