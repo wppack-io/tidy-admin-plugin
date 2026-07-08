@@ -107,6 +107,29 @@ PHP
     echo 'created:  web/wp-content/plugins/tidy-admin/wppack-tidy-admin.php'
 fi
 
+# Cap outbound HTTP timeouts so real plugin API calls work on the dev site
+# without a slow/unreachable host tying up a request. bin/dev-server runs the
+# built-in server with PHP_CLI_SERVER_WORKERS, so a blocked worker no longer
+# stalls the whole site — no need to block external HTTP outright.
+if [ ! -f web/wp-content/mu-plugins/dev-http-timeout.php ]; then
+    mkdir -p web/wp-content/mu-plugins
+    cat > web/wp-content/mu-plugins/dev-http-timeout.php <<'PHP'
+<?php
+/*
+ * Dev-only: allow outbound HTTP so real plugin API calls work on the dev site,
+ * but cap the timeout so a slow or unreachable host fails fast instead of tying
+ * up a request. The built-in server runs with PHP_CLI_SERVER_WORKERS (see
+ * bin/dev-server), so a blocked worker no longer stalls the whole site.
+ */
+add_filter('http_request_args', static function (array $args) {
+    $args['timeout'] = min((float) ($args['timeout'] ?? 5), 10.0);
+
+    return $args;
+}, PHP_INT_MAX);
+PHP
+    echo 'created:  web/wp-content/mu-plugins/dev-http-timeout.php'
+fi
+
 # --- Reset ---
 
 vendor/bin/wp db reset --yes
