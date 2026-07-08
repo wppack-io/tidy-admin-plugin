@@ -183,6 +183,19 @@ final class MonsterInsights extends AbstractModule
                 #monsterinsights_reports_widget .mi-dw-not-authed h2 { display: none !important; }
                 CSS,
             ],
+            'dashboard-menu-item' => [
+                'label' => __('Remove the duplicate Insights item from the Dashboard menu', 'wppack-tidy-admin'),
+                /*
+                 * MonsterInsights injects an "Insights" shortcut under the core
+                 * Dashboard menu (index.php) that merely duplicates its own
+                 * top-level Insights menu. Hide the duplicate — the reports stay
+                 * reachable from the plugin's own menu. Scoped to #menu-dashboard
+                 * so the top-level Insights menu is untouched.
+                 */
+                'adminCss' => <<<'CSS'
+                #adminmenu #menu-dashboard li:has(> a[href*="page=monsterinsights_reports"]) { display: none !important; }
+                CSS,
+            ],
         ];
     }
 }
