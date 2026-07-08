@@ -52,9 +52,10 @@ final class W3TotalCache extends AbstractModule
         return [
             'upgrade-menus' => [
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
-                // The green "Upgrade" button in the plugin's own top nav bar links
-                // to the w3tc_licensing_upgrade action (→ W3TC Pro checkout); hide
-                // it and surface the Pro pitch in the Upgrades panel instead.
+                // The green "Upgrade" button in the plugin's own top nav bar is a
+                // .button-buy-plugin input that opens a Pro-checkout lightbox (the
+                // licensing_upgrade message action); hide it and surface the Pro
+                // pitch in the Upgrades panel instead.
                 'extraScreenMetaContent' => [
                     [
                         'category' => 'upgrade',
@@ -64,7 +65,8 @@ final class W3TotalCache extends AbstractModule
                     ],
                 ],
                 'adminCss' => <<<'CSS'
-                body[class*="page_w3tc"] a[href*="w3tc_licensing_upgrade"] { display: none !important; }
+                body[class*="page_w3tc"] .button-buy-plugin,
+                body[class*="page_w3tc"] a[href*="licensing_upgrade"] { display: none !important; }
                 CSS,
             ],
             'premium-pages' => [
@@ -80,10 +82,24 @@ final class W3TotalCache extends AbstractModule
             ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
-                // The "Go to Pro" / "gopro" call-to-action buttons scattered beside
-                // Pro-only settings across every cache section.
+                // The "gopro" call-to-action buttons scattered beside Pro-only
+                // settings; the "Premium Services" sub-tab each cache section
+                // carries purely to pitch W3TC's paid CDN/monitoring add-ons; and
+                // the branded marketing footer (logo, newsletter sign-up, W3
+                // Edge/BoldGrid/social links, utm-tagged article links and a
+                // "Premium Support Services" pitch). The real documentation stays
+                // reachable via the plugin's native Help tabs and Support submenu.
+                // On the Dashboard, three promo widgets: affiliate host guides
+                // (#w3tc_partners), a BunnyCDN sign-up pitch (#w3tc_bunnycdn) and
+                // a paid "Premium Services" widget (#w3tc_services). The Account
+                // widget is left alone — it reports real license status.
                 'adminCss' => <<<'CSS'
-                body[class*="page_w3tc"] .w3tc-gopro { display: none !important; }
+                body[class*="page_w3tc"] .w3tc-gopro,
+                body[class*="page_w3tc"] .nav-tab[data-tab-type="premium-services"],
+                body[class*="page_w3tc"] #w3tc-footer,
+                #w3tc_partners,
+                #w3tc_bunnycdn,
+                #w3tc_services { display: none !important; }
                 CSS,
             ],
         ];
