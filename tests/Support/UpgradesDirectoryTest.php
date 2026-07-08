@@ -125,6 +125,59 @@ final class UpgradesDirectoryTest extends TestCase
         $this->assertStringContainsString('https://acf.example/pro/', $html);
     }
 
+    public function test_renders_a_license_key_modal_for_plugins_with_a_connect_flow(): void
+    {
+        global $submenu;
+        $submenu = [];
+
+        $directory = new UpgradesDirectory(
+            ['upgrade' => []],
+            [['category' => 'upgrade', 'parent' => 'wp-mail-smtp', 'html' => '<p><a href="https://wpmailsmtp.com/pro/">Upgrade</a></p>']],
+            [[
+                'parent' => 'wp-mail-smtp',
+                'name' => 'WP Mail SMTP',
+                'slug' => 'wp-mail-smtp',
+                'license' => [
+                    'action' => 'wp_mail_smtp_vue_upgrade_plugin',
+                    'nonceAction' => 'wpms-admin-nonce',
+                    'nonceParam' => 'nonce',
+                    'keyParam' => 'license_key',
+                    'redirectPath' => 'redirect_url',
+                ],
+            ]],
+        );
+
+        $html = $this->render($directory);
+
+        // The trigger carries the plugin's own AJAX action and param names
+        $this->assertStringContainsString('tidy-admin-upgrades-license', $html);
+        $this->assertStringContainsString('data-action="wp_mail_smtp_vue_upgrade_plugin"', $html);
+        $this->assertStringContainsString('data-key-param="license_key"', $html);
+        $this->assertStringContainsString('data-redirect="redirect_url"', $html);
+        // The shared modal and its script are printed once
+        $this->assertStringContainsString('id="tidy-admin-license-modal"', $html);
+        $this->assertStringContainsString('window.ajaxurl', $html);
+    }
+
+    public function test_no_license_modal_when_no_plugin_offers_a_connect_flow(): void
+    {
+        global $submenu;
+        $submenu = [
+            'x' => [0 => ['Upgrade', 'manage_options', 'x-pro']],
+        ];
+
+        $directory = new UpgradesDirectory(
+            ['upgrade' => ['x-pro']],
+            [],
+            [['parent' => 'x', 'name' => 'X Plugin', 'slug' => 'x', 'license' => null]],
+        );
+
+        $html = $this->render($directory);
+
+        $this->assertStringNotContainsString('tidy-admin-license-modal', $html);
+        $this->assertStringNotContainsString('tidy-admin-upgrades-license', $html);
+    }
+
     public function test_prefers_a_full_url_baked_into_the_menu_label(): void
     {
         global $submenu;

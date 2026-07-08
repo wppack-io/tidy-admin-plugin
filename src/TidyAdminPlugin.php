@@ -128,6 +128,7 @@ final class TidyAdminPlugin
                     'parent' => $module->menuParent(),
                     'name' => self::pluginName($file),
                     'slug' => $file !== '' ? dirname($file) : '',
+                    'license' => $module->licenseConnect(),
                 ];
             }
 

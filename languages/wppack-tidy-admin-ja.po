@@ -347,3 +347,27 @@ msgstr "ヘルプ・アップグレードボタンをページヘッダーに統
 
 msgid "Hide the setup pitch in the analytics dashboard widget"
 msgstr "アナリティクスウィジェットのセットアップ勧誘を非表示"
+
+msgid "Already have a license key? Enter it to install Pro"
+msgstr "ライセンスキーをお持ちですか？入力して Pro 版をインストール"
+
+msgid "Install the Pro version"
+msgstr "Pro 版をインストール"
+
+msgid "Enter your license key to download and install the Pro plugin automatically."
+msgstr "ライセンスキーを入力すると、Pro 版プラグインを自動でダウンロード・インストールします。"
+
+msgid "License key"
+msgstr "ライセンスキー"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Connect & install Pro"
+msgstr "接続して Pro をインストール"
+
+msgid "Please enter your license key."
+msgstr "ライセンスキーを入力してください。"
+
+msgid "Could not start the upgrade. Please try again."
+msgstr "アップグレードを開始できませんでした。もう一度お試しください。"

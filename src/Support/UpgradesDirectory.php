@@ -27,14 +27,13 @@ final class UpgradesDirectory
     /**
      * @param array<string, list<string>>                                 $needlesByCategory category => slug substrings (only the "upgrade" category is shown here)
      * @param list<array{category: string, parent: string, html: string}> $extraContent      module-declared panel HTML
-     * @param list<array{parent: string, name: string, slug: string}>     $plugins           active plugins that own a menu parent
+     * @param list<array{parent: string, name: string, slug: string, license: array{action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|null}> $plugins active plugins that own a menu parent
      */
     public function __construct(
         private readonly array $needlesByCategory,
         private readonly array $extraContent,
         private readonly array $plugins,
-    ) {
-    }
+    ) {}
 
     public function register(): void
     {
@@ -75,7 +74,7 @@ final class UpgradesDirectory
         foreach ($cards as $card) {
             echo $this->card($card);
         }
-        echo '</div>' . $this->styles() . '</div>';
+        echo '</div>' . $this->modal() . $this->styles() . '</div>';
     }
 
     /**
@@ -116,7 +115,7 @@ final class UpgradesDirectory
 
         $cards = [];
         foreach ($this->plugins as $plugin) {
-            $html = $this->upgradeHtml($plugin['parent'], $relocated);
+            $html = $this->upgradeHtml($plugin['parent'], $relocated) . $this->licenseButton($plugin['license'] ?? null);
 
             if ($html !== '') {
                 $cards[] = ['name' => $plugin['name'], 'slug' => $plugin['slug'], 'html' => $html];
@@ -124,6 +123,31 @@ final class UpgradesDirectory
         }
 
         return $cards;
+    }
+
+    /**
+     * A "have a key? install Pro" trigger for plugins whose free version ships
+     * a real license-connect flow. The plugin's own AJAX action, a nonce made
+     * for it here, and the response shape ride on data-attributes; the modal
+     * script (printed once) fires the action and follows the returned URL.
+     *
+     * @param array{action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|null $license
+     */
+    private function licenseButton(?array $license): string
+    {
+        if ($license === null) {
+            return '';
+        }
+
+        return sprintf(
+            '<p class="tidy-admin-upgrades-card__license"><button type="button" class="button-link tidy-admin-upgrades-license" data-action="%s" data-nonce="%s" data-nonce-param="%s" data-key-param="%s" data-redirect="%s">%s</button></p>',
+            esc_attr($license['action']),
+            esc_attr(wp_create_nonce($license['nonceAction'])),
+            esc_attr($license['nonceParam']),
+            esc_attr($license['keyParam']),
+            esc_attr($license['redirectPath']),
+            esc_html__('Already have a license key? Enter it to install Pro', 'wppack-tidy-admin'),
+        );
     }
 
     /**
@@ -224,6 +248,90 @@ final class UpgradesDirectory
         $body .= '</p>';
 
         return $body;
+    }
+
+    /**
+     * The shared license-key modal and the vanilla script that drives it —
+     * printed once, only when at least one plugin offers a connect flow. On
+     * submit it posts the key to that plugin's own AJAX action (carried on the
+     * clicked button's data-attributes) and follows the returned install URL.
+     */
+    private function modal(): string
+    {
+        $hasLicense = array_filter($this->plugins, static fn(array $plugin): bool => ($plugin['license'] ?? null) !== null);
+        if ($hasLicense === []) {
+            return '';
+        }
+
+        $enterKey = esc_js(__('Please enter your license key.', 'wppack-tidy-admin'));
+        $failed = esc_js(__('Could not start the upgrade. Please try again.', 'wppack-tidy-admin'));
+
+        $html = '<div id="tidy-admin-license-modal" class="tidy-admin-license-modal" hidden>'
+            . '<div class="tidy-admin-license-modal__box" role="dialog" aria-modal="true" aria-labelledby="tidy-admin-license-modal-title">'
+            . '<h2 id="tidy-admin-license-modal-title">' . esc_html__('Install the Pro version', 'wppack-tidy-admin') . '</h2>'
+            . '<p>' . esc_html__('Enter your license key to download and install the Pro plugin automatically.', 'wppack-tidy-admin') . '</p>'
+            . '<input type="text" class="tidy-admin-license-modal__key regular-text" autocomplete="off" spellcheck="false" placeholder="' . esc_attr__('License key', 'wppack-tidy-admin') . '">'
+            . '<p class="tidy-admin-license-modal__error" hidden></p>'
+            . '<p class="tidy-admin-license-modal__actions">'
+            . '<button type="button" class="button tidy-admin-license-modal__cancel">' . esc_html__('Cancel', 'wppack-tidy-admin') . '</button> '
+            . '<button type="button" class="button button-primary tidy-admin-license-modal__submit">' . esc_html__('Connect & install Pro', 'wppack-tidy-admin') . '</button>'
+            . '</p></div></div>';
+
+        $js = <<<JS
+            (function () {
+                var modal = document.getElementById('tidy-admin-license-modal');
+                if (!modal) { return; }
+                var keyInput = modal.querySelector('.tidy-admin-license-modal__key');
+                var errorEl = modal.querySelector('.tidy-admin-license-modal__error');
+                var submitBtn = modal.querySelector('.tidy-admin-license-modal__submit');
+                var cfg = {};
+                function showError(msg) { errorEl.textContent = msg; errorEl.hidden = false; }
+                function close() { modal.hidden = true; }
+                function open(btn) {
+                    cfg = { action: btn.dataset.action, nonce: btn.dataset.nonce, nonceParam: btn.dataset.nonceParam, keyParam: btn.dataset.keyParam, redirect: btn.dataset.redirect };
+                    keyInput.value = ''; errorEl.hidden = true; submitBtn.disabled = false;
+                    modal.hidden = false; keyInput.focus();
+                }
+                document.querySelectorAll('.tidy-admin-upgrades-license').forEach(function (btn) {
+                    btn.addEventListener('click', function () { open(btn); });
+                });
+                modal.querySelector('.tidy-admin-license-modal__cancel').addEventListener('click', close);
+                modal.addEventListener('click', function (e) { if (e.target === modal) { close(); } });
+                document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) { close(); } });
+                submitBtn.addEventListener('click', function () {
+                    var key = keyInput.value.trim();
+                    if (!key) { showError('{$enterKey}'); return; }
+                    submitBtn.disabled = true; errorEl.hidden = true;
+                    var body = new URLSearchParams();
+                    body.set('action', cfg.action);
+                    body.set(cfg.nonceParam, cfg.nonce);
+                    body.set(cfg.keyParam, key);
+                    fetch(window.ajaxurl, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+                        .then(function (r) { return r.json(); })
+                        .then(function (res) {
+                            var url = res && res.success && res.data ? res.data[cfg.redirect] : null;
+                            if (url) { window.location.href = url; return; }
+                            submitBtn.disabled = false;
+                            showError(res && typeof res.data === 'string' && res.data ? res.data : '{$failed}');
+                        })
+                        .catch(function () { submitBtn.disabled = false; showError('{$failed}'); });
+                });
+            })();
+            JS;
+
+        $css = '<style>'
+            . '.tidy-admin-upgrades-card__license { margin: 12px 0 0; }'
+            . '.tidy-admin-upgrades-card__license .button-link { color: #2271b1; text-decoration: underline; cursor: pointer; font-size: 12px; padding: 0; }'
+            . '.tidy-admin-license-modal { position: fixed; inset: 0; z-index: 100000; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, .5); }'
+            . '.tidy-admin-license-modal[hidden] { display: none; }'
+            . '.tidy-admin-license-modal__box { width: 440px; max-width: calc(100% - 32px); padding: 20px 24px; background: #fff; border-radius: 6px; box-shadow: 0 10px 40px rgba(0, 0, 0, .25); }'
+            . '.tidy-admin-license-modal__box h2 { margin-top: 0; }'
+            . '.tidy-admin-license-modal__key { width: 100%; margin: 4px 0 8px; }'
+            . '.tidy-admin-license-modal__error { color: #d63638; margin: 0 0 8px; }'
+            . '.tidy-admin-license-modal__actions { display: flex; justify-content: flex-end; gap: 8px; margin: 8px 0 0; }'
+            . '</style>';
+
+        return $css . $html . '<script>' . $js . '</script>';
     }
 
     private function styles(): string

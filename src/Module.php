@@ -65,6 +65,19 @@ interface Module
     public function providesHelpPanel(): bool;
 
     /**
+     * How this plugin's own "enter your license key" flow installs the paid
+     * version — when the free plugin ships a real one. Many only show a
+     * "no license needed" placeholder; those return null. When present, the
+     * Plugin Upgrades screen offers a key-entry modal that fires the plugin's
+     * own AJAX connect handler (with a nonce created for `nonceAction`), then
+     * follows the URL at `redirectPath` in the response so the plugin performs
+     * the real Pro install.
+     *
+     * @return array{action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|null
+     */
+    public function licenseConnect(): ?array;
+
+    /**
      * The module's cleanups, one entry per user-visible feature. Every
      * feature is individually toggleable on the Settings > Tidy Admin page,
      * so keys must stay stable and labels must say what the feature actually

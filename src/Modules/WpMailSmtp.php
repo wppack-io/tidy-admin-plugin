@@ -37,6 +37,21 @@ final class WpMailSmtp extends AbstractModule
         return ['wp-mail-smtp'];
     }
 
+    public function licenseConnect(): array
+    {
+        // Lite ships a real "enter your license key" flow: SetupWizard::upgrade_plugin
+        // (the wp_mail_smtp_vue_upgrade_plugin AJAX action) turns the key into an
+        // Awesome Motive Connect URL and returns it as data.redirect_url, then the
+        // browser follows it to download and install WP Mail SMTP Pro.
+        return [
+            'action' => 'wp_mail_smtp_vue_upgrade_plugin',
+            'nonceAction' => 'wpms-admin-nonce',
+            'nonceParam' => 'nonce',
+            'keyParam' => 'license_key',
+            'redirectPath' => 'redirect_url',
+        ];
+    }
+
     public function features(): array
     {
         return [

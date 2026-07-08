@@ -31,6 +31,11 @@ abstract class AbstractModule implements Module
         return true;
     }
 
+    public function licenseConnect(): ?array
+    {
+        return null;
+    }
+
     public function features(): array
     {
         return [];
