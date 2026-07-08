@@ -194,25 +194,22 @@ final class Wordfence extends AbstractModule
             ],
             'menu-badge-colour' => [
                 'label' => __('Match its menu notification badge to the admin colour scheme', 'wppack-tidy-admin'),
-                'adminCss' => <<<'CSS'
-                /* Wordfence paints its sidebar notification bubble (.wf-menu-badge)
-                   its own brand orange (#fcb214), ignoring the admin colour scheme,
-                   so it clashes with every other menu's blue count. Publish each
-                   built-in scheme's real notification colour as a variable and
-                   re-assert it — same pattern as menu-active-colour. An unknown
-                   scheme sets no variable, so the fallback keeps Wordfence's orange */
-                body.admin-color-fresh { --tidy-admin-wf-badge: #d63638; }
-                body.admin-color-light { --tidy-admin-wf-badge: #d64e07; }
-                body.admin-color-modern { --tidy-admin-wf-badge: #3858e9; }
-                body.admin-color-blue { --tidy-admin-wf-badge: #e1a948; }
-                body.admin-color-coffee { --tidy-admin-wf-badge: #9ea476; }
-                body.admin-color-ectoplasm { --tidy-admin-wf-badge: #d46f15; }
-                body.admin-color-midnight { --tidy-admin-wf-badge: #69a8bb; }
-                body.admin-color-ocean { --tidy-admin-wf-badge: #aa9d88; }
-                body.admin-color-sunrise { --tidy-admin-wf-badge: #ccaf0b; }
-                /* Two ids to outrank Wordfence's own #adminmenu .update-plugins.wf-menu-badge */
-                #adminmenu #toplevel_page_Wordfence .wf-menu-badge { background-color: var(--tidy-admin-wf-badge, #fcb214) !important; }
-                CSS,
+                // Wordfence stamps its sidebar count bubble with its own classes and
+                // paints it brand-orange (#fcb214 !important), ignoring the admin
+                // colour scheme and the dark hover/current state every other menu's
+                // count uses. Rather than re-declare all nine schemes' notification
+                // and hover colours, strip Wordfence's classes so the bubble is a
+                // plain core .update-plugins badge — WordPress then colours it
+                // natively for the active scheme, in every state.
+                'register' => static function (): void {
+                    add_action('admin_footer', static function (): void {
+                        wp_print_inline_script_tag(
+                            'document.querySelectorAll("#adminmenu #toplevel_page_Wordfence .wf-menu-badge")'
+                            . '.forEach(function(b){b.classList.remove('
+                            . '"wf-menu-badge","wf-notification-count-container","wf-notification-count");});',
+                        );
+                    });
+                },
             ],
             'panel-placement' => [
                 'label' => __('Overlay the Help and Upgrades buttons onto the page title', 'wppack-tidy-admin'),
