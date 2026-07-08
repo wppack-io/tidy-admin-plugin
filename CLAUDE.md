@@ -103,12 +103,25 @@ default when the flag is unset. Everything else defaults to ON.
 
 ### Conventions that matter here
 
+- **PHP first, CSS last resort.** Remove or relocate vendor UI through PHP
+  hooks (`remove_action`/`remove_filter`, `remove_submenu_page`,
+  `wp_dequeue_script`, a `w3tc_notes`-style filter, `noticeDenyByHook`,
+  `submenuRelocations`, …) before reaching for `adminCss`. A promo pulled at
+  the source stays gone on every screen and every locale; a CSS `display:
+  none` only hides the copy you happened to target. Use `adminCss` only when
+  the element is baked into inline HTML with no hook to intercept it — and say
+  so in the comment.
 - Every removal is documented with an inline comment saying what the removed
   item is and why removing it is safe (e.g. "Pro feature; Lite only shows a
   sample plus a Pro pitch"). Keep that discipline for new entries; comments
   are in English.
 - Submenu slugs and upsell URLs are matched by **substring** (external links
   carry UTM params; labels vary by locale, so match URLs, never display text).
+- A vendor may print its promo chrome (toolbars, footers, notices) on **every**
+  admin page via `admin_notices`/`admin_footer`, not just its own screens (it
+  surfaces e.g. on the plugin-delete confirmation). Hide such shared promo
+  elements globally, not scoped to `body[class*="page_{slug}"]`; keep the
+  scope only for parts that are functional on the plugin's own pages.
 - `declare(strict_types=1)`, PER coding style, one final class per file.
 
 ## Testing
