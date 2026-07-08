@@ -82,6 +82,58 @@ final class UpgradesDirectoryTest extends TestCase
         $this->assertStringContainsString('offer a Pro upgrade', $html);
     }
 
+    public function test_a_sentence_promo_reads_whole_as_plain_text_with_relocated_links_as_buttons(): void
+    {
+        global $submenu;
+        $submenu = [
+            'sbi' => [
+                0 => ['Upgrade to Pro', 'manage_options', 'sbi-pro'],
+            ],
+        ];
+
+        // A real sentence keeps its inline link's text so it reads whole, but
+        // as plain text (no vendor styling); the relocated menu link is a button.
+        $directory = new UpgradesDirectory(
+            ['upgrade' => ['sbi-pro']],
+            [['category' => 'upgrade', 'parent' => 'sbi', 'html' => '<p style="border:1px solid red">You are on Instagram Feed Lite. <a href="https://smashballoon.com/pitch/">See what Pro adds</a>.</p>']],
+            [['parent' => 'sbi', 'name' => 'Instagram Feed']],
+        );
+
+        $html = $this->render($directory);
+
+        // The pitch reads whole, inline link's text kept in the prose
+        $this->assertStringContainsString('You are on Instagram Feed Lite', $html);
+        $this->assertStringContainsString('See what Pro adds', $html);
+        // But the vendor's own markup/styling is dropped, not echoed
+        $this->assertStringNotContainsString('border:1px solid red', $html);
+        $this->assertStringNotContainsString('smashballoon.com/pitch', $html);
+        // The relocated menu link is the slim button
+        $this->assertStringContainsString('button button-small', $html);
+        $this->assertStringContainsString('sbi-pro', $html);
+    }
+
+    public function test_a_link_only_upgrade_block_shows_a_button_and_no_promo(): void
+    {
+        global $submenu;
+        $submenu = [];
+
+        // ACF-style: the upgrade block is just a link, so there is a button but
+        // no promo sentence duplicating its label.
+        $directory = new UpgradesDirectory(
+            ['upgrade' => []],
+            [['category' => 'upgrade', 'parent' => 'acf', 'html' => '<p><a href="https://acf.example/pro/">Upgrade to PRO</a></p>']],
+            [['parent' => 'acf', 'name' => 'Advanced Custom Fields']],
+        );
+
+        $html = $this->render($directory);
+
+        $this->assertStringContainsString('button button-small', $html);
+        $this->assertStringContainsString('Upgrade to PRO', $html);
+        $this->assertStringContainsString('https://acf.example/pro/', $html);
+        // No promo paragraph rendered (the class still appears in the <style>)
+        $this->assertStringNotContainsString('__promo">', $html);
+    }
+
     public function test_prefers_a_full_url_baked_into_the_menu_label(): void
     {
         global $submenu;

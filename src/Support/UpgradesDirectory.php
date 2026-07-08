@@ -178,45 +178,70 @@ final class UpgradesDirectory
     }
 
     /**
-     * A short promo sentence (the plugin's own upgrade blurb, tags stripped)
-     * above one or more upgrade buttons — the primary call to action styled
-     * like a core primary button so the upgrade is obvious at a glance.
+     * The plugin's upgrade promo above its upgrade links as slim buttons.
+     *
+     * When the module's upgrade HTML is a real sentence it is shown verbatim
+     * (its inline link kept in place, so the pitch reads naturally) and only
+     * the relocated menu links become buttons. When it is just bare links
+     * (no prose), there is no promo and every link becomes a button — each
+     * keeping the plugin's own wording ("Premium", "PRO", "Addons", …).
      *
      * @param array<string, list<array{label: string, url: string}>> $relocated
      */
     private function upgradeHtml(string $parent, array $relocated): string
     {
-        $promoHtml = '';
-        foreach ($this->extraContent as $extra) {
-            if ($extra['category'] === 'upgrade' && $extra['parent'] === $parent) {
-                $promoHtml .= ' ' . $extra['html'];
+        $extra = '';
+        foreach ($this->extraContent as $entry) {
+            if ($entry['category'] === 'upgrade' && $entry['parent'] === $parent) {
+                $extra .= $entry['html'];
             }
         }
-        // Space out adjacent tags before stripping so neighbouring link labels
-        // don't run together (e.g. "Upgrade to ProUnlimited Extension").
-        $promo = trim((string) preg_replace('/\s+/', ' ', wp_strip_all_tags(str_replace('<', ' <', $promoHtml))));
 
-        // Upgrade actions: the relocated menu links, or the promo's own link
-        // when the plugin only declared HTML.
+        // Real prose, or just bare upgrade links? Measure what is left once the
+        // links are removed.
+        $prose = trim((string) preg_replace('/\s+/', ' ', wp_strip_all_tags(str_replace('<', ' <', (string) preg_replace('/<a\b[^>]*>.*?<\/a>/is', ' ', $extra)))));
+        $hasProse = mb_strlen($prose) >= 12;
+
         $links = $relocated[$parent] ?? [];
-        if ($links === [] && $promoHtml !== '' && preg_match('/href=(["\'])(https?:\/\/.*?)\1/', $promoHtml, $m) === 1) {
-            $links = [['label' => __('Upgrade to Pro', 'wppack-tidy-admin'), 'url' => $m[2]]];
+        if (!$hasProse && preg_match_all('/<a\b[^>]*href=(["\'])(https?:\/\/[^"\']+)\1[^>]*>(.*?)<\/a>/is', $extra, $matches, PREG_SET_ORDER) > 0) {
+            foreach ($matches as $match) {
+                $links[] = ['label' => trim(wp_strip_all_tags($match[3])), 'url' => $match[2]];
+            }
+        }
+        $seen = [];
+        $links = array_values(array_filter($links, static function (array $link) use (&$seen): bool {
+            if (isset($seen[$link['url']])) {
+                return false;
+            }
+            $seen[$link['url']] = true;
+
+            return true;
+        }));
+
+        // The pitch as plain text — link labels kept inline so the sentence
+        // reads whole, but the vendor's own notice styling (borders, tints) is
+        // dropped so every card looks the same. Trailing arrows/separators left
+        // by a call-to-action link are trimmed.
+        $promo = '';
+        if ($hasProse) {
+            $text = trim((string) preg_replace('/\s+/', ' ', wp_strip_all_tags(str_replace('<', ' <', $extra))));
+            $text = (string) preg_replace('/[\s>:|\x{2192}\x{2190}\x{2022}\-–—]+$/u', '', $text);
+            $promo = '<p class="tidy-admin-upgrades-card__promo">' . esc_html($text) . '</p>';
         }
 
         if ($promo === '' && $links === []) {
             return '';
         }
 
-        $body = $promo === '' ? '' : '<p class="tidy-admin-upgrades-card__promo">' . esc_html($promo) . '</p>';
-
+        $body = $promo;
         if ($links !== []) {
             $body .= '<p class="tidy-admin-upgrades-card__actions">';
             $primary = true;
             foreach ($links as $item) {
                 $external = str_starts_with($item['url'], 'http') && !str_starts_with($item['url'], admin_url());
                 $body .= sprintf(
-                    '<a class="button %s" href="%s"%s>%s</a>',
-                    $primary ? 'button-primary' : 'button-secondary',
+                    '<a class="button button-small %s" href="%s"%s>%s</a>',
+                    $primary ? 'button-primary' : '',
                     esc_url($item['url']),
                     $external ? ' target="_blank" rel="noopener noreferrer"' : '',
                     esc_html($item['label'] !== '' ? $item['label'] : __('Upgrade', 'wppack-tidy-admin')),
@@ -237,7 +262,8 @@ final class UpgradesDirectory
             . '.tidy-admin-upgrades-card__title { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; padding: 0 0 10px; font-size: 14px; line-height: 1.4; border-bottom: 1px solid #f0f0f1; }'
             . '.tidy-admin-upgrades-card__title .dashicons { color: var(--wp-admin-theme-color, #2271b1); }'
             . '.tidy-admin-upgrades-card__promo { color: #50575e; margin: 0 0 12px; }'
-            . '.tidy-admin-upgrades-card__actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }'
+            . '.tidy-admin-upgrades-card__actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }'
+            . '.tidy-admin-upgrades-card__actions .button { min-height: 0; height: auto; padding: 1px 10px; line-height: 1.9; font-size: 12px; }'
             . '.tidy-admin-upgrades-widget .tidy-admin-upgrades-card { border: 0; border-radius: 0; box-shadow: none; padding: 12px 0; }'
             . '.tidy-admin-upgrades-widget .tidy-admin-upgrades-card:first-child { padding-top: 0; }'
             . '.tidy-admin-upgrades-widget .tidy-admin-upgrades-card + .tidy-admin-upgrades-card { border-top: 1px solid #f0f0f1; }'
