@@ -145,6 +145,14 @@ final class ReviewsFeed extends AbstractModule
                  * the color the core dashicons use.
                  */
                 'adminCss' => <<<'CSS'
+                /* The plugin swaps in its own data-URI icon per state (60%-alpha
+                   normal, dodgerblue hover, white current) via a higher-specificity
+                   ".toplevel_page_sbr" descendant rule; blank that content with an even
+                   higher specificity so our repainted mask below shows in every state */
+                #adminmenu #toplevel_page_sbr .toplevel_page_sbr .wp-menu-image::before,
+                #adminmenu #toplevel_page_sbr:hover .toplevel_page_sbr .wp-menu-image::before,
+                #adminmenu #toplevel_page_sbr.current .toplevel_page_sbr .wp-menu-image::before,
+                #adminmenu #toplevel_page_sbr.wp-has-current-submenu .toplevel_page_sbr .wp-menu-image::before { content: "" !important; }
                 #toplevel_page_sbr:hover .wp-menu-image::before,
                 #toplevel_page_sbr.current .wp-menu-image::before,
                 #toplevel_page_sbr.wp-has-current-submenu .wp-menu-image::before { background-color: #fff; }
