@@ -84,15 +84,11 @@ final class UpgradesDirectory
      */
     private function card(array $card): string
     {
-        $icon = '';
-        if ($card['slug'] !== '') {
-            // WordPress.org serves plugin icons at ps.w.org/{slug}/assets/; if a
-            // plugin has none there, the <img> quietly removes itself.
-            $icon = sprintf(
-                '<img class="tidy-admin-upgrades-card__icon" src="%s" alt="" loading="lazy" onerror="this.remove()">',
-                esc_url('https://ps.w.org/' . $card['slug'] . '/assets/icon-128x128.png'),
-            );
-        }
+        $iconUrl = $card['slug'] !== '' ? $this->pluginIconUrl($card['slug']) : '';
+        $icon = $iconUrl === '' ? '' : sprintf(
+            '<img class="tidy-admin-upgrades-card__icon" src="%s" alt="" loading="lazy" onerror="this.remove()">',
+            esc_url($iconUrl),
+        );
 
         return '<div class="tidy-admin-upgrades-card">'
             . '<div class="tidy-admin-upgrades-card__head">'
@@ -101,6 +97,43 @@ final class UpgradesDirectory
             . '</div>'
             . $card['html']
             . '</div>';
+    }
+
+    /**
+     * The plugin's real icon URL from the WordPress.org plugins API (whatever
+     * format it actually ships — png, gif, svg — so e.g. Yoast's animated .gif
+     * resolves), cached for a week. '' when the plugin has no hosted icon.
+     */
+    private function pluginIconUrl(string $slug): string
+    {
+        $key = 'tidy_admin_plugin_icon_' . $slug;
+        $cached = get_transient($key);
+        if ($cached !== false) {
+            return (string) $cached;
+        }
+
+        if (!function_exists('plugins_api')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+        }
+
+        $info = plugins_api('plugin_information', ['slug' => $slug, 'fields' => ['icons' => true, 'sections' => false, 'short_description' => false]]);
+        $icons = (!is_wp_error($info) && is_object($info) && isset($info->icons) && is_array($info->icons)) ? $info->icons : [];
+
+        // Prefer the higher-resolution icon, then the vector, then the 1x; skip
+        // the generic geopattern "default" so a genuinely icon-less plugin
+        // shows no image rather than a placeholder.
+        $url = '';
+        foreach (['2x', 'svg', '1x'] as $size) {
+            if (!empty($icons[$size])) {
+                $url = (string) $icons[$size];
+
+                break;
+            }
+        }
+
+        set_transient($key, $url, $url !== '' ? WEEK_IN_SECONDS : HOUR_IN_SECONDS);
+
+        return $url;
     }
 
     /**

@@ -18,10 +18,37 @@ use WPPack\Plugin\TidyAdminPlugin\Tests\TestCase;
 
 final class UpgradesDirectoryTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Stub the WordPress.org plugins API so icon lookups are deterministic
+        // and make no HTTP request.
+        add_filter('plugins_api', [$this, 'stubPluginsApi'], 10, 3);
+    }
+
     protected function tearDown(): void
     {
+        remove_filter('plugins_api', [$this, 'stubPluginsApi'], 10);
+        foreach (['wordpress-seo', 'instagram-feed', 'advanced-custom-fields', 'location-weather', 'wp-mail-smtp', 'x'] as $slug) {
+            delete_transient('tidy_admin_plugin_icon_' . $slug);
+        }
         unset($GLOBALS['submenu']);
         parent::tearDown();
+    }
+
+    /**
+     * @param mixed  $result
+     * @param object $args
+     *
+     * @return object
+     */
+    public function stubPluginsApi($result, string $action, $args)
+    {
+        if ($action === 'plugin_information' && isset($args->slug)) {
+            return (object) ['icons' => ['2x' => 'https://ps.w.org/' . $args->slug . '/assets/icon-256x256.gif']];
+        }
+
+        return $result;
     }
 
     private function render(UpgradesDirectory $directory): string
@@ -49,9 +76,9 @@ final class UpgradesDirectoryTest extends TestCase
 
         $html = $this->render($directory);
 
-        // The plugin name and its WordPress.org icon
+        // The plugin name and its real WordPress.org icon (from the plugins API)
         $this->assertStringContainsString('Yoast SEO', $html);
-        $this->assertStringContainsString('https://ps.w.org/wordpress-seo/assets/icon-128x128.png', $html);
+        $this->assertStringContainsString('https://ps.w.org/wordpress-seo/assets/icon-256x256.gif', $html);
         // The relocated upgrade item is a primary button to the page it opens
         $this->assertStringContainsString('button-primary', $html);
         $this->assertStringContainsString('wpseo_licenses', $html);
