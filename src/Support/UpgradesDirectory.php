@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace WPPack\Plugin\TidyAdminPlugin\Support;
 
 /**
- * A single "Plugin Upgrades" screen (Settings submenu) plus a matching
- * dashboard widget: one compact card per active plugin with just its Pro
- * upgrade link and short promo. Deliberately minimal — the premium-feature
- * lists, documentation and WordPress.org links stay in each plugin's own
- * Help/Upgrades panels; piling them all onto one screen is poor UX.
+ * A single "Plugin Upgrades" screen under the Plugins menu: one card per
+ * active plugin — its WordPress.org icon, its name, and its upgrade links as
+ * buttons (the Pro pitch first, a Lite-vs-Pro comparison alongside it when the
+ * plugin offers one). Deliberately link-only: the premium-feature lists and
+ * documentation stay in each plugin's own Help/Upgrades panels.
  */
 final class UpgradesDirectory
 {
@@ -27,13 +27,14 @@ final class UpgradesDirectory
     /**
      * @param array<string, list<string>>                                 $needlesByCategory category => slug substrings (only the "upgrade" category is shown here)
      * @param list<array{category: string, parent: string, html: string}> $extraContent      module-declared panel HTML
-     * @param list<array{parent: string, name: string}>                   $plugins           active plugins that own a menu parent
+     * @param list<array{parent: string, name: string, slug: string}>     $plugins           active plugins that own a menu parent
      */
     public function __construct(
         private readonly array $needlesByCategory,
         private readonly array $extraContent,
         private readonly array $plugins,
-    ) {}
+    ) {
+    }
 
     public function register(): void
     {
@@ -50,14 +51,6 @@ final class UpgradesDirectory
                 'activate_plugins',
                 self::PAGE,
                 [$this, 'renderPage'],
-            );
-        });
-
-        add_action('wp_dashboard_setup', function (): void {
-            wp_add_dashboard_widget(
-                'tidy-admin-upgrades-directory',
-                __('Plugin Upgrades', 'wppack-tidy-admin'),
-                [$this, 'renderWidget'],
             );
         });
     }
@@ -80,42 +73,42 @@ final class UpgradesDirectory
 
         echo '<div class="tidy-admin-upgrades-grid">';
         foreach ($cards as $card) {
-            echo $this->card($card['name'], $card['html'], 'h2');
+            echo $this->card($card);
         }
         echo '</div>' . $this->styles() . '</div>';
     }
 
-    public function renderWidget(): void
+    /**
+     * One plugin card: its WordPress.org icon, its name, then its upgrade links.
+     *
+     * @param array{name: string, slug: string, html: string} $card
+     */
+    private function card(array $card): string
     {
-        $cards = $this->collect();
-
-        if ($cards === []) {
-            echo '<p>' . esc_html__('None of your active plugins offer a Pro upgrade.', 'wppack-tidy-admin') . '</p>';
-
-            return;
+        $icon = '';
+        if ($card['slug'] !== '') {
+            // WordPress.org serves plugin icons at ps.w.org/{slug}/assets/; if a
+            // plugin has none there, the <img> quietly removes itself.
+            $icon = sprintf(
+                '<img class="tidy-admin-upgrades-card__icon" src="%s" alt="" loading="lazy" onerror="this.remove()">',
+                esc_url('https://ps.w.org/' . $card['slug'] . '/assets/icon-128x128.png'),
+            );
         }
 
-        echo '<div class="tidy-admin-upgrades tidy-admin-upgrades-widget">';
-        foreach ($cards as $card) {
-            echo $this->card($card['name'], $card['html'], 'h3');
-        }
-        echo '</div>' . $this->styles();
-    }
-
-    /** One plugin card: the plugin name, then its upgrade body. */
-    private function card(string $name, string $body, string $tag): string
-    {
         return '<div class="tidy-admin-upgrades-card">'
-            . '<' . $tag . ' class="tidy-admin-upgrades-card__title">' . esc_html($name) . '</' . $tag . '>'
-            . $body
+            . '<div class="tidy-admin-upgrades-card__head">'
+            . $icon
+            . '<h2 class="tidy-admin-upgrades-card__title">' . esc_html($card['name']) . '</h2>'
+            . '</div>'
+            . $card['html']
             . '</div>';
     }
 
     /**
-     * One card per plugin — just its upgrade link and promo — in the order the
-     * plugins were declared, skipping those with nothing to upgrade to.
+     * One card per plugin, in declaration order, skipping any with no upgrade
+     * link to show.
      *
-     * @return list<array{name: string, html: string}>
+     * @return list<array{name: string, slug: string, html: string}>
      */
     private function collect(): array
     {
@@ -126,7 +119,7 @@ final class UpgradesDirectory
             $html = $this->upgradeHtml($plugin['parent'], $relocated);
 
             if ($html !== '') {
-                $cards[] = ['name' => $plugin['name'], 'html' => $html];
+                $cards[] = ['name' => $plugin['name'], 'slug' => $plugin['slug'], 'html' => $html];
             }
         }
 
@@ -134,7 +127,7 @@ final class UpgradesDirectory
     }
 
     /**
-     * Matches the relocation needles against the live $submenu — the same links
+     * Matches the upgrade needles against the live $submenu — the same links
      * SubmenuCleaner relocates into the per-plugin panels — grouped by parent,
      * without removing anything.
      *
@@ -148,7 +141,6 @@ final class UpgradesDirectory
         $items = [];
         $matched = [];
 
-        // Only the upgrade links are shown on this consolidated screen.
         foreach ($this->needlesByCategory['upgrade'] ?? [] as $needle) {
             foreach ((array) $submenu as $parent => $entries) {
                 if (!in_array((string) $parent, $parents, true)) {
@@ -178,36 +170,30 @@ final class UpgradesDirectory
     }
 
     /**
-     * The plugin's upgrade promo above its upgrade links as slim buttons.
-     *
-     * When the module's upgrade HTML is a real sentence it is shown verbatim
-     * (its inline link kept in place, so the pitch reads naturally) and only
-     * the relocated menu links become buttons. When it is just bare links
-     * (no prose), there is no promo and every link becomes a button — each
-     * keeping the plugin's own wording ("Premium", "PRO", "Addons", …).
+     * The plugin's upgrade links as buttons — the first (its main Pro pitch) as
+     * a primary button, the rest (e.g. a Lite-vs-Pro comparison) alongside it.
+     * Uses the relocated menu links; when a plugin has none, falls back to the
+     * links inside its own upgrade HTML. No prose — just the links.
      *
      * @param array<string, list<array{label: string, url: string}>> $relocated
      */
     private function upgradeHtml(string $parent, array $relocated): string
     {
-        $extra = '';
-        foreach ($this->extraContent as $entry) {
-            if ($entry['category'] === 'upgrade' && $entry['parent'] === $parent) {
-                $extra .= $entry['html'];
-            }
-        }
-
-        // Real prose, or just bare upgrade links? Measure what is left once the
-        // links are removed.
-        $prose = trim((string) preg_replace('/\s+/', ' ', wp_strip_all_tags(str_replace('<', ' <', (string) preg_replace('/<a\b[^>]*>.*?<\/a>/is', ' ', $extra)))));
-        $hasProse = mb_strlen($prose) >= 12;
-
         $links = $relocated[$parent] ?? [];
-        if (!$hasProse && preg_match_all('/<a\b[^>]*href=(["\'])(https?:\/\/[^"\']+)\1[^>]*>(.*?)<\/a>/is', $extra, $matches, PREG_SET_ORDER) > 0) {
-            foreach ($matches as $match) {
-                $links[] = ['label' => trim(wp_strip_all_tags($match[3])), 'url' => $match[2]];
+        if ($links === []) {
+            $extra = '';
+            foreach ($this->extraContent as $entry) {
+                if ($entry['category'] === 'upgrade' && $entry['parent'] === $parent) {
+                    $extra .= $entry['html'];
+                }
+            }
+            if (preg_match_all('/<a\b[^>]*href=(["\'])(https?:\/\/[^"\']+)\1[^>]*>(.*?)<\/a>/is', $extra, $matches, PREG_SET_ORDER) > 0) {
+                foreach ($matches as $match) {
+                    $links[] = ['label' => trim(wp_strip_all_tags($match[3])), 'url' => $match[2]];
+                }
             }
         }
+
         $seen = [];
         $links = array_values(array_filter($links, static function (array $link) use (&$seen): bool {
             if (isset($seen[$link['url']])) {
@@ -218,38 +204,24 @@ final class UpgradesDirectory
             return true;
         }));
 
-        // The pitch as plain text — link labels kept inline so the sentence
-        // reads whole, but the vendor's own notice styling (borders, tints) is
-        // dropped so every card looks the same. Trailing arrows/separators left
-        // by a call-to-action link are trimmed.
-        $promo = '';
-        if ($hasProse) {
-            $text = trim((string) preg_replace('/\s+/', ' ', wp_strip_all_tags(str_replace('<', ' <', $extra))));
-            $text = (string) preg_replace('/[\s>:|\x{2192}\x{2190}\x{2022}\-–—]+$/u', '', $text);
-            $promo = '<p class="tidy-admin-upgrades-card__promo">' . esc_html($text) . '</p>';
-        }
-
-        if ($promo === '' && $links === []) {
+        if ($links === []) {
             return '';
         }
 
-        $body = $promo;
-        if ($links !== []) {
-            $body .= '<p class="tidy-admin-upgrades-card__actions">';
-            $primary = true;
-            foreach ($links as $item) {
-                $external = str_starts_with($item['url'], 'http') && !str_starts_with($item['url'], admin_url());
-                $body .= sprintf(
-                    '<a class="button button-small %s" href="%s"%s>%s</a>',
-                    $primary ? 'button-primary' : '',
-                    esc_url($item['url']),
-                    $external ? ' target="_blank" rel="noopener noreferrer"' : '',
-                    esc_html($item['label'] !== '' ? $item['label'] : __('Upgrade', 'wppack-tidy-admin')),
-                );
-                $primary = false;
-            }
-            $body .= '</p>';
+        $body = '<p class="tidy-admin-upgrades-card__actions">';
+        $primary = true;
+        foreach ($links as $item) {
+            $external = str_starts_with($item['url'], 'http') && !str_starts_with($item['url'], admin_url());
+            $body .= sprintf(
+                '<a class="button %s" href="%s"%s>%s</a>',
+                $primary ? 'button-primary' : '',
+                esc_url($item['url']),
+                $external ? ' target="_blank" rel="noopener noreferrer"' : '',
+                esc_html($item['label'] !== '' ? $item['label'] : __('Upgrade', 'wppack-tidy-admin')),
+            );
+            $primary = false;
         }
+        $body .= '</p>';
 
         return $body;
     }
@@ -259,13 +231,10 @@ final class UpgradesDirectory
         return '<style>'
             . '.tidy-admin-upgrades-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 16px; }'
             . '.tidy-admin-upgrades-card { background: #fff; border: 1px solid #dcdcde; border-radius: 6px; padding: 16px; box-shadow: 0 1px 2px rgba(0, 0, 0, .04); }'
-            . '.tidy-admin-upgrades-card__title { margin: 0 0 10px; padding: 0; font-size: 14px; line-height: 1.4; }'
-            . '.tidy-admin-upgrades-card__promo { color: #50575e; margin: 0 0 12px; }'
-            . '.tidy-admin-upgrades-card__actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }'
-            . '.tidy-admin-upgrades-card__actions .button { min-height: 0; height: auto; padding: 1px 10px; line-height: 1.9; font-size: 12px; }'
-            . '.tidy-admin-upgrades-widget .tidy-admin-upgrades-card { border: 0; border-radius: 0; box-shadow: none; padding: 12px 0; }'
-            . '.tidy-admin-upgrades-widget .tidy-admin-upgrades-card:first-child { padding-top: 0; }'
-            . '.tidy-admin-upgrades-widget .tidy-admin-upgrades-card + .tidy-admin-upgrades-card { border-top: 1px solid #f0f0f1; }'
+            . '.tidy-admin-upgrades-card__head { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }'
+            . '.tidy-admin-upgrades-card__icon { width: 36px; height: 36px; border-radius: 6px; flex: 0 0 auto; }'
+            . '.tidy-admin-upgrades-card__title { margin: 0; padding: 0; font-size: 14px; line-height: 1.3; }'
+            . '.tidy-admin-upgrades-card__actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }'
             . '</style>';
     }
 }

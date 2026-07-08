@@ -121,11 +121,13 @@ final class TidyAdminPlugin
             }
 
             if ($module->menuParent() !== '') {
-                // One card on the consolidated "Plugin Upgrades & Resources"
-                // screen/widget, grouped under this plugin's menu parent
+                // One card on the consolidated "Plugin Upgrades" screen, grouped
+                // under this plugin's menu parent. The slug (its plugin folder)
+                // is the WordPress.org slug used for the icon.
                 $directoryPlugins[] = [
                     'parent' => $module->menuParent(),
                     'name' => self::pluginName($file),
+                    'slug' => $file !== '' ? dirname($file) : '',
                 ];
             }
 
