@@ -147,9 +147,14 @@ final class OptinMonster extends AbstractModule
                    — reset the panel text to the native screen-meta 13px */
                 body[class*="page_optin-monster"] #tidy-admin-plugin-help-wrap *,
                 body[class*="page_optin-monster"] #tidy-admin-upgrades-wrap * { font-size: 13px !important; line-height: 1.6 !important; }
-                /* OptinMonster: the "?" help icon in its header bar (the Help panel
-                   carries its documentation and support links) */
-                body[class*="page_optin-monster"] .omapi-plugin-header .omapi-plugin-banner__icon { display: none !important; }
+                /* OptinMonster: the "Need Help?" (?) icon in its header bar, which
+                   links out to optinmonster.com/docs — redundant now the Help panel
+                   carries the plugin's documentation and support links. Different
+                   builds render it differently (an <a class="omapi-plugin-banner__icon">
+                   vs an <a class="static-menu-item"> with a help-circle image), but
+                   both live alone in the .omapi-plugin-banner__icons list, so hide
+                   that whole list to cover every version. */
+                body[class*="page_optin-monster"] .omapi-plugin-banner__icons { display: none !important; }
                 /* OptinMonster: its sidebar notification counter jiggles every few
                    seconds to draw the eye — stop the animation (the badge stays) */
                 #adminmenu .om-notifications-count { animation: none !important; }
