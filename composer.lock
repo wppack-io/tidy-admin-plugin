@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "896e4aa72a461dacd15ddd71d967a79b",
+    "content-hash": "10ae61f9f7b6ba15f709418b77fc611f",
     "packages": [
         {
             "name": "composer/installers",
@@ -7115,6 +7115,37 @@
                 "source": "https://plugins.svn.wordpress.org/taxonomy-terms-order"
             },
             "time": "2026-05-20T06:51:08+00:00"
+        },
+        {
+            "name": "wp-plugin/w3-total-cache",
+            "version": "2.10.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/w3-total-cache/",
+                "reference": "tags/2.10.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/w3-total-cache.2.10.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "BoldGrid"
+                }
+            ],
+            "description": "Search Engine (SEO) & Performance Optimization (WPO) via caching. Integrated caching: CDN, Page, Minify, Object, Fragment, Database support.",
+            "homepage": "https://www.boldgrid.com/totalcache/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/w3-total-cache/#developers",
+                "issues": "https://wordpress.org/support/plugin/w3-total-cache",
+                "source": "https://plugins.svn.wordpress.org/w3-total-cache"
+            },
+            "time": "2026-07-06T17:55:56+00:00"
         },
         {
             "name": "wp-plugin/wordfence",

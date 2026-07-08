@@ -55,6 +55,7 @@ final class TidyAdminPlugin
         Modules\Redirection::class,
         Modules\ReviewsFeed::class,
         Modules\TaxonomyTermsOrder::class,
+        Modules\W3TotalCache::class,
         Modules\WordPressCore::class,
         Modules\WpChat::class,
         Modules\WpConsent::class,

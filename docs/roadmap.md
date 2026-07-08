@@ -52,6 +52,7 @@ time and are listed only to explain prioritization.
 | [Contact Form CFDB7](https://wordpress.org/plugins/contact-form-cfdb7/) | 500k+ | Paid extensions |
 | [Custom Post Type UI](https://wordpress.org/plugins/custom-post-type-ui/) | 1M+ | CPT UI Pro (Pluginize / WebDevStudios) |
 | [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 500k+ | Advanced Taxonomy Terms Order |
+| [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) | 1M+ | W3 Total Cache Pro |
 | [YARPP](https://wordpress.org/plugins/yet-another-related-posts-plugin/) | 200k+ | — (review requests only) |
 | [BNFW](https://wordpress.org/plugins/bnfw/) | 200k+ | Paid add-ons, priority support |
 | [EmbedPress](https://wordpress.org/plugins/embedpress/) | 100k+ | EmbedPress Pro |
@@ -85,7 +86,6 @@ smaller promotion surface than tier 1.
 | Plugin | Active installs | Commercial edition | Free-version promotion surface |
 |---|---|---|---|
 | [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) | 2M+ | Essential Addons Pro | Locked (Pro) elements, upgrade menus, notices |
-| [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) | 1M+ | W3 Total Cache Pro | Pro-badged settings, upgrade prompts |
 | [Smush](https://wordpress.org/plugins/wp-smushit/) | 1M+ | Smush Pro (WPMU DEV) | Pro teasers, cross-sells for other WPMU DEV plugins |
 | [WP-Optimize](https://wordpress.org/plugins/wp-optimize/) | 1M+ | WP-Optimize Premium | Premium tabs, teaser features, notices |
 | [WP Fastest Cache](https://wordpress.org/plugins/wp-fastest-cache/) | 1M+ | Premium | Locked settings checkboxes, upgrade prompts |

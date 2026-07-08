@@ -60,6 +60,7 @@
         "wp-plugin/reviews-feed": "*",
         "wp-plugin/smashballoon-wpchat-livechat-customer-support": "*",
         "wp-plugin/taxonomy-terms-order": "*",
+        "wp-plugin/w3-total-cache": "*",
         "wp-plugin/wordfence": "*",
         "wp-plugin/wordpress-seo": "*",
         "wp-plugin/wp-mail-smtp": "*",
