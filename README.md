@@ -65,6 +65,11 @@ plugins.
   or feature by feature: every module lists its actual cleanups (e.g. "Remove
   the HelpScout support beacon", "Hide the license fields") as individually
   toggleable checkboxes. Everything is ON by default.
+- **Settings › Plugin Upgrades** (and a matching dashboard widget) gathers the
+  Pro upgrade link for each active plugin into one compact card grid — just the
+  link and a short promo, so upgrading is discoverable in one place without the
+  per-plugin nagging. The premium-feature and documentation details stay in each
+  plugin's own Help / Upgrades panels.
 
 ## Supported plugins
 

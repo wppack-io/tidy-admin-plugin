@@ -94,6 +94,7 @@ final class TidyAdminPlugin
         $noticeDenyByHook = [];
         $setupNoticePlugins = [];
         $adminCss = [self::BASE_ADMIN_CSS];
+        $directoryPlugins = [];
 
         $settingsModules = [];
 
@@ -117,6 +118,15 @@ final class TidyAdminPlugin
             ];
             if (!Support\Settings::moduleEnabled($settingsKey)) {
                 continue;
+            }
+
+            if ($module->menuParent() !== '') {
+                // One card on the consolidated "Plugin Upgrades & Resources"
+                // screen/widget, grouped under this plugin's menu parent
+                $directoryPlugins[] = [
+                    'parent' => $module->menuParent(),
+                    'name' => self::pluginName($file),
+                ];
             }
 
             if ($module->menuParent() !== '' && $module->providesHelpPanel()) {
@@ -172,6 +182,7 @@ final class TidyAdminPlugin
         ), static fn(string $parent): bool => $parent !== ''));
 
         (new Support\SubmenuCleaner($submenuRelocations, $extraMetaLinks, $saleNotices, $helpSidebars, $panelParents))->register();
+        (new Support\UpgradesDirectory($submenuRelocations, $extraMetaLinks, $directoryPlugins))->register();
         (new Support\PluginListLinkCleaner($upsellLinkUrlsByPlugin))->register();
         (new Support\NoticeHookCleaner($noticeDenyByHook))->register();
         (new Support\SetupNoticeRelocator($setupNoticePlugins))->register();

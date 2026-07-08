@@ -444,7 +444,7 @@ final class SubmenuCleaner
     }
 
     /** Mirrors how wp-admin/menu-header.php builds submenu link URLs. */
-    private static function itemUrl(string $parent, string $slug): string
+    public static function itemUrl(string $parent, string $slug): string
     {
         if (preg_match('#^https?://#', $slug) === 1) {
             return $slug;

@@ -329,3 +329,21 @@ msgstr "ウェビナー宣伝通知を停止"
 #: src/Modules/Yoast.php
 msgid "Use the freed upsell space for content"
 msgstr "空いたアップセル領域をコンテンツの表示に活用"
+
+msgid "Plugin Upgrades"
+msgstr "プラグインのアップグレード"
+
+msgid "The Pro upgrade link for each of your active plugins, in one place. Their documentation and premium-feature details stay in each plugin's own Help and Upgrades panels."
+msgstr "有効なプラグインごとの Pro アップグレードリンクを一箇所にまとめています。ドキュメントやプレミアム機能の詳細は、各プラグインの Help / Upgrades パネルに残ります。"
+
+msgid "None of your active plugins offer a Pro upgrade."
+msgstr "有効なプラグインにアップグレード可能なものはありません。"
+
+msgid "Match its highlighted menu item to the admin colour scheme"
+msgstr "有効なメニュー項目を管理画面のカラースキームに合わせる"
+
+msgid "Integrate the Help and Upgrades buttons into the page header"
+msgstr "ヘルプ・アップグレードボタンをページヘッダーに統合"
+
+msgid "Hide the setup pitch in the analytics dashboard widget"
+msgstr "アナリティクスウィジェットのセットアップ勧誘を非表示"
