@@ -50,9 +50,12 @@ final class FeedsForYoutube extends AbstractModule
         return [
             'upgrade-menus' => [
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
-                // "Try the Pro version demo" menu item (external demo link)
+                // "Try the Pro version demo" menu item (external demo link). It is
+                // a preview of Pro, not the upgrade action, so it rides in the
+                // Premium features tab — leaving "Upgrade to Pro" (below) as the
+                // main pitch on the Upgrades panel and the Plugin Upgrades screen.
                 'submenuRelocations' => [
-                    'upgrade' => [
+                    'premium' => [
                         'youtube-feed/demo',
                     ],
                 ],
