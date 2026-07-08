@@ -60,6 +60,21 @@ final class OptinMonster extends AbstractModule
                     ],
                 ],
             ],
+            'marketing-notices' => [
+                'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
+                /*
+                 * "Get More Email Subscribers with OptinMonster — Please connect to
+                 * or create an OptinMonster account ..." — a connect/cross-sell prompt
+                 * OptinMonster prints on every admin screen via admin_notices. Its own
+                 * screens still carry the "Connect Your Site" prompt, so setup stays
+                 * reachable there.
+                 */
+                'noticeDenyByHook' => [
+                    'admin_notices' => [
+                        'OMAPI_Validate::notices',
+                    ],
+                ],
+            ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
                 // Menu items cross-selling the vendor's other products
