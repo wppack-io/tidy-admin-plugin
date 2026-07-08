@@ -131,6 +131,11 @@ final class MonsterInsights extends AbstractModule
                 body[class*="page_monsterinsights"] .monsterinsights-prettylinks-flow-ad { display: none !important; }
                 /* The floating "AI Charlie" assistant widget (a Pro/AI upsell prompt) */
                 body[class*="page_monsterinsights"] .monsterinsights-ai-charlie { display: none !important; }
+                /* Addons page: the "Recommended For You" Upgrade-to-Pro banner and its
+                   heading (the heading directly before the banner; other addon section
+                   headings like "You Might Also Like" stay) */
+                body[class*="page_monsterinsights"] .monsterinsights-addons-upsell,
+                body[class*="page_monsterinsights"] .monsterinsights-addons-heading:has(+ .monsterinsights-addons-upsell) { display: none !important; }
                 /* Setup Checklist: the Pro-feature milestones (one-click eCommerce,
                    Search Console, form conversions, Custom Dimensions, ...) whose
                    action is an Upgrade link; the functional setup steps stay */
