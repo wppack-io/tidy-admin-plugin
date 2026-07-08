@@ -231,8 +231,15 @@ final class AllInOneSeo extends AbstractModule
                         (new $class())->maybeShowNotice();
                     }
                 },
+                /*
+                 * The compound selector beats Redirection's aggressive
+                 * ".notice:not(.hidden) { display: block !important }" (it collects
+                 * admin notices into its own React UI on tools.php?page=redirection),
+                 * which would otherwise re-show this hidden notice there. The
+                 * widget exception keeps its ID selector, so it still wins.
+                 */
                 'adminCss' => <<<'CSS'
-                .aioseo-conflicting-plugin-notice { display: none !important; }
+                .aioseo-conflicting-plugin-notice.notice:not(.hidden) { display: none !important; }
                 #tidy_admin_pending_setup .aioseo-conflicting-plugin-notice { display: block !important; }
                 CSS,
                 /*
