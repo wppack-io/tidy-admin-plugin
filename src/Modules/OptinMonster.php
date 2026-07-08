@@ -162,6 +162,11 @@ final class OptinMonster extends AbstractModule
                    top alert bar — the dashboard's own "Connect Your Site" card already
                    carries the same setup prompt */
                 body[class*="page_optin-monster"] .omapi-alert-bar-wrapper { display: none !important; }
+                /* OptinMonster: the floating round "Quick Links" flyout button
+                   (bottom-right), whose expanded menu leads with an "Upgrade to
+                   OptinMonster Pro" pitch — a Vue component with no PHP hook to
+                   remove, so hidden here as a last resort. */
+                body[class*="page_optin-monster"] #om-flyout { display: none !important; }
                 CSS,
             ],
             'panel-placement' => [
