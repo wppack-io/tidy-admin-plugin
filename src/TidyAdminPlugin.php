@@ -52,6 +52,7 @@ final class TidyAdminPlugin
         Modules\OptinMonster::class,
         Modules\PostTypesOrder::class,
         Modules\PublishPressFuture::class,
+        Modules\Redirection::class,
         Modules\ReviewsFeed::class,
         Modules\TaxonomyTermsOrder::class,
         Modules\WordPressCore::class,

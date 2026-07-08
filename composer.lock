@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "368abad2802f745b705ccdda034dca79",
+    "content-hash": "896e4aa72a461dacd15ddd71d967a79b",
     "packages": [
         {
             "name": "composer/installers",
@@ -6991,6 +6991,37 @@
                 "source": "https://plugins.svn.wordpress.org/post-types-order"
             },
             "time": "2026-06-18T10:51:22+00:00"
+        },
+        {
+            "name": "wp-plugin/redirection",
+            "version": "5.8.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/redirection/",
+                "reference": "tags/5.8.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/redirection.5.8.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "John Godley"
+                }
+            ],
+            "description": "Manage 301 redirects, track 404 errors, and improve your site. No knowledge of Apache or Nginx required.",
+            "homepage": "https://redirection.me/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/redirection/#developers",
+                "issues": "https://wordpress.org/support/plugin/redirection",
+                "source": "https://plugins.svn.wordpress.org/redirection"
+            },
+            "time": "2026-07-01T18:36:00+00:00"
         },
         {
             "name": "wp-plugin/reviews-feed",

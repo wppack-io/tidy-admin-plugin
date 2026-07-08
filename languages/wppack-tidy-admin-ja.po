@@ -374,3 +374,6 @@ msgstr "アップグレードを開始できませんでした。もう一度お
 
 msgid "Remove the Marketing Education item from the Dashboard menu"
 msgstr "ダッシュボードメニューの「Marketing Education」項目を除去"
+
+msgid "Add the WordPress.org links to the plugin's Help tab"
+msgstr "WordPress.org リンクをプラグインの Help タブに追加"

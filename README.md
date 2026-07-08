@@ -103,6 +103,7 @@ supported, with the major versions the cleanups were verified against:
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 4.x |
 | [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 2.x |
 | [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 4.x |
+| [Redirection](https://wordpress.org/plugins/redirection/) | 5.x |
 | [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 1.x |
 | [Wordfence](https://wordpress.org/plugins/wordfence/) | 8.x |
 | [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 4.x |

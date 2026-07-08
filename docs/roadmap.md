@@ -46,6 +46,7 @@ time and are listed only to explain prioritization.
 | [WPChat (Smash Balloon)](https://wordpress.org/plugins/smashballoon-wpchat-livechat-customer-support/) | 10k+ | WPChat paid tiers |
 | [Duplicator](https://wordpress.org/plugins/duplicator/) | 1M+ | Duplicator Pro |
 | [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 800k+ | PublishPress Future Pro |
+| [Redirection](https://wordpress.org/plugins/redirection/) | 2M+ | — (free, donation-supported) |
 | [Broken Link Checker](https://wordpress.org/plugins/broken-link-checker/) | 700k+ | Cloud Link Checker (paid service) |
 | [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 600k+ | Advanced Post Types Order |
 | [Contact Form CFDB7](https://wordpress.org/plugins/contact-form-cfdb7/) | 500k+ | Paid extensions |
