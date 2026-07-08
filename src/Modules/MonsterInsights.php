@@ -102,6 +102,10 @@ final class MonsterInsights extends AbstractModule
                 body[class*="page_monsterinsights"] .monsterinsights-settings-block:has(.monsterinsights-settings-addon-upgrade) { display: none !important; }
                 /* Fallback for any upgrade row not wrapped in a settings block */
                 body[class*="page_monsterinsights"] .monsterinsights-settings-addon-upgrade { display: none !important; }
+                /* The "License Key" settings block — in Lite it is only a "Thank you
+                   for being a loyal MonsterInsights Lite user. Upgrade to Pro..." pitch
+                   (no key to enter), marked by its license-lite section */
+                body[class*="page_monsterinsights"] .monsterinsights-settings-block:has(.monsterinsights-settings-license-lite) { display: none !important; }
                 /* "Made with ♥ by the MonsterInsights Team" footer (its Support, Docs
                    and Free Plugins links; the Help panel carries support links) */
                 body[class*="page_monsterinsights"] .monsterinsights-footer-love { display: none !important; }
@@ -109,6 +113,29 @@ final class MonsterInsights extends AbstractModule
                    they show nothing but upgrade teasers, so hide the tab links */
                 body[class*="page_monsterinsights"] nav.monsterinsights-main-navigation a[href*="#/ecommerce"],
                 body[class*="page_monsterinsights"] nav.monsterinsights-main-navigation a[href*="#/conversions"] { display: none !important; }
+                /* The Tools › Report Export sub-tab is a Pro-only export */
+                body[class*="page_monsterinsights"] a.monsterinsights-navigation-tab-link[href*="#/tools/report-export"] { display: none !important; }
+                /* Tools › URL Builder: the "Make your campaign links prettier!"
+                   PrettyLinks cross-sell ad (the URL builder itself stays) */
+                body[class*="page_monsterinsights"] .monsterinsights-prettylinks-flow-ad { display: none !important; }
+                /* The floating "AI Charlie" assistant widget (a Pro/AI upsell prompt) */
+                body[class*="page_monsterinsights"] .monsterinsights-ai-charlie { display: none !important; }
+                CSS,
+            ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Overlay the Help/Upgrades buttons onto the MonsterInsights header
+                   row instead of a separate band above it. #wpbody (the region's
+                   offset parent) starts at the admin bar and the header sits ~32px
+                   lower, so top:27px lands the buttons on the header's right, level
+                   with the logo; both scroll together. Scoped to the reports screen —
+                   the settings screens keep a Save Changes button on the header's
+                   right that the buttons must not cover */
+                body[class*="monsterinsights_overview_report"] #tidy-admin-meta-region { position: absolute; top: 27px; left: 20px; right: 0; z-index: 100; }
+                body[class*="monsterinsights_overview_report"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* Sit the buttons left of the header's notifications inbox icon */
+                body[class*="monsterinsights_overview_report"] #tidy-admin-meta-region #screen-meta-links { margin-right: 56px; }
                 CSS,
             ],
             'dashboard-widget' => [
