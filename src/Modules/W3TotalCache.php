@@ -166,6 +166,13 @@ final class W3TotalCache extends AbstractModule
                         );
                     });
                 },
+                // Core offsets the toggle buttons down 49px (with a -50px bottom
+                // margin) so they overlap the panel core prints above them. Once
+                // the panel sits below the toolbar those offsets drop the buttons
+                // beneath the notices instead of hugging the toolbar — cancel them.
+                'adminCss' => <<<'CSS'
+                body[class*="page_w3tc"] #screen-meta-links { top: 0 !important; margin-bottom: 0 !important; }
+                CSS,
             ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
