@@ -162,6 +162,12 @@ final class MonsterInsights extends AbstractModule
                 body[class*="page_monsterinsights"] .monsterinsights-header { padding-top: 54px !important; }
                 body[class*="page_monsterinsights"] #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
                 body[class*="page_monsterinsights"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* The notifications inbox carries a 20px right margin. Where it is the
+                   last item in the header (no Save Changes after it, e.g. the About
+                   pages) that margin leaves it short of the buttons overlaid above —
+                   drop it only there; when Save Changes follows, the margin is the gap
+                   between them and must stay */
+                body[class*="page_monsterinsights"] .monsterinsights-notificationsv3-container:last-child { margin-right: 0 !important; }
                 CSS,
             ],
             'dashboard-widget' => [
