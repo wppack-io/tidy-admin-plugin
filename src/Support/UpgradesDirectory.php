@@ -42,10 +42,12 @@ final class UpgradesDirectory
         }
 
         add_action('admin_menu', function (): void {
-            add_options_page(
+            // Under the Plugins menu — it is about the active plugins' upgrades
+            add_submenu_page(
+                'plugins.php',
                 __('Plugin Upgrades', 'wppack-tidy-admin'),
                 __('Plugin Upgrades', 'wppack-tidy-admin'),
-                'manage_options',
+                'activate_plugins',
                 self::PAGE,
                 [$this, 'renderPage'],
             );
@@ -67,7 +69,7 @@ final class UpgradesDirectory
         echo '<div class="wrap tidy-admin-upgrades">';
         echo '<h1>' . esc_html__('Plugin Upgrades', 'wppack-tidy-admin') . '</h1>';
         echo '<p class="description">'
-            . esc_html__('The Pro upgrade link for each of your active plugins, in one place. Their documentation and premium-feature details stay in each plugin\'s own Help and Upgrades panels.', 'wppack-tidy-admin')
+            . esc_html__('Your active plugins offer feature-rich paid versions — their Pro upgrade links are gathered here in one place.', 'wppack-tidy-admin')
             . '</p>';
 
         if ($cards === []) {
@@ -100,13 +102,11 @@ final class UpgradesDirectory
         echo '</div>' . $this->styles();
     }
 
-    /** One plugin card: a star + the plugin name, then its upgrade body. */
+    /** One plugin card: the plugin name, then its upgrade body. */
     private function card(string $name, string $body, string $tag): string
     {
         return '<div class="tidy-admin-upgrades-card">'
-            . '<' . $tag . ' class="tidy-admin-upgrades-card__title">'
-            . '<span class="dashicons dashicons-star-filled" aria-hidden="true"></span>'
-            . esc_html($name) . '</' . $tag . '>'
+            . '<' . $tag . ' class="tidy-admin-upgrades-card__title">' . esc_html($name) . '</' . $tag . '>'
             . $body
             . '</div>';
     }
@@ -259,8 +259,7 @@ final class UpgradesDirectory
         return '<style>'
             . '.tidy-admin-upgrades-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 16px; }'
             . '.tidy-admin-upgrades-card { background: #fff; border: 1px solid #dcdcde; border-radius: 6px; padding: 16px; box-shadow: 0 1px 2px rgba(0, 0, 0, .04); }'
-            . '.tidy-admin-upgrades-card__title { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; padding: 0 0 10px; font-size: 14px; line-height: 1.4; border-bottom: 1px solid #f0f0f1; }'
-            . '.tidy-admin-upgrades-card__title .dashicons { color: var(--wp-admin-theme-color, #2271b1); }'
+            . '.tidy-admin-upgrades-card__title { margin: 0 0 10px; padding: 0; font-size: 14px; line-height: 1.4; }'
             . '.tidy-admin-upgrades-card__promo { color: #50575e; margin: 0 0 12px; }'
             . '.tidy-admin-upgrades-card__actions { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }'
             . '.tidy-admin-upgrades-card__actions .button { min-height: 0; height: auto; padding: 1px 10px; line-height: 1.9; font-size: 12px; }'

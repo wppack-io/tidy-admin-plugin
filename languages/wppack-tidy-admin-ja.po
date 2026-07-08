@@ -333,8 +333,8 @@ msgstr "空いたアップセル領域をコンテンツの表示に活用"
 msgid "Plugin Upgrades"
 msgstr "プラグインのアップグレード"
 
-msgid "The Pro upgrade link for each of your active plugins, in one place. Their documentation and premium-feature details stay in each plugin's own Help and Upgrades panels."
-msgstr "有効なプラグインごとの Pro アップグレードリンクを一箇所にまとめています。ドキュメントやプレミアム機能の詳細は、各プラグインの Help / Upgrades パネルに残ります。"
+msgid "Your active plugins offer feature-rich paid versions — their Pro upgrade links are gathered here in one place."
+msgstr "お使いのプラグインには、機能が充実した有償版が用意されています。それぞれの Pro アップグレードリンクを一箇所にまとめました。"
 
 msgid "None of your active plugins offer a Pro upgrade."
 msgstr "有効なプラグインにアップグレード可能なものはありません。"
