@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-08T16:54:28+09:00\n"
+"POT-Creation-Date: 2026-07-08T23:02:00+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -39,7 +39,7 @@ msgstr ""
 #: src/Modules/FeedsForTiktok.php:65
 #: src/Modules/FeedsForYoutube.php:68
 #: src/Modules/OptinMonster.php:59
-#: src/Modules/W3TotalCache.php:63
+#: src/Modules/W3TotalCache.php:64
 #: src/Modules/WpChat.php:126
 msgid "Upgrade to Pro"
 msgstr ""
@@ -57,7 +57,7 @@ msgstr ""
 #: src/Modules/MonsterInsights.php:52
 #: src/Modules/OptinMonster.php:79
 #: src/Modules/ReviewsFeed.php:63
-#: src/Modules/W3TotalCache.php:71
+#: src/Modules/W3TotalCache.php:88
 #: src/Modules/WpConsent.php:54
 #: src/Modules/WpMailSmtp.php:75
 #: src/Modules/Yoast.php:54
@@ -83,7 +83,7 @@ msgstr ""
 #: src/Modules/OptinMonster.php:128
 #: src/Modules/Redirection.php:88
 #: src/Modules/ReviewsFeed.php:93
-#: src/Modules/W3TotalCache.php:82
+#: src/Modules/W3TotalCache.php:103
 #: src/Modules/WpChat.php:107
 #: src/Modules/WpConsent.php:155
 #: src/Modules/WpMailSmtp.php:281
@@ -439,6 +439,10 @@ msgstr ""
 
 #: src/Modules/Redirection.php:60
 msgid "Add the WordPress.org links to the plugin's Help tab"
+msgstr ""
+
+#: src/Modules/W3TotalCache.php:73
+msgid "Silence its fetched marketing notices"
 msgstr ""
 
 #: src/Modules/Wordfence.php:44

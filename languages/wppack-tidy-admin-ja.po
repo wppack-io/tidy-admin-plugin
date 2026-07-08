@@ -377,3 +377,6 @@ msgstr "ダッシュボードメニューの「Marketing Education」項目を�
 
 msgid "Add the WordPress.org links to the plugin's Help tab"
 msgstr "WordPress.org リンクをプラグインの Help タブに追加"
+
+msgid "Silence its fetched marketing notices"
+msgstr "外部から取得するマーケティング通知を止める"

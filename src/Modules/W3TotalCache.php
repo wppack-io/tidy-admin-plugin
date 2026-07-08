@@ -69,6 +69,21 @@ final class W3TotalCache extends AbstractModule
                 body[class*="page_w3tc"] a[href*="licensing_upgrade"] { display: none !important; }
                 CSS,
             ],
+            'marketing-notices' => [
+                'label' => __('Silence its fetched marketing notices', 'wppack-tidy-admin'),
+                // Seasonal-sale/coupon notices (e.g. "Get 50% off … flash-sale")
+                // are pulled from W3TC's API into the w3tc_cached_notices option
+                // and injected client-side by the w3tc-admin-notices script.
+                // Dequeue that script so the marketing channel stays quiet — the
+                // plugin's own functional notices are separate PHP admin_notices
+                // and are left untouched.
+                'register' => static function (): void {
+                    add_action('admin_enqueue_scripts', static function (): void {
+                        wp_dequeue_script('w3tc-admin-notices');
+                        wp_deregister_script('w3tc-admin-notices');
+                    }, 100);
+                },
+            ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
                 // "Feature Showcase" is a catalogue of Pro extensions; "About" is a
@@ -96,11 +111,14 @@ final class W3TotalCache extends AbstractModule
                 // On the Dashboard, three promo widgets: affiliate host guides
                 // (#w3tc_partners), a BunnyCDN sign-up pitch (#w3tc_bunnycdn) and
                 // a paid "Premium Services" widget (#w3tc_services). The Account
-                // widget is left alone — it reports real license status.
+                // widget is left alone — it reports real license status. The
+                // General Settings and CDN pages carry their own inline BunnyCDN
+                // sign-up ads (#w3tc-bunnycdn-ad-*).
                 'adminCss' => <<<'CSS'
                 body[class*="page_w3tc"] .w3tc-gopro,
                 body[class*="page_w3tc"] .nav-tab[data-tab-type="premium-services"],
                 body[class*="page_w3tc"] #w3tc-footer,
+                body[class*="page_w3tc"] [id^="w3tc-bunnycdn-ad"],
                 #w3tc_partners,
                 #w3tc_bunnycdn,
                 #w3tc_services { display: none !important; }
