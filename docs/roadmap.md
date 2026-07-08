@@ -36,6 +36,7 @@ time and are listed only to explain prioritization.
 | [All-in-One WP Migration](https://wordpress.org/plugins/all-in-one-wp-migration/) | 5M+ | Paid extensions |
 | [Wordfence](https://wordpress.org/plugins/wordfence/) | 4M+ | Wordfence Premium / Care / Response |
 | [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 3M+ | WP Mail SMTP Pro |
+| [WPForms Lite](https://wordpress.org/plugins/wpforms-lite/) | 6M+ | WPForms Pro |
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 2M+ | MC4WP Premium |
 | [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 1M+ | Instagram Feed Pro |
 | [Facebook Feed (Smash Balloon)](https://wordpress.org/plugins/custom-facebook-feed/) | 200k+ | Custom Facebook Feed Pro |
@@ -71,7 +72,6 @@ version. These are the plugins where a module helps the most people.
 | Plugin | Active installs | Commercial edition | Free-version promotion surface |
 |---|---|---|---|
 | [Elementor](https://wordpress.org/plugins/elementor/) | 10M+ | Elementor Pro | Upgrade submenu, locked (Pro) widgets and feature pages, admin notices |
-| [WPForms Lite](https://wordpress.org/plugins/wpforms-lite/) | 6M+ | WPForms Pro | Upgrade submenu, teaser pages (Entries, Addons), dashboard widget, notices |
 | [LiteSpeed Cache](https://wordpress.org/plugins/litespeed-cache/) | 6M+ | QUIC.cloud paid services | Service sign-up prompts, promotional notices |
 | [Really Simple Security](https://wordpress.org/plugins/really-simple-ssl/) | 5M+ | Really Simple Security Pro | Upgrade prompts in its dashboard, locked feature toggles, notices |
 | [Jetpack](https://wordpress.org/plugins/jetpack/) | 4M+ | Paid plans | My Jetpack plan cards, recommendation banners, notices |

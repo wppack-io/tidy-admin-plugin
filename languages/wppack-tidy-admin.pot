@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-08T23:55:24+09:00\n"
+"POT-Creation-Date: 2026-07-09T13:20:56+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -39,7 +39,7 @@ msgstr ""
 #: src/Modules/FeedsForTiktok.php:65
 #: src/Modules/FeedsForYoutube.php:68
 #: src/Modules/OptinMonster.php:59
-#: src/Modules/W3TotalCache.php:66
+#: src/Modules/W3TotalCache.php:69
 #: src/Modules/WpChat.php:126
 msgid "Upgrade to Pro"
 msgstr ""
@@ -57,8 +57,9 @@ msgstr ""
 #: src/Modules/MonsterInsights.php:52
 #: src/Modules/OptinMonster.php:79
 #: src/Modules/ReviewsFeed.php:63
-#: src/Modules/W3TotalCache.php:90
+#: src/Modules/W3TotalCache.php:110
 #: src/Modules/WpConsent.php:54
+#: src/Modules/WpForms.php:62
 #: src/Modules/WpMailSmtp.php:75
 #: src/Modules/Yoast.php:54
 msgid "Move Premium feature pages to the Upgrades panel"
@@ -83,9 +84,10 @@ msgstr ""
 #: src/Modules/OptinMonster.php:128
 #: src/Modules/Redirection.php:88
 #: src/Modules/ReviewsFeed.php:93
-#: src/Modules/W3TotalCache.php:171
+#: src/Modules/W3TotalCache.php:201
 #: src/Modules/WpChat.php:107
 #: src/Modules/WpConsent.php:155
+#: src/Modules/WpForms.php:139
 #: src/Modules/WpMailSmtp.php:281
 #: src/Modules/Yoast.php:221
 msgid "Hide upsell promotions on its screens"
@@ -115,6 +117,7 @@ msgstr ""
 #: src/Modules/W3TotalCache.php:56
 #: src/Modules/WpChat.php:39
 #: src/Modules/WpConsent.php:44
+#: src/Modules/WpForms.php:44
 #: src/Modules/WpMailSmtp.php:61
 #: src/Modules/Yoast.php:45
 msgid "Move upgrade menus to the Upgrades panel"
@@ -140,6 +143,7 @@ msgstr ""
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:49
 #: src/Modules/WpConsent.php:72
+#: src/Modules/WpForms.php:97
 #: src/Modules/WpMailSmtp.php:85
 #: src/Modules/Yarpp.php:49
 #: src/Modules/Yoast.php:65
@@ -238,6 +242,7 @@ msgstr ""
 
 #: src/Modules/AllInOneSeo.php:504
 #: src/Modules/EmbedPress.php:150
+#: src/Modules/WpForms.php:129
 #: src/Modules/WpMailSmtp.php:225
 msgid "Remove the floating quick-links menu"
 msgstr ""
@@ -253,10 +258,11 @@ msgstr ""
 #: src/Modules/LocationWeather.php:220
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/MonsterInsights.php:157
-#: src/Modules/OptinMonster.php:168
+#: src/Modules/OptinMonster.php:178
 #: src/Modules/ReviewsFeed.php:172
 #: src/Modules/WpChat.php:148
 #: src/Modules/WpConsent.php:207
+#: src/Modules/WpForms.php:185
 #: src/Modules/WpMailSmtp.php:300
 #: src/Modules/Yoast.php:281
 msgid "Integrate the Help and Upgrades buttons into the page header"
@@ -323,6 +329,7 @@ msgid "Fix the squeezed select fields on its screens"
 msgstr ""
 
 #: src/Modules/Duplicator.php:254
+#: src/Modules/WpForms.php:52
 #: src/Modules/WpMailSmtp.php:161
 msgid "Remove the \"You're using Lite\" notice bar"
 msgstr ""
@@ -347,7 +354,7 @@ msgid "Stop the post-install welcome-page redirect"
 msgstr ""
 
 #: src/Modules/Duplicator.php:382
-#: src/Modules/Wordfence.php:218
+#: src/Modules/Wordfence.php:215
 msgid "Overlay the Help and Upgrades buttons onto the page title"
 msgstr ""
 
@@ -441,31 +448,31 @@ msgstr ""
 msgid "Add the WordPress.org links to the plugin's Help tab"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:75
+#: src/Modules/W3TotalCache.php:85
 msgid "Silence its fetched marketing notices"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:105
+#: src/Modules/W3TotalCache.php:125
 msgid "Fold documentation links into the native Help"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:122
+#: src/Modules/W3TotalCache.php:142
 msgid "FAQ"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:124
+#: src/Modules/W3TotalCache.php:144
 msgid "Support"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:126
+#: src/Modules/W3TotalCache.php:146
 msgid "Setup Guide"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:130
+#: src/Modules/W3TotalCache.php:150
 msgid "Resources"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:148
+#: src/Modules/W3TotalCache.php:168
 msgid "Open the Help and Upgrades panels below its toolbar"
 msgstr ""
 

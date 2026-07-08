@@ -60,6 +60,7 @@ final class TidyAdminPlugin
         Modules\WpChat::class,
         Modules\WpConsent::class,
         Modules\Wordfence::class,
+        Modules\WpForms::class,
         Modules\WpMailSmtp::class,
         Modules\Yarpp::class,
         Modules\Yoast::class,

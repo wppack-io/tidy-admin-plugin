@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10ae61f9f7b6ba15f709418b77fc611f",
+    "content-hash": "7dde7d0a0853f7fa32bfe637b11b313b",
     "packages": [
         {
             "name": "composer/installers",
@@ -7269,6 +7269,37 @@
                 "source": "https://plugins.svn.wordpress.org/wpconsent-cookies-banner-privacy-suite"
             },
             "time": "2026-06-24T10:26:14+00:00"
+        },
+        {
+            "name": "wp-plugin/wpforms-lite",
+            "version": "1.10.2.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wpforms-lite/",
+                "reference": "tags/1.10.2.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wpforms-lite.1.10.2.1.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Syed Balkhi"
+                }
+            ],
+            "description": "The best WordPress contact form plugin. Drag & Drop form builder to create beautiful contact forms, payment forms, & other custom forms.",
+            "homepage": "https://wpforms.com",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/wpforms-lite/#developers",
+                "issues": "https://wordpress.org/support/plugin/wpforms-lite",
+                "source": "https://plugins.svn.wordpress.org/wpforms-lite"
+            },
+            "time": "2026-06-25T11:40:50+00:00"
         },
         {
             "name": "wp-plugin/yet-another-related-posts-plugin",
