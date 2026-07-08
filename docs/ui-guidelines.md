@@ -39,6 +39,12 @@ into one feature (no "cosmetic CSS" catch-alls):
 | plugins.php row links | Sales links **removed**; functional links (Docs, FAQ) kept | feature with `upsellLinkUrls` |
 | Behavior only reachable through the plugin's own filters (education tabs, teaser mailers, flyouts) | **Disable via the plugin's own filter** | feature with `register` |
 | License fields (key inputs, license headings) | **Hide by default** as a per-module feature; users turn it off while entering a key | a `license-fields` feature with `adminCss` |
+| Admin-menu branding the vendor imposes over the chosen admin colour scheme (a brand-coloured sidebar icon, or the current/hover highlight painted in a brand colour) | **Normalise to core** — the native icon palette and the scheme's own menu colours | a per-item feature with `adminCss` (e.g. `menu-icon`, `menu-active-colour`); publish each `admin-color-*` scheme's colour as a `--var` and re-assert it over the vendor's own selectors with `!important` |
+
+This last row is the one exception to "only upsells": recolouring the admin
+menu is cosmetic, not promotional, but a vendor overriding wp-admin's own
+colour scheme is the same kind of admin-space imposition. Keep it strictly to
+restoring core's appearance — never introduce a new colour.
 
 When in doubt whether something is promotional or functional, leave it and
 note the question — removing a functional element is the one failure mode

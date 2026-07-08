@@ -158,6 +158,40 @@ final class Wordfence extends AbstractModule
                 #toplevel_page_Wordfence.wp-has-current-submenu .wp-menu-image::before { filter: brightness(0) invert(1); }
                 CSS,
             ],
+            'menu-active-colour' => [
+                'label' => __('Match its highlighted menu item to the admin colour scheme', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Wordfence paints its current sidebar item with its own brand blue
+                   (#1b719e), ignoring the chosen admin colour scheme. Publish each
+                   built-in scheme's real active-menu colour as a variable, then
+                   re-assert it over Wordfence's own selectors so the highlight matches
+                   core — like menu-icon flattens the icon. An unknown/custom scheme
+                   sets no variable, so the fallback leaves Wordfence's own colour */
+                body.admin-color-fresh { --tidy-admin-wf-current: #2271b1; --tidy-admin-wf-submenu: #72aee6; }
+                body.admin-color-light { --tidy-admin-wf-current: #888; --tidy-admin-wf-submenu: #04a4cc; }
+                body.admin-color-modern { --tidy-admin-wf-current: #3858e9; --tidy-admin-wf-submenu: #7b90ff; }
+                body.admin-color-blue { --tidy-admin-wf-current: #096484; --tidy-admin-wf-submenu: #fff; }
+                body.admin-color-coffee { --tidy-admin-wf-current: #c7a589; --tidy-admin-wf-submenu: #c7a589; }
+                body.admin-color-ectoplasm { --tidy-admin-wf-current: #a3b745; --tidy-admin-wf-submenu: #a3b745; }
+                body.admin-color-midnight { --tidy-admin-wf-current: #e14d43; --tidy-admin-wf-submenu: #e14d43; }
+                body.admin-color-ocean { --tidy-admin-wf-current: #9ebaa0; --tidy-admin-wf-submenu: #9ebaa0; }
+                body.admin-color-sunrise { --tidy-admin-wf-current: #dd823b; --tidy-admin-wf-submenu: #f7e3d3; }
+                /* current + hover highlight background */
+                #adminmenu li#toplevel_page_Wordfence.current a.menu-top,
+                #adminmenu li#toplevel_page_Wordfence.wp-has-current-submenu .wp-submenu .wp-submenu-head,
+                #adminmenu li#toplevel_page_Wordfence.wp-has-current-submenu a.wp-has-current-submenu,
+                .folded #adminmenu li#toplevel_page_Wordfence.current.menu-top,
+                #adminmenu a.toplevel_page_Wordfence:hover,
+                #adminmenu li#toplevel_page_Wordfence.menu-top:hover,
+                #adminmenu li#toplevel_page_Wordfence.opensub > a.menu-top,
+                #adminmenu li#toplevel_page_Wordfence > a.menu-top:focus { background: var(--tidy-admin-wf-current, #1b719e) !important; }
+                /* submenu link hover/focus text colour (Wordfence forces its own
+                   #228fc8; !important beats its non-important rule). The current
+                   submenu item is left to WordPress */
+                #adminmenu #toplevel_page_Wordfence .wp-submenu a:hover,
+                #adminmenu #toplevel_page_Wordfence .wp-submenu a:focus { color: var(--tidy-admin-wf-submenu, #228fc8) !important; }
+                CSS,
+            ],
             'panel-placement' => [
                 'label' => __('Overlay the Help and Upgrades buttons onto the page title', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
