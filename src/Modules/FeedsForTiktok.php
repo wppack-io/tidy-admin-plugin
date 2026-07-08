@@ -32,6 +32,18 @@ final class FeedsForTiktok extends AbstractModule
         return 'sbtt';
     }
 
+    /** @return array{mode: 'redirect', urlTemplate: string} */
+    public function licenseConnect(): array
+    {
+        // Lite ships a license-key setting; SbttFunctions::get_upgrade_pro_plugin_link
+        // turns a key into this seamless-upgrade URL (an empty key just links to the
+        // marketing page), which installs Pro from the account.
+        return [
+            'mode' => 'redirect',
+            'urlTemplate' => 'https://smashballoon.com/pricing/tiktok-feed/?license_key={key}&upgrade=true',
+        ];
+    }
+
     public function features(): array
     {
         return [
