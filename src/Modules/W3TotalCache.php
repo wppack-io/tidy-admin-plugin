@@ -170,8 +170,11 @@ final class W3TotalCache extends AbstractModule
                 // margin) so they overlap the panel core prints above them. Once
                 // the panel sits below the toolbar those offsets drop the buttons
                 // beneath the notices instead of hugging the toolbar — cancel them.
+                // Also drop the toolbar's own 15px bottom margin so the panel and
+                // buttons sit flush against it rather than floating 15px below.
                 'adminCss' => <<<'CSS'
                 body[class*="page_w3tc"] #screen-meta-links { top: 0 !important; margin-bottom: 0 !important; }
+                body[class*="page_w3tc"] #w3tc-top-nav-bar { margin-bottom: 0 !important; }
                 CSS,
             ],
             'upsell-ui' => [
