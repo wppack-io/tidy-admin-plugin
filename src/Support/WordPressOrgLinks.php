@@ -33,22 +33,18 @@ final class WordPressOrgLinks
         // Every link here points to WordPress.org, so the heading is the
         // (untranslatable) site name itself. "Reviews" is core's own string,
         // so it always matches the native admin wording.
-        return '<p><strong>WordPress.org</strong></p>'
-            . sprintf(
-                '<p><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></p>',
-                esc_url("{$localized}/plugins/{$slug}/"),
-                esc_html__('Plugin page', 'wppack-tidy-admin'),
-            )
-            . sprintf(
-                '<p><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></p>',
-                esc_url("https://wordpress.org/support/plugin/{$slug}/reviews/"),
-                esc_html__('Reviews'),
-            )
-            . sprintf(
-                '<p><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></p>',
-                esc_url("https://wordpress.org/support/plugin/{$slug}/"),
-                esc_html__('Support forum', 'wppack-tidy-admin'),
-            );
+        $link = static fn(string $url, string $label, string $marginBottom = '4px'): string => sprintf(
+            '<p style="margin: 0 0 %s;"><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></p>',
+            $marginBottom,
+            esc_url($url),
+            esc_html($label),
+        );
+
+        return '<p style="margin: 12px 0 4px;"><strong style="display: inline-flex; align-items: center; gap: 5px;">'
+            . '<span class="dashicons dashicons-wordpress" aria-hidden="true" style="font-size: 18px; width: 18px; height: 18px; line-height: 18px;"></span>WordPress.org</strong></p>'
+            . $link("{$localized}/plugins/{$slug}/", __('Plugin page', 'wppack-tidy-admin'))
+            . $link("https://wordpress.org/support/plugin/{$slug}/reviews/", __('Reviews'))
+            . $link("https://wordpress.org/support/plugin/{$slug}/", __('Support forum', 'wppack-tidy-admin'), '12px');
     }
 
     /**

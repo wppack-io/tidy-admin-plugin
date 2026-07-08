@@ -22,7 +22,8 @@ final class WordPressOrgLinksTest extends TestCase
     {
         $html = WordPressOrgLinks::html('mailchimp-for-wp');
 
-        $this->assertStringContainsString('<strong>WordPress.org</strong>', $html, 'the sidebar is headed by the site name all links point to');
+        $this->assertStringContainsString('dashicons-wordpress', $html, 'the heading carries the WordPress mark');
+        $this->assertStringContainsString('WordPress.org</strong>', $html, 'the sidebar is headed by the site name all links point to');
         $this->assertStringContainsString('https://wordpress.org/plugins/mailchimp-for-wp/', $html);
         $this->assertStringContainsString('https://wordpress.org/support/plugin/mailchimp-for-wp/reviews/', $html);
         $this->assertStringContainsString('https://wordpress.org/support/plugin/mailchimp-for-wp/', $html);
