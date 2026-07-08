@@ -146,23 +146,15 @@ final class MonsterInsights extends AbstractModule
             'panel-placement' => [
                 'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
-                /* Overlay the Help/Upgrades buttons onto the MonsterInsights header
-                   row instead of a separate band above it. #wpbody (the region's
-                   offset parent) starts at the admin bar and the header sits ~32px
-                   lower, so top:27px lands the buttons on the header's right, level
-                   with the logo; both scroll together. Scoped to the reports screen —
-                   the settings screens keep a Save Changes button on the header's
-                   right that the buttons must not cover */
-                body[class*="monsterinsights_overview_report"] #tidy-admin-meta-region { position: absolute; top: 27px; left: 20px; right: 0; z-index: 100; }
-                body[class*="monsterinsights_overview_report"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
-                /* Sit the buttons left of the header's notifications inbox icon */
-                body[class*="monsterinsights_overview_report"] #tidy-admin-meta-region #screen-meta-links { margin-right: 56px; }
-                /* Settings screens carry a Save Changes button on the header's right,
-                   so instead of covering it, overlay the buttons on the header's top
-                   and add top padding to drop the logo and Save Changes clear below */
-                body[class*="page_monsterinsights_settings"] .monsterinsights-header { padding-top: 54px !important; }
-                body[class*="page_monsterinsights_settings"] #tidy-admin-meta-region { position: absolute; top: 8px; left: 20px; right: 0; z-index: 100; }
-                body[class*="page_monsterinsights_settings"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* Overlay the Help/Upgrades buttons on the top strip of the
+                   MonsterInsights header on every screen. Add top padding so the
+                   header's own controls (the logo, the notifications inbox, and the
+                   Save Changes button on settings screens) drop clear below, and pin
+                   the buttons flush under the admin bar. #wpbody (the region's offset
+                   parent) starts right at the admin bar and both scroll together */
+                body[class*="page_monsterinsights"] .monsterinsights-header { padding-top: 54px !important; }
+                body[class*="page_monsterinsights"] #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
+                body[class*="page_monsterinsights"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                 CSS,
             ],
             'dashboard-widget' => [
