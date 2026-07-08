@@ -146,6 +146,12 @@ final class MonsterInsights extends AbstractModule
                 body[class*="monsterinsights_overview_report"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                 /* Sit the buttons left of the header's notifications inbox icon */
                 body[class*="monsterinsights_overview_report"] #tidy-admin-meta-region #screen-meta-links { margin-right: 56px; }
+                /* Settings screens carry a Save Changes button on the header's right,
+                   so instead of covering it, overlay the buttons on the header's top
+                   and add top padding to drop the logo and Save Changes clear below */
+                body[class*="page_monsterinsights_settings"] .monsterinsights-header { padding-top: 54px !important; }
+                body[class*="page_monsterinsights_settings"] #tidy-admin-meta-region { position: absolute; top: 8px; left: 20px; right: 0; z-index: 100; }
+                body[class*="page_monsterinsights_settings"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                 CSS,
             ],
             'dashboard-widget' => [
