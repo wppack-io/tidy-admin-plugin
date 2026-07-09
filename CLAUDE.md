@@ -19,9 +19,14 @@ Claude-specific navigation + session hygiene, nothing duplicated from there.
    `git reset --hard`, `rm -rf` — call it out and wait.
 6. **Don't auto-push after every commit.** Batch locally; push only on
    explicit instruction.
-7. **Only remove upsells, promos and review requests.** Never touch a target
-   plugin's functional pages, functional notices, or front-end output. When
-   in doubt whether something is promotional, leave it and ask.
+7. **The purpose is admin-UX improvement, not promo removal alone.** What we
+   *delete* is limited to upsells, promos and review requests — never remove a
+   target plugin's functional pages, notices, or front-end output. But
+   relocating and **normalising** functional vendor chrome to WordPress-native
+   behaviour (consistent admin-bar/menu styling, native hover, unified
+   notification bubbles, per-plugin show/hide toggles) is core work, not out of
+   scope. Never break a functional element; when unsure whether something is
+   promotional, leave it and ask.
 8. **Follow [docs/ui-guidelines.md](docs/ui-guidelines.md) for every UI
    decision** — it defines what gets removed, relocated, confined, or
    CSS-hidden, and which mechanism to use. Propose a guideline change

@@ -17,8 +17,11 @@ button next to the standard Help button on each plugin's own screens (a
 running discount shows there too), documentation and support links join the
 **Help** button beside it, and setup reminders collect into a single
 **Pending plugin setup** dashboard widget instead of nagging on every
-screen. Nothing functional is removed — every page and link stays reachable,
-and each cleanup can be toggled per plugin, feature by feature.
+screen. It also normalizes the chrome vendors impose on wp-admin — brand-colored
+menu icons, non-native toolbar hover states, inconsistently styled notification
+bubbles — back to WordPress-native styling, and lets you hide a plugin's
+admin-bar menu entirely. Nothing functional is removed — every page and link
+stays reachable, and each cleanup can be toggled per plugin, feature by feature.
 
 **This plugin does not exist to stop anyone from upgrading to paid plugins.**
 We understand that paid plugins fund and motivate the development of the free

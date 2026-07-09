@@ -40,11 +40,16 @@ into one feature (no "cosmetic CSS" catch-alls):
 | Behavior only reachable through the plugin's own filters (education tabs, teaser mailers, flyouts) | **Disable via the plugin's own filter** | feature with `register` |
 | License fields (key inputs, license headings) | **Hide by default** as a per-module feature; users turn it off while entering a key | a `license-fields` feature with `adminCss` |
 | Admin-menu branding the vendor imposes over the chosen admin colour scheme (a brand-coloured sidebar icon, or the current/hover highlight painted in a brand colour) | **Normalise to core** — the native icon palette and the scheme's own menu colours | a per-item feature with `adminCss` (e.g. `menu-icon`, `menu-active-colour`); publish each `admin-color-*` scheme's colour as a `--var` and re-assert it over the vendor's own selectors with `!important` |
+| Vendor admin-bar (toolbar) menu — its upgrade/paid/promo nodes, its non-native hover colour, its inconsistently-styled notification bubble, and the whole menu's presence | Nodes: **relocate/remove** like any other promo (upgrade/paid → Upgrades panel on the plugin's screens, docs/support → Help). Chrome: **normalise to core** (native hover, a WP-standard count bubble). Whole menu: offer a **per-plugin opt-in to hide it entirely** | an `admin-bar` feature (`register` with `admin_bar_menu` + `remove_node`, plus `adminCss` normalising the bubble/hover to WP's standard) and a separate opt-in `admin-bar-hide` feature (`default => false`) |
 
-This last row is the one exception to "only upsells": recolouring the admin
-menu is cosmetic, not promotional, but a vendor overriding wp-admin's own
-colour scheme is the same kind of admin-space imposition. Keep it strictly to
-restoring core's appearance — never introduce a new colour.
+The last two rows are not grudging exceptions to "only upsells" — normalising
+inconsistent vendor chrome **is** core to this plugin's purpose, which is a
+better admin UX overall, not promo removal alone. A vendor overriding
+wp-admin's own colour scheme, toolbar hover states, or notification-bubble
+styling is the same kind of admin-space imposition as a promo, and restoring
+WordPress-native behaviour is squarely in scope. Keep it strictly to restoring
+core's appearance — never introduce a colour or style of your own — and never
+break the element's function.
 
 When in doubt whether something is promotional or functional, leave it and
 note the question — removing a functional element is the one failure mode
