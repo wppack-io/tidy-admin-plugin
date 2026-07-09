@@ -211,6 +211,15 @@ final class WpMailSmtp extends AbstractModule
                  */
                 'register' => static function (): void {
                     add_filter('wp_mail_smtp_providers_loader_get_providers', static function (array $providers): array {
+                        // The Vue setup wizard's bundled JS reads
+                        // wp_mail_smtp_vue.mailer_options.amazonses.display_identities
+                        // (and its siblings) directly, so pruning these providers there
+                        // leaves it undefined and crashes the whole wizard. Only trim
+                        // them from the server-rendered settings mailer picker, where
+                        // they are Pro-teaser tiles — leave the wizard's list intact.
+                        if (($_GET['page'] ?? '') === 'wp-mail-smtp-setup-wizard') {
+                            return $providers;
+                        }
                         unset(
                             $providers['amazonses'], // Amazon SES
                             $providers['outlook'],   // Microsoft 365 / Outlook
