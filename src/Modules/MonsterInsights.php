@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
+use WP_Admin_Bar;
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
 use WPPack\Plugin\TidyAdminPlugin\Support\AdminBar;
 
@@ -61,6 +62,17 @@ final class MonsterInsights extends AbstractModule
                     [],
                     '> .monsterinsights-adminbar-content > .ab-item'
                 ),
+            ],
+            'admin-bar-hide' => [
+                'label' => __('Hide its admin bar menu entirely', 'wppack-tidy-admin'),
+                'default' => false,
+                // Opt-in declutter: drop the whole MonsterInsights "Insights" toolbar
+                // menu. Off by default — it is functional navigation, not a promo.
+                'register' => static function (): void {
+                    add_action('admin_bar_menu', static function (WP_Admin_Bar $bar): void {
+                        $bar->remove_node('monsterinsights_frontend_button');
+                    }, 1002);
+                },
             ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),

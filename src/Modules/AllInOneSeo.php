@@ -571,6 +571,17 @@ final class AllInOneSeo extends AbstractModule
                 'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-aioseo-main', ['.aioseo-menu-notification-counter'])
                     . AdminBar::nativeHoverCss('#wp-admin-bar-aioseo-main', ['.aioseo-logo']),
             ],
+            'admin-bar-hide' => [
+                'label' => __('Hide its admin bar menu entirely', 'wppack-tidy-admin'),
+                'default' => false,
+                // Opt-in declutter: drop the whole AIOSEO "SEO" toolbar menu. Off by
+                // default — it is functional navigation, not a promo.
+                'register' => static function (): void {
+                    add_action('admin_bar_menu', static function (WP_Admin_Bar $bar): void {
+                        $bar->remove_node('aioseo-main');
+                    }, 1002);
+                },
+            ],
         ];
     }
 }

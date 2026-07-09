@@ -102,6 +102,17 @@ final class W3TotalCache extends AbstractModule
                 // WordPress's native count bubble in the scheme's own notification colour.
                 'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-w3tc', ['.awaiting-mod']),
             ],
+            'admin-bar-hide' => [
+                'label' => __('Hide its admin bar menu entirely', 'wppack-tidy-admin'),
+                'default' => false,
+                // Opt-in declutter: drop the whole W3TC "Performance" toolbar menu.
+                // Off by default — it is functional navigation, not a promo.
+                'register' => static function (): void {
+                    add_action('admin_bar_menu', static function (WP_Admin_Bar $bar): void {
+                        $bar->remove_node('w3tc');
+                    }, 1002);
+                },
+            ],
             'marketing-notices' => [
                 'label' => __('Silence its fetched marketing notices', 'wppack-tidy-admin'),
                 // Two marketing channels, both handled in PHP:

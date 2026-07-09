@@ -146,6 +146,17 @@ final class Yoast extends AbstractModule
                 'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-wpseo-menu', ['.wp-ui-notification'])
                     . AdminBar::nativeHoverCss('#wp-admin-bar-wpseo-menu', ['.yoast-logo']),
             ],
+            'admin-bar-hide' => [
+                'label' => __('Hide its admin bar menu entirely', 'wppack-tidy-admin'),
+                'default' => false,
+                // Opt-in declutter: drop the whole Yoast SEO toolbar menu. Off by
+                // default — it is functional navigation, not a promo.
+                'register' => static function (): void {
+                    add_action('admin_bar_menu', static function (WP_Admin_Bar $bar): void {
+                        $bar->remove_node('wpseo-menu');
+                    }, 1002);
+                },
+            ],
             'introductions' => [
                 'label' => __('Disable promotional introduction popups', 'wppack-tidy-admin'),
                 /*
