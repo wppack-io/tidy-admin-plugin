@@ -41,6 +41,12 @@ final class EmbedPress extends AbstractModule
                 /* EmbedPress: the sidebar icon is a brand-colored SVG (an <img> in the
                    menu item); flatten it to white like the core icons */
                 #toplevel_page_embedpress .wp-menu-image img { filter: brightness(0) invert(1); }
+                /* WordPress dims inactive plugin <img> icons to opacity 0.6 — which
+                   matches the two grey admin schemes (fresh, light) but leaves the
+                   whitened icon looking grey next to the near-white dashicon icons of
+                   every other scheme. Un-dim it there for the resting state only, so it
+                   matches; hover and current keep WordPress's own full-bright opacity. */
+                body:not(.admin-color-fresh):not(.admin-color-light) #toplevel_page_embedpress:not(.wp-has-current-submenu):not(:hover) .wp-menu-image img { opacity: 0.95; }
                 CSS,
             ],
             'upgrade-menus' => [
