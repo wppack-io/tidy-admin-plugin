@@ -55,6 +55,11 @@ final class EmbedPress extends AbstractModule
                             . '</ul>',
                     ],
                 ],
+                'adminCss' => <<<'CSS'
+                /* EmbedPress: the promotional "New" badge it tacks onto its sidebar menu
+                   item to draw the eye to its feature-preview modal */
+                #adminmenu .ep-whatsnew-badge { display: none !important; }
+                CSS,
             ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
