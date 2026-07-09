@@ -37,6 +37,23 @@ final class WpForms extends AbstractModule
         return ['wpforms-'];
     }
 
+    /** @return array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string} */
+    public function licenseConnect(): array
+    {
+        // WPForms Lite ships its own Lite→Pro connect flow: the wpforms_connect_url
+        // AJAX action (Lite\Admin\Connect::generate_url) turns a license key into an
+        // Awesome Motive Connect URL and returns it as data.url, then the browser
+        // follows it to download and install WPForms Pro.
+        return [
+            'mode' => 'ajax',
+            'action' => 'wpforms_connect_url',
+            'nonceAction' => 'wpforms-admin',
+            'nonceParam' => 'nonce',
+            'keyParam' => 'key',
+            'redirectPath' => 'url',
+        ];
+    }
+
     public function features(): array
     {
         return [
