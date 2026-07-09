@@ -48,6 +48,23 @@ final class WpForms extends AbstractModule
                     ],
                 ],
             ],
+            'plugin-list-links' => [
+                'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
+                'upsellLinkUrls' => [
+                    'wpforms.com/lite-upgrade/', // "Get WPForms Pro" row link on plugins.php
+                ],
+            ],
+            'activation-redirect' => [
+                'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
+                // On activation WPForms sets a wpforms_activation_redirect transient and
+                // its Welcome::redirect() (admin_init) sends the user to the
+                // "wpforms-getting-started" welcome screen. It already honours a
+                // wpforms_activation_redirect *option* as an opt-out, so make that
+                // option read true — the transient is still cleared, just no redirect.
+                'register' => static function (): void {
+                    add_filter('pre_option_wpforms_activation_redirect', '__return_true');
+                },
+            ],
             'notice-bar' => [
                 'label' => __('Remove the "You\'re using Lite" notice bar', 'wppack-tidy-admin'),
                 // The "You're using WPForms Lite … upgrading to Pro for 50% off" bar
