@@ -73,10 +73,13 @@ interface Module
      *  - 'ajax': post the key to the plugin's own AJAX action (with a nonce
      *    created here for `nonceAction`) and follow the URL at `redirectPath`
      *    in the response, so the plugin performs the real Pro install.
+     *  - 'ajax-reload': as 'ajax', but the action activates the key in place (no
+     *    separate Pro download, e.g. a cloud API key) and returns no URL — the
+     *    panel just reloads on success.
      *  - 'redirect': send the browser to `urlTemplate` with `{key}` replaced by
      *    the entered key — the vendor's own seamless-upgrade URL.
      *
-     * @return array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|array{mode: 'redirect', urlTemplate: string}|null
+     * @return array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|array{mode: 'ajax-reload', action: string, nonceAction: string, nonceParam: string, keyParam: string}|array{mode: 'redirect', urlTemplate: string}|null
      */
     public function licenseConnect(): ?array;
 

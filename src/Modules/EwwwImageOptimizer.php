@@ -39,6 +39,23 @@ final class EwwwImageOptimizer extends AbstractModule
         return ['ewww-image-optimizer'];
     }
 
+    /** @return array{mode: 'ajax-reload', action: string, nonceAction: string, nonceParam: string, keyParam: string} */
+    public function licenseConnect(): array
+    {
+        // EWWW has no separate Pro plugin: its Compress API Key unlocks premium
+        // cloud compression in place. The ewww_cloud_key_verify AJAX action
+        // validates the key against the API and, on success, saves it with
+        // ewww_image_optimizer_set_option — so the panel just reloads afterwards
+        // (no redirect) to reflect the activated state.
+        return [
+            'mode' => 'ajax-reload',
+            'action' => 'ewww_cloud_key_verify',
+            'nonceAction' => 'ewww-image-optimizer-settings',
+            'nonceParam' => 'ewww_wpnonce',
+            'keyParam' => 'compress_api_key',
+        ];
+    }
+
     public function features(): array
     {
         return [

@@ -27,7 +27,7 @@ final class UpgradesDirectory
     /**
      * @param array<string, list<string>>                                 $needlesByCategory category => slug substrings (only the "upgrade" category is shown here)
      * @param list<array{category: string, parent: string, html: string}> $extraContent      module-declared panel HTML
-     * @param list<array{parent: string, name: string, slug: string, license: array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|array{mode: 'redirect', urlTemplate: string}|null}> $plugins active plugins that own a menu parent
+     * @param list<array{parent: string, name: string, slug: string, license: array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|array{mode: 'ajax-reload', action: string, nonceAction: string, nonceParam: string, keyParam: string}|array{mode: 'redirect', urlTemplate: string}|null}> $plugins active plugins that own a menu parent
      */
     public function __construct(
         private readonly array $needlesByCategory,
@@ -164,7 +164,7 @@ final class UpgradesDirectory
      * for it here, and the response shape ride on data-attributes; the modal
      * script (printed once) fires the action and follows the returned URL.
      *
-     * @param array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|array{mode: 'redirect', urlTemplate: string}|null $license
+     * @param array{mode: 'ajax', action: string, nonceAction: string, nonceParam: string, keyParam: string, redirectPath: string}|array{mode: 'ajax-reload', action: string, nonceAction: string, nonceParam: string, keyParam: string}|array{mode: 'redirect', urlTemplate: string}|null $license
      */
     private function licenseButton(?array $license): string
     {
@@ -176,6 +176,17 @@ final class UpgradesDirectory
             // The plugin's own seamless-upgrade URL; {key} is filled in by the
             // modal script and the browser is sent there.
             $data = sprintf('data-mode="redirect" data-url="%s"', esc_attr($license['urlTemplate']));
+        } elseif ($license['mode'] === 'ajax-reload') {
+            // The plugin's own AJAX action saves/activates the key in place (no Pro
+            // download); the modal reloads the page on success instead of following
+            // a redirect URL.
+            $data = sprintf(
+                'data-mode="ajax-reload" data-action="%s" data-nonce="%s" data-nonce-param="%s" data-key-param="%s"',
+                esc_attr($license['action']),
+                esc_attr(wp_create_nonce($license['nonceAction'])),
+                esc_attr($license['nonceParam']),
+                esc_attr($license['keyParam']),
+            );
         } else {
             $data = sprintf(
                 'data-mode="ajax" data-action="%s" data-nonce="%s" data-nonce-param="%s" data-key-param="%s" data-redirect="%s"',
@@ -354,6 +365,12 @@ final class UpgradesDirectory
                     fetch(window.ajaxurl, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
                         .then(function (r) { return r.json(); })
                         .then(function (res) {
+                            if (cfg.mode === 'ajax-reload') {
+                                // In-place activation (e.g. an API-key verify that saves the
+                                // key): {error: msg} on failure, anything else is success.
+                                if (res && res.error) { submitBtn.disabled = false; showError(res.error); return; }
+                                window.location.reload(); return;
+                            }
                             var url = res && res.success && res.data ? res.data[cfg.redirect] : null;
                             if (url) { window.location.href = url; return; }
                             submitBtn.disabled = false;
