@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-09T08:39:46+00:00\n"
+"PO-Revision-Date: 2026-07-09T08:45:59+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -88,7 +88,7 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/W3TotalCache.php:222
 #: src/Modules/WpChat.php:129
 #: src/Modules/WpConsent.php:155
-#: src/Modules/WpForms.php:215
+#: src/Modules/WpForms.php:230
 #: src/Modules/WpMailSmtp.php:297
 #: src/Modules/Yoast.php:228
 msgid "Hide upsell promotions on its screens"
@@ -269,7 +269,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/ReviewsFeed.php:193
 #: src/Modules/WpChat.php:170
 #: src/Modules/WpConsent.php:207
-#: src/Modules/WpForms.php:257
+#: src/Modules/WpForms.php:272
 #: src/Modules/WpMailSmtp.php:319
 #: src/Modules/Yoast.php:292
 msgid "Integrate the Help and Upgrades buttons into the page header"
@@ -537,6 +537,10 @@ msgstr "「WordPress イベントとニュース」ダッシュボードウィ�
 #: src/Modules/WpForms.php:152
 msgid "Clean up its admin bar menu (upgrade, paid features, promo links)"
 msgstr "管理バーメニューを整理（アップグレード・有料機能・宣伝リンク）"
+
+#: src/Modules/WpForms.php:215
+msgid "Keep its styles out of the command palette"
+msgstr "コマンドパレットへのスタイル漏れを防ぐ"
 
 #: src/Modules/WpMailSmtp.php:167
 msgid "Remove the SendLayer setup banner"

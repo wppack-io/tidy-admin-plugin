@@ -211,6 +211,21 @@ final class WpForms extends AbstractModule
                 #wpforms-flyout { display: none !important; }
                 CSS,
             ],
+            'command-palette' => [
+                'label' => __('Keep its styles out of the command palette', 'wppack-tidy-admin'),
+                // WPForms styles every input on its screens via body.wpforms-admin-page
+                // (rounded corners, padding, a blue focus border/shadow). WordPress's
+                // own Command Palette (⌘K) renders its search field as an <input>
+                // inside that same body, so it inherits WPForms' look instead of the
+                // core borderless field. Restore core's values for [cmdk-input] only.
+                'adminCss' => <<<'CSS'
+                body.wpforms-admin-page .commands-command-menu__container [cmdk-input],
+                body.wpforms-admin-page .commands-command-menu__container [cmdk-input]:focus {
+                    border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+                    background: transparent !important; padding: 16px 4px !important;
+                }
+                CSS,
+            ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 // These are all Vue/JS-rendered or baked into the settings markup with

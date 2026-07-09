@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-09T17:39:45+09:00\n"
+"POT-Creation-Date: 2026-07-09T17:45:59+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -89,7 +89,7 @@ msgstr ""
 #: src/Modules/W3TotalCache.php:222
 #: src/Modules/WpChat.php:129
 #: src/Modules/WpConsent.php:155
-#: src/Modules/WpForms.php:215
+#: src/Modules/WpForms.php:230
 #: src/Modules/WpMailSmtp.php:297
 #: src/Modules/Yoast.php:228
 msgid "Hide upsell promotions on its screens"
@@ -270,7 +270,7 @@ msgstr ""
 #: src/Modules/ReviewsFeed.php:193
 #: src/Modules/WpChat.php:170
 #: src/Modules/WpConsent.php:207
-#: src/Modules/WpForms.php:257
+#: src/Modules/WpForms.php:272
 #: src/Modules/WpMailSmtp.php:319
 #: src/Modules/Yoast.php:292
 msgid "Integrate the Help and Upgrades buttons into the page header"
@@ -537,6 +537,10 @@ msgstr ""
 
 #: src/Modules/WpForms.php:152
 msgid "Clean up its admin bar menu (upgrade, paid features, promo links)"
+msgstr ""
+
+#: src/Modules/WpForms.php:215
+msgid "Keep its styles out of the command palette"
 msgstr ""
 
 #: src/Modules/WpMailSmtp.php:167
