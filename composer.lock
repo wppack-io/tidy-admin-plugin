@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7dde7d0a0853f7fa32bfe637b11b313b",
+    "content-hash": "798cefd821543a94452415c3e1be08f9",
     "packages": [
         {
             "name": "composer/installers",
@@ -6712,6 +6712,37 @@
                 "source": "https://plugins.svn.wordpress.org/embedpress"
             },
             "time": "2026-06-24T10:35:49+00:00"
+        },
+        {
+            "name": "wp-plugin/ewww-image-optimizer",
+            "version": "8.7.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/ewww-image-optimizer/",
+                "reference": "tags/8.7.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/ewww-image-optimizer.8.7.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0|~2.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://wp-packages.org/downloads",
+            "authors": [
+                {
+                    "name": "Shane Bishop"
+                }
+            ],
+            "description": "Comprehensive image optimization with WebP, AVIF, Lazy Load, and more. Optimize images automatically for Faster Sites and Happy Visitors.",
+            "homepage": "https://wordpress.org/plugins/ewww-image-optimizer/",
+            "support": {
+                "changelog": "https://wordpress.org/plugins/ewww-image-optimizer/#developers",
+                "issues": "https://wordpress.org/support/plugin/ewww-image-optimizer",
+                "source": "https://plugins.svn.wordpress.org/ewww-image-optimizer"
+            },
+            "time": "2026-06-10T19:31:34+00:00"
         },
         {
             "name": "wp-plugin/feeds-for-tiktok",

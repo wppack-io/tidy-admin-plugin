@@ -47,6 +47,7 @@
         "wp-plugin/custom-twitter-feeds": "*",
         "wp-plugin/duplicator": "*",
         "wp-plugin/embedpress": "*",
+        "wp-plugin/ewww-image-optimizer": "*",
         "wp-plugin/feeds-for-tiktok": "*",
         "wp-plugin/feeds-for-youtube": "*",
         "wp-plugin/google-analytics-for-wordpress": "*",
