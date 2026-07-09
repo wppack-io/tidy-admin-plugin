@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+use WPPack\Plugin\TidyAdminPlugin\Support\AdminBar;
 
 final class MonsterInsights extends AbstractModule
 {
@@ -47,6 +48,19 @@ final class MonsterInsights extends AbstractModule
                         'monsterinsights.com/lite/', // Upgrade to Pro (redirects to monsterinsights.com)
                     ],
                 ],
+            ],
+            'admin-bar' => [
+                'label' => __('Clean up and normalize its admin bar menu', 'wppack-tidy-admin'),
+                // On hover MonsterInsights flips its toolbar "Insights" toggle to a
+                // white background with dark text — nothing like a native item.
+                // Restore the toolbar's own dark background and the scheme's hover
+                // colour. Its .ab-item is nested under a wrapper div, and its icon is
+                // a real dashicon (recolours with the text), so no icon filter needed.
+                'adminCss' => AdminBar::nativeHoverCss(
+                    '#wp-admin-bar-monsterinsights_frontend_button',
+                    [],
+                    '> .monsterinsights-adminbar-content > .ab-item'
+                ),
             ],
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),

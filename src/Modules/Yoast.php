@@ -15,6 +15,7 @@ namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
 use WP_Admin_Bar;
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+use WPPack\Plugin\TidyAdminPlugin\Support\AdminBar;
 
 final class Yoast extends AbstractModule
 {
@@ -115,7 +116,7 @@ final class Yoast extends AbstractModule
                 ],
             ],
             'admin-bar' => [
-                'label' => __('Clean up its admin bar menu (upgrades, help, inspector)', 'wppack-tidy-admin'),
+                'label' => __('Clean up and normalize its admin bar menu', 'wppack-tidy-admin'),
                 'register' => static function (): void {
                     add_action('admin_bar_menu', static function (WP_Admin_Bar $bar): void {
                         $bar->remove_node('wpseo-get-premium');
@@ -138,6 +139,12 @@ final class Yoast extends AbstractModule
                         $bar->remove_node('wpseo-sub-get-help');
                     }, 999);
                 },
+                // Yoast paints its toolbar notification count in a hardcoded brand red
+                // (#d63638) that clashes with every non-fresh admin colour scheme.
+                // Restyle it to WordPress's native count bubble in the scheme's own
+                // notification colour.
+                'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-wpseo-menu', ['.wp-ui-notification'])
+                    . AdminBar::nativeHoverCss('#wp-admin-bar-wpseo-menu', ['.yoast-logo']),
             ],
             'introductions' => [
                 'label' => __('Disable promotional introduction popups', 'wppack-tidy-admin'),

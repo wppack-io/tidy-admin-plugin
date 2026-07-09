@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
+use WP_Admin_Bar;
 use WP_Screen;
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+use WPPack\Plugin\TidyAdminPlugin\Support\AdminBar;
 use WPPack\Plugin\TidyAdminPlugin\Support\WordPressOrgLinks;
 
 final class W3TotalCache extends AbstractModule
@@ -80,6 +82,25 @@ final class W3TotalCache extends AbstractModule
                 .button-buy-plugin,
                 a[href*="licensing_upgrade"] { display: none !important; }
                 CSS,
+            ],
+            'admin-bar' => [
+                'label' => __('Clean up and normalize its admin bar menu', 'wppack-tidy-admin'),
+                // The "Performance" toolbar menu carries an "Upgrade Performance" upsell
+                // overlay and FAQ / Support links (both already relocated into the Help
+                // panel on W3TC's own screens). Drop those; General Settings, Manage
+                // Extensions, the purge actions and the Feature Showcase count stay.
+                // Runs at 1001, after W3TC has built the menu.
+                'register' => static function (): void {
+                    add_action('admin_bar_menu', static function (WP_Admin_Bar $bar): void {
+                        $bar->remove_node('w3tc_overlay_upgrade'); // "Upgrade Performance" (upsell)
+                        $bar->remove_node('w3tc_settings_faq');    // FAQ (lives in the Help panel)
+                        $bar->remove_node('w3tc_support');         // Support (lives in the Help panel)
+                    }, 1001);
+                },
+                // W3TC paints its toolbar count in a hardcoded brand red (#d63638) that
+                // clashes with every non-fresh admin colour scheme; restyle it to
+                // WordPress's native count bubble in the scheme's own notification colour.
+                'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-w3tc', ['.awaiting-mod']),
             ],
             'marketing-notices' => [
                 'label' => __('Silence its fetched marketing notices', 'wppack-tidy-admin'),

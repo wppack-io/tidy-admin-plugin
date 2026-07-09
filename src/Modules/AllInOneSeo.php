@@ -15,6 +15,7 @@ namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
 use WP_Admin_Bar;
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+use WPPack\Plugin\TidyAdminPlugin\Support\AdminBar;
 
 final class AllInOneSeo extends AbstractModule
 {
@@ -548,7 +549,7 @@ final class AllInOneSeo extends AbstractModule
                 CSS,
             ],
             'admin-bar' => [
-                'label' => __('Remove upgrade items from the admin bar', 'wppack-tidy-admin'),
+                'label' => __('Clean up and normalize its admin bar menu', 'wppack-tidy-admin'),
                 'register' => static function (): void {
                     add_action('admin_bar_menu', static function (WP_Admin_Bar $bar): void {
                         $bar->remove_node('aioseo-pro-upgrade');
@@ -563,6 +564,12 @@ final class AllInOneSeo extends AbstractModule
                         // AIOSEO registers its admin bar at priority 1000
                     }, 1001);
                 },
+                // Centre its notification counter like a native bubble (it drifts off
+                // in the submenu) and restore the toolbar's own hover response — the
+                // AIOSEO logo is a baked-colour SVG background, so it only takes the
+                // approximate brightness filter.
+                'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-aioseo-main', ['.aioseo-menu-notification-counter'])
+                    . AdminBar::nativeHoverCss('#wp-admin-bar-aioseo-main', ['.aioseo-logo']),
             ],
         ];
     }
