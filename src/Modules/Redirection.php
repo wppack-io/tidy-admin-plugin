@@ -74,12 +74,16 @@ final class Redirection extends AbstractModule
             ],
             'setup-notice' => [
                 'label' => __('Move the setup notice to the plugin screens and dashboard widget', 'wppack-tidy-admin'),
-                // "Please complete your Redirection setup to activate the plugin."
-                // — Redirection_Admin::show_incomplete_installation_notice prints
-                // it on every admin screen until the database is set up. Confine it
-                // to Redirection's own screen and the Pending plugin setup widget.
+                // Redirection nags on every admin screen until its database is set
+                // up. Redirection_Admin::update_nag prints "Please complete your
+                // Redirection setup to activate the plugin." (and, for older installs,
+                // a "database needs to be updated" prompt); show_incomplete_installation_notice
+                // prints a missing-files install error. Relocate both to the Pending
+                // plugin setup widget (each already suppresses itself on Redirection's
+                // own screen).
                 'setupNoticeByHook' => [
                     'admin_notices' => [
+                        'Redirection_Admin::update_nag',
                         'Redirection_Admin::show_incomplete_installation_notice',
                     ],
                 ],
