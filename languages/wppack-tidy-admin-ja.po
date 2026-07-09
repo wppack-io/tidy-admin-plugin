@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-09T06:48:56+00:00\n"
+"PO-Revision-Date: 2026-07-09T07:25:55+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -35,7 +35,7 @@ msgstr "ヘッダーのアップグレードボタンをアップグレードパ
 #: src/Modules/AdvancedCustomFields.php:66
 #: src/Modules/AllInOneWpMigration.php:79
 #: src/Modules/Duplicator.php:76
-#: src/Modules/EwwwImageOptimizer.php:59
+#: src/Modules/EwwwImageOptimizer.php:76
 #: src/Modules/FeedsForTiktok.php:77
 #: src/Modules/FeedsForYoutube.php:89
 #: src/Modules/OptinMonster.php:59
@@ -52,7 +52,7 @@ msgstr "Pro 版にアップグレード"
 #: src/Modules/CustomPostTypeUi.php:58
 #: src/Modules/Duplicator.php:125
 #: src/Modules/EmbedPress.php:71
-#: src/Modules/EwwwImageOptimizer.php:64
+#: src/Modules/EwwwImageOptimizer.php:81
 #: src/Modules/FeedsForYoutube.php:94
 #: src/Modules/InstagramFeed.php:79
 #: src/Modules/MonsterInsights.php:52
@@ -60,7 +60,7 @@ msgstr "Pro 版にアップグレード"
 #: src/Modules/ReviewsFeed.php:84
 #: src/Modules/W3TotalCache.php:110
 #: src/Modules/WpConsent.php:54
-#: src/Modules/WpForms.php:79
+#: src/Modules/WpForms.php:97
 #: src/Modules/WpMailSmtp.php:75
 #: src/Modules/Yoast.php:54
 msgid "Move Premium feature pages to the Upgrades panel"
@@ -88,7 +88,7 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/W3TotalCache.php:201
 #: src/Modules/WpChat.php:129
 #: src/Modules/WpConsent.php:155
-#: src/Modules/WpForms.php:156
+#: src/Modules/WpForms.php:215
 #: src/Modules/WpMailSmtp.php:297
 #: src/Modules/Yoast.php:221
 msgid "Hide upsell promotions on its screens"
@@ -106,7 +106,7 @@ msgstr "WP Engine の宣伝を除去"
 #: src/Modules/CustomTwitterFeeds.php:72
 #: src/Modules/Duplicator.php:44
 #: src/Modules/EmbedPress.php:53
-#: src/Modules/EwwwImageOptimizer.php:46
+#: src/Modules/EwwwImageOptimizer.php:63
 #: src/Modules/FeedsForTiktok.php:63
 #: src/Modules/FeedsForYoutube.php:73
 #: src/Modules/InstagramFeed.php:71
@@ -119,7 +119,7 @@ msgstr "WP Engine の宣伝を除去"
 #: src/Modules/W3TotalCache.php:56
 #: src/Modules/WpChat.php:51
 #: src/Modules/WpConsent.php:44
-#: src/Modules/WpForms.php:44
+#: src/Modules/WpForms.php:62
 #: src/Modules/WpMailSmtp.php:61
 #: src/Modules/Yoast.php:45
 msgid "Move upgrade menus to the Upgrades panel"
@@ -133,7 +133,7 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/CustomTwitterFeeds.php:80
 #: src/Modules/Duplicator.php:180
 #: src/Modules/EmbedPress.php:99
-#: src/Modules/EwwwImageOptimizer.php:102
+#: src/Modules/EwwwImageOptimizer.php:119
 #: src/Modules/FeedsForTiktok.php:88
 #: src/Modules/FeedsForYoutube.php:110
 #: src/Modules/InstagramFeed.php:90
@@ -146,7 +146,7 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:71
 #: src/Modules/WpConsent.php:72
-#: src/Modules/WpForms.php:114
+#: src/Modules/WpForms.php:173
 #: src/Modules/WpMailSmtp.php:85
 #: src/Modules/Yarpp.php:49
 #: src/Modules/Yoast.php:65
@@ -171,7 +171,7 @@ msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に�
 #: src/Modules/PublishPressFuture.php:129
 #: src/Modules/ReviewsFeed.php:127
 #: src/Modules/WpConsent.php:66
-#: src/Modules/WpForms.php:52
+#: src/Modules/WpForms.php:70
 #: src/Modules/WpMailSmtp.php:115
 #: src/Modules/Yoast.php:80
 msgid "Remove upgrade links from the plugin list"
@@ -211,7 +211,7 @@ msgid "Hide locked Pro settings rows"
 msgstr "ロックされた Pro 設定行を非表示"
 
 #: src/Modules/AllInOneSeo.php:337
-#: src/Modules/EwwwImageOptimizer.php:138
+#: src/Modules/EwwwImageOptimizer.php:155
 #: src/Modules/WpMailSmtp.php:332
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
@@ -248,7 +248,7 @@ msgstr "AI クレジットのアップセルを非表示"
 
 #: src/Modules/AllInOneSeo.php:504
 #: src/Modules/EmbedPress.php:161
-#: src/Modules/WpForms.php:146
+#: src/Modules/WpForms.php:205
 #: src/Modules/WpMailSmtp.php:241
 msgid "Remove the floating quick-links menu"
 msgstr "フローティングのクイックリンクメニューを除去"
@@ -258,7 +258,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/CustomFacebookFeed.php:230
 #: src/Modules/CustomTwitterFeeds.php:137
 #: src/Modules/EmbedPress.php:196
-#: src/Modules/EwwwImageOptimizer.php:124
+#: src/Modules/EwwwImageOptimizer.php:141
 #: src/Modules/FeedsForTiktok.php:151
 #: src/Modules/FeedsForYoutube.php:255
 #: src/Modules/InstagramFeed.php:318
@@ -269,7 +269,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/ReviewsFeed.php:193
 #: src/Modules/WpChat.php:170
 #: src/Modules/WpConsent.php:207
-#: src/Modules/WpForms.php:202
+#: src/Modules/WpForms.php:257
 #: src/Modules/WpMailSmtp.php:319
 #: src/Modules/Yoast.php:285
 msgid "Integrate the Help and Upgrades buttons into the page header"
@@ -327,7 +327,7 @@ msgstr "無効化時のフィードバックアンケートを除去"
 #: src/Modules/InstagramFeed.php:54
 #: src/Modules/ReviewsFeed.php:51
 #: src/Modules/WpChat.php:61
-#: src/Modules/WpForms.php:58
+#: src/Modules/WpForms.php:76
 msgid "Stop the welcome-screen redirect on activation"
 msgstr "有効化時のウェルカム画面へのリダイレクトを停止"
 
@@ -356,7 +356,7 @@ msgid "Fix the squeezed select fields on its screens"
 msgstr "画面内のセレクトボックスの詰まった余白を修正"
 
 #: src/Modules/Duplicator.php:254
-#: src/Modules/WpForms.php:69
+#: src/Modules/WpForms.php:87
 #: src/Modules/WpMailSmtp.php:161
 msgid "Remove the \"You're using Lite\" notice bar"
 msgstr "「Lite を使用中」通知バーを除去"
@@ -389,11 +389,11 @@ msgstr "ヘルプ / アップグレードボタンをページタイトルに重
 msgid "Remove the milestone celebration popup"
 msgstr "マイルストーン祝賀ポップアップを除去"
 
-#: src/Modules/EwwwImageOptimizer.php:78
+#: src/Modules/EwwwImageOptimizer.php:95
 msgid "Remove the Contribute and cross-sell Plugins tabs"
 msgstr "「Contribute」タブと他製品を宣伝する「Plugins」タブを除去"
 
-#: src/Modules/EwwwImageOptimizer.php:88
+#: src/Modules/EwwwImageOptimizer.php:105
 msgid "Remove the newsletter sign-up"
 msgstr "ニュースレター登録を除去"
 
@@ -531,6 +531,10 @@ msgstr "メニューの通知バッジを管理カラースキームに合わせ
 msgid "Remove the \"WordPress Events and News\" dashboard widget"
 msgstr "「WordPress イベントとニュース」ダッシュボードウィジェットを除去"
 
+#: src/Modules/WpForms.php:152
+msgid "Clean up its admin bar menu (upgrade, paid features, promo links)"
+msgstr "管理バーメニューを整理（アップグレード・有料機能・宣伝リンク）"
+
 #: src/Modules/WpMailSmtp.php:167
 msgid "Remove the SendLayer setup banner"
 msgstr "SendLayer セットアップバナーを除去"
@@ -592,7 +596,7 @@ msgid "Upgrades"
 msgstr "アップグレード"
 
 #: src/Support/SubmenuCleaner.php:404
-#: src/Support/UpgradesDirectory.php:288
+#: src/Support/UpgradesDirectory.php:299
 msgid "Upgrade"
 msgstr "アップグレード"
 
@@ -614,35 +618,35 @@ msgstr "お使いのプラグインには、機能が充実した有償版が用
 msgid "None of your active plugins offer a Pro upgrade."
 msgstr "有効なプラグインにアップグレード可能なものはありません。"
 
-#: src/Support/UpgradesDirectory.php:193
+#: src/Support/UpgradesDirectory.php:204
 msgid "Already have a license key? Enter it to install Pro"
 msgstr "ライセンスキーをお持ちですか？入力して Pro 版をインストール"
 
-#: src/Support/UpgradesDirectory.php:310
+#: src/Support/UpgradesDirectory.php:321
 msgid "Please enter your license key."
 msgstr "ライセンスキーを入力してください。"
 
-#: src/Support/UpgradesDirectory.php:311
+#: src/Support/UpgradesDirectory.php:322
 msgid "Could not start the upgrade. Please try again."
 msgstr "アップグレードを開始できませんでした。もう一度お試しください。"
 
-#: src/Support/UpgradesDirectory.php:315
+#: src/Support/UpgradesDirectory.php:326
 msgid "Install the Pro version"
 msgstr "Pro 版をインストール"
 
-#: src/Support/UpgradesDirectory.php:316
+#: src/Support/UpgradesDirectory.php:327
 msgid "Enter your license key to download and install the Pro plugin automatically."
 msgstr "ライセンスキーを入力すると、Pro 版プラグインを自動でダウンロード・インストールします。"
 
-#: src/Support/UpgradesDirectory.php:317
+#: src/Support/UpgradesDirectory.php:328
 msgid "License key"
 msgstr "ライセンスキー"
 
-#: src/Support/UpgradesDirectory.php:320
+#: src/Support/UpgradesDirectory.php:331
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/Support/UpgradesDirectory.php:321
+#: src/Support/UpgradesDirectory.php:332
 msgid "Connect & install Pro"
 msgstr "接続して Pro をインストール"
 

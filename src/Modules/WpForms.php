@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
+use WP_Admin_Bar;
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
 
 final class WpForms extends AbstractModule
@@ -107,6 +108,26 @@ final class WpForms extends AbstractModule
                         'wpforms-smtp',      // SMTP (installs WP Mail SMTP)
                     ],
                 ],
+                // Geolocation and Access Controls are Pro-only Settings tabs whose views
+                // still render a working upgrade teaser in Lite. Relocate them (link
+                // only) into the Upgrades panel so the pages stay reachable, then hide
+                // just their nav tabs below — never disable the pages themselves.
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'premium',
+                        'parent' => 'wpforms-overview',
+                        'html' => '<ul class="tidy-admin-meta-links">'
+                            . '<li><a href="' . esc_url(admin_url('admin.php?page=wpforms-settings&view=geolocation')) . '">' . esc_html__('Geolocation', 'wpforms-lite') . '</a></li>'
+                            . '<li><a href="' . esc_url(admin_url('admin.php?page=wpforms-settings&view=access')) . '">' . esc_html__('Access Controls', 'wpforms-lite') . '</a></li>'
+                            . '</ul>',
+                    ],
+                ],
+                'adminCss' => <<<'CSS'
+                /* Drop the Geolocation and Access nav tabs (their <li>s in the settings
+                   tab bar) — the pages stay reachable from the Upgrades panel link above. */
+                body[class*="page_wpforms"] .wpforms-admin-tabs li:has(a[href*="view=geolocation"]),
+                body[class*="page_wpforms"] .wpforms-admin-tabs li:has(a[href*="view=access"]) { display: none !important; }
+                CSS,
                 // WPForms tacks a "NEW!" badge span onto the Payments menu title;
                 // SubmenuCleaner strips the tag but keeps its text, so the relocated
                 // Premium-tab link reads "Payments NEW!". Strip the badge from the
@@ -125,6 +146,27 @@ final class WpForms extends AbstractModule
                         }
                         unset($item);
                     }, PHP_INT_MAX - 1);
+                },
+            ],
+            'admin-bar' => [
+                'label' => __('Clean up its admin bar menu (upgrade, paid features, promo links)', 'wppack-tidy-admin'),
+                // The toolbar's WPForms menu carries an "Upgrade to Pro" item, links to
+                // Lite's Pro-only teasers (Payments and the Geolocation / Access Control
+                // settings tabs), and the Community / Help Docs promo links. Drop all of
+                // those — the teaser pages stay reachable and are relocated to the
+                // Upgrades panel, and Community / Help Docs already live in the Help
+                // panel, both on WPForms screens. All Forms, Add New, Settings and Tools
+                // stay. Runs after both builders — AdminBarMenu::register at 999 and the
+                // Lite upgrade_to_pro_menu at 1000.
+                'register' => static function (): void {
+                    add_action('admin_bar_menu', static function (WP_Admin_Bar $bar): void {
+                        $bar->remove_node('wpforms-upgrade');              // "Upgrade to Pro"
+                        $bar->remove_node('wpforms-payments');             // Payments (Pro in Lite)
+                        $bar->remove_node('wpforms-geolocation-settings'); // Geolocation (Pro)
+                        $bar->remove_node('wpforms-access-settings');      // Access Control (Pro)
+                        $bar->remove_node('wpforms-community');            // Community (Facebook group)
+                        $bar->remove_node('wpforms-help-docs');            // Help Docs (→ Help panel)
+                    }, 1001);
                 },
             ],
             'help-links' => [
@@ -209,10 +251,6 @@ final class WpForms extends AbstractModule
                 /* Integrations tab: every provider except Constant Contact (Lite's one
                    free integration) is a Pro teaser that opens an upgrade prompt */
                 body[class*="page_wpforms"] .wpforms-settings-provider:not([class*="constant-contact"]) { display: none !important; }
-                /* Geolocation and Access are Pro-only settings tabs — drop the nav
-                   tabs (their <li>s in the settings tab bar) */
-                body[class*="page_wpforms"] .wpforms-admin-tabs li:has(a[href*="view=geolocation"]),
-                body[class*="page_wpforms"] .wpforms-admin-tabs li:has(a[href*="view=access"]) { display: none !important; }
                 CSS,
             ],
             'panel-placement' => [
