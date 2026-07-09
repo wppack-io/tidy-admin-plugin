@@ -40,6 +40,18 @@ final class FeedsForYoutube extends AbstractModule
         // Lite ships an "already have a license?" key box; Smash Balloon's own
         // seamless-upgrade URL takes the key and installs Pro from the account.
         return [
+            'deactivation-survey' => [
+                'label' => __('Remove the deactivation feedback survey', 'wppack-tidy-admin'),
+                // On plugins.php the Smash Balloon framework enqueues a shared
+                // sb-deactivation-modal script that hijacks the Deactivate link with a
+                // "why are you deactivating?" survey. There is no opt-out filter, so
+                // dequeue the script — the Deactivate link then works normally.
+                'register' => static function (): void {
+                    add_action('admin_enqueue_scripts', static function (): void {
+                        wp_dequeue_script('sb-deactivation-modal');
+                    }, 100);
+                },
+            ],
             'activation-redirect' => [
                 'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
                 // On activation the plugin adds a sby_plugin_do_activation_redirect option and

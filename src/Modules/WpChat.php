@@ -35,6 +35,18 @@ final class WpChat extends AbstractModule
     public function features(): array
     {
         return [
+            'deactivation-survey' => [
+                'label' => __('Remove the deactivation feedback survey', 'wppack-tidy-admin'),
+                // On plugins.php the Smash Balloon framework enqueues a shared
+                // sb-deactivation-modal script that hijacks the Deactivate link with a
+                // "why are you deactivating?" survey. There is no opt-out filter, so
+                // dequeue the script — the Deactivate link then works normally.
+                'register' => static function (): void {
+                    add_action('admin_enqueue_scripts', static function (): void {
+                        wp_dequeue_script('sb-deactivation-modal');
+                    }, 100);
+                },
+            ],
             'upgrade-menus' => [
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
                 // "Upgrade" sidebar item, styled as a highlighted pill (free
