@@ -1,403 +1,629 @@
-# Japanese translation for WPPack Tidy Admin.
-# This file is distributed under the same license as the WPPack Tidy Admin plugin.
 msgid ""
 msgstr ""
 "Project-Id-Version: WPPack Tidy Admin 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
+"PO-Revision-Date: 2026-07-09T05:46:15+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
 
+#. Plugin Name of the plugin
+#: wppack-tidy-admin.php:15
+msgid "WPPack Tidy Admin"
+msgstr ""
+
 #. Description of the plugin
+#: wppack-tidy-admin.php:16
 msgid "Tidy up wp-admin — take plugin vendors' upsells, promos and notices out of the flow. Per-plugin modules activate only when the target plugin is active."
 msgstr "wp-admin を整頓 — プラグインベンダーのアップセル・宣伝・通知を導線の外へ。対象プラグインが有効なときだけ、プラグインごとのモジュールが働きます。"
 
-#: src/Support/SubmenuCleaner.php
-msgid "Upgrades"
-msgstr "アップグレード"
+#. Author of the plugin
+#: wppack-tidy-admin.php:20
+msgid "WPPack"
+msgstr ""
 
-#: src/Support/SubmenuCleaner.php
-msgid "Upgrade"
-msgstr "アップグレード"
-
-#: src/Support/SubmenuCleaner.php
-msgid "Premium features"
-msgstr "プレミアム機能"
-
-#: src/Support/SetupNoticeRelocator.php
-msgid "Pending plugin setup"
-msgstr "セットアップが必要なプラグイン"
-
-#: src/Support/WordPressOrgLinks.php
-msgid "Plugin page"
-msgstr "プラグインページ"
-
-#: src/Support/WordPressOrgLinks.php src/Modules/Mc4wp.php
-msgid "Support forum"
-msgstr "サポートフォーラム"
-
-#: src/Modules/Mc4wp.php
-msgid "Report a bug (GitHub)"
-msgstr "バグ報告 (GitHub)"
-
-#: src/Support/SettingsPage.php
-msgid "Disable tidying entirely per plugin, or feature by feature."
-msgstr "プラグインごとに整理を完全に無効化するか、機能単位で無効化できます。"
-
-#: src/Support/SettingsPage.php
-msgid "Enable"
-msgstr "有効にする"
-
-#: src/Modules
-msgid "Move upgrade menus to the Upgrades panel"
-msgstr "アップグレード系メニューをアップグレードパネルへ移設"
-
-#: src/Modules
-msgid "Move Premium feature pages to the Upgrades panel"
-msgstr "プレミアム機能ページをアップグレードパネルへ移設"
-
-#: src/Modules
-msgid "Move documentation and support links to the Help panel"
-msgstr "ドキュメント・サポートのリンクをヘルプパネルへ移設"
-
-#: src/Modules
-msgid "Remove upgrade links from the plugin list"
-msgstr "プラグイン一覧からアップグレードリンクを除去"
-
-#: src/Modules
-msgid "Remove the review request"
-msgstr "レビュー依頼を除去"
-
-#: src/Modules
-msgid "Show sale notices only in the Upgrades panel"
-msgstr "セール通知はアップグレードパネル内のみに表示"
-
-#: src/Modules
-msgid "Move the setup notice to the plugin screens and dashboard widget"
-msgstr "セットアップ通知をプラグイン画面とダッシュボードウィジェットへ移設"
-
-#: src/Modules/AdvancedCustomFields.php
+#: src/Modules/AdvancedCustomFields.php:54
 msgid "Move the header upgrade button to the Upgrades panel"
 msgstr "ヘッダーのアップグレードボタンをアップグレードパネルへ移設"
 
-#: src/Modules/AdvancedCustomFields.php
-msgid "Hide Pro-only field types from the field pickers"
-msgstr "フィールド選択から Pro 専用フィールドタイプを非表示"
-
-#: src/Modules/AdvancedCustomFields.php
-msgid "Remove the WP Engine promotions"
-msgstr "WP Engine の宣伝を除去"
-
-#: src/Modules/AllInOneSeo.php
-msgid "Keep the post-list title column readable beside its SEO column"
-msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に保つ"
-
-#: src/Modules
-msgid "Hide upsell promotions on its screens"
-msgstr "画面内のアップセル宣伝を非表示"
-
-#: src/Modules
-msgid "Integrate the Help and Upgrades buttons into the page header"
-msgstr "ヘルプ / アップグレードボタンをページヘッダーに統合"
-
-#: src/Modules
-msgid "Skip the recommended-plugin installs in its setup wizard"
-msgstr "セットアップウィザードの推奨プラグイン導入をスキップ"
-
-#: src/Modules
-msgid "Make its admin menu icon white like the core icons"
-msgstr "管理メニューのアイコンをコアのアイコンと同じ白色に"
-
-#: src/Modules/AllInOneWpMigration.php
+#: src/Modules/AdvancedCustomFields.php:66
+#: src/Modules/AllInOneWpMigration.php:79
+#: src/Modules/Duplicator.php:76
+#: src/Modules/EwwwImageOptimizer.php:59
+#: src/Modules/FeedsForTiktok.php:65
+#: src/Modules/FeedsForYoutube.php:68
+#: src/Modules/OptinMonster.php:59
+#: src/Modules/W3TotalCache.php:69
+#: src/Modules/WpChat.php:126
 msgid "Upgrade to Pro"
 msgstr "Pro 版にアップグレード"
 
-#: src/Modules/AllInOneWpMigration.php
-msgid "Tidy the import upload-limit notice"
-msgstr "インポートの容量制限通知を整理"
+#: src/Modules/AdvancedCustomFields.php:71
+#: src/Modules/AllInOneSeo.php:55
+#: src/Modules/AllInOneWpMigration.php:52
+#: src/Modules/Bnfw.php:47
+#: src/Modules/CustomFacebookFeed.php:58
+#: src/Modules/CustomPostTypeUi.php:58
+#: src/Modules/Duplicator.php:125
+#: src/Modules/EmbedPress.php:60
+#: src/Modules/EwwwImageOptimizer.php:64
+#: src/Modules/FeedsForYoutube.php:73
+#: src/Modules/InstagramFeed.php:58
+#: src/Modules/MonsterInsights.php:52
+#: src/Modules/OptinMonster.php:79
+#: src/Modules/ReviewsFeed.php:63
+#: src/Modules/W3TotalCache.php:110
+#: src/Modules/WpConsent.php:54
+#: src/Modules/WpForms.php:62
+#: src/Modules/WpMailSmtp.php:75
+#: src/Modules/Yoast.php:54
+msgid "Move Premium feature pages to the Upgrades panel"
+msgstr "プレミアム機能ページをアップグレードパネルへ移設"
 
-#: src/Modules/AllInOneWpMigration.php
-msgid "Remove Pro-only export and import destinations"
-msgstr "Pro 専用のエクスポート/インポート先を除去"
+#: src/Modules/AdvancedCustomFields.php:90
+msgid "Hide Pro-only field types from the field pickers"
+msgstr "フィールド選択から Pro 専用フィールドタイプを非表示"
 
-#: src/Modules/Bnfw.php
-msgid "Remove the third-party SMTP plugin recommendation"
-msgstr "他社 SMTP プラグインの推奨通知を除去"
+#: src/Modules/AdvancedCustomFields.php:129
+#: src/Modules/AllInOneSeo.php:140
+#: src/Modules/CustomFacebookFeed.php:180
+#: src/Modules/CustomPostTypeUi.php:100
+#: src/Modules/CustomTwitterFeeds.php:81
+#: src/Modules/Duplicator.php:264
+#: src/Modules/EmbedPress.php:160
+#: src/Modules/FeedsForTiktok.php:111
+#: src/Modules/FeedsForYoutube.php:212
+#: src/Modules/InstagramFeed.php:175
+#: src/Modules/LocationWeather.php:167
+#: src/Modules/MonsterInsights.php:95
+#: src/Modules/OptinMonster.php:128
+#: src/Modules/Redirection.php:88
+#: src/Modules/ReviewsFeed.php:93
+#: src/Modules/W3TotalCache.php:201
+#: src/Modules/WpChat.php:107
+#: src/Modules/WpConsent.php:155
+#: src/Modules/WpForms.php:139
+#: src/Modules/WpMailSmtp.php:290
+#: src/Modules/Yoast.php:221
+msgid "Hide upsell promotions on its screens"
+msgstr "画面内のアップセル宣伝を非表示"
 
-#: src/Modules/BrokenLinkChecker.php
-msgid "Move the free-plugins page to the Help panel"
-msgstr "無料プラグイン一覧ページをヘルプパネルへ移設"
+#: src/Modules/AdvancedCustomFields.php:140
+msgid "Remove the WP Engine promotions"
+msgstr "WP Engine の宣伝を除去"
 
-#: src/Modules/BrokenLinkChecker.php
-msgid "Remove the Cloud Link Checker cross-sell"
-msgstr "Cloud Link Checker のクロスセルを除去"
+#: src/Modules/AllInOneSeo.php:45
+#: src/Modules/Bnfw.php:39
+#: src/Modules/Cfdb7.php:39
+#: src/Modules/CustomFacebookFeed.php:50
+#: src/Modules/CustomPostTypeUi.php:45
+#: src/Modules/CustomTwitterFeeds.php:51
+#: src/Modules/Duplicator.php:44
+#: src/Modules/EmbedPress.php:47
+#: src/Modules/EwwwImageOptimizer.php:46
+#: src/Modules/FeedsForTiktok.php:51
+#: src/Modules/FeedsForYoutube.php:52
+#: src/Modules/InstagramFeed.php:50
+#: src/Modules/LocationWeather.php:52
+#: src/Modules/Mc4wp.php:44
+#: src/Modules/MonsterInsights.php:44
+#: src/Modules/OptinMonster.php:44
+#: src/Modules/PublishPressFuture.php:39
+#: src/Modules/ReviewsFeed.php:39
+#: src/Modules/W3TotalCache.php:56
+#: src/Modules/WpChat.php:39
+#: src/Modules/WpConsent.php:44
+#: src/Modules/WpForms.php:44
+#: src/Modules/WpMailSmtp.php:61
+#: src/Modules/Yoast.php:45
+msgid "Move upgrade menus to the Upgrades panel"
+msgstr "アップグレード系メニューをアップグレードパネルへ移設"
 
-#: src/Modules/BrokenLinkChecker.php
-msgid "Hide the stray empty heading on its pages"
-msgstr "ページ内の余分な空見出しを非表示"
+#: src/Modules/AllInOneSeo.php:77
+#: src/Modules/AllInOneWpMigration.php:92
+#: src/Modules/Bnfw.php:56
+#: src/Modules/CustomFacebookFeed.php:73
+#: src/Modules/CustomPostTypeUi.php:80
+#: src/Modules/CustomTwitterFeeds.php:59
+#: src/Modules/Duplicator.php:180
+#: src/Modules/EmbedPress.php:88
+#: src/Modules/EwwwImageOptimizer.php:102
+#: src/Modules/FeedsForTiktok.php:76
+#: src/Modules/FeedsForYoutube.php:89
+#: src/Modules/InstagramFeed.php:69
+#: src/Modules/LocationWeather.php:72
+#: src/Modules/Mc4wp.php:52
+#: src/Modules/MonsterInsights.php:67
+#: src/Modules/OptinMonster.php:101
+#: src/Modules/PublishPressFuture.php:100
+#: src/Modules/ReviewsFeed.php:74
+#: src/Modules/Wordfence.php:75
+#: src/Modules/WpChat.php:49
+#: src/Modules/WpConsent.php:72
+#: src/Modules/WpForms.php:97
+#: src/Modules/WpMailSmtp.php:85
+#: src/Modules/Yarpp.php:49
+#: src/Modules/Yoast.php:65
+msgid "Move documentation and support links to the Help panel"
+msgstr "ドキュメント・サポートのリンクをヘルプパネルへ移設"
 
-#: src/Modules/FeedsForTiktok.php
-msgid "Keep its buttons from wrapping mid-label"
-msgstr "ボタンラベルの途中改行を防止"
+#: src/Modules/AllInOneSeo.php:121
+msgid "Keep the post-list title column readable beside its SEO column"
+msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に保つ"
 
-#: src/Modules/FeedsForYoutube.php
-msgid "Remove the recommended-plugin installs from its setup wizard"
-msgstr "セットアップウィザードから推奨プラグインのインストールを除去"
+#: src/Modules/AllInOneSeo.php:165
+#: src/Modules/CustomFacebookFeed.php:92
+#: src/Modules/CustomTwitterFeeds.php:68
+#: src/Modules/Duplicator.php:248
+#: src/Modules/EmbedPress.php:121
+#: src/Modules/FeedsForYoutube.php:177
+#: src/Modules/InstagramFeed.php:102
+#: src/Modules/LocationWeather.php:96
+#: src/Modules/Mc4wp.php:92
+#: src/Modules/MonsterInsights.php:75
+#: src/Modules/PublishPressFuture.php:129
+#: src/Modules/ReviewsFeed.php:106
+#: src/Modules/WpConsent.php:66
+#: src/Modules/WpMailSmtp.php:115
+#: src/Modules/Yoast.php:80
+msgid "Remove upgrade links from the plugin list"
+msgstr "プラグイン一覧からアップグレードリンクを除去"
 
-#: src/Modules/Duplicator.php
-msgid "Stop the post-install welcome-page redirect"
-msgstr "インストール直後のウェルカムページへのリダイレクトを停止"
-
-#: src/Modules/Duplicator.php
-msgid "Remove the recommended-plugin cross-sell from its dashboard widget"
-msgstr "ダッシュボードウィジェットの推奨プラグイン枠を除去"
-
-#: src/Modules/Duplicator.php
-msgid "Hide the license pitch on its settings screen"
-msgstr "設定画面のライセンス勧誘を非表示"
-
-#: src/Modules/EmbedPress.php
-msgid "Remove the milestone celebration popup"
-msgstr "マイルストーン祝賀ポップアップを除去"
-
-#: src/Modules/EmbedPress.php
-msgid "Remove the floating quick-links menu"
-msgstr "フローティングのクイックリンクメニューを除去"
-
-#: src/Modules/InstagramFeed.php
-msgid "Hide Pro-only feed types from the feed builder"
-msgstr "フィードビルダーから Pro 専用フィードタイプを非表示"
-
-#: src/Modules/InstagramFeed.php
-msgid "Fix the squeezed select fields on its screens"
-msgstr "画面内のセレクトボックスの詰まった余白を修正"
-
-#: src/Modules/InstagramFeed.php
-msgid "Remove marketing notices and announcements"
-msgstr "マーケティング通知・お知らせを除去"
-
-#: src/Modules/LocationWeather.php
-msgid "Remove promotional notices and popups"
-msgstr "宣伝通知・ポップアップを除去"
-
-#: src/Modules/LocationWeather.php
-msgid "Move the weather editor's Pro pitches to the Upgrades panel"
-msgstr "ウェザーエディター内の Pro 宣伝をアップグレードパネルへ移設"
-
-#: src/Modules/LocationWeather.php src/Modules/WpMailSmtp.php
-msgid "Restore the standard admin footer"
-msgstr "標準の管理画面フッターを復元"
-
-#: src/Modules/LocationWeather.php
-msgid "Skip the unused block-editor promo bundle"
-msgstr "未使用のブロックエディター宣伝バンドルを読み込まない"
-
-#: src/Modules/Mc4wp.php
-msgid "Remove Premium ads from its screens"
-msgstr "画面内の Premium 広告を除去"
-
-#: src/Modules/Mc4wp.php
-msgid "Hide the \"You are here\" breadcrumb"
-msgstr "「You are here」パンくずを非表示"
-
-#: src/Modules/PostTypesOrder.php src/Modules/TaxonomyTermsOrder.php
-msgid "Hide the advanced-version promo box"
-msgstr "上位版の宣伝ボックスを非表示"
-
-#: src/Modules/PostTypesOrder.php src/Modules/TaxonomyTermsOrder.php
-msgid "Remove the icon from its Settings menu item"
-msgstr "設定メニュー項目のアイコンを除去"
-
-#: src/Modules/PublishPressFuture.php
-msgid "Show Scheduled Actions in the sidebar instead of a page button"
-msgstr "Scheduled Actions をページ内ボタンではなくサイドバーに表示"
-
-#: src/Modules/PublishPressFuture.php
-msgid "Keep the post-list expiration column readable"
-msgstr "投稿一覧の有効期限列を読みやすい幅に保つ"
-
-#: src/Modules/PublishPressFuture.php
-msgid "Hide locked Pro settings rows"
-msgstr "ロックされた Pro 設定行を非表示"
-
-#: src/Modules/PublishPressFuture.php
+#: src/Modules/AllInOneSeo.php:171
+#: src/Modules/PublishPressFuture.php:143
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr "「無料版を使用中」バーを除去"
 
-#: src/Modules
-msgid "Make its admin menu icon white like the core icons"
-msgstr "管理メニューのアイコンをコアのアイコンと同じ白色に"
+#: src/Modules/AllInOneSeo.php:190
+#: src/Modules/Cfdb7.php:47
+#: src/Modules/Mc4wp.php:120
+#: src/Modules/PublishPressFuture.php:154
+#: src/Modules/Yarpp.php:41
+msgid "Remove the review request"
+msgstr "レビュー依頼を除去"
 
-#: src/Modules/Wordfence.php
-msgid "Move the upgrade menu to the Upgrades panel"
-msgstr "アップグレードメニューをアップグレードパネルへ移設"
-
-#: src/Modules/Wordfence.php
-msgid "Overlay the Help and Upgrades buttons onto the page title"
-msgstr "ヘルプ / アップグレードボタンをページタイトルに重ねて表示"
-
-#: src/Modules/Wordfence.php
-msgid "Hide upsell cards and ads on its screens"
-msgstr "画面内のアップセルカード・広告を非表示"
-
-#: src/Modules/WpMailSmtp.php
-msgid "Remove the \"You're using Lite\" notice bar"
-msgstr "「Lite を使用中」通知バーを除去"
-
-#: src/Modules/WpMailSmtp.php
-msgid "Remove the Backup Connection teaser"
-msgstr "Backup Connection のティーザーを除去"
-
-#: src/Modules/WpMailSmtp.php
-msgid "Remove the SendLayer setup banner"
-msgstr "SendLayer セットアップバナーを除去"
-
-#: src/Modules/WpMailSmtp.php
-msgid "Remove Pro-only education tabs"
-msgstr "Pro 専用の紹介タブを除去"
-
-#: src/Modules/WpMailSmtp.php
-msgid "Remove Pro-only teaser mailers from the mailer list"
-msgstr "メーラー一覧から Pro 専用ティーザーを除去"
-
-#: src/Modules/WpMailSmtp.php
-msgid "Always show the Scheduled Actions tools page"
-msgstr "Scheduled Actions ツールページを常に表示"
-
-#: src/Modules/WpMailSmtp.php
-msgid "Remove the dashboard widget's Pro teaser chart"
-msgstr "ダッシュボードウィジェットの Pro ティーザーチャートを除去"
-
-#: src/Modules/WpMailSmtp.php
-msgid "Hide the license fields (turn off while entering a key)"
-msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
-
-#: src/Modules/Yoast.php
-msgid "Remove the Yoast.com blog feed from its dashboard widget"
-msgstr "ダッシュボードウィジェットから Yoast.com のブログフィードを除去"
-
-#: src/Modules/AllInOneSeo.php
-msgid "Remove its news dashboard widget"
-msgstr "ニュース系のダッシュボードウィジェットを除去"
-
-#: src/Modules/AllInOneSeo.php
+#: src/Modules/AllInOneSeo.php:216
 msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr "「複数の SEO プラグイン」警告をセットアップウィジェットへ移設"
 
-#: src/Modules/AllInOneSeo.php
-msgid "Stop AIOSEO from adding AI buttons to the editor"
-msgstr "エディターへの AI ボタン自動追加を防止"
+#: src/Modules/AllInOneSeo.php:268
+#: src/Modules/Duplicator.php:367
+#: src/Modules/LocationWeather.php:182
+#: src/Modules/WpMailSmtp.php:253
+msgid "Restore the standard admin footer"
+msgstr "標準の管理画面フッターを復元"
 
-#: src/Modules/AllInOneSeo.php
-msgid "Disable all AI features"
-msgstr "すべての AI 機能を無効化"
-
-#: src/Modules/AllInOneSeo.php
-msgid "Remove the border on its editor toolbar icons"
-msgstr "エディターツールバーのアイコンの枠線を除去"
-
-#: src/Modules/AllInOneSeo.php
-msgid "Hide the AI credits upsell"
-msgstr "AI クレジットのアップセルを非表示"
-
-#: src/Modules/AllInOneSeo.php
+#: src/Modules/AllInOneSeo.php:288
 msgid "Fix styling conflicts with WordPress core"
 msgstr "WordPress コアとのスタイル競合を修正"
 
-#: src/Modules/Yoast.php
-msgid "Remove the HelpScout support beacon"
-msgstr "HelpScout サポートビーコンを除去"
+#: src/Modules/AllInOneSeo.php:297
+#: src/Modules/PublishPressFuture.php:135
+msgid "Hide locked Pro settings rows"
+msgstr "ロックされた Pro 設定行を非表示"
 
-#: src/Modules/Yoast.php
-msgid "Clean up its admin bar menu (upgrades, help, inspector)"
-msgstr "管理バーメニューを整理（アップグレード・ヘルプ・インスペクター）"
+#: src/Modules/AllInOneSeo.php:337
+#: src/Modules/EwwwImageOptimizer.php:138
+#: src/Modules/WpMailSmtp.php:322
+msgid "Hide the license fields (turn off while entering a key)"
+msgstr "ライセンス項目を非表示（キー入力・確認時はオフに）"
 
-#: src/Modules/Yoast.php
-msgid "Disable promotional introduction popups"
-msgstr "宣伝の紹介ポップアップを無効化"
+#: src/Modules/AllInOneSeo.php:366
+#: src/Modules/WpMailSmtp.php:177
+msgid "Remove Pro-only education tabs"
+msgstr "Pro 専用の紹介タブを除去"
 
-#: src/Modules/Yoast.php
-msgid "Stop the \"set up a redirect\" upsell when trashing content"
-msgstr "ゴミ箱移動時の「リダイレクト設定」アップセルを停止"
+#: src/Modules/AllInOneSeo.php:413
+msgid "Remove its news dashboard widget"
+msgstr "ニュース系のダッシュボードウィジェットを除去"
 
-#: src/Modules/Yoast.php
-msgid "Stop the webinar promo notice"
-msgstr "ウェビナー宣伝通知を停止"
+#: src/Modules/AllInOneSeo.php:426
+#: src/Modules/WpMailSmtp.php:241
+msgid "Always show the Scheduled Actions tools page"
+msgstr "Scheduled Actions ツールページを常に表示"
 
-#: src/Modules/Yoast.php
-msgid "Use the freed upsell space for content"
-msgstr "空いたアップセル領域をコンテンツの表示に活用"
+#: src/Modules/AllInOneSeo.php:438
+msgid "Stop AIOSEO from adding AI buttons to the editor"
+msgstr "エディターへの AI ボタン自動追加を防止"
 
-msgid "Plugin Upgrades"
-msgstr "プラグインのアップグレード"
+#: src/Modules/AllInOneSeo.php:470
+msgid "Disable all AI features"
+msgstr "すべての AI 機能を無効化"
 
-msgid "Your active plugins offer feature-rich paid versions — their Pro upgrade links are gathered here in one place."
-msgstr "お使いのプラグインには、機能が充実した有償版が用意されています。それぞれの Pro アップグレードリンクを一箇所にまとめました。"
+#: src/Modules/AllInOneSeo.php:483
+msgid "Remove the border on its editor toolbar icons"
+msgstr "エディターツールバーのアイコンの枠線を除去"
 
-msgid "None of your active plugins offer a Pro upgrade."
-msgstr "有効なプラグインにアップグレード可能なものはありません。"
+#: src/Modules/AllInOneSeo.php:494
+msgid "Hide the AI credits upsell"
+msgstr "AI クレジットのアップセルを非表示"
 
-msgid "Match its highlighted menu item to the admin colour scheme"
-msgstr "有効なメニュー項目を管理画面のカラースキームに合わせる"
+#: src/Modules/AllInOneSeo.php:504
+#: src/Modules/EmbedPress.php:150
+#: src/Modules/WpForms.php:129
+#: src/Modules/WpMailSmtp.php:234
+msgid "Remove the floating quick-links menu"
+msgstr "フローティングのクイックリンクメニューを除去"
 
+#: src/Modules/AllInOneSeo.php:511
+#: src/Modules/BrokenLinkChecker.php:64
+#: src/Modules/CustomFacebookFeed.php:209
+#: src/Modules/CustomTwitterFeeds.php:116
+#: src/Modules/EmbedPress.php:185
+#: src/Modules/EwwwImageOptimizer.php:124
+#: src/Modules/FeedsForTiktok.php:139
+#: src/Modules/FeedsForYoutube.php:234
+#: src/Modules/InstagramFeed.php:297
+#: src/Modules/LocationWeather.php:220
+#: src/Modules/Mc4wp.php:144
+#: src/Modules/MonsterInsights.php:157
+#: src/Modules/OptinMonster.php:178
+#: src/Modules/ReviewsFeed.php:172
+#: src/Modules/WpChat.php:148
+#: src/Modules/WpConsent.php:207
+#: src/Modules/WpForms.php:185
+#: src/Modules/WpMailSmtp.php:309
+#: src/Modules/Yoast.php:281
 msgid "Integrate the Help and Upgrades buttons into the page header"
-msgstr "ヘルプ・アップグレードボタンをページヘッダーに統合"
+msgstr "ヘルプ / アップグレードボタンをページヘッダーに統合"
 
+#: src/Modules/AllInOneSeo.php:551
+msgid "Remove upgrade items from the admin bar"
+msgstr ""
+
+#: src/Modules/AllInOneWpMigration.php:44
+#: src/Modules/EmbedPress.php:39
+#: src/Modules/LocationWeather.php:44
+#: src/Modules/ReviewsFeed.php:139
+#: src/Modules/Wordfence.php:150
+msgid "Make its admin menu icon white like the core icons"
+msgstr "管理メニューのアイコンをコアのアイコンと同じ白色に"
+
+#: src/Modules/AllInOneWpMigration.php:117
+msgid "Remove Pro-only export and import destinations"
+msgstr "Pro 専用のエクスポート/インポート先を除去"
+
+#: src/Modules/AllInOneWpMigration.php:132
+msgid "Tidy the import upload-limit notice"
+msgstr "インポートの容量制限通知を整理"
+
+#: src/Modules/Bnfw.php:64
+msgid "Remove the third-party SMTP plugin recommendation"
+msgstr "他社 SMTP プラグインの推奨通知を除去"
+
+#: src/Modules/BrokenLinkChecker.php:39
+msgid "Move the free-plugins page to the Help panel"
+msgstr "無料プラグイン一覧ページをヘルプパネルへ移設"
+
+#: src/Modules/BrokenLinkChecker.php:49
+msgid "Remove the Cloud Link Checker cross-sell"
+msgstr "Cloud Link Checker のクロスセルを除去"
+
+#: src/Modules/BrokenLinkChecker.php:57
+msgid "Hide the stray empty heading on its pages"
+msgstr "ページ内の余分な空見出しを非表示"
+
+#: src/Modules/CustomFacebookFeed.php:98
+#: src/Modules/CustomTwitterFeeds.php:74
+#: src/Modules/FeedsForTiktok.php:85
+#: src/Modules/FeedsForYoutube.php:183
+#: src/Modules/InstagramFeed.php:108
+#: src/Modules/OptinMonster.php:64
+#: src/Modules/ReviewsFeed.php:112
+#: src/Modules/WpChat.php:89
+#: src/Modules/WpConsent.php:105
+msgid "Remove marketing notices and announcements"
+msgstr "マーケティング通知・お知らせを除去"
+
+#: src/Modules/CustomFacebookFeed.php:112
+#: src/Modules/InstagramFeed.php:201
+msgid "Skip the recommended-plugin installs in its setup wizard"
+msgstr "セットアップウィザードの推奨プラグイン導入をスキップ"
+
+#: src/Modules/CustomFacebookFeed.php:201
+#: src/Modules/CustomTwitterFeeds.php:108
+#: src/Modules/FeedsForYoutube.php:226
+#: src/Modules/InstagramFeed.php:140
+msgid "Fix the squeezed select fields on its screens"
+msgstr "画面内のセレクトボックスの詰まった余白を修正"
+
+#: src/Modules/Duplicator.php:254
+#: src/Modules/WpForms.php:52
+#: src/Modules/WpMailSmtp.php:161
+msgid "Remove the \"You're using Lite\" notice bar"
+msgstr "「Lite を使用中」通知バーを除去"
+
+#: src/Modules/Duplicator.php:318
+#: src/Modules/EmbedPress.php:127
+#: src/Modules/LocationWeather.php:113
+msgid "Show sale notices only in the Upgrades panel"
+msgstr "セール通知はアップグレードパネル内のみに表示"
+
+#: src/Modules/Duplicator.php:329
+#: src/Modules/WpConsent.php:140
+msgid "Remove the recommended-plugin cross-sell from its dashboard widget"
+msgstr "ダッシュボードウィジェットの推奨プラグイン枠を除去"
+
+#: src/Modules/Duplicator.php:341
+msgid "Hide the license pitch on its settings screen"
+msgstr "設定画面のライセンス勧誘を非表示"
+
+#: src/Modules/Duplicator.php:353
+msgid "Stop the post-install welcome-page redirect"
+msgstr "インストール直後のウェルカムページへのリダイレクトを停止"
+
+#: src/Modules/Duplicator.php:382
+#: src/Modules/Wordfence.php:215
+msgid "Overlay the Help and Upgrades buttons onto the page title"
+msgstr "ヘルプ / アップグレードボタンをページタイトルに重ねて表示"
+
+#: src/Modules/EmbedPress.php:137
+msgid "Remove the milestone celebration popup"
+msgstr "マイルストーン祝賀ポップアップを除去"
+
+#: src/Modules/EwwwImageOptimizer.php:78
+msgid "Remove the Contribute and cross-sell Plugins tabs"
+msgstr "「Contribute」タブと他製品を宣伝する「Plugins」タブを除去"
+
+#: src/Modules/EwwwImageOptimizer.php:88
+msgid "Remove the newsletter sign-up"
+msgstr "ニュースレター登録を除去"
+
+#: src/Modules/FeedsForTiktok.php:131
+msgid "Keep its buttons from wrapping mid-label"
+msgstr "ボタンラベルの途中改行を防止"
+
+#: src/Modules/FeedsForYoutube.php:98
+msgid "Remove the recommended-plugin installs from its setup wizard"
+msgstr "セットアップウィザードから推奨プラグインのインストールを除去"
+
+#: src/Modules/InstagramFeed.php:148
+msgid "Hide Pro-only feed types from the feed builder"
+msgstr "フィードビルダーから Pro 専用フィードタイプを非表示"
+
+#: src/Modules/LocationWeather.php:102
+msgid "Remove promotional notices and popups"
+msgstr "宣伝通知・ポップアップを除去"
+
+#: src/Modules/LocationWeather.php:123
+#: src/Modules/Mc4wp.php:128
+#: src/Modules/MonsterInsights.php:81
+#: src/Modules/PostTypesOrder.php:50
+#: src/Modules/Redirection.php:76
+#: src/Modules/Wordfence.php:116
+#: src/Modules/WpMailSmtp.php:121
+#: src/Modules/Yoast.php:109
+msgid "Move the setup notice to the plugin screens and dashboard widget"
+msgstr "セットアップ通知をプラグイン画面とダッシュボードウィジェットへ移設"
+
+#: src/Modules/LocationWeather.php:132
+msgid "Move the weather editor's Pro pitches to the Upgrades panel"
+msgstr "ウェザーエディター内の Pro 宣伝をアップグレードパネルへ移設"
+
+#: src/Modules/LocationWeather.php:199
+msgid "Skip the unused block-editor promo bundle"
+msgstr "未使用のブロックエディター宣伝バンドルを読み込まない"
+
+#: src/Modules/Mc4wp.php:64
+#: src/Support/WordPressOrgLinks.php:47
+msgid "Support forum"
+msgstr "サポートフォーラム"
+
+#: src/Modules/Mc4wp.php:65
+msgid "Report a bug (GitHub)"
+msgstr "バグ報告 (GitHub)"
+
+#: src/Modules/Mc4wp.php:98
+msgid "Remove Premium ads from its screens"
+msgstr "画面内の Premium 広告を除去"
+
+#: src/Modules/Mc4wp.php:137
+msgid "Hide the \"You are here\" breadcrumb"
+msgstr "「You are here」パンくずを非表示"
+
+#: src/Modules/MonsterInsights.php:177
 msgid "Hide the setup pitch in the analytics dashboard widget"
 msgstr "アナリティクスウィジェットのセットアップ勧誘を非表示"
 
-msgid "Already have a license key? Enter it to install Pro"
-msgstr "ライセンスキーをお持ちですか？入力して Pro 版をインストール"
+#: src/Modules/MonsterInsights.php:190
+msgid "Remove the duplicate Insights item from the Dashboard menu"
+msgstr ""
 
-msgid "Install the Pro version"
-msgstr "Pro 版をインストール"
-
-msgid "Enter your license key to download and install the Pro plugin automatically."
-msgstr "ライセンスキーを入力すると、Pro 版プラグインを自動でダウンロード・インストールします。"
-
-msgid "License key"
-msgstr "ライセンスキー"
-
-msgid "Cancel"
-msgstr "キャンセル"
-
-msgid "Connect & install Pro"
-msgstr "接続して Pro をインストール"
-
-msgid "Please enter your license key."
-msgstr "ライセンスキーを入力してください。"
-
-msgid "Could not start the upgrade. Please try again."
-msgstr "アップグレードを開始できませんでした。もう一度お試しください。"
-
+#: src/Modules/OptinMonster.php:89
 msgid "Remove the Marketing Education item from the Dashboard menu"
 msgstr "ダッシュボードメニューの「Marketing Education」項目を除去"
 
+#: src/Modules/PostTypesOrder.php:59
+#: src/Modules/TaxonomyTermsOrder.php:40
+msgid "Hide the advanced-version promo box"
+msgstr "上位版の宣伝ボックスを非表示"
+
+#: src/Modules/PostTypesOrder.php:68
+#: src/Modules/TaxonomyTermsOrder.php:49
+msgid "Remove the icon from its Settings menu item"
+msgstr "設定メニュー項目のアイコンを除去"
+
+#: src/Modules/PublishPressFuture.php:59
+msgid "Show Scheduled Actions in the sidebar instead of a page button"
+msgstr "Scheduled Actions をページ内ボタンではなくサイドバーに表示"
+
+#: src/Modules/PublishPressFuture.php:161
+msgid "Keep the post-list expiration column readable"
+msgstr "投稿一覧の有効期限列を読みやすい幅に保つ"
+
+#: src/Modules/Redirection.php:60
 msgid "Add the WordPress.org links to the plugin's Help tab"
 msgstr "WordPress.org リンクをプラグインの Help タブに追加"
 
+#: src/Modules/W3TotalCache.php:85
 msgid "Silence its fetched marketing notices"
 msgstr "外部から取得するマーケティング通知を止める"
 
+#: src/Modules/W3TotalCache.php:125
 msgid "Fold documentation links into the native Help"
 msgstr "ドキュメントリンクを標準ヘルプに統合"
 
-msgid "Resources"
-msgstr "リソース"
-
+#: src/Modules/W3TotalCache.php:142
 msgid "FAQ"
 msgstr "よくある質問"
 
+#: src/Modules/W3TotalCache.php:144
 msgid "Support"
 msgstr "サポート"
 
+#: src/Modules/W3TotalCache.php:146
 msgid "Setup Guide"
 msgstr "セットアップガイド"
 
+#: src/Modules/W3TotalCache.php:150
+msgid "Resources"
+msgstr "リソース"
+
+#: src/Modules/W3TotalCache.php:168
+msgid "Open the Help and Upgrades panels below its toolbar"
+msgstr "ヘルプとアップグレードのパネルをツールバーの下に開く"
+
+#: src/Modules/Wordfence.php:44
+msgid "Move the upgrade menu to the Upgrades panel"
+msgstr "アップグレードメニューをアップグレードパネルへ移設"
+
+#: src/Modules/Wordfence.php:103
+msgid "Hide upsell cards and ads on its screens"
+msgstr "画面内のアップセルカード・広告を非表示"
+
+#: src/Modules/Wordfence.php:162
+msgid "Match its highlighted menu item to the admin colour scheme"
+msgstr "有効なメニュー項目を管理画面のカラースキームに合わせる"
+
+#: src/Modules/Wordfence.php:196
 msgid "Match its menu notification badge to the admin colour scheme"
 msgstr "メニューの通知バッジを管理カラースキームに合わせる"
 
-msgid "Open the Help and Upgrades panels below its toolbar"
-msgstr "ヘルプとアップグレードのパネルをツールバーの下に開く"
+#: src/Modules/WordPressCore.php:44
+msgid "Remove the \"WordPress Events and News\" dashboard widget"
+msgstr ""
+
+#: src/Modules/WpMailSmtp.php:167
+msgid "Remove the SendLayer setup banner"
+msgstr "SendLayer セットアップバナーを除去"
+
+#: src/Modules/WpMailSmtp.php:206
+msgid "Remove Pro-only teaser mailers from the mailer list"
+msgstr "メーラー一覧から Pro 専用ティーザーを除去"
+
+#: src/Modules/WpMailSmtp.php:270
+msgid "Remove the dashboard widget's Pro teaser chart"
+msgstr "ダッシュボードウィジェットの Pro ティーザーチャートを除去"
+
+#: src/Modules/WpMailSmtp.php:281
+msgid "Remove the Backup Connection teaser"
+msgstr "Backup Connection のティーザーを除去"
+
+#: src/Modules/Yoast.php:86
+msgid "Remove the Yoast.com blog feed from its dashboard widget"
+msgstr "ダッシュボードウィジェットから Yoast.com のブログフィードを除去"
+
+#: src/Modules/Yoast.php:96
+msgid "Remove the HelpScout support beacon"
+msgstr "HelpScout サポートビーコンを除去"
+
+#: src/Modules/Yoast.php:118
+msgid "Clean up its admin bar menu (upgrades, help, inspector)"
+msgstr "管理バーメニューを整理（アップグレード・ヘルプ・インスペクター）"
+
+#: src/Modules/Yoast.php:143
+msgid "Disable promotional introduction popups"
+msgstr "宣伝の紹介ポップアップを無効化"
+
+#: src/Modules/Yoast.php:155
+msgid "Stop the \"set up a redirect\" upsell when trashing content"
+msgstr "ゴミ箱移動時の「リダイレクト設定」アップセルを停止"
+
+#: src/Modules/Yoast.php:184
+msgid "Stop the webinar promo notice"
+msgstr "ウェビナー宣伝通知を停止"
+
+#: src/Modules/Yoast.php:251
+msgid "Use the freed upsell space for content"
+msgstr "空いたアップセル領域をコンテンツの表示に活用"
+
+#: src/Support/SettingsPage.php:95
+msgid "Disable tidying entirely per plugin, or feature by feature."
+msgstr "プラグインごとに整理を完全に無効化するか、機能単位で無効化できます。"
+
+#: src/Support/SettingsPage.php:109
+msgid "Enable"
+msgstr "有効にする"
+
+#: src/Support/SetupNoticeRelocator.php:113
+msgid "Pending plugin setup"
+msgstr "セットアップが必要なプラグイン"
+
+#: src/Support/SubmenuCleaner.php:194
+msgid "Upgrades"
+msgstr "アップグレード"
+
+#: src/Support/SubmenuCleaner.php:404
+#: src/Support/UpgradesDirectory.php:288
+msgid "Upgrade"
+msgstr "アップグレード"
+
+#: src/Support/SubmenuCleaner.php:405
+msgid "Premium features"
+msgstr "プレミアム機能"
+
+#: src/Support/UpgradesDirectory.php:48
+#: src/Support/UpgradesDirectory.php:49
+#: src/Support/UpgradesDirectory.php:62
+msgid "Plugin Upgrades"
+msgstr "プラグインのアップグレード"
+
+#: src/Support/UpgradesDirectory.php:64
+msgid "Your active plugins offer feature-rich paid versions — their Pro upgrade links are gathered here in one place."
+msgstr "お使いのプラグインには、機能が充実した有償版が用意されています。それぞれの Pro アップグレードリンクを一箇所にまとめました。"
+
+#: src/Support/UpgradesDirectory.php:68
+msgid "None of your active plugins offer a Pro upgrade."
+msgstr "有効なプラグインにアップグレード可能なものはありません。"
+
+#: src/Support/UpgradesDirectory.php:193
+msgid "Already have a license key? Enter it to install Pro"
+msgstr "ライセンスキーをお持ちですか？入力して Pro 版をインストール"
+
+#: src/Support/UpgradesDirectory.php:310
+msgid "Please enter your license key."
+msgstr "ライセンスキーを入力してください。"
+
+#: src/Support/UpgradesDirectory.php:311
+msgid "Could not start the upgrade. Please try again."
+msgstr "アップグレードを開始できませんでした。もう一度お試しください。"
+
+#: src/Support/UpgradesDirectory.php:315
+msgid "Install the Pro version"
+msgstr "Pro 版をインストール"
+
+#: src/Support/UpgradesDirectory.php:316
+msgid "Enter your license key to download and install the Pro plugin automatically."
+msgstr "ライセンスキーを入力すると、Pro 版プラグインを自動でダウンロード・インストールします。"
+
+#: src/Support/UpgradesDirectory.php:317
+msgid "License key"
+msgstr "ライセンスキー"
+
+#: src/Support/UpgradesDirectory.php:320
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/Support/UpgradesDirectory.php:321
+msgid "Connect & install Pro"
+msgstr "接続して Pro をインストール"
+
+#: src/Support/WordPressOrgLinks.php:45
+msgid "Plugin page"
+msgstr "プラグインページ"

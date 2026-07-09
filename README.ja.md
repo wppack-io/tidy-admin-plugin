@@ -88,6 +88,7 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 | [Custom Post Type UI](https://wordpress.org/plugins/custom-post-type-ui/) | 1.x |
 | [Duplicator](https://wordpress.org/plugins/duplicator/) | 1.x |
 | [EmbedPress](https://wordpress.org/plugins/embedpress/) | 4.x |
+| [EWWW Image Optimizer](https://wordpress.org/plugins/ewww-image-optimizer/) | 8.x |
 | [Facebook Feed (Smash Balloon)](https://wordpress.org/plugins/custom-facebook-feed/) | 4.x |
 | [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 6.x |
 | [MonsterInsights (Google Analytics)](https://wordpress.org/plugins/google-analytics-for-wordpress/) | 10.x |

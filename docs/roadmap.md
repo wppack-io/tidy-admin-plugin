@@ -57,6 +57,7 @@ time and are listed only to explain prioritization.
 | [YARPP](https://wordpress.org/plugins/yet-another-related-posts-plugin/) | 200k+ | — (review requests only) |
 | [BNFW](https://wordpress.org/plugins/bnfw/) | 200k+ | Paid add-ons, priority support |
 | [EmbedPress](https://wordpress.org/plugins/embedpress/) | 100k+ | EmbedPress Pro |
+| [EWWW Image Optimizer](https://wordpress.org/plugins/ewww-image-optimizer/) | 1M+ | EWWW IO paid tiers |
 | [Location Weather](https://wordpress.org/plugins/location-weather/) | 10k+ | Location Weather Pro |
 
 Plus a **WordPress core** module (`WordPressCore`, always active) whose
@@ -96,7 +97,6 @@ smaller promotion surface than tier 1.
 | [NextGEN Gallery](https://wordpress.org/plugins/nextgen-gallery/) | 400k+ | NextGEN Pro | Upgrade menus, teaser pages |
 | [SeedProd](https://wordpress.org/plugins/coming-soon/) | 1M+ | SeedProd Pro (Awesome Motive) | Upgrade menus, locked templates/blocks, notices |
 | [All-In-One Security (AIOS)](https://wordpress.org/plugins/all-in-one-wp-security-and-firewall/) | 1M+ | AIOS Premium | Premium feature teasers, upgrade prompts |
-| [EWWW Image Optimizer](https://wordpress.org/plugins/ewww-image-optimizer/) | 1M+ | EWWW IO paid tiers | Pro teasers in settings, notices |
 | [Complianz](https://wordpress.org/plugins/complianz-gdpr/) | 1M+ | Complianz Premium | Locked features, upgrade prompts |
 | [Imagify](https://wordpress.org/plugins/imagify/) | 900k+ | Imagify paid plans (WP Media) | Quota and upgrade prompts, notices |
 | [Solid Security](https://wordpress.org/plugins/better-wp-security/) | 900k+ | Solid Security Pro | Pro-badged features, upgrade prompts |
