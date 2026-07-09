@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "798cefd821543a94452415c3e1be08f9",
+    "content-hash": "285dc28047d4817dccbe46a73e7a0829",
     "packages": [
         {
             "name": "composer/installers",
@@ -7362,6 +7362,45 @@
                 "source": "https://plugins.svn.wordpress.org/yet-another-related-posts-plugin"
             },
             "time": "2026-03-23T19:23:21+00:00"
+        },
+        {
+            "name": "wpnx-io/wp-translations",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wpnx-io/wp-translations.git",
+                "reference": "33290c305881109006a6b5c1d99522be8534611b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wpnx-io/wp-translations/zipball/33290c305881109006a6b5c1d99522be8534611b",
+                "reference": "33290c305881109006a6b5c1d99522be8534611b",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0"
+            },
+            "require-dev": {
+                "composer/composer": "^2.5"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "WpnxIo\\WPTranslations\\WPTranslations"
+            },
+            "autoload": {
+                "psr-4": {
+                    "WpnxIo\\WPTranslations\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Composer plugin to download translation files from wordpress.org",
+            "support": {
+                "source": "https://github.com/wpnx-io/wp-translations/tree/v4.0.0"
+            },
+            "time": "2025-05-01T03:20:53+00:00"
         },
         {
             "name": "yoast/phpunit-polyfills",
