@@ -61,6 +61,22 @@ final class WpConsent extends AbstractModule
                         'wpconsent-do-not-track',  // Do Not Sell (PRO)
                     ],
                 ],
+                // The Cookies page's IAB TCF and Languages tabs are the same kind of
+                // Pro teaser (their views still render an upsell in the free version).
+                // Relocate them (link only) into the Upgrades panel so the pages stay
+                // reachable; the nav tabs themselves are hidden by the upsell-ui feature.
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'premium',
+                        'parent' => 'wpconsent',
+                        'html' => '<ul class="tidy-admin-meta-links">'
+                            . '<li><a href="' . esc_url(admin_url('admin.php?page=wpconsent-cookies&view=iabtcf')) . '">'
+                            . esc_html__('IAB TCF', 'wpconsent-cookies-banner-privacy-suite') . '</a></li>'
+                            . '<li><a href="' . esc_url(admin_url('admin.php?page=wpconsent-cookies&view=languages')) . '">'
+                            . esc_html__('Languages', 'wpconsent-cookies-banner-privacy-suite') . '</a></li>'
+                            . '</ul>',
+                    ],
+                ],
             ],
             'plugin-list-links' => [
                 'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),

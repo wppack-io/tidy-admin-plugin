@@ -60,12 +60,12 @@ final class LocationWeather extends AbstractModule
                     ],
                 ],
                 'adminCss' => <<<'CSS'
-                /* Location Weather: dashboard tabs "Our Plugins", "Lite vs Pro", "About Us" */
+                /* Location Weather: dashboard tabs "Our Plugins" (cross-sell) and
+                   "Lite vs Pro" (relocated above). "About Us" is a resource, so the
+                   help-links feature handles it. */
                 li.splwb-nav-our-plugins,
                 li:has(> a[href="#lite_vs_pro"]),
-                a[href="#lite_vs_pro"],
-                li:has(> a[href="#about_us"]),
-                a[href="#about_us"] { display: none !important; }
+                a[href="#lite_vs_pro"] { display: none !important; }
                 CSS,
             ],
             'help-links' => [
@@ -75,9 +75,14 @@ final class LocationWeather extends AbstractModule
                         'category' => 'help',
                         'parent' => $this->menuParent(),
                         // The complete "Get Help" dropdown from its dashboard header
-                        // (hidden below), kept as the plugin's Help content. Labels
-                        // reuse its own text domain; Documentation is core's string.
-                        'html' => '<ul class="tidy-admin-meta-links">' . $this->getHelpItems() . '</ul>',
+                        // (hidden below), kept as the plugin's Help content, plus the
+                        // "About Us" dashboard tab (team/product background — a resource,
+                        // relocated here rather than dropped). Labels reuse its own text
+                        // domain; Documentation is core's string.
+                        'html' => '<ul class="tidy-admin-meta-links">' . $this->getHelpItems()
+                            . '<li><a href="' . esc_url(admin_url('edit.php?post_type=location_weather&page=splw_admin_dashboard#about_us')) . '">'
+                            . esc_html__('About Us', 'location-weather') . '</a></li>'
+                            . '</ul>',
                     ],
                 ],
                 'adminCss' => <<<'CSS'
@@ -90,6 +95,10 @@ final class LocationWeather extends AbstractModule
                    cards are Pro promos) and the Video Tutorials section (ditto) */
                 .splwb-qs-sidebar,
                 .splwb-qs-tutorials-section { display: none !important; }
+                /* Location Weather: the "About Us" dashboard tab — relocated to the Help
+                   panel above, so hide its nav tab (the page stays reachable). */
+                li:has(> a[href="#about_us"]),
+                a[href="#about_us"] { display: none !important; }
                 CSS,
             ],
             'plugin-list-links' => [

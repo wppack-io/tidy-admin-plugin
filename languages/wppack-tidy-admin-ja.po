@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-09T08:55:21+00:00\n"
+"PO-Revision-Date: 2026-07-09T10:41:06+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -55,10 +55,10 @@ msgstr "Pro 版にアップグレード"
 #: src/Modules/EwwwImageOptimizer.php:81
 #: src/Modules/FeedsForYoutube.php:94
 #: src/Modules/InstagramFeed.php:79
-#: src/Modules/MonsterInsights.php:78
+#: src/Modules/MonsterInsights.php:83
 #: src/Modules/OptinMonster.php:85
 #: src/Modules/ReviewsFeed.php:84
-#: src/Modules/W3TotalCache.php:142
+#: src/Modules/W3TotalCache.php:147
 #: src/Modules/WpConsent.php:54
 #: src/Modules/WpForms.php:97
 #: src/Modules/WpMailSmtp.php:75
@@ -80,14 +80,14 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/FeedsForTiktok.php:123
 #: src/Modules/FeedsForYoutube.php:233
 #: src/Modules/InstagramFeed.php:196
-#: src/Modules/LocationWeather.php:167
-#: src/Modules/MonsterInsights.php:121
+#: src/Modules/LocationWeather.php:176
+#: src/Modules/MonsterInsights.php:126
 #: src/Modules/OptinMonster.php:134
 #: src/Modules/Redirection.php:92
 #: src/Modules/ReviewsFeed.php:114
-#: src/Modules/W3TotalCache.php:233
+#: src/Modules/W3TotalCache.php:238
 #: src/Modules/WpChat.php:129
-#: src/Modules/WpConsent.php:155
+#: src/Modules/WpConsent.php:171
 #: src/Modules/WpForms.php:241
 #: src/Modules/WpMailSmtp.php:297
 #: src/Modules/Yoast.php:239
@@ -139,13 +139,13 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/InstagramFeed.php:90
 #: src/Modules/LocationWeather.php:72
 #: src/Modules/Mc4wp.php:52
-#: src/Modules/MonsterInsights.php:93
+#: src/Modules/MonsterInsights.php:98
 #: src/Modules/OptinMonster.php:107
 #: src/Modules/PublishPressFuture.php:100
 #: src/Modules/ReviewsFeed.php:95
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:71
-#: src/Modules/WpConsent.php:72
+#: src/Modules/WpConsent.php:88
 #: src/Modules/WpForms.php:184
 #: src/Modules/WpMailSmtp.php:85
 #: src/Modules/Yarpp.php:49
@@ -164,13 +164,13 @@ msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に�
 #: src/Modules/EmbedPress.php:132
 #: src/Modules/FeedsForYoutube.php:198
 #: src/Modules/InstagramFeed.php:123
-#: src/Modules/LocationWeather.php:96
+#: src/Modules/LocationWeather.php:105
 #: src/Modules/Mc4wp.php:92
-#: src/Modules/MonsterInsights.php:101
+#: src/Modules/MonsterInsights.php:106
 #: src/Modules/OptinMonster.php:64
 #: src/Modules/PublishPressFuture.php:129
 #: src/Modules/ReviewsFeed.php:127
-#: src/Modules/WpConsent.php:66
+#: src/Modules/WpConsent.php:82
 #: src/Modules/WpForms.php:70
 #: src/Modules/WpMailSmtp.php:115
 #: src/Modules/Yoast.php:81
@@ -196,7 +196,7 @@ msgstr "「複数の SEO プラグイン」警告をセットアップウィジ�
 
 #: src/Modules/AllInOneSeo.php:269
 #: src/Modules/Duplicator.php:367
-#: src/Modules/LocationWeather.php:182
+#: src/Modules/LocationWeather.php:191
 #: src/Modules/WpMailSmtp.php:260
 msgid "Restore the standard admin footer"
 msgstr "標準の管理画面フッターを復元"
@@ -262,13 +262,13 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/FeedsForTiktok.php:151
 #: src/Modules/FeedsForYoutube.php:255
 #: src/Modules/InstagramFeed.php:318
-#: src/Modules/LocationWeather.php:220
+#: src/Modules/LocationWeather.php:229
 #: src/Modules/Mc4wp.php:144
-#: src/Modules/MonsterInsights.php:183
+#: src/Modules/MonsterInsights.php:188
 #: src/Modules/OptinMonster.php:184
 #: src/Modules/ReviewsFeed.php:193
 #: src/Modules/WpChat.php:170
-#: src/Modules/WpConsent.php:207
+#: src/Modules/WpConsent.php:223
 #: src/Modules/WpForms.php:283
 #: src/Modules/WpMailSmtp.php:319
 #: src/Modules/Yoast.php:303
@@ -283,8 +283,8 @@ msgid "Clean up and normalize its admin bar menu"
 msgstr "管理バーメニューを整理・正規化"
 
 #: src/Modules/AllInOneSeo.php:575
-#: src/Modules/MonsterInsights.php:67
-#: src/Modules/W3TotalCache.php:106
+#: src/Modules/MonsterInsights.php:72
+#: src/Modules/W3TotalCache.php:111
 #: src/Modules/WpForms.php:173
 #: src/Modules/Yoast.php:150
 msgid "Hide its admin bar menu entirely"
@@ -350,7 +350,7 @@ msgstr "有効化時のウェルカム画面へのリダイレクトを停止"
 #: src/Modules/OptinMonster.php:70
 #: src/Modules/ReviewsFeed.php:133
 #: src/Modules/WpChat.php:111
-#: src/Modules/WpConsent.php:105
+#: src/Modules/WpConsent.php:121
 msgid "Remove marketing notices and announcements"
 msgstr "マーケティング通知・お知らせを除去"
 
@@ -374,12 +374,12 @@ msgstr "「Lite を使用中」通知バーを除去"
 
 #: src/Modules/Duplicator.php:318
 #: src/Modules/EmbedPress.php:138
-#: src/Modules/LocationWeather.php:113
+#: src/Modules/LocationWeather.php:122
 msgid "Show sale notices only in the Upgrades panel"
 msgstr "セール通知はアップグレードパネル内のみに表示"
 
 #: src/Modules/Duplicator.php:329
-#: src/Modules/WpConsent.php:140
+#: src/Modules/WpConsent.php:156
 msgid "Remove the recommended-plugin cross-sell from its dashboard widget"
 msgstr "ダッシュボードウィジェットの推奨プラグイン枠を除去"
 
@@ -420,13 +420,13 @@ msgstr "セットアップウィザードから推奨プラグインのインス
 msgid "Hide Pro-only feed types from the feed builder"
 msgstr "フィードビルダーから Pro 専用フィードタイプを非表示"
 
-#: src/Modules/LocationWeather.php:102
+#: src/Modules/LocationWeather.php:111
 msgid "Remove promotional notices and popups"
 msgstr "宣伝通知・ポップアップを除去"
 
-#: src/Modules/LocationWeather.php:123
+#: src/Modules/LocationWeather.php:132
 #: src/Modules/Mc4wp.php:128
-#: src/Modules/MonsterInsights.php:107
+#: src/Modules/MonsterInsights.php:112
 #: src/Modules/PostTypesOrder.php:50
 #: src/Modules/Redirection.php:76
 #: src/Modules/Wordfence.php:116
@@ -435,11 +435,11 @@ msgstr "宣伝通知・ポップアップを除去"
 msgid "Move the setup notice to the plugin screens and dashboard widget"
 msgstr "セットアップ通知をプラグイン画面とダッシュボードウィジェットへ移設"
 
-#: src/Modules/LocationWeather.php:132
+#: src/Modules/LocationWeather.php:141
 msgid "Move the weather editor's Pro pitches to the Upgrades panel"
 msgstr "ウェザーエディター内の Pro 宣伝をアップグレードパネルへ移設"
 
-#: src/Modules/LocationWeather.php:199
+#: src/Modules/LocationWeather.php:208
 msgid "Skip the unused block-editor promo bundle"
 msgstr "未使用のブロックエディター宣伝バンドルを読み込まない"
 
@@ -460,11 +460,11 @@ msgstr "画面内の Premium 広告を除去"
 msgid "Hide the \"You are here\" breadcrumb"
 msgstr "「You are here」パンくずを非表示"
 
-#: src/Modules/MonsterInsights.php:203
+#: src/Modules/MonsterInsights.php:208
 msgid "Hide the setup pitch in the analytics dashboard widget"
 msgstr "アナリティクスウィジェットのセットアップ勧誘を非表示"
 
-#: src/Modules/MonsterInsights.php:216
+#: src/Modules/MonsterInsights.php:221
 msgid "Remove the duplicate Insights item from the Dashboard menu"
 msgstr "ダッシュボードメニューの重複 Insights 項目を除去"
 
@@ -494,31 +494,31 @@ msgstr "投稿一覧の有効期限列を読みやすい幅に保つ"
 msgid "Add the WordPress.org links to the plugin's Help tab"
 msgstr "WordPress.org リンクをプラグインの Help タブに追加"
 
-#: src/Modules/W3TotalCache.php:117
+#: src/Modules/W3TotalCache.php:122
 msgid "Silence its fetched marketing notices"
 msgstr "外部から取得するマーケティング通知を止める"
 
-#: src/Modules/W3TotalCache.php:157
+#: src/Modules/W3TotalCache.php:162
 msgid "Fold documentation links into the native Help"
 msgstr "ドキュメントリンクを標準ヘルプに統合"
 
-#: src/Modules/W3TotalCache.php:174
+#: src/Modules/W3TotalCache.php:179
 msgid "FAQ"
 msgstr "よくある質問"
 
-#: src/Modules/W3TotalCache.php:176
+#: src/Modules/W3TotalCache.php:181
 msgid "Support"
 msgstr "サポート"
 
-#: src/Modules/W3TotalCache.php:178
+#: src/Modules/W3TotalCache.php:183
 msgid "Setup Guide"
 msgstr "セットアップガイド"
 
-#: src/Modules/W3TotalCache.php:182
+#: src/Modules/W3TotalCache.php:187
 msgid "Resources"
 msgstr "リソース"
 
-#: src/Modules/W3TotalCache.php:200
+#: src/Modules/W3TotalCache.php:205
 msgid "Open the Help and Upgrades panels below its toolbar"
 msgstr "ヘルプとアップグレードのパネルをツールバーの下に開く"
 
