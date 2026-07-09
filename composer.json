@@ -42,11 +42,12 @@
         "wp-plugin/broken-link-checker": "*",
         "wp-plugin/contact-form-7": "^6.1",
         "wp-plugin/contact-form-cfdb7": "*",
-        "wp-plugin/custom-post-type-ui": "*",
         "wp-plugin/custom-facebook-feed": "*",
+        "wp-plugin/custom-post-type-ui": "*",
         "wp-plugin/custom-twitter-feeds": "*",
         "wp-plugin/duplicator": "*",
         "wp-plugin/embedpress": "*",
+        "wp-plugin/ewww-image-optimizer": "*",
         "wp-plugin/feeds-for-tiktok": "*",
         "wp-plugin/feeds-for-youtube": "*",
         "wp-plugin/google-analytics-for-wordpress": "*",
@@ -67,6 +68,7 @@
         "wp-plugin/wpconsent-cookies-banner-privacy-suite": "*",
         "wp-plugin/wpforms-lite": "*",
         "wp-plugin/yet-another-related-posts-plugin": "*",
+        "wpnx-io/wp-translations": "*",
         "yoast/phpunit-polyfills": "^4.0"
     },
     "autoload": {
@@ -82,7 +84,8 @@
     "config": {
         "allow-plugins": {
             "composer/installers": true,
-            "roots/wordpress-core-installer": true
+            "roots/wordpress-core-installer": true,
+            "wpnx-io/wp-translations": true
         },
         "optimize-autoloader": true,
         "preferred-install": "dist",
@@ -101,7 +104,11 @@
             "web/wp-content/themes/{$name}/": [
                 "type:wordpress-theme"
             ]
-        }
+        },
+        "wordpress-translations": [
+            "ja"
+        ],
+        "wordpress-translations-dir": "web/wp-content/languages"
     },
     "prefer-stable": true,
     "archive": {
