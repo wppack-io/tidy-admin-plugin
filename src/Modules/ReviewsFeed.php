@@ -35,6 +35,15 @@ final class ReviewsFeed extends AbstractModule
     public function features(): array
     {
         return [
+            'activation-redirect' => [
+                'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
+                // On activation the plugin adds a sbr_plugin_do_activation_redirect option and
+                // redirects to its setup screen. Filter that option's read to
+                // false so the redirect never fires.
+                'register' => static function (): void {
+                    add_filter('option_sbr_plugin_do_activation_redirect', '__return_false');
+                },
+            ],
             'upgrade-menus' => [
                 'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
                 'submenuRelocations' => [

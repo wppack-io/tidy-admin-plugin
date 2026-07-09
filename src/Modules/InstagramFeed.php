@@ -38,6 +38,15 @@ final class InstagramFeed extends AbstractModule
         // Lite ships an "already have a license?" key box; Smash Balloon's own
         // seamless-upgrade URL takes the key and installs Pro from the account.
         return [
+            'activation-redirect' => [
+                'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
+                // On activation the plugin adds a sbi_plugin_do_activation_redirect option and
+                // redirects to its setup screen. Filter that option's read to
+                // false so the redirect never fires.
+                'register' => static function (): void {
+                    add_filter('option_sbi_plugin_do_activation_redirect', '__return_false');
+                },
+            ],
             'mode' => 'redirect',
             'urlTemplate' => 'https://smashballoon.com/instagram-feed/instagram-lite-upgrade/?license_key={key}&upgrade=true',
         ];

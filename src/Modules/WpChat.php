@@ -45,6 +45,16 @@ final class WpChat extends AbstractModule
                     ],
                 ],
             ],
+            'activation-redirect' => [
+                'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
+                // On activation WPChat adds a wpchat_plugin_do_activation_redirect
+                // option and its redirectAfterActivation() sends the user to
+                // admin.php?page=wp-chat. It has no opt-out, so filter the option read
+                // to false — the redirect check never fires.
+                'register' => static function (): void {
+                    add_filter('option_wpchat_plugin_do_activation_redirect', '__return_false');
+                },
+            ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
                 /*

@@ -39,6 +39,15 @@ final class CustomTwitterFeeds extends AbstractModule
         // seamless-upgrade URL takes the key and installs Pro from the account.
         // Twitter Feeds carries the key in edd_license_key, not license_key.
         return [
+            'activation-redirect' => [
+                'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
+                // On activation the plugin adds a ctf_plugin_do_activation_redirect option and
+                // redirects to its setup screen. Filter that option's read to
+                // false so the redirect never fires.
+                'register' => static function (): void {
+                    add_filter('option_ctf_plugin_do_activation_redirect', '__return_false');
+                },
+            ],
             'mode' => 'redirect',
             'urlTemplate' => 'https://smashballoon.com/custom-twitter-feeds/twitter-lite-upgrade/?edd_license_key={key}&upgrade=true',
         ];
