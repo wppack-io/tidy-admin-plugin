@@ -60,6 +60,12 @@ final class OptinMonster extends AbstractModule
                     ],
                 ],
             ],
+            'plugin-list-links' => [
+                'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
+                'upsellLinkUrls' => [
+                    'app.optinmonster.com', // "Upgrade to Pro" row link on plugins.php (to the OM app)
+                ],
+            ],
             'marketing-notices' => [
                 'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
                 /*
