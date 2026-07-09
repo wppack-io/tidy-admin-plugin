@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-09T10:41:06+00:00\n"
+"PO-Revision-Date: 2026-07-09T18:11:10+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -590,11 +590,23 @@ msgstr "ウェビナー宣伝通知を停止"
 msgid "Use the freed upsell space for content"
 msgstr "空いたアップセル領域をコンテンツの表示に活用"
 
-#: src/Support/SettingsPage.php:95
+#: src/Support/SettingsPage.php:94
 msgid "Disable tidying entirely per plugin, or feature by feature."
 msgstr "プラグインごとに整理を完全に無効化するか、機能単位で無効化できます。"
 
-#: src/Support/SettingsPage.php:109
+#: src/Support/SettingsPage.php:96
+msgid "Show:"
+msgstr "表示:"
+
+#: src/Support/SettingsPage.php:98
+msgid "All features"
+msgstr "すべての機能"
+
+#: src/Support/SettingsPage.php:99
+msgid "Admin bar"
+msgstr "管理バー"
+
+#: src/Support/SettingsPage.php:117
 msgid "Enable"
 msgstr "有効にする"
 

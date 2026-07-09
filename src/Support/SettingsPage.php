@@ -18,7 +18,8 @@ namespace WPPack\Plugin\TidyAdminPlugin\Support;
  * standard Settings API and form-table markup. Every module lists its
  * actual cleanups as individually toggleable features, plus a whole-module
  * switch and the global toggle for vendors' license fields. Everything
- * defaults to ON, so the page only stores overrides.
+ * defaults to ON, so the page only stores overrides. A small dropdown narrows
+ * the (long) list to one area — e.g. just the admin-bar toggles.
  */
 final class SettingsPage
 {
@@ -90,32 +91,37 @@ final class SettingsPage
         ?>
         <div class="wrap">
             <h1>Tidy Admin</h1>
+            <p class="description"><?php esc_html_e('Disable tidying entirely per plugin, or feature by feature.', 'wppack-tidy-admin'); ?></p>
+            <p>
+                <label for="tidy-filter"><?php esc_html_e('Show:', 'wppack-tidy-admin'); ?></label>
+                <select id="tidy-filter">
+                    <option value=""><?php esc_html_e('All features', 'wppack-tidy-admin'); ?></option>
+                    <option value="admin-bar"><?php esc_html_e('Admin bar', 'wppack-tidy-admin'); ?></option>
+                </select>
+            </p>
             <form method="post" action="options.php">
                 <?php settings_fields(self::PAGE); ?>
-                <p class="description"><?php esc_html_e('Disable tidying entirely per plugin, or feature by feature.', 'wppack-tidy-admin'); ?></p>
-                <table class="form-table" role="presentation">
+                <table class="form-table tidy-modules" role="presentation">
                     <?php foreach ($this->modules as $module) : ?>
                         <?php $group = Settings::OPTION . '[modules][' . $module['file'] . ']'; ?>
-                        <tr>
+                        <tr class="tidy-module">
                             <th scope="row"><?php echo esc_html($module['name']); ?></th>
                             <td>
                                 <fieldset>
                                     <input type="hidden"
                                         name="<?php echo esc_attr($group); ?>[_features]"
                                         value="<?php echo esc_attr(implode(',', array_keys($module['features']))); ?>">
-                                    <label>
+                                    <label class="tidy-enable">
                                         <input type="checkbox" name="<?php echo esc_attr($group); ?>[enabled]"
                                             value="1" <?php checked(Settings::moduleEnabled($module['file'])); ?>>
                                         <strong><?php esc_html_e('Enable', 'wppack-tidy-admin'); ?></strong>
                                     </label>
-                                    <br>
                                     <?php foreach ($module['features'] as $key => $feature) : ?>
-                                        <label style="margin-inline-start: 24px;">
+                                        <label class="tidy-feature" data-key="<?php echo esc_attr($key); ?>">
                                             <input type="checkbox" name="<?php echo esc_attr($group); ?>[<?php echo esc_attr($key); ?>]"
                                                 value="1" <?php checked(Settings::featureEnabled($module['file'], $key, $feature['default'])); ?>>
                                             <?php echo esc_html($feature['label']); ?>
                                         </label>
-                                        <br>
                                     <?php endforeach; ?>
                                 </fieldset>
                             </td>
@@ -125,6 +131,32 @@ final class SettingsPage
                 <?php submit_button(); ?>
             </form>
         </div>
+        <style>
+            .tidy-modules .tidy-enable,
+            .tidy-modules .tidy-feature { display: block; }
+            .tidy-modules .tidy-feature { margin-inline-start: 24px; }
+            .tidy-modules .tidy-feature[hidden] { display: none; }
+            .tidy-module[hidden] { display: none; }
+        </style>
+        <script>
+            ( function () {
+                var select = document.getElementById( 'tidy-filter' );
+                if ( ! select ) { return; }
+                var rows = document.querySelectorAll( '.tidy-module' );
+                select.addEventListener( 'change', function () {
+                    var cat = select.value;
+                    rows.forEach( function ( row ) {
+                        var any = false;
+                        row.querySelectorAll( '.tidy-feature' ).forEach( function ( f ) {
+                            var match = cat === '' || ( f.dataset.key || '' ).indexOf( cat ) === 0;
+                            f.hidden = ! match;
+                            if ( match ) { any = true; }
+                        } );
+                        row.hidden = ! ( cat === '' || any );
+                    } );
+                } );
+            }() );
+        </script>
         <?php
     }
 }
