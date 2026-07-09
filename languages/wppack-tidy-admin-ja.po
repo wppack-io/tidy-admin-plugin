@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-09T18:11:10+00:00\n"
+"PO-Revision-Date: 2026-07-09T18:18:04+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -539,6 +539,10 @@ msgid "Match its menu notification badge to the admin colour scheme"
 msgstr "メニューの通知バッジを管理カラースキームに合わせる"
 
 #: src/Modules/WordPressCore.php:44
+msgid "Remove the \"WordPress update available\" nag from every screen"
+msgstr "「WordPress の更新が利用可能」の催促を全画面から除去"
+
+#: src/Modules/WordPressCore.php:64
 msgid "Remove the \"WordPress Events and News\" dashboard widget"
 msgstr "「WordPress イベントとニュース」ダッシュボードウィジェットを除去"
 
