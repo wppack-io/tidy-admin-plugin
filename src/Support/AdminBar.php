@@ -71,14 +71,14 @@ final class AdminBar
      */
     public static function notificationBubbleCss(string $node, array $badges): string
     {
-        $full = static fn (string $b): string => "#wpadminbar {$node} {$b}";
+        $full = static fn(string $b): string => "#wpadminbar {$node} {$b}";
         $sel = implode(",\n", array_map($full, $badges));
-        $inner = implode(",\n", array_map(static fn (string $b): string => $full($b) . ' *', $badges));
+        $inner = implode(",\n", array_map(static fn(string $b): string => $full($b) . ' *', $badges));
         // Flex-centre every row (top bar or submenu) that carries a badge, so the
         // pill sits dead-centre in *any* row height — 32px toolbar and shorter
         // submenu rows alike — instead of being nudged by a margin that suits only
         // one height. :has() scopes this to badge rows, leaving other items alone.
-        $rows = implode(",\n", array_map(static fn (string $b): string => "#wpadminbar {$node} .ab-item:has({$b})", $badges));
+        $rows = implode(",\n", array_map(static fn(string $b): string => "#wpadminbar {$node} .ab-item:has({$b})", $badges));
 
         // The bubble itself is a WordPress-native count circle (the #adminmenu
         // .update-plugins pill): 18px, its number centred by text-align + a
@@ -106,7 +106,7 @@ final class AdminBar
         foreach (self::NOTIFICATION_COLORS as $scheme => $hex) {
             $scoped = implode(
                 ",\n",
-                array_map(static fn (string $b): string => "body.admin-color-{$scheme} " . $full($b), $badges)
+                array_map(static fn(string $b): string => "body.admin-color-{$scheme} " . $full($b), $badges),
             );
             $colours .= "\n{$scoped} { background-color: {$hex} !important; }";
         }
@@ -131,7 +131,7 @@ final class AdminBar
      */
     public static function nativeHoverCss(string $item, array $iconSelectors = [], string $abItemPath = '> .ab-item', bool $resetBackground = false): string
     {
-        $target = static fn (string $prefix): string => "{$prefix} {$item}:hover {$abItemPath},\n"
+        $target = static fn(string $prefix): string => "{$prefix} {$item}:hover {$abItemPath},\n"
             . "{$prefix} {$item} {$abItemPath}:focus";
 
         $css = '';
@@ -148,7 +148,7 @@ final class AdminBar
         if ($iconSelectors !== []) {
             $icons = implode(
                 ",\n",
-                array_map(static fn (string $s): string => "#wpadminbar {$item}:hover {$s}", $iconSelectors)
+                array_map(static fn(string $s): string => "#wpadminbar {$item}:hover {$s}", $iconSelectors),
             );
             // A baked-colour (near-white) SVG-background icon can't take `color`, so a
             // plain brightness bump leaves it white. Tint it toward the toolbar's
