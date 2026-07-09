@@ -229,6 +229,13 @@ final class WpMailSmtp extends AbstractModule
                         return $providers;
                     });
                 },
+                // On the setup wizard the provider list has to stay intact (above), so
+                // the three Pro mailers still render there as disabled teaser tiles —
+                // hide those tiles with CSS instead. Only the Pro mailers carry the
+                // -disabled label class, so free mailers are untouched.
+                'adminCss' => <<<'CSS'
+                .wp-mail-smtp-input-radios-with-icons label.wp-mail-smtp-styled-radio-label-disabled { display: none !important; }
+                CSS,
             ],
             'flyout' => [
                 'label' => __('Remove the floating quick-links menu', 'wppack-tidy-admin'),
@@ -292,6 +299,9 @@ final class WpMailSmtp extends AbstractModule
                 /* WP Mail SMTP: "Recommended" ribbon on the SendLayer mailer tile — drawn
                    as the tile's background image (vendor steering, not information) */
                 .wp-mail-smtp-mailer-image.is-recommended { background-image: none !important; }
+                /* WP Mail SMTP: the "Recommended" badges the setup wizard prints on its
+                   partner mailer tiles (SendLayer/SMTP.com/Brevo) — same steering */
+                .wp-mail-smtp-recommended-badge { display: none !important; }
                 /* WP Mail SMTP: upsell on the successful test-email screen (keep the success message itself) */
                 .wp-mail-smtp-test-success-banner--lite .wpms-test-email-success-banner__heading ~ p,
                 .wp-mail-smtp-test-success-banner--lite ul,
