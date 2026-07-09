@@ -25,7 +25,7 @@ final class Yoast extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [27];
+        return [27, 28];
     }
 
     public function menuParent(): string
@@ -238,6 +238,10 @@ final class Yoast extends AbstractModule
                 body:not(:is([class*="page_wpseo_page_academy"], [class*="page_wpseo_licenses"], [class*="page_wpseo_redirects"],
                     [class*="page_wpseo_workouts"], [class*="page_wpseo_brand_insights"]))
                     :is(.yoast_premium_upsell, .yst-feature-upsell, .yst-badge--upsell, .yst-button--upsell) { display: none !important; }
+                /* Yoast (v28 dashboard): the task list's "Unlock all Premium tasks" row.
+                   Its .yst-button--upsell is hidden above, but drop the whole table row
+                   so no orphaned pitch text is left behind */
+                body[class*="page_wpseo"] .yst-table-row:has(.yst-button--upsell) { display: none !important; }
                 /* Yoast: editor buttons that open the Premium feature modal (add related keyphrase /
                    internal linking suggestions; target both metabox and sidebar variants via the ID prefix) */
                 button[id^="yoast-additional-keyphrase-"],
