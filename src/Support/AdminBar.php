@@ -147,8 +147,14 @@ final class AdminBar
                 ",\n",
                 array_map(static fn (string $s): string => "#wpadminbar {$item}:hover {$s}", $iconSelectors)
             );
-            // Approximate hover response for baked-colour SVG-background icons.
-            $css .= "\n{$icons} { filter: brightness(1.4) !important; transition: filter .1s ease; }";
+            // A baked-colour (near-white) SVG-background icon can't take `color`, so a
+            // plain brightness bump leaves it white. Tint it toward the toolbar's
+            // blue-family hover accent with a filter chain instead — an approximation
+            // of the exact per-scheme colour (which a filter can't target), matching
+            // the common fresh/modern/light/blue schemes.
+            $css .= "\n{$icons} { filter: brightness(0) saturate(100%) invert(56%) sepia(46%) "
+                . "saturate(900%) hue-rotate(196deg) brightness(101%) contrast(94%) !important;"
+                . " transition: filter .1s ease; }";
         }
 
         return $css;
