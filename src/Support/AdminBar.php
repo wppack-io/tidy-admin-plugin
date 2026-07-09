@@ -121,23 +121,26 @@ final class AdminBar
      * single-ID vendor rule). Baked-colour SVG icons can't take `color`/`fill`, so
      * an optional brightness filter gives them an approximate hover response.
      *
-     * @param string       $item          the plugin's top-level `#wp-admin-bar-…` node
-     * @param list<string> $iconSelectors icon selectors (already scoped to the node) to brighten on hover
-     * @param string       $abItemPath    path from the node to its top-level `.ab-item` (default a direct
-     *                                     child); pass a deeper path for wrappers (e.g. MonsterInsights)
+     * @param string       $item            the plugin's top-level `#wp-admin-bar-…` node
+     * @param list<string> $iconSelectors   icon selectors (already scoped to the node) to brighten on hover
+     * @param string       $abItemPath      path from the node to its top-level `.ab-item` (default a direct
+     *                                       child); pass a deeper path for wrappers (e.g. MonsterInsights)
+     * @param bool         $resetBackground neutralise a custom hover background the vendor paints (e.g.
+     *                                       MonsterInsights flips to white). Off by default so the item keeps
+     *                                       the toolbar's own native hover darken like every other item
      */
-    public static function nativeHoverCss(string $item, array $iconSelectors = [], string $abItemPath = '> .ab-item'): string
+    public static function nativeHoverCss(string $item, array $iconSelectors = [], string $abItemPath = '> .ab-item', bool $resetBackground = false): string
     {
         $target = static fn (string $prefix): string => "{$prefix} {$item}:hover {$abItemPath},\n"
             . "{$prefix} {$item} {$abItemPath}:focus";
 
-        // Neutralise any custom hover background the vendor paints (e.g.
-        // MonsterInsights flips to a white background); the item then keeps the
-        // toolbar's own dark background like every native item.
-        $css = $target('#wpadminbar') . " { background: transparent !important; }";
+        $css = '';
+        if ($resetBackground) {
+            $css .= $target('#wpadminbar') . " { background: transparent !important; }\n";
+        }
 
         // Fresh is the un-classed default; the rest override per active scheme.
-        $css .= "\n" . $target('#wpadminbar') . " { color: #00b9eb !important; }";
+        $css .= $target('#wpadminbar') . " { color: #00b9eb !important; }";
         foreach (self::HOVER_COLORS as $scheme => $hex) {
             $css .= "\n" . $target("body.admin-color-{$scheme} #wpadminbar") . " { color: {$hex} !important; }";
         }

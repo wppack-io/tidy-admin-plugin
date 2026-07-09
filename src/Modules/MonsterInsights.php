@@ -60,7 +60,8 @@ final class MonsterInsights extends AbstractModule
                 'adminCss' => AdminBar::nativeHoverCss(
                     '#wp-admin-bar-monsterinsights_frontend_button',
                     [],
-                    '> .monsterinsights-adminbar-content > .ab-item'
+                    '> .monsterinsights-adminbar-content > .ab-item',
+                    true
                 ) . <<<'CSS'
                 /* Its dashicon glyph renders ~2px high within its box, sitting above the
                    native toolbar icons; nudge it down to line them up. */
