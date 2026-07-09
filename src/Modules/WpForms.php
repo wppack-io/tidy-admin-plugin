@@ -210,6 +210,11 @@ final class WpForms extends AbstractModule
                    live in the Help panel now. */
                 body[class*="page_wpforms"] .wpforms-header .wpforms-link,
                 body[class*="page_wpforms"] .wpforms-admin-no-forms-footer { display: none !important; }
+                /* The same Docs/Videos/Support Forum/What's New row at the foot of
+                   the WPForms dashboard widget (Blocks\Links::render() is echoed
+                   straight inside widget_content(), no hook to intercept) — those
+                   links live in the Help panel on WPForms' own screens. */
+                #wpforms_reports_widget_lite .wpforms-links { display: none !important; }
                 CSS,
             ],
             'flyout' => [
