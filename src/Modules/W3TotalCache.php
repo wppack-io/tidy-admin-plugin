@@ -100,7 +100,12 @@ final class W3TotalCache extends AbstractModule
                 // W3TC paints its toolbar count in a hardcoded brand red (#d63638) that
                 // clashes with every non-fresh admin colour scheme; restyle it to
                 // WordPress's native count bubble in the scheme's own notification colour.
-                'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-w3tc', ['.awaiting-mod']),
+                'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-w3tc', ['.awaiting-mod'])
+                    . <<<'CSS'
+                    /* W3TC draws its cube glyph low within its icon box, so it renders
+                       ~2px below the native toolbar icons; nudge it up to line them up. */
+                    #wpadminbar #wp-admin-bar-w3tc .w3tc-icon { transform: translateY(-2px); }
+                    CSS,
             ],
             'admin-bar-hide' => [
                 'label' => __('Hide its admin bar menu entirely', 'wppack-tidy-admin'),
