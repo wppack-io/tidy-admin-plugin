@@ -145,6 +145,30 @@ final class WpSmush extends AbstractModule
                 body[class*="page_smush"] .wpmudev-nav__item-wrap-academy { display: none !important; }
                 CSS,
             ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                // Smush opens with its own white header bar (.smush-header, ~61px) at
+                // the top of the content area, so the default flow row would sit above
+                // it as a separate gray band. Overlay the screen-meta region across
+                // that bar instead — #wpbody is the region's offset parent — anchored
+                // to the very top, so the closed toggles hang from under the admin bar
+                // exactly like core's Help / Screen Options tabs and an opened panel
+                // drops from the same edge. Inset from the sidebar by core's 20px
+                // content padding, and inset the toggle row from the right so the
+                // buttons line up just before the header's Activity Log and account
+                // icons.
+                'adminCss' => <<<'CSS'
+                body[class*="page_smush"] #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
+                body[class*="page_smush"] #tidy-admin-meta-region #screen-meta-links { margin-right: 170px; }
+                body[class*="page_smush"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* The header's account sign-in / Activity Log popovers live inside the
+                   header row's stacking context (z-index 99), so no z-index of their
+                   own can lift them over the region (100). While one is open (the
+                   popover template only mounts then), dip the region below the header
+                   so the popover wins; the toggles return the moment it closes. */
+                body[class*="page_smush"]:has(.wpmudev-nav .wpmudev-popover-template) #tidy-admin-meta-region { z-index: 98; }
+                CSS,
+            ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 // All rendered inside Smush's React bundle (wpmudev-plugin-ui) with

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-10T01:28:01+00:00\n"
+"PO-Revision-Date: 2026-07-10T01:35:02+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -91,7 +91,7 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/WpConsent.php:171
 #: src/Modules/WpForms.php:246
 #: src/Modules/WpMailSmtp.php:297
-#: src/Modules/WpSmush.php:149
+#: src/Modules/WpSmush.php:164
 #: src/Modules/Yoast.php:239
 msgid "Hide upsell promotions on its screens"
 msgstr "画面内のアップセル宣伝を非表示"
@@ -276,6 +276,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/WpConsent.php:223
 #: src/Modules/WpForms.php:288
 #: src/Modules/WpMailSmtp.php:319
+#: src/Modules/WpSmush.php:149
 #: src/Modules/Yoast.php:303
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr "ヘルプ / アップグレードボタンをページヘッダーに統合"

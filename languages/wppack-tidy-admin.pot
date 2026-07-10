@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-10T10:28:00+09:00\n"
+"POT-Creation-Date: 2026-07-10T10:35:01+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -92,7 +92,7 @@ msgstr ""
 #: src/Modules/WpConsent.php:171
 #: src/Modules/WpForms.php:246
 #: src/Modules/WpMailSmtp.php:297
-#: src/Modules/WpSmush.php:149
+#: src/Modules/WpSmush.php:164
 #: src/Modules/Yoast.php:239
 msgid "Hide upsell promotions on its screens"
 msgstr ""
@@ -277,6 +277,7 @@ msgstr ""
 #: src/Modules/WpConsent.php:223
 #: src/Modules/WpForms.php:288
 #: src/Modules/WpMailSmtp.php:319
+#: src/Modules/WpSmush.php:149
 #: src/Modules/Yoast.php:303
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
