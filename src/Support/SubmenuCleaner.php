@@ -56,6 +56,11 @@ final class SubmenuCleaner
      *        vendors duplicate teaser items under core menus (e.g. AIOSEO's
      *        "Redirection Manager" under Tools) — those matches are hidden from the
      *        sidebar but must not spawn panels on core screens. Empty = no restriction.
+     * @param array<string, string> $parentAliases
+     *        Legacy/hidden parent slug => the module's primary menuParent(). Screens
+     *        whose $parent_file resolves to an alias carry the primary parent's
+     *        panels (e.g. Elementor's settings pages resolve to the hidden
+     *        "elementor" toplevel while the panels live on "elementor-home").
      */
     public function __construct(
         private readonly array $needlesByCategory,
@@ -63,6 +68,7 @@ final class SubmenuCleaner
         private readonly array $saleNotices = [],
         private readonly array $helpSidebars = [],
         private readonly array $panelParents = [],
+        private readonly array $parentAliases = [],
     ) {}
 
     public function register(): void
@@ -123,9 +129,12 @@ final class SubmenuCleaner
                         // why this item matched). Same substring, same precision as
                         // the PHP match above.
                         $this->hiddenSlugs[] = $needle;
+                        // Items under an aliased legacy parent belong to the
+                        // primary parent's panels
+                        $panelParent = $this->parentAliases[(string) $parent] ?? (string) $parent;
                         // Duplicates under foreign (core) parents are hidden only —
                         // their panel home is the plugin's own parent menu
-                        if ($this->panelParents !== [] && !in_array((string) $parent, $this->panelParents, true)) {
+                        if ($this->panelParents !== [] && !in_array($panelParent, $this->panelParents, true)) {
                             continue;
                         }
                         $label = (string) ($item[0] ?? $slug);
@@ -136,7 +145,7 @@ final class SubmenuCleaner
                         $url = preg_match('/\bhref=(["\'])(https?:\/\/.*?)\1/', $label, $m) === 1
                             ? $m[2]
                             : self::itemUrl((string) $parent, $slug);
-                        $this->hidden[$category][(string) $parent][] = [
+                        $this->hidden[$category][$panelParent][] = [
                             'label' => trim(wp_strip_all_tags($label)),
                             'url' => $url,
                         ];
@@ -184,6 +193,10 @@ final class SubmenuCleaner
                 $parent = $specific;
             }
         }
+
+        // A legacy/hidden parent resolves to the module's primary parent, so
+        // its screens carry the same panels
+        $parent = $this->parentAliases[$parent] ?? $parent;
 
         $panels = [];
         if (($help = $this->helpPanel($parent)) !== '') {

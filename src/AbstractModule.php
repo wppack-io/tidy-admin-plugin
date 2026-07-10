@@ -21,6 +21,11 @@ abstract class AbstractModule implements Module
         return '';
     }
 
+    public function menuParentAliases(): array
+    {
+        return [];
+    }
+
     public function ownPagePrefixes(): array
     {
         return [];

@@ -72,7 +72,9 @@ A single WordPress plugin (`wppack/tidy-admin-plugin`, entry point
 
 - `src/Module.php` — interface: one implementation per target plugin. Each
   module declares `targetPluginFile()`, `supportedMajorVersions()`,
-  `menuParent()`, `ownPagePrefixes()`, and `features()` — one entry per
+  `menuParent()` (plus `menuParentAliases()` when the vendor registers pages
+  under a legacy hidden parent, e.g. Elementor), `ownPagePrefixes()`, and
+  `features()` — one entry per
   user-visible cleanup with a translated label and its bundled declarations
   (`submenuRelocations`, `extraScreenMetaContent`, `saleNoticeRelocation`,
   `upsellLinkUrls`, `noticeDenyByHook`, `setupNoticeByHook`, `adminCss`,
