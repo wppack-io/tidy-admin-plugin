@@ -47,6 +47,7 @@ final class TidyAdminPlugin
         Modules\FeedsForTiktok::class,
         Modules\FeedsForYoutube::class,
         Modules\InstagramFeed::class,
+        Modules\LiteSpeedCache::class,
         Modules\LocationWeather::class,
         Modules\Mc4wp::class,
         Modules\MonsterInsights::class,

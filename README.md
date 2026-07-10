@@ -95,6 +95,7 @@ supported, with the major versions the cleanups were verified against:
 | [EWWW Image Optimizer](https://wordpress.org/plugins/ewww-image-optimizer/) | 8.x |
 | [Facebook Feed (Smash Balloon)](https://wordpress.org/plugins/custom-facebook-feed/) | 4.x |
 | [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 6.x |
+| [LiteSpeed Cache](https://wordpress.org/plugins/litespeed-cache/) | 7.x |
 | [MonsterInsights (Google Analytics)](https://wordpress.org/plugins/google-analytics-for-wordpress/) | 10.x |
 | [OptinMonster](https://wordpress.org/plugins/optinmonster/) | 2.x |
 | [Reviews Feed (Smash Balloon)](https://wordpress.org/plugins/reviews-feed/) | 2.x |

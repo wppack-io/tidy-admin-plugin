@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-10T01:35:02+00:00\n"
+"PO-Revision-Date: 2026-07-10T02:37:11+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -81,6 +81,7 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/FeedsForTiktok.php:123
 #: src/Modules/FeedsForYoutube.php:233
 #: src/Modules/InstagramFeed.php:196
+#: src/Modules/LiteSpeedCache.php:70
 #: src/Modules/LocationWeather.php:176
 #: src/Modules/MonsterInsights.php:126
 #: src/Modules/OptinMonster.php:134
@@ -91,7 +92,7 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/WpConsent.php:171
 #: src/Modules/WpForms.php:246
 #: src/Modules/WpMailSmtp.php:297
-#: src/Modules/WpSmush.php:164
+#: src/Modules/WpSmush.php:191
 #: src/Modules/Yoast.php:239
 msgid "Hide upsell promotions on its screens"
 msgstr "画面内のアップセル宣伝を非表示"
@@ -140,6 +141,7 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/FeedsForTiktok.php:88
 #: src/Modules/FeedsForYoutube.php:110
 #: src/Modules/InstagramFeed.php:90
+#: src/Modules/LiteSpeedCache.php:107
 #: src/Modules/LocationWeather.php:72
 #: src/Modules/Mc4wp.php:52
 #: src/Modules/MonsterInsights.php:98
@@ -151,7 +153,7 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/WpConsent.php:88
 #: src/Modules/WpForms.php:184
 #: src/Modules/WpMailSmtp.php:85
-#: src/Modules/WpSmush.php:126
+#: src/Modules/WpSmush.php:144
 #: src/Modules/Yarpp.php:49
 #: src/Modules/Yoast.php:66
 msgid "Move documentation and support links to the Help panel"
@@ -177,7 +179,7 @@ msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に�
 #: src/Modules/WpConsent.php:82
 #: src/Modules/WpForms.php:70
 #: src/Modules/WpMailSmtp.php:115
-#: src/Modules/WpSmush.php:82
+#: src/Modules/WpSmush.php:100
 #: src/Modules/Yoast.php:81
 msgid "Remove upgrade links from the plugin list"
 msgstr "プラグイン一覧からアップグレードリンクを除去"
@@ -201,6 +203,7 @@ msgstr "「複数の SEO プラグイン」警告をセットアップウィジ�
 
 #: src/Modules/AllInOneSeo.php:269
 #: src/Modules/Duplicator.php:367
+#: src/Modules/LiteSpeedCache.php:91
 #: src/Modules/LocationWeather.php:191
 #: src/Modules/WpMailSmtp.php:260
 msgid "Restore the standard admin footer"
@@ -267,6 +270,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/FeedsForTiktok.php:151
 #: src/Modules/FeedsForYoutube.php:255
 #: src/Modules/InstagramFeed.php:318
+#: src/Modules/LiteSpeedCache.php:123
 #: src/Modules/LocationWeather.php:229
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/MonsterInsights.php:188
@@ -276,7 +280,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/WpConsent.php:223
 #: src/Modules/WpForms.php:288
 #: src/Modules/WpMailSmtp.php:319
-#: src/Modules/WpSmush.php:149
+#: src/Modules/WpSmush.php:167
 #: src/Modules/Yoast.php:303
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr "ヘルプ / アップグレードボタンをページヘッダーに統合"
@@ -289,6 +293,7 @@ msgid "Clean up and normalize its admin bar menu"
 msgstr "管理バーメニューを整理・正規化"
 
 #: src/Modules/AllInOneSeo.php:575
+#: src/Modules/LiteSpeedCache.php:134
 #: src/Modules/MonsterInsights.php:72
 #: src/Modules/W3TotalCache.php:111
 #: src/Modules/WpForms.php:173
@@ -335,7 +340,7 @@ msgstr "ページ内の余分な空見出しを非表示"
 #: src/Modules/InstagramFeed.php:42
 #: src/Modules/ReviewsFeed.php:39
 #: src/Modules/WpChat.php:39
-#: src/Modules/WpSmush.php:114
+#: src/Modules/WpSmush.php:132
 msgid "Remove the deactivation feedback survey"
 msgstr "無効化時のフィードバックアンケートを除去"
 
@@ -346,7 +351,7 @@ msgstr "無効化時のフィードバックアンケートを除去"
 #: src/Modules/ReviewsFeed.php:51
 #: src/Modules/WpChat.php:61
 #: src/Modules/WpForms.php:76
-#: src/Modules/WpSmush.php:97
+#: src/Modules/WpSmush.php:115
 msgid "Stop the welcome-screen redirect on activation"
 msgstr "有効化時のウェルカム画面へのリダイレクトを停止"
 
@@ -427,6 +432,15 @@ msgstr "セットアップウィザードから推奨プラグインのインス
 #: src/Modules/InstagramFeed.php:169
 msgid "Hide Pro-only feed types from the feed builder"
 msgstr "フィードビルダーから Pro 専用フィードタイプを非表示"
+
+#: src/Modules/LiteSpeedCache.php:45
+msgid "Remove the news, promo and review-request banners"
+msgstr "ニュース・宣伝・レビュー依頼のバナーを除去"
+
+#: src/Modules/LiteSpeedCache.php:58
+#: src/Modules/Yoast.php:161
+msgid "Disable promotional introduction popups"
+msgstr "宣伝の紹介ポップアップを無効化"
 
 #: src/Modules/LocationWeather.php:111
 msgid "Remove promotional notices and popups"
@@ -578,7 +592,7 @@ msgstr "ダッシュボードウィジェットの Pro ティーザーチャー�
 msgid "Remove the Backup Connection teaser"
 msgstr "Backup Connection のティーザーを除去"
 
-#: src/Modules/WpSmush.php:88
+#: src/Modules/WpSmush.php:106
 msgid "Remove the review request from the plugin list"
 msgstr "プラグイン一覧からレビュー依頼を除去"
 
@@ -589,10 +603,6 @@ msgstr "ダッシュボードウィジェットから Yoast.com のブログフ�
 #: src/Modules/Yoast.php:97
 msgid "Remove the HelpScout support beacon"
 msgstr "HelpScout サポートビーコンを除去"
-
-#: src/Modules/Yoast.php:161
-msgid "Disable promotional introduction popups"
-msgstr "宣伝の紹介ポップアップを無効化"
 
 #: src/Modules/Yoast.php:173
 msgid "Stop the \"set up a redirect\" upsell when trashing content"
