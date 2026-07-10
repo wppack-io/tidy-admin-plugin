@@ -65,6 +65,7 @@
         "wp-plugin/wordfence": "*",
         "wp-plugin/wordpress-seo": "*",
         "wp-plugin/wp-mail-smtp": "*",
+        "wp-plugin/wp-smushit": "^4.2",
         "wp-plugin/wpconsent-cookies-banner-privacy-suite": "*",
         "wp-plugin/wpforms-lite": "*",
         "wp-plugin/yet-another-related-posts-plugin": "*",
