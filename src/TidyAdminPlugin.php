@@ -43,6 +43,7 @@ final class TidyAdminPlugin
         Modules\CustomFacebookFeed::class,
         Modules\CustomTwitterFeeds::class,
         Modules\Duplicator::class,
+        Modules\Elementor::class,
         Modules\EmbedPress::class,
         Modules\EwwwImageOptimizer::class,
         Modules\FeedsForTiktok::class,
