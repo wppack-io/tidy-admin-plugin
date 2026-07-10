@@ -42,6 +42,7 @@
         "wp-plugin/broken-link-checker": "*",
         "wp-plugin/contact-form-7": "^6.1",
         "wp-plugin/contact-form-cfdb7": "*",
+        "wp-plugin/cookie-law-info": "^3.5",
         "wp-plugin/custom-facebook-feed": "*",
         "wp-plugin/custom-post-type-ui": "*",
         "wp-plugin/custom-twitter-feeds": "*",
