@@ -164,7 +164,7 @@ final class SubmenuCleanerTest extends TestCase
         $this->assertStringContainsString('admin.php?page=wpseo_licenses', $output, 'page slugs resolve to admin URLs');
         $this->assertStringContainsString('example.com\/lite-upgrade\/?ref=x', $output, 'external links are kept verbatim');
         $this->assertStringContainsString('target=\"_blank\"', $output);
-        $this->assertStringContainsString("className = 'button show-settings'", $output, 'buttons opt into the core screen-meta toggle');
+        $this->assertStringContainsString("className = 'button button-compact show-settings'", $output, 'buttons opt into the core screen-meta toggle (compact, 32px like core since WP 7.0)');
         $this->assertStringNotContainsString('jQuery', $output, 'injected code is vanilla JS');
 
         $this->assertSame(1, preg_match('/var panels = (\[.*\]);/', $output, $m));

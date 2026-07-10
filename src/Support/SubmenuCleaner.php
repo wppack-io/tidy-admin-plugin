@@ -298,7 +298,9 @@ final class SubmenuCleaner
                 var button = document.createElement('button');
                 button.type = 'button';
                 button.id = panel.id + '-link';
-                button.className = 'button show-settings';
+                // Match core's screen-meta toggles exactly: since WP 7.0 the plain
+                // .button defaults to 40px, and core marks these compact (32px).
+                button.className = 'button button-compact show-settings';
                 button.setAttribute('aria-controls', panel.id + '-wrap');
                 button.setAttribute('aria-expanded', 'false');
                 button.textContent = panel.title;
