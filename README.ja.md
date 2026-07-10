@@ -111,6 +111,7 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 | [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) | 2.x |
 | [Wordfence](https://wordpress.org/plugins/wordfence/) | 8.x |
 | [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 4.x |
+| [Smush](https://wordpress.org/plugins/wp-smushit/) | 4.x |
 | [WPForms Lite](https://wordpress.org/plugins/wpforms-lite/) | 1.x |
 | [YARPP](https://wordpress.org/plugins/yet-another-related-posts-plugin/) | 5.x |
 | [Yoast SEO](https://wordpress.org/plugins/wordpress-seo/) | 27.x |

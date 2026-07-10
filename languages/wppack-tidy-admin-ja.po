@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-09T18:18:04+00:00\n"
+"PO-Revision-Date: 2026-07-10T01:28:01+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -62,6 +62,7 @@ msgstr "Pro 版にアップグレード"
 #: src/Modules/WpConsent.php:54
 #: src/Modules/WpForms.php:97
 #: src/Modules/WpMailSmtp.php:75
+#: src/Modules/WpSmush.php:72
 #: src/Modules/Yoast.php:55
 msgid "Move Premium feature pages to the Upgrades panel"
 msgstr "プレミアム機能ページをアップグレードパネルへ移設"
@@ -88,8 +89,9 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/W3TotalCache.php:238
 #: src/Modules/WpChat.php:129
 #: src/Modules/WpConsent.php:171
-#: src/Modules/WpForms.php:241
+#: src/Modules/WpForms.php:246
 #: src/Modules/WpMailSmtp.php:297
+#: src/Modules/WpSmush.php:149
 #: src/Modules/Yoast.php:239
 msgid "Hide upsell promotions on its screens"
 msgstr "画面内のアップセル宣伝を非表示"
@@ -121,6 +123,7 @@ msgstr "WP Engine の宣伝を除去"
 #: src/Modules/WpConsent.php:44
 #: src/Modules/WpForms.php:62
 #: src/Modules/WpMailSmtp.php:61
+#: src/Modules/WpSmush.php:44
 #: src/Modules/Yoast.php:46
 msgid "Move upgrade menus to the Upgrades panel"
 msgstr "アップグレード系メニューをアップグレードパネルへ移設"
@@ -148,6 +151,7 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/WpConsent.php:88
 #: src/Modules/WpForms.php:184
 #: src/Modules/WpMailSmtp.php:85
+#: src/Modules/WpSmush.php:126
 #: src/Modules/Yarpp.php:49
 #: src/Modules/Yoast.php:66
 msgid "Move documentation and support links to the Help panel"
@@ -173,6 +177,7 @@ msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に�
 #: src/Modules/WpConsent.php:82
 #: src/Modules/WpForms.php:70
 #: src/Modules/WpMailSmtp.php:115
+#: src/Modules/WpSmush.php:82
 #: src/Modules/Yoast.php:81
 msgid "Remove upgrade links from the plugin list"
 msgstr "プラグイン一覧からアップグレードリンクを除去"
@@ -248,7 +253,7 @@ msgstr "AI クレジットのアップセルを非表示"
 
 #: src/Modules/AllInOneSeo.php:505
 #: src/Modules/EmbedPress.php:161
-#: src/Modules/WpForms.php:216
+#: src/Modules/WpForms.php:221
 #: src/Modules/WpMailSmtp.php:241
 msgid "Remove the floating quick-links menu"
 msgstr "フローティングのクイックリンクメニューを除去"
@@ -269,7 +274,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/ReviewsFeed.php:193
 #: src/Modules/WpChat.php:170
 #: src/Modules/WpConsent.php:223
-#: src/Modules/WpForms.php:283
+#: src/Modules/WpForms.php:288
 #: src/Modules/WpMailSmtp.php:319
 #: src/Modules/Yoast.php:303
 msgid "Integrate the Help and Upgrades buttons into the page header"
@@ -329,6 +334,7 @@ msgstr "ページ内の余分な空見出しを非表示"
 #: src/Modules/InstagramFeed.php:42
 #: src/Modules/ReviewsFeed.php:39
 #: src/Modules/WpChat.php:39
+#: src/Modules/WpSmush.php:114
 msgid "Remove the deactivation feedback survey"
 msgstr "無効化時のフィードバックアンケートを除去"
 
@@ -339,6 +345,7 @@ msgstr "無効化時のフィードバックアンケートを除去"
 #: src/Modules/ReviewsFeed.php:51
 #: src/Modules/WpChat.php:61
 #: src/Modules/WpForms.php:76
+#: src/Modules/WpSmush.php:97
 msgid "Stop the welcome-screen redirect on activation"
 msgstr "有効化時のウェルカム画面へのリダイレクトを停止"
 
@@ -550,7 +557,7 @@ msgstr "「WordPress イベントとニュース」ダッシュボードウィ�
 msgid "Clean up its admin bar menu (upgrade, paid features, promo links)"
 msgstr "管理バーメニューを整理（アップグレード・有料機能・宣伝リンク）"
 
-#: src/Modules/WpForms.php:226
+#: src/Modules/WpForms.php:231
 msgid "Keep its styles out of the command palette"
 msgstr "コマンドパレットへのスタイル漏れを防ぐ"
 
@@ -569,6 +576,10 @@ msgstr "ダッシュボードウィジェットの Pro ティーザーチャー�
 #: src/Modules/WpMailSmtp.php:288
 msgid "Remove the Backup Connection teaser"
 msgstr "Backup Connection のティーザーを除去"
+
+#: src/Modules/WpSmush.php:88
+msgid "Remove the review request from the plugin list"
+msgstr "プラグイン一覧からレビュー依頼を除去"
 
 #: src/Modules/Yoast.php:87
 msgid "Remove the Yoast.com blog feed from its dashboard widget"

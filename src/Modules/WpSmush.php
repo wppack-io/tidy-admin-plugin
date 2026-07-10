@@ -1,0 +1,175 @@
+<?php
+
+/*
+ * This file is part of the WPPack package.
+ *
+ * (c) Tsuyoshi Tsurushima
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace WPPack\Plugin\TidyAdminPlugin\Modules;
+
+use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+
+final class WpSmush extends AbstractModule
+{
+    public function targetPluginFile(): string
+    {
+        return 'wp-smushit/wp-smush.php';
+    }
+
+    public function supportedMajorVersions(): array
+    {
+        return [4];
+    }
+
+    public function menuParent(): string
+    {
+        return 'smush';
+    }
+
+    public function ownPagePrefixes(): array
+    {
+        return ['smush'];
+    }
+
+    public function features(): array
+    {
+        return [
+            'upgrade-menus' => [
+                'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
+                // "Upgrade Pro" sidebar item (free version only; its slug is the
+                // wpmudev.com sales page, added by add_upgrade_submenu_page())
+                'submenuRelocations' => [
+                    'upgrade' => [
+                        'wpmudev.com/project/wp-smush-pro',
+                    ],
+                ],
+                // Smush appends a "Pro" pill and an icon span to the menu title;
+                // SubmenuCleaner strips the tags but keeps their text, so the
+                // relocated link would read "UpgradePro". Strip the spans from the
+                // title just before SubmenuCleaner's PHP_INT_MAX pass captures it.
+                'register' => static function (): void {
+                    add_action('admin_menu', static function (): void {
+                        global $submenu;
+                        if (empty($submenu['smush']) || !is_array($submenu['smush'])) {
+                            return;
+                        }
+                        foreach ($submenu['smush'] as &$item) {
+                            if (str_contains((string) ($item[2] ?? ''), 'wp-smush-pro')) {
+                                $item[0] = trim((string) preg_replace('#<span[^>]*>.*?</span>#', '', (string) ($item[0] ?? '')));
+                            }
+                        }
+                        unset($item);
+                    }, PHP_INT_MAX - 1);
+                },
+            ],
+            'premium-pages' => [
+                'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
+                // The CDN page is Pro-only: in the free version it renders a locked
+                // teaser (blurred settings behind an auto-opening upgrade modal).
+                'submenuRelocations' => [
+                    'premium' => [
+                        'smush-cdn',
+                    ],
+                ],
+            ],
+            'plugin-list-links' => [
+                'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
+                'upsellLinkUrls' => [
+                    'wpmudev.com/project/wp-smush-pro', // "Get Smush Pro" row link on plugins.php
+                ],
+            ],
+            'review-links' => [
+                'label' => __('Remove the review request from the plugin list', 'wppack-tidy-admin'),
+                // The "Rate Smush" text link and the ★★★★★ stars Smush appends to its
+                // plugins.php meta row — both point at the wordpress.org review form.
+                // The plain Support link (no /reviews path) stays.
+                'upsellLinkUrls' => [
+                    'wordpress.org/support/plugin/wp-smushit/reviews',
+                ],
+            ],
+            'activation-redirect' => [
+                'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
+                // On activation Installer::redirect_to_setup_page() (activated_plugin)
+                // sends the user to the admin.php?page=smush onboarding wizard. Its
+                // only opt-out is the skip-smush-setup option, but forcing that would
+                // also suppress the wizard itself — so drop the redirect callback.
+                // On the very request that activates Smush, activate_plugin() loads
+                // the plugin file (registering the callback) *after* init, so an
+                // init-time removal is too early — piggyback on the same
+                // activated_plugin hook at priority 0 and remove the callback just
+                // before it would run.
+                'register' => static function (): void {
+                    add_action('activated_plugin', static function (): void {
+                        remove_action('activated_plugin', ['Smush\\Core\\Installer', 'redirect_to_setup_page']);
+                    }, 0);
+                },
+            ],
+            'deactivation-survey' => [
+                'label' => __('Remove the deactivation feedback survey', 'wppack-tidy-admin'),
+                // On plugins.php Smush renders a hidden "we're sorry to see you go"
+                // survey modal in the footer whose script hijacks the Deactivate
+                // link. Dropping the render (it also enqueues the interception
+                // script) restores the plain Deactivate link; there is no opt-out.
+                'noticeDenyByHook' => [
+                    'admin_footer' => [
+                        'Smush\\Core\\Frontend\\Frontend_Controller::render_deactivate_survey_modal',
+                    ],
+                ],
+            ],
+            'help-links' => [
+                'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
+                // The Documentation and Help & Support links from its header nav,
+                // moved into the Help panel (on top of the automatic WordPress.org
+                // sidebar). The functional Activity Log button and the WPMU DEV
+                // account menu beside them stay put.
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'help',
+                        'parent' => 'smush',
+                        'html' => '<ul class="tidy-admin-meta-links">'
+                            . '<li><a href="https://wpmudev.com/docs/wpmu-dev-plugins/smush/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation') . '</a></li>'
+                            . '<li><a href="https://wpmudev.com/support/" target="_blank" rel="noopener noreferrer">' . esc_html__('Help & Support', 'wp-smushit') . '</a></li>'
+                            . '</ul>',
+                    ],
+                ],
+                // The nav renders inside Smush's React bundle with no server hook;
+                // each item carries a stable wrapper class.
+                'adminCss' => <<<'CSS'
+                body[class*="page_smush"] .wpmudev-nav__item-wrap-help,
+                body[class*="page_smush"] .wpmudev-nav__item-wrap-academy { display: none !important; }
+                CSS,
+            ],
+            'upsell-ui' => [
+                'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
+                // All rendered inside Smush's React bundle (wpmudev-plugin-ui) with
+                // no server hook to intercept, so CSS is the reachable option.
+                'adminCss' => <<<'CSS'
+                /* Pro teaser cards — locked features whose only controls are
+                   "Learn more" and an "Upgrade (Pro)" button: the CDN and Next-Gen
+                   Formats cards on the dashboard, Auto Resize on the settings page.
+                   The component marks them all with a --pro modifier. */
+                body[class*="page_smush"] .wpmudev-selector-toggle-card--pro { display: none !important; }
+                /* "Save up to 50% with Ultra Pro. Learn more" line in the
+                   Smush Savings stats card */
+                body[class*="page_smush"] .wpmudev-stats-card__upsell-text { display: none !important; }
+                /* The locked "Ultra (Pro) 5X compression" option in the compression
+                   level selector — a disabled teaser radio; Basic and Super stay */
+                body[class*="page_smush"] .wpmudev-bulk-smush-status__setting-level--ultra { display: none !important; }
+                /* The header's "Pro Features" button (opens a feature-comparison
+                   upgrade modal) */
+                body[class*="page_smush"] .smush-header__actions .wpmudev-button--pro { display: none !important; }
+                /* The header nav's "WPMU DEV" hub link (a membership cross-promo)
+                   and the separator that sets it off from the functional items */
+                body[class*="page_smush"] .wpmudev-nav__item-wrap-all-wpmudev,
+                body[class*="page_smush"] .wpmudev-nav__item-wrap-separator { display: none !important; }
+                CSS,
+            ],
+        ];
+    }
+}
