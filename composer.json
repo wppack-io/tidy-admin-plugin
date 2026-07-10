@@ -52,6 +52,7 @@
         "wp-plugin/feeds-for-youtube": "*",
         "wp-plugin/google-analytics-for-wordpress": "*",
         "wp-plugin/instagram-feed": "*",
+        "wp-plugin/litespeed-cache": "^7.8",
         "wp-plugin/location-weather": "*",
         "wp-plugin/mailchimp-for-wp": "*",
         "wp-plugin/optinmonster": "*",
