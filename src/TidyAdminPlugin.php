@@ -63,6 +63,7 @@ final class TidyAdminPlugin
         Modules\Wordfence::class,
         Modules\WpForms::class,
         Modules\WpMailSmtp::class,
+        Modules\WpSmush::class,
         Modules\Yarpp::class,
         Modules\Yoast::class,
     ];
@@ -225,13 +226,26 @@ final class TidyAdminPlugin
     {
         $activePlugins = (array) get_option('active_plugins', []);
 
+        // On the request that activates a plugin, activate_plugin() only adds it
+        // to active_plugins *after* init — so its module would sit out the very
+        // request where activation-time cleanups (e.g. suppressing an
+        // activated_plugin welcome redirect, like Smush's) must already be
+        // hooked. Treat the plugin named in plugins.php's activate action as
+        // active too; registering cleanups for it one request early is harmless.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $activating = is_admin() && ($_GET['action'] ?? '') === 'activate'
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            ? (string) ($_GET['plugin'] ?? '')
+            : '';
+
         return array_values(array_filter(
             array_map(
                 static fn(string $class): Module => new $class(),
                 self::MODULES,
             ),
             static fn(Module $module): bool => $module->targetPluginFile() === ''
-                || in_array($module->targetPluginFile(), $activePlugins, true),
+                || in_array($module->targetPluginFile(), $activePlugins, true)
+                || ($activating !== '' && $module->targetPluginFile() === $activating),
         ));
     }
 
