@@ -99,12 +99,56 @@ final class CookieYes extends AbstractModule
                 // only stable handle is that it is the nav bar's lone Radix dropdown
                 // trigger — the nav tab buttons beside it carry Radix ids too but are
                 // role="tab", and Help Guides / Support are plain links.
+                //
+                // CookieYes is a SaaS-connect plugin: signing in to the web app
+                // unlocks paid features in place per plan, and every locked control
+                // carries a crown pill (rendered only while locked). So the crowned
+                // controls are hidden via :has(crown) — they reappear on their own
+                // the moment a connected plan unlocks them — and nothing is hidden
+                // by feature name. The crown pill's only stable signature is its
+                // utility-class combination (text-xs + font-semibold + border, a
+                // combination the app uses for nothing else).
                 'adminCss' => <<<'CSS'
                 body[class*="page_cookie-law-info"] .cky-app-nav-bar button[id^="radix"]:not([role="tab"]) { display: none !important; }
-                /* The dashboard Overview cards' "Add languages" and "Geo-target"
-                   upsell links — premium teasers marked with a rounded star pill;
-                   the functional "Change" link beside them carries no pill and stays. */
-                body[class*="page_cookie-law-info"] .cky-info-widget-text button:has([class*="rounded-full"]) { display: none !important; }
+                /* The crown rules live inside the app's own `utilities` cascade
+                   layer: some subjects carry Tailwind's `!` variant (e.g.
+                   cky:flex!), and a layered !important beats any unlayered
+                   !important — inside the same layer our far higher specificity
+                   wins instead. */
+                @layer utilities {
+                /* The crown renders in two variants: a bordered pill
+                   ([class*="text-xs"][class*="font-semibold"][class*="border"]) and a
+                   small round badge with the crown-yellow background
+                   ([class*="bg-[#FFE8C6]"]). Crowned option rows (EU Countries & UK,
+                   Select countries, the Custom theme, Custom logo/icon, …) — each
+                   crowned label's wrapper holds only its radio button and the label,
+                   so hide the wrapper to take the orphan radio circle with it — and
+                   crowned buttons (the dashboard's Add languages / Geo-target links,
+                   premium colour pickers, crowned toggles) hide only themselves. */
+                body[class*="page_cookie-law-info"] #cky-app div:has(> label [class*="text-xs"][class*="font-semibold"][class*="border"]),
+                body[class*="page_cookie-law-info"] #cky-app div:has(> label [class*="bg-[#FFE8C6]"]),
+                body[class*="page_cookie-law-info"] #cky-app button:has([class*="text-xs"][class*="font-semibold"][class*="border"]),
+                body[class*="page_cookie-law-info"] #cky-app button:has([class*="bg-[#FFE8C6]"]),
+                body[class*="page_cookie-law-info"] .cky-info-widget-text button:has([class*="text-xs"][class*="font-semibold"][class*="border"]) { display: none !important; }
+                /* Crowned thumbnail-card options (the Popup layout): the badge sits
+                   in the card's caption (a direct-child div), so bound the match to
+                   that shallow path — sibling cards (Box, Banner) carry no badge.
+                   Crowned dropdown options (the GDPR & US State Laws template) are
+                   Radix listbox options. */
+                body[class*="page_cookie-law-info"] #cky-app div[class*="flex-col"]:has(> div > [class*="bg-[#FFE8C6]"]),
+                body[class*="page_cookie-law-info"] [role="option"]:has([class*="bg-[#FFE8C6]"]),
+                body[class*="page_cookie-law-info"] [role="menuitem"]:has([class*="bg-[#FFE8C6]"]) { display: none !important; }
+                /* Toggle rows whose control is a crowned switch (Support IAB TCF
+                   v2.3, Support Google's Additional Consent Mode) — hide the row so
+                   no orphaned label is left, and the bordered box around them (it
+                   contains nothing else; the geo-target box beside it carries its
+                   crowns on labels, not buttons, so it does not match). */
+                body[class*="page_cookie-law-info"] #cky-app div[class*="-mx-"][class*="flex-wrap"]:has(button [class*="text-xs"][class*="font-semibold"][class*="border"]),
+                body[class*="page_cookie-law-info"] #cky-app div[class*="rounded-[3px]"]:has(div[class*="-mx-"][class*="flex-wrap"] button [class*="text-xs"][class*="font-semibold"][class*="border"]) { display: none !important; }
+                /* Whole premium sections whose crown floats beside the heading with
+                   no control at all (Custom CSS for additional styling). */
+                body[class*="page_cookie-law-info"] #cky-app div[class*="rounded-[3px]"]:has([class*="text-xs"][class*="font-semibold"][class*="border"]):not(:has(label [class*="text-xs"][class*="font-semibold"][class*="border"])):not(:has(button [class*="text-xs"][class*="font-semibold"][class*="border"])) { display: none !important; }
+                }
                 CSS,
                 // The upgrade lead for the Upgrades panel: CookieYes' paid tiers
                 // live on its cloud-plan pricing page.

@@ -51,6 +51,18 @@ WordPress-native behaviour is squarely in scope. Keep it strictly to restoring
 core's appearance — never introduce a colour or style of your own — and never
 break the element's function.
 
+**SaaS-connect exception.** When a plugin's premium features unlock *in
+place* by signing in to the vendor's cloud service (CookieYes, and any plugin
+whose locked controls simply activate once connected on a suitable plan),
+never hide the feature UI *by name* — the lock badge on a control is plan
+state, not a promotion, and a static hide would take a working setting away
+from a connected user. What **is** allowed is hiding controls **through their
+lock marker** (the crown/lock pill the app renders only while locked) with a
+`:has(crown)` selector: the control disappears while locked and reappears on
+its own the moment the plan unlocks it. Pure promotions around them (partner /
+affiliate pitches, connect nags on foreign screens, review requests) are
+still removed as usual.
+
 When in doubt whether something is promotional or functional, leave it and
 note the question — removing a functional element is the one failure mode
 this plugin must never have.
