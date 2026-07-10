@@ -47,6 +47,7 @@
         "wp-plugin/custom-post-type-ui": "*",
         "wp-plugin/custom-twitter-feeds": "*",
         "wp-plugin/duplicator": "*",
+        "wp-plugin/elementor": "*",
         "wp-plugin/embedpress": "*",
         "wp-plugin/ewww-image-optimizer": "*",
         "wp-plugin/feeds-for-tiktok": "*",
