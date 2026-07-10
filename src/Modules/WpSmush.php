@@ -77,6 +77,24 @@ final class WpSmush extends AbstractModule
                         'smush-cdn',
                     ],
                 ],
+                // The settings page's Next-Gen Formats view is the same kind of
+                // Pro-only teaser (every control on it renders locked in free).
+                // Relocate it (link only) into the Upgrades panel so the page stays
+                // reachable, and hide its item in the settings side navigation below.
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'premium',
+                        'parent' => 'smush',
+                        'html' => '<p><a href="' . esc_url(admin_url('admin.php?page=smush-settings&view=nextgen')) . '">'
+                            . esc_html__('Next-Gen Formats', 'wp-smushit') . '</a></p>',
+                    ],
+                ],
+                // The side-navigation items are identical buttons with no per-item
+                // class or href (text-only labels in a React rail), so the position
+                // is the only hook: Next-Gen Formats is the second item.
+                'adminCss' => <<<'CSS'
+                body[class*="page_smush"] .smush-sidenav-main-container__navigation .wpmudev-side-navigation > li:nth-child(2) { display: none !important; }
+                CSS,
             ],
             'plugin-list-links' => [
                 'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
@@ -192,6 +210,10 @@ final class WpSmush extends AbstractModule
                    and the separator that sets it off from the functional items */
                 body[class*="page_smush"] .wpmudev-nav__item-wrap-all-wpmudev,
                 body[class*="page_smush"] .wpmudev-nav__item-wrap-separator { display: none !important; }
+                /* Pro-locked rows on the settings Integrations view (Amazon S3) — a
+                   disabled toggle with a Pro badge; the component marks them
+                   is-disabled. The functional integrations beside them stay. */
+                body[class*="page_smush"] .wpmudev-integrations__setting-item.is-disabled { display: none !important; }
                 CSS,
             ],
         ];
