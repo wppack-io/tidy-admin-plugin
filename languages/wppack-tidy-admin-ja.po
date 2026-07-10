@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-10T02:37:11+00:00\n"
+"PO-Revision-Date: 2026-07-10T05:34:28+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -34,6 +34,7 @@ msgstr "ヘッダーのアップグレードボタンをアップグレードパ
 
 #: src/Modules/AdvancedCustomFields.php:66
 #: src/Modules/AllInOneWpMigration.php:79
+#: src/Modules/CookieYes.php:116
 #: src/Modules/Duplicator.php:76
 #: src/Modules/EwwwImageOptimizer.php:76
 #: src/Modules/FeedsForTiktok.php:77
@@ -73,6 +74,7 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 
 #: src/Modules/AdvancedCustomFields.php:129
 #: src/Modules/AllInOneSeo.php:141
+#: src/Modules/CookieYes.php:96
 #: src/Modules/CustomFacebookFeed.php:201
 #: src/Modules/CustomPostTypeUi.php:100
 #: src/Modules/CustomTwitterFeeds.php:102
@@ -132,6 +134,7 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/AllInOneSeo.php:78
 #: src/Modules/AllInOneWpMigration.php:92
 #: src/Modules/Bnfw.php:56
+#: src/Modules/CookieYes.php:143
 #: src/Modules/CustomFacebookFeed.php:94
 #: src/Modules/CustomPostTypeUi.php:80
 #: src/Modules/CustomTwitterFeeds.php:80
@@ -164,6 +167,7 @@ msgid "Keep the post-list title column readable beside its SEO column"
 msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に保つ"
 
 #: src/Modules/AllInOneSeo.php:166
+#: src/Modules/CookieYes.php:90
 #: src/Modules/CustomFacebookFeed.php:113
 #: src/Modules/CustomTwitterFeeds.php:89
 #: src/Modules/Duplicator.php:248
@@ -191,6 +195,7 @@ msgstr "「無料版を使用中」バーを除去"
 
 #: src/Modules/AllInOneSeo.php:191
 #: src/Modules/Cfdb7.php:47
+#: src/Modules/CookieYes.php:55
 #: src/Modules/Mc4wp.php:120
 #: src/Modules/PublishPressFuture.php:154
 #: src/Modules/Yarpp.php:41
@@ -263,6 +268,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 
 #: src/Modules/AllInOneSeo.php:512
 #: src/Modules/BrokenLinkChecker.php:64
+#: src/Modules/CookieYes.php:121
 #: src/Modules/CustomFacebookFeed.php:230
 #: src/Modules/CustomTwitterFeeds.php:137
 #: src/Modules/EmbedPress.php:196
@@ -333,17 +339,7 @@ msgstr "Cloud Link Checker のクロスセルを除去"
 msgid "Hide the stray empty heading on its pages"
 msgstr "ページ内の余分な空見出しを非表示"
 
-#: src/Modules/CustomFacebookFeed.php:42
-#: src/Modules/CustomTwitterFeeds.php:43
-#: src/Modules/FeedsForTiktok.php:43
-#: src/Modules/FeedsForYoutube.php:44
-#: src/Modules/InstagramFeed.php:42
-#: src/Modules/ReviewsFeed.php:39
-#: src/Modules/WpChat.php:39
-#: src/Modules/WpSmush.php:132
-msgid "Remove the deactivation feedback survey"
-msgstr "無効化時のフィードバックアンケートを除去"
-
+#: src/Modules/CookieYes.php:44
 #: src/Modules/CustomFacebookFeed.php:54
 #: src/Modules/CustomTwitterFeeds.php:55
 #: src/Modules/FeedsForYoutube.php:56
@@ -355,6 +351,7 @@ msgstr "無効化時のフィードバックアンケートを除去"
 msgid "Stop the welcome-screen redirect on activation"
 msgstr "有効化時のウェルカム画面へのリダイレクトを停止"
 
+#: src/Modules/CookieYes.php:64
 #: src/Modules/CustomFacebookFeed.php:119
 #: src/Modules/CustomTwitterFeeds.php:95
 #: src/Modules/FeedsForTiktok.php:97
@@ -366,6 +363,18 @@ msgstr "有効化時のウェルカム画面へのリダイレクトを停止"
 #: src/Modules/WpConsent.php:121
 msgid "Remove marketing notices and announcements"
 msgstr "マーケティング通知・お知らせを除去"
+
+#: src/Modules/CookieYes.php:79
+#: src/Modules/CustomFacebookFeed.php:42
+#: src/Modules/CustomTwitterFeeds.php:43
+#: src/Modules/FeedsForTiktok.php:43
+#: src/Modules/FeedsForYoutube.php:44
+#: src/Modules/InstagramFeed.php:42
+#: src/Modules/ReviewsFeed.php:39
+#: src/Modules/WpChat.php:39
+#: src/Modules/WpSmush.php:132
+msgid "Remove the deactivation feedback survey"
+msgstr "無効化時のフィードバックアンケートを除去"
 
 #: src/Modules/CustomFacebookFeed.php:133
 #: src/Modules/InstagramFeed.php:222

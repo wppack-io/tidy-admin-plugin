@@ -89,6 +89,7 @@ supported, with the major versions the cleanups were verified against:
 | [BNFW](https://wordpress.org/plugins/bnfw/) | 1.x |
 | [Broken Link Checker](https://wordpress.org/plugins/broken-link-checker/) | 2.x |
 | [Contact Form CFDB7](https://wordpress.org/plugins/contact-form-cfdb7/) | 1.x |
+| [CookieYes](https://wordpress.org/plugins/cookie-law-info/) | 3.x |
 | [Custom Post Type UI](https://wordpress.org/plugins/custom-post-type-ui/) | 1.x |
 | [Duplicator](https://wordpress.org/plugins/duplicator/) | 1.x |
 | [EmbedPress](https://wordpress.org/plugins/embedpress/) | 4.x |
