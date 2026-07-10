@@ -49,6 +49,18 @@ interface Module
     public function menuParent(): string;
 
     /**
+     * Additional $parent_file values that also identify this plugin's own
+     * screens. Some vendors keep registering their pages under a legacy,
+     * hidden toplevel while the visible menu lives elsewhere (e.g. Elementor's
+     * settings pages resolve to the hidden "elementor" parent while the
+     * visible menu is "elementor-home") — screens resolving to a parent listed
+     * here carry the same Help/Upgrades panels as menuParent()'s own screens.
+     *
+     * @return list<string>
+     */
+    public function menuParentAliases(): array;
+
+    /**
      * $_GET['page'] slug prefixes identifying the plugin's own admin screens,
      * where relocated setup notices keep showing.
      *

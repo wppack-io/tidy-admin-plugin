@@ -43,6 +43,7 @@ final class TidyAdminPlugin
         Modules\CustomFacebookFeed::class,
         Modules\CustomTwitterFeeds::class,
         Modules\Duplicator::class,
+        Modules\Elementor::class,
         Modules\EmbedPress::class,
         Modules\EwwwImageOptimizer::class,
         Modules\FeedsForTiktok::class,
@@ -103,6 +104,7 @@ final class TidyAdminPlugin
         $setupNoticePlugins = [];
         $adminCss = [self::BASE_ADMIN_CSS];
         $directoryPlugins = [];
+        $panelParentAliases = [];
 
         $settingsModules = [];
 
@@ -138,6 +140,11 @@ final class TidyAdminPlugin
                     'slug' => $file !== '' ? dirname($file) : '',
                     'license' => $module->licenseConnect(),
                 ];
+                // Screens resolving to a legacy/hidden parent still get the
+                // primary parent's panels
+                foreach ($module->menuParentAliases() as $alias) {
+                    $panelParentAliases[$alias] = $module->menuParent();
+                }
             }
 
             if ($module->menuParent() !== '' && $module->providesHelpPanel()) {
@@ -192,7 +199,7 @@ final class TidyAdminPlugin
             $modules,
         ), static fn(string $parent): bool => $parent !== ''));
 
-        (new Support\SubmenuCleaner($submenuRelocations, $extraMetaLinks, $saleNotices, $helpSidebars, $panelParents))->register();
+        (new Support\SubmenuCleaner($submenuRelocations, $extraMetaLinks, $saleNotices, $helpSidebars, $panelParents, $panelParentAliases))->register();
         (new Support\UpgradesDirectory($submenuRelocations, $extraMetaLinks, $directoryPlugins))->register();
         (new Support\PluginListLinkCleaner($upsellLinkUrlsByPlugin))->register();
         (new Support\NoticeHookCleaner($noticeDenyByHook))->register();
