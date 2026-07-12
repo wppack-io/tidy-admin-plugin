@@ -172,6 +172,29 @@ final class SubmenuCleaner
     }
 
     /**
+     * Maps an aliased (legacy/hidden) parent slug to its module's primary
+     * parent. Vendors may append query args to $parent_file and run it
+     * through esc_url() (e.g. Elementor's
+     * "edit.php?post_type=elementor_library&amp;tabs_group=library"), so
+     * beyond the exact match, an alias also matches a decoded parent that
+     * continues with further query args.
+     */
+    private function resolveParentAlias(string $parent): string
+    {
+        if (isset($this->parentAliases[$parent])) {
+            return $this->parentAliases[$parent];
+        }
+        $normalized = html_entity_decode($parent, ENT_QUOTES);
+        foreach ($this->parentAliases as $alias => $primary) {
+            if ($normalized === $alias || str_starts_with($normalized, $alias . '&')) {
+                return $primary;
+            }
+        }
+
+        return $parent;
+    }
+
+    /**
      * Adds one screen-meta toggle button per non-empty panel, wired up by
      * core's screenMeta.init() so they behave exactly like Help.
      */
@@ -196,10 +219,18 @@ final class SubmenuCleaner
 
         // A legacy/hidden parent resolves to the module's primary parent, so
         // its screens carry the same panels
-        $parent = $this->parentAliases[$parent] ?? $parent;
+        $parent = $this->resolveParentAlias($parent);
+
+        // When the screen already carries core's contextual Help (its own tabs
+        // and Help button — e.g. Elementor's floating-elements list), that
+        // native panel stays the single Help button, like the ACF-type
+        // providesHelpPanel() opt-out; adding a second Help button would
+        // duplicate it. The Upgrades button is unaffected.
+        $screen = get_current_screen();
+        $hasNativeHelp = $screen !== null && $screen->get_help_tabs() !== [];
 
         $panels = [];
-        if (($help = $this->helpPanel($parent)) !== '') {
+        if (!$hasNativeHelp && ($help = $this->helpPanel($parent)) !== '') {
             // Core's own string, so the button matches the native Help tab in every language
             $panels[] = ['id' => 'tidy-admin-plugin-help', 'title' => __('Help'), 'content' => $help];
         }
