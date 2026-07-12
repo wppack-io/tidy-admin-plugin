@@ -38,7 +38,13 @@ final class Elementor extends AbstractModule
         // pages (Settings, Tools, Role Manager, Custom Fonts, Submissions, …)
         // are still registered under the legacy "elementor" toplevel — which
         // Elementor hides with CSS — so $parent_file resolves to it there.
-        return ['elementor'];
+        // The template-library and floating-elements list screens are plain
+        // CPT screens with their own parent slugs.
+        return [
+            'elementor',
+            'edit.php?post_type=elementor_library',
+            'edit.php?post_type=e-floating-buttons',
+        ];
     }
 
     public function ownPagePrefixes(): array
@@ -345,6 +351,25 @@ final class Elementor extends AbstractModule
                 /* Role Manager page: "Want to give access to more granular
                    permissions? Upgrade" box below the functional role controls */
                 body[class*="page_elementor"] .elementor-role-go-pro { display: none !important; }
+                /* Element Manager: the "Upgrade now" button in the Permissions
+                   column header (the column is a locked Pro teaser; its per-row
+                   Edit controls already render disabled) and the "Elementor Pro
+                   Elements" promo box below the table. The teaser pages' own
+                   CTAs use a different class (elementor-button), so they keep
+                   theirs. */
+                body[class*="page_elementor"] .wrap a.components-button.go-pro,
+                body[class*="page_elementor"] div:has(> div > div > a[class*="e-id-elementor-element-manager-button-upgrade"]) { display: none !important; }
+                /* Getting Started (page=elementor): the "Go Pro, Go limitless"
+                   side banner (hide its column container so the content column
+                   reflows) and the Jumpstart tiles that lead to the Pro teaser
+                   pages. The Theme Builder tile's URL is the bare app URL —
+                   anchor to the exact string end so the functional Site
+                   Templates link (…#/kit-library) never matches. */
+                body.toplevel_page_elementor div[class*="MuiContainer-maxWidthXs"]:has(a[href*="go-pro-home-sidebar-upgrade"]),
+                body.toplevel_page_elementor li:has(> div > a[href*="page=popup_templates"]),
+                body.toplevel_page_elementor li:has(> div > a[href*="page=elementor_custom_icons"]),
+                body.toplevel_page_elementor li:has(> div > a[href*="page=elementor_custom_fonts"]),
+                body.toplevel_page_elementor li:has(> div > a[href$="page=elementor-app"]) { display: none !important; }
                 CSS,
             ],
             'license-fields' => [
