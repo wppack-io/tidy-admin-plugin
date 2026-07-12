@@ -381,6 +381,44 @@ final class Elementor extends AbstractModule
                 body[class*="page_elementor"] #elementor-home-app [data-test="alert-connect"] { display: none !important; }
                 CSS,
             ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                // Elementor pins a fixed 48px "Site Builder" top bar over the
+                // content area on its editor-one screens (#wpbody clears it with
+                // a margin), so the default flow row would sit as a gray band
+                // between the bar and the page. Hang the buttons from the bar's
+                // bottom edge instead — like core's Help tab under the admin bar
+                // — and let an opened panel drop over the content below.
+                'adminCss' => <<<'CSS'
+                body:has(#editor-one-top-bar) #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
+                body:has(#editor-one-top-bar) #tidy-admin-meta-region #screen-meta-links { display: block; float: right; margin-right: 20px; }
+                body:has(#editor-one-top-bar) #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* The Home screen has no editor-one bar; its app draws its own
+                   48px dark header at the top of the content area. Hang the
+                   buttons below that header too, inset from the right edge so
+                   they sit clear of the header row's "Go to site setup / Edit
+                   site" actions. */
+                body.toplevel_page_elementor-home #tidy-admin-meta-region { position: absolute; top: 48px; left: 20px; right: 0; z-index: 100; }
+                body.toplevel_page_elementor-home #tidy-admin-meta-region #screen-meta-links { margin-right: 340px; }
+                body.toplevel_page_elementor-home #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                CSS,
+            ],
+            'getting-started-style' => [
+                'label' => __('Restyle the Getting Started screen to the WordPress admin look', 'wppack-tidy-admin'),
+                // The Getting Started screen (page=elementor) paints its own
+                // brand look over wp-admin: a bold 24px Roboto page title and
+                // brand-pink MUI buttons. Normalise both to core's appearance —
+                // the .wrap h1 typography and the admin colour scheme's own
+                // button colours (published by core as --wp-admin-theme-color
+                // custom properties) — never a colour of our own.
+                'adminCss' => <<<'CSS'
+                body.toplevel_page_elementor #wpbody-content h5.MuiTypography-h5 { font-size: 23px; font-weight: 400; color: #1d2327; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; }
+                body.toplevel_page_elementor #wpbody-content .MuiButton-containedPrimary { background: var(--wp-admin-theme-color, #2271b1) !important; color: #fff !important; border-radius: 3px; box-shadow: none; }
+                body.toplevel_page_elementor #wpbody-content .MuiButton-containedPrimary:hover { background: var(--wp-admin-theme-color-darker-10, #135e96) !important; }
+                body.toplevel_page_elementor #wpbody-content .MuiButton-outlinedSecondary { color: var(--wp-admin-theme-color, #2271b1) !important; border-color: var(--wp-admin-theme-color, #2271b1) !important; background: #f6f7f7 !important; border-radius: 3px; }
+                body.toplevel_page_elementor #wpbody-content .MuiButton-outlinedSecondary:hover { background: #f0f0f1 !important; }
+                CSS,
+            ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
                 // The vendor's real resources (its Help Center and its Academy

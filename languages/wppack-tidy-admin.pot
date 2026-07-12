@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-10T17:05:19+09:00\n"
+"POT-Creation-Date: 2026-07-12T12:50:14+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -53,7 +53,7 @@ msgstr ""
 #: src/Modules/CustomFacebookFeed.php:79
 #: src/Modules/CustomPostTypeUi.php:58
 #: src/Modules/Duplicator.php:125
-#: src/Modules/Elementor.php:131
+#: src/Modules/Elementor.php:137
 #: src/Modules/EmbedPress.php:71
 #: src/Modules/EwwwImageOptimizer.php:81
 #: src/Modules/FeedsForYoutube.php:94
@@ -81,7 +81,7 @@ msgstr ""
 #: src/Modules/CustomPostTypeUi.php:100
 #: src/Modules/CustomTwitterFeeds.php:102
 #: src/Modules/Duplicator.php:264
-#: src/Modules/Elementor.php:312
+#: src/Modules/Elementor.php:318
 #: src/Modules/EmbedPress.php:171
 #: src/Modules/FeedsForTiktok.php:123
 #: src/Modules/FeedsForYoutube.php:233
@@ -113,7 +113,7 @@ msgstr ""
 #: src/Modules/CustomPostTypeUi.php:45
 #: src/Modules/CustomTwitterFeeds.php:72
 #: src/Modules/Duplicator.php:44
-#: src/Modules/Elementor.php:112
+#: src/Modules/Elementor.php:118
 #: src/Modules/EmbedPress.php:53
 #: src/Modules/EwwwImageOptimizer.php:63
 #: src/Modules/FeedsForTiktok.php:63
@@ -143,7 +143,7 @@ msgstr ""
 #: src/Modules/CustomPostTypeUi.php:80
 #: src/Modules/CustomTwitterFeeds.php:80
 #: src/Modules/Duplicator.php:180
-#: src/Modules/Elementor.php:360
+#: src/Modules/Elementor.php:423
 #: src/Modules/EmbedPress.php:99
 #: src/Modules/EwwwImageOptimizer.php:119
 #: src/Modules/FeedsForTiktok.php:88
@@ -176,7 +176,7 @@ msgstr ""
 #: src/Modules/CustomFacebookFeed.php:113
 #: src/Modules/CustomTwitterFeeds.php:89
 #: src/Modules/Duplicator.php:248
-#: src/Modules/Elementor.php:198
+#: src/Modules/Elementor.php:204
 #: src/Modules/EmbedPress.php:132
 #: src/Modules/FeedsForYoutube.php:198
 #: src/Modules/InstagramFeed.php:123
@@ -202,7 +202,7 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:191
 #: src/Modules/Cfdb7.php:47
 #: src/Modules/CookieYes.php:55
-#: src/Modules/Elementor.php:204
+#: src/Modules/Elementor.php:210
 #: src/Modules/Mc4wp.php:120
 #: src/Modules/PublishPressFuture.php:154
 #: src/Modules/Yarpp.php:41
@@ -231,7 +231,7 @@ msgid "Hide locked Pro settings rows"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:338
-#: src/Modules/Elementor.php:351
+#: src/Modules/Elementor.php:376
 #: src/Modules/EwwwImageOptimizer.php:155
 #: src/Modules/WpMailSmtp.php:332
 msgid "Hide the license fields (turn off while entering a key)"
@@ -279,6 +279,7 @@ msgstr ""
 #: src/Modules/CookieYes.php:165
 #: src/Modules/CustomFacebookFeed.php:230
 #: src/Modules/CustomTwitterFeeds.php:137
+#: src/Modules/Elementor.php:385
 #: src/Modules/EmbedPress.php:196
 #: src/Modules/EwwwImageOptimizer.php:141
 #: src/Modules/FeedsForTiktok.php:151
@@ -350,7 +351,7 @@ msgstr ""
 #: src/Modules/CookieYes.php:44
 #: src/Modules/CustomFacebookFeed.php:54
 #: src/Modules/CustomTwitterFeeds.php:55
-#: src/Modules/Elementor.php:99
+#: src/Modules/Elementor.php:105
 #: src/Modules/FeedsForYoutube.php:56
 #: src/Modules/InstagramFeed.php:54
 #: src/Modules/ReviewsFeed.php:51
@@ -363,7 +364,7 @@ msgstr ""
 #: src/Modules/CookieYes.php:64
 #: src/Modules/CustomFacebookFeed.php:119
 #: src/Modules/CustomTwitterFeeds.php:95
-#: src/Modules/Elementor.php:227
+#: src/Modules/Elementor.php:233
 #: src/Modules/FeedsForTiktok.php:97
 #: src/Modules/FeedsForYoutube.php:204
 #: src/Modules/InstagramFeed.php:129
@@ -377,7 +378,7 @@ msgstr ""
 #: src/Modules/CookieYes.php:79
 #: src/Modules/CustomFacebookFeed.php:42
 #: src/Modules/CustomTwitterFeeds.php:43
-#: src/Modules/Elementor.php:294
+#: src/Modules/Elementor.php:300
 #: src/Modules/FeedsForTiktok.php:43
 #: src/Modules/FeedsForYoutube.php:44
 #: src/Modules/InstagramFeed.php:42
@@ -429,15 +430,19 @@ msgstr ""
 msgid "Overlay the Help and Upgrades buttons onto the page title"
 msgstr ""
 
-#: src/Modules/Elementor.php:262
+#: src/Modules/Elementor.php:268
 msgid "Remove the Accessibility promo dashboard widget"
 msgstr ""
 
-#: src/Modules/Elementor.php:274
+#: src/Modules/Elementor.php:280
 msgid "Clean promotions out of the Overview dashboard widget"
 msgstr ""
 
-#: src/Modules/Elementor.php:371
+#: src/Modules/Elementor.php:407
+msgid "Restyle the Getting Started screen to the WordPress admin look"
+msgstr ""
+
+#: src/Modules/Elementor.php:434
 msgid "Academy"
 msgstr ""
 
@@ -672,16 +677,16 @@ msgstr ""
 msgid "Pending plugin setup"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:207
+#: src/Support/SubmenuCleaner.php:238
 msgid "Upgrades"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:419
+#: src/Support/SubmenuCleaner.php:450
 #: src/Support/UpgradesDirectory.php:299
 msgid "Upgrade"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:420
+#: src/Support/SubmenuCleaner.php:451
 msgid "Premium features"
 msgstr ""
 
