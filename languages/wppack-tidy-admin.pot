@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-13T21:43:26+09:00\n"
+"POT-Creation-Date: 2026-07-13T22:35:37+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -176,7 +176,7 @@ msgstr ""
 #: src/Modules/Mc4wp.php:52
 #: src/Modules/MonsterInsights.php:107
 #: src/Modules/OptinMonster.php:107
-#: src/Modules/PublishPressAuthors.php:110
+#: src/Modules/PublishPressAuthors.php:165
 #: src/Modules/PublishPressBlocks.php:117
 #: src/Modules/PublishPressCapabilities.php:103
 #: src/Modules/PublishPressChecklists.php:116
@@ -260,7 +260,7 @@ msgstr ""
 #: src/Modules/LiteSpeedCache.php:91
 #: src/Modules/LocationWeather.php:191
 #: src/Modules/Maintenance.php:68
-#: src/Modules/PublishPressAuthors.php:126
+#: src/Modules/PublishPressAuthors.php:181
 #: src/Modules/PublishPressCapabilities.php:119
 #: src/Modules/PublishPressChecklists.php:132
 #: src/Modules/PublishPressPermissions.php:140
@@ -275,6 +275,7 @@ msgid "Fix styling conflicts with WordPress core"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:302
+#: src/Modules/PublishPressAuthors.php:124
 #: src/Modules/PublishPressFuture.php:137
 msgid "Hide locked Pro settings rows"
 msgstr ""
@@ -342,7 +343,7 @@ msgstr ""
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/MonsterInsights.php:197
 #: src/Modules/OptinMonster.php:184
-#: src/Modules/PublishPressAuthors.php:136
+#: src/Modules/PublishPressAuthors.php:191
 #: src/Modules/PublishPressBlocks.php:106
 #: src/Modules/PublishPressCapabilities.php:129
 #: src/Modules/PublishPressChecklists.php:142
@@ -619,6 +620,10 @@ msgid "Remove the icon from its Settings menu item"
 msgstr ""
 
 #: src/Modules/PublishPressAuthors.php:95
+msgid "Fix its broken settings-tab links"
+msgstr ""
+
+#: src/Modules/PublishPressAuthors.php:150
 #: src/Modules/PublishPressChecklists.php:101
 msgid "Hide the support pitch column on its screens"
 msgstr ""

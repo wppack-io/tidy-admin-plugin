@@ -91,6 +91,61 @@ final class PublishPressAuthors extends AbstractModule
                     ],
                 ],
             ],
+            'tab-links' => [
+                'label' => __('Fix its broken settings-tab links', 'wppack-tidy-admin'),
+                /*
+                 * The Author Pages screen keys its tabs by CSS class selector
+                 * (".ppma-author-pages-tab-general") and prints that key
+                 * through esc_url(), which prepends a scheme to the
+                 * scheme-less string and mangles the href into a dead URL
+                 * ("http://.ppma-author-pages-tab-general") — a middle-click
+                 * or open-in-new-tab lands on an error page. Both schemes are
+                 * matched: core prepends http:// under the default protocol
+                 * list and https:// when a caller passes a list headed by
+                 * https. Switching itself runs off data-tab-content, so only
+                 * the href needs repair; there is no hook (the vendor echoes
+                 * the anchor directly, and its tabs filter feeds both the
+                 * href and the switching key), hence the footer script. A
+                 * host cannot start with a dot, so the pattern cannot match
+                 * a legitimate URL.
+                 */
+                'register' => static function (): void {
+                    add_action('admin_print_footer_scripts', static function (): void {
+                        if (!str_starts_with((string) ($_GET['page'] ?? ''), 'ppma')) {
+                            return;
+                        }
+                        echo '<script>document.querySelectorAll(\'a[data-tab-content][href^="http://."],a[data-tab-content][href^="https://."]\').forEach(function(a){'
+                            . 'a.setAttribute("href",a.getAttribute("href").replace(/^https?:\/\/\./,"#"));'
+                            . '});</script>' . "\n";
+                    });
+                },
+            ],
+            'pro-locked-fields' => [
+                'label' => __('Hide locked Pro settings rows', 'wppack-tidy-admin'),
+                // Fields that only work in Pro render as disabled controls
+                // with a gold lock CTA in Free (the author-category post-type
+                // picker, quick-edit post types, author-list settings, the
+                // author-box editor's Pro rows) — dead UI; the upgrade link
+                // lives in the Upgrades panel. Baked into the templates with
+                // no hook, so CSS, keyed on the vendor's own promo markers:
+                // group rows tag the tr, field rows tag the td, inline locks
+                // sit in .ppma-promo-upgrade-notice beside the control. The
+                // custom-fields list also appends fake blurred teaser rows
+                // via JS (tr.ppma-blur). body[class*="ppma"] covers both its
+                // admin pages (page_ppma-*) and its post-type editors
+                // (post-type-ppma_boxes, post-type-ppmacf_field).
+                'adminCss' => <<<'CSS'
+                body[class*="ppma"] tr.ppma-promo-overlay-row,
+                body[class*="ppma"] tr:has(> td.ppma-promo-overlay-row),
+                body[class*="ppma"] tr.ppma-blur,
+                body[class*="ppma"] .form-field:has(.ppma-promo-upgrade-notice),
+                body[class*="ppma"] label:has(.ppma-promo-upgrade-notice),
+                body[class*="ppma"] p:has(.ppma-promo-upgrade-notice),
+                /* "Add New Author Field": Pro-locked — its script rewrites the
+                   href to # and a click only opens a promo thickbox */
+                body[class*="ppma"] .page-title-action[href="#"]:has(.dashicons-lock) { display: none !important; }
+                CSS,
+            ],
             'support-box' => [
                 'label' => __('Hide the support pitch column on its screens', 'wppack-tidy-admin'),
                 // The settings screen's "Need PublishPress Authors support?"
