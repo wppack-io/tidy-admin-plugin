@@ -83,8 +83,15 @@ final class Maintenance extends AbstractModule
                 'adminCss' => <<<'CSS'
                 /* The whole sidebar: a PRO discount box, a "Get PRO Now" button
                    and install-promos for the vendor's separate Weglot, WP
-                   Captcha and WP Force SSL plugins — nothing functional */
+                   Captcha and WP Force SSL plugins — nothing functional. The
+                   tabs wrapper floated beside it at 70% width; with the sidebar
+                   gone, let it flow at full width. */
                 body.toplevel_page_maintenance #mtnc-sidebar-wrapper { display: none !important; }
+                body.toplevel_page_maintenance #mtnc-tabs-wrapper { float: none !important; width: auto !important; }
+                /* The header's maintenance-mode toggle was pulled left by
+                   margin: -14px calc(27% + 30px) to clear the sidebar column;
+                   with the sidebar gone, let it sit at the header's right edge */
+                body.toplevel_page_maintenance #header-right { margin: 0 !important; }
                 /* "PRO" entry in the page's own tab menu (only opens the
                    pricing dialog) */
                 body.toplevel_page_maintenance li.pro-menu { display: none !important; }
@@ -116,6 +123,30 @@ final class Maintenance extends AbstractModule
                             . esc_html__('Upgrade to Pro', 'wppack-tidy-admin') . '</a></p>',
                     ],
                 ],
+            ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                // The page opens with its own white header bar (logo left,
+                // maintenance-mode toggle at the right edge once the sidebar
+                // margin above is neutralized), so the default flow row would
+                // sit above it as a separate gray band. Overlay the screen-meta
+                // region across that bar instead, hanging the buttons from its
+                // top edge just left of the toggle (~180px + gutter); an opened
+                // panel drops over the content below. The 20px left inset keeps
+                // the opened panel off the admin menu on this full-bleed page.
+                'adminCss' => <<<'CSS'
+                body.toplevel_page_maintenance #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
+                body.toplevel_page_maintenance #tidy-admin-meta-region #screen-meta-links { margin-right: 230px; }
+                body.toplevel_page_maintenance #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                /* On phone widths the header row is too narrow for the buttons
+                   to sit between the logo and the toggle — pad the header bar
+                   at the top and hang the buttons in that strip instead, still
+                   overlaid on the same white bar */
+                @media (max-width: 782px) {
+                    body.toplevel_page_maintenance .mtnc-header { padding-top: 52px; }
+                    body.toplevel_page_maintenance #tidy-admin-meta-region #screen-meta-links { margin-right: 10px; }
+                }
+                CSS,
             ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
