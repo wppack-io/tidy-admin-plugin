@@ -54,31 +54,15 @@ final class Revisionary extends AbstractModule
                 // The sidebar "Upgrade to Pro" item is registered with the bare
                 // slug "revisionary" — a substring of every sibling slug
                 // (revisionary-q, revisionary-settings, …), so a relocation
-                // needle cannot address it; remove it directly and lead the
-                // panel to the vendor's pricing page (its UPGRADE_PRO_URL).
-                'register' => static function (): void {
-                    add_action('admin_menu', static function (): void {
-                        remove_submenu_page('revisionary-q', 'revisionary');
-                    }, PHP_INT_MAX - 1);
-                    // CoreAdmin's script repaints the *last* submenu item gold
-                    // and rewrites its href to the sales site, assuming it is
-                    // its own Upgrade item — with that item removed it would
-                    // hijack the Settings link instead; undo it after load.
-                    add_action('admin_footer', static function (): void {
-                        echo '<script>(function () {'
-                            . 'function fix() { document.querySelectorAll("#toplevel_page_revisionary-q .wp-submenu a[href*=\"publishpress.com\"]").forEach(function (a) {'
-                            . 'a.href = ' . wp_json_encode(admin_url('admin.php?page=revisionary-settings')) . ';'
-                            . 'a.style.fontWeight = ""; a.style.color = ""; a.removeAttribute("target");'
-                            . '}); }'
-                            // The vendor's ready handler can queue behind deferred
-                            // jQuery and run after window load, so watch the menu
-                            // and undo the gold repaint whenever it happens
-                            . 'var menu = document.getElementById("toplevel_page_revisionary-q");'
-                            . 'if (menu) { new MutationObserver(fix).observe(menu, { attributes: true, subtree: true, attributeFilter: ["href", "style"] }); }'
-                            . 'fix();'
-                            . '})();</script>' . "\n";
-                    }, PHP_INT_MAX);
-                },
+                // needle cannot address it. It must not be *removed* either:
+                // the vendor's script repaints the submenu's LAST item gold and
+                // rewrites its href to the sales site, so removal hands that
+                // treatment to the Settings link. Hide it with CSS instead —
+                // it stays the last item and soaks up its own repaint — and
+                // lead the panel to the vendor's pricing page.
+                'adminCss' => <<<'CSS'
+                #adminmenu #toplevel_page_revisionary-q .wp-submenu li:has(> a[href$="page=revisionary"]) { display: none !important; }
+                CSS,
                 'extraScreenMetaContent' => [
                     [
                         'category' => 'upgrade',
