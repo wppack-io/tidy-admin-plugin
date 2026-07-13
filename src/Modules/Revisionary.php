@@ -40,6 +40,23 @@ final class Revisionary extends AbstractModule
     public function features(): array
     {
         return [
+            'marketing-notices' => [
+                'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
+                // The purple "You're using PublishPress Revisions Free —
+                // Upgrade to Pro" bar the shared wordpress-version-notices
+                // library pins above the plugin's own screens. Every
+                // PublishPress plugin registers its banner through this
+                // filter; drop this plugin's entry after it is added.
+                'register' => static function (): void {
+                    add_filter('pp_version_notice_top_notice_settings', static function ($settings) {
+                        if (is_array($settings)) {
+                            unset($settings['revisionary']);
+                        }
+
+                        return $settings;
+                    }, PHP_INT_MAX);
+                },
+            ],
             'review-request' => [
                 'label' => __('Remove the review request', 'wppack-tidy-admin'),
                 // The "Are you enjoying PublishPress Revisions?" banner from the
