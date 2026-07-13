@@ -93,13 +93,29 @@ final class PublishPressBlocks extends AbstractModule
             ],
             'pro-teaser-cards' => [
                 'label' => __('Hide locked Pro feature cards on its dashboard', 'wppack-tidy-admin'),
-                // The dashboard's Pro-only feature cards ("Core blocks
-                // features PRO", …) carry a permanently disabled toggle — a
-                // teaser with no working control. The vendor marks exactly
-                // those with its own --disabled modifier; the upgrade link
-                // lives in the Upgrades panel.
+                // Pro-only UI renders permanently locked in Free — dead
+                // teasers whose only control is a gold lock link to the sales
+                // site; the upgrade link lives in the Upgrades panel. All
+                // matched by the vendor's own markers: --disabled feature
+                // cards on the dashboard, block cards whose toggle is
+                // replaced by the .advgb-pro-small-overlay-text lock (Block
+                // Settings uses li.block-config-item, Block Controls' Blocks
+                // tab li.block-item), and settings rows blurred out beside
+                // the same lock (auto-insert blocks metaboxes).
+                // body[class*="advgb"] also covers its post-type editor
+                // screens (post-type-advgb_insert_block).
+                // Some locked rows carry no lock link of their own and are
+                // only blurred (th and controls in .advgb-blur, e.g. the
+                // month/year post filters); and inside otherwise functional
+                // rows only individual Pro choices blur (post-type
+                // checkboxes) — hide just those labels there, the row's
+                // working controls stay.
                 'adminCss' => <<<'CSS'
-                body[class*="page_advgb"] .advgb-feature-box--disabled { display: none !important; }
+                body[class*="advgb"] .advgb-feature-box--disabled,
+                body[class*="advgb"] li:is(.block-config-item, .block-item):has(.advgb-pro-small-overlay-text),
+                body[class*="advgb"] tr:has(.advgb-pro-small-overlay-text),
+                body[class*="advgb"] tr:has(> th.advgb-blur),
+                body[class*="advgb"] label.advgb-blur { display: none !important; }
                 CSS,
             ],
             'panel-placement' => [
