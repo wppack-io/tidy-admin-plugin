@@ -59,6 +59,20 @@ final class AdminBar
     ];
 
     /**
+     * The active user's scheme notification colour — the base value emitted
+     * before the body.admin-color-* overrides. In wp-admin those overrides
+     * re-assert the same colour; on the front end (no admin-color-* body
+     * class) this base rule is what applies, so front toolbar badges match
+     * the user's admin scheme instead of falling back to fresh red.
+     */
+    private static function defaultNotificationColor(): string
+    {
+        $scheme = get_user_option('admin_color');
+
+        return self::NOTIFICATION_COLORS[is_string($scheme) ? $scheme : 'fresh'] ?? self::NOTIFICATION_COLORS['fresh'];
+    }
+
+    /**
      * Per-scheme rules painting one property of a selector with the active
      * admin colour scheme's own notification colour (fresh is the un-classed
      * default) — for vendor status dots and badges hardcoded in a brand red
@@ -66,7 +80,7 @@ final class AdminBar
      */
     public static function notificationColorCss(string $selector, string $property = 'color'): string
     {
-        $css = "{$selector} { {$property}: " . self::NOTIFICATION_COLORS['fresh'] . " !important; }";
+        $css = "{$selector} { {$property}: " . self::defaultNotificationColor() . " !important; }";
         foreach (self::NOTIFICATION_COLORS as $scheme => $hex) {
             $css .= "\nbody.admin-color-{$scheme} {$selector} { {$property}: {$hex} !important; }";
         }
@@ -118,7 +132,7 @@ final class AdminBar
         CSS;
 
         // Fresh is the un-classed default; the rest override per active scheme.
-        $colours = "{$sel} { background-color: #d63638 !important; }";
+        $colours = "{$sel} { background-color: " . self::defaultNotificationColor() . " !important; }";
         foreach (self::NOTIFICATION_COLORS as $scheme => $hex) {
             $scoped = implode(
                 ",\n",
