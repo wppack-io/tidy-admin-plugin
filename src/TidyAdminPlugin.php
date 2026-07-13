@@ -59,6 +59,7 @@ final class TidyAdminPlugin
         Modules\PublishPressFuture::class,
         Modules\Redirection::class,
         Modules\RedisCache::class,
+        Modules\Revisionary::class,
         Modules\ReviewsFeed::class,
         Modules\TaxonomyTermsOrder::class,
         Modules\W3TotalCache::class,

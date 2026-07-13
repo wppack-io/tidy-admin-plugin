@@ -111,6 +111,7 @@ supported, with the major versions the cleanups were verified against:
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 4.x |
 | [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 2.x |
 | [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 4.x |
+| [PublishPress Revisions](https://wordpress.org/plugins/revisionary/) | 3.x |
 | [Redirection](https://wordpress.org/plugins/redirection/) | 5.x |
 | [Redis Object Cache](https://wordpress.org/plugins/redis-cache/) | 2.x |
 | [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 1.x |
