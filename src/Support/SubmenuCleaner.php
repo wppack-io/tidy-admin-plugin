@@ -271,9 +271,18 @@ final class SubmenuCleaner
             .tidy-admin-help-columns { position: relative; }
             /* Right sidebar, replicated from core's .contextual-help-sidebar */
             .tidy-admin-help-sidebar { width: 150px; float: right; padding: 0 8px 0 12px; overflow: auto; }
+            /* Mobile: replicate core's contextual-help stacking — the sidebar
+               and back layer disappear and the tab column becomes a full-width
+               list above the content (common.css @media 782px) */
             @media screen and (max-width: 782px) {
                 .tidy-admin-help-sidebar { display: none; }
-                .tidy-admin-help-back.tidy-admin-has-sidebar { right: 0; border-right: none; }
+                .tidy-admin-help-back { display: none; }
+                .tidy-admin-help-tabs { clear: both; width: 100%; float: none; }
+                .tidy-admin-help-tabs ul { margin: 0 0 1em; padding: 1em 0 0; }
+                .tidy-admin-help-tabs .active { margin: 0; }
+                .tidy-admin-help-tabs-wrap { clear: both; max-width: 100%; float: none; }
+                #tidy-admin-meta-region #screen-meta,
+                #tidy-admin-meta-region #screen-meta-links { margin-right: 10px; }
             }
             /* Left tab menu, replicated from the core Help panel (.contextual-help-tabs) */
             /* Positioned like core's #contextual-help-columns so the tab column
