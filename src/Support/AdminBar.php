@@ -59,6 +59,22 @@ final class AdminBar
     ];
 
     /**
+     * Per-scheme rules painting one property of a selector with the active
+     * admin colour scheme's own notification colour (fresh is the un-classed
+     * default) — for vendor status dots and badges hardcoded in a brand red
+     * that clashes with every non-fresh scheme.
+     */
+    public static function notificationColorCss(string $selector, string $property = 'color'): string
+    {
+        $css = "{$selector} { {$property}: " . self::NOTIFICATION_COLORS['fresh'] . " !important; }";
+        foreach (self::NOTIFICATION_COLORS as $scheme => $hex) {
+            $css .= "\nbody.admin-color-{$scheme} {$selector} { {$property}: {$hex} !important; }";
+        }
+
+        return $css;
+    }
+
+    /**
      * CSS that restyles a vendor's admin-bar count bubble to WordPress's own
      * notification bubble: the exact geometry of `#adminmenu .update-plugins`,
      * coloured in the *active admin colour scheme's* own notification colour

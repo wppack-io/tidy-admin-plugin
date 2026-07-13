@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+use WPPack\Plugin\TidyAdminPlugin\Support\AdminBar;
 
 final class Maintenance extends AbstractModule
 {
@@ -204,7 +205,13 @@ final class Maintenance extends AbstractModule
                 },
                 'adminCss' => <<<'CSS'
                 #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(1); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
-                CSS,
+                CSS
+                    // The OFF-state status dot is hardcoded brand red (#FE2D2D),
+                    // too loud next to core's palette — paint it in the active
+                    // scheme's own notification colour instead. The ON-state
+                    // green stays: maintenance mode being live is worth a
+                    // distinct colour.
+                    . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled'),
             ],
             'image-urls' => [
                 'label' => __('Fix its double-slash image URLs', 'wppack-tidy-admin'),
