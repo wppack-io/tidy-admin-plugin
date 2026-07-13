@@ -177,6 +177,13 @@ default when the flag is unset. Everything else defaults to ON.
 
 ## Browser testing (dev server)
 
+**Run wp-cli from `web/`** (`cd web && ../vendor/bin/wp …`), never from the
+repo root: WPChat's bootstrap does `require_once 'vendor/autoload.php'` with
+a relative path, and from the repo root include_path's `.` resolves that to
+the *repo's* autoloader — every command (and only wp-cli, not the dev
+server) dies with "ServiceContainer not found". `wp-cli.yml` is found by
+upward search, so running from `web/` needs no extra flags.
+
 Modeled on wppack: wp-cli as a dev dependency, `wp-cli.yml` (`path: web/wp`,
 `server.docroot: web`), and a persistent `mysql` dev service
 (`tidy_admin_dev`, port 3308) next to `mysql-test` in `compose.yaml`.
