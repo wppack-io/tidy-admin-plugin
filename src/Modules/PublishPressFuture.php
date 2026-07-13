@@ -48,8 +48,10 @@ final class PublishPressFuture extends AbstractModule
                 /* PublishPress Future: the version-notices library rewrites the upgrade
                    submenu's href to an external URL at admin_print_scripts, after the
                    slug-based hiding CSS was built — hide it by its own stable class
-                   (the link stays available in the Upgrades panel) */
-                #adminmenu li.pp-version-notice-upgrade-menu-item { display: none !important; }
+                   (the link stays available in the Upgrades panel). Scoped to this
+                   plugin's menu: sibling PublishPress plugins get the same class from
+                   the shared library and manage it with their own toggles */
+                #adminmenu #toplevel_page_publishpress-future li.pp-version-notice-upgrade-menu-item { display: none !important; }
                 /* PublishPress Future: "Upgrade to Pro" button in the workflow editor's
                    header toolbar (the upgrade link lives in the Upgrades panel) */
                 .edit-post-header-toolbar__buy-pro { display: none !important; }
