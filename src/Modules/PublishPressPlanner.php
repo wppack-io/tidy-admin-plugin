@@ -129,7 +129,26 @@ final class PublishPressPlanner extends AbstractModule
                 // panel; the rest is branding.
                 'adminCss' => <<<'CSS'
                 body[class*="page_pp-calendar"] #wpbody-content footer:has(.pp-pressshack-logo),
-                body[class*="planner_page"] #wpbody-content footer:has(.pp-pressshack-logo) { display: none !important; }
+                body[class*="page_pp-content"] #wpbody-content footer:has(.pp-pressshack-logo),
+                body[class*="page_pp-modules-settings"] #wpbody-content footer:has(.pp-pressshack-logo) { display: none !important; }
+                CSS,
+            ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                // The vendor wraps its .wrap so the automatic core float never
+                // engages and the buttons sat in a flow row above the page.
+                // Overlay them at the top right, on the page title's row like
+                // the list screens; an opened panel drops over the content.
+                // Matched on the page-slug part of the body class — the hook
+                // prefix comes from the translated menu label, so it is not
+                // stable across locales.
+                'adminCss' => <<<'CSS'
+                body[class*="page_pp-calendar"] #tidy-admin-meta-region,
+                body[class*="page_pp-content"] #tidy-admin-meta-region,
+                body[class*="page_pp-modules-settings"] #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
+                body[class*="page_pp-calendar"] #tidy-admin-meta-region #screen-meta,
+                body[class*="page_pp-content"] #tidy-admin-meta-region #screen-meta,
+                body[class*="page_pp-modules-settings"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                 CSS,
             ],
         ];

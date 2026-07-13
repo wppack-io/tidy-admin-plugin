@@ -102,6 +102,17 @@ final class PublishPressBlocks extends AbstractModule
                 body[class*="page_advgb"] .advgb-feature-box--disabled { display: none !important; }
                 CSS,
             ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                // The vendor wraps its .wrap so the automatic core float never
+                // engages and the buttons sat in a flow row above the page.
+                // Overlay them at the top right, on the page title's row like
+                // the list screens; an opened panel drops over the content.
+                'adminCss' => <<<'CSS'
+                body[class*="page_advgb"] #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
+                body[class*="page_advgb"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                CSS,
+            ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
                 // The vendor's documentation category and contact page — the

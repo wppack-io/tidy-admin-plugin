@@ -146,6 +146,20 @@ final class PublishPressPermissions extends AbstractModule
                 body[class*="page_presspermit"] #wpbody-content footer:has(.pp-pressshack-logo) { display: none !important; }
                 CSS,
             ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                // The vendor wraps its .wrap so the automatic core float never
+                // engages and the buttons sat in a flow row above the page.
+                // Overlay them at the top right, on the page title's row like
+                // the list screens; an opened panel drops over the content.
+                // Inert on screens with native meta buttons (e.g. the groups
+                // list): there core lays the buttons out itself and the
+                // #tidy-admin-meta-region wrapper is never created.
+                'adminCss' => <<<'CSS'
+                body[class*="page_presspermit"] #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
+                body[class*="page_presspermit"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                CSS,
+            ],
         ];
     }
 }
