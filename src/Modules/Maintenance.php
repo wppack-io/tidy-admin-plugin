@@ -162,6 +162,50 @@ final class Maintenance extends AbstractModule
                     ],
                 ],
             ],
+            'menu-icon' => [
+                'label' => __('Make its admin menu icon white like the core icons', 'wppack-tidy-admin'),
+                'adminCss' => <<<'CSS'
+                /* Maintenance: the sidebar icon is a brand-colored PNG (an <img>
+                   in the menu item) and oversized at 29px; flatten it to white
+                   like the core icons and cap it at the dashicon size */
+                #toplevel_page_maintenance .wp-menu-image img { filter: brightness(0) invert(1); width: 20px; height: auto; }
+                /* WordPress dims inactive plugin <img> icons to opacity 0.6 — right
+                   for the two grey schemes, grey-looking next to the near-white
+                   icons of every other scheme; un-dim the resting state there */
+                body:not(.admin-color-fresh):not(.admin-color-light) #toplevel_page_maintenance:not(.wp-has-current-submenu):not(:hover) .wp-menu-image img { opacity: 0.95; }
+                CSS,
+            ],
+            'admin-bar' => [
+                'label' => __('Clean up and normalize its admin bar menu', 'wppack-tidy-admin'),
+                // Give the toolbar item the same icon treatment as the sidebar:
+                // the toolbar ships icon-transparent.png — the M mark on a
+                // *filled* circle, which a whitening filter turns into a solid
+                // blob — so swap in the sidebar's icon-small.png (the bare mark)
+                // and flatten it to white at core toolbar-icon size. The
+                // green/red status dot beside the label is state information
+                // and stays.
+                'register' => static function (): void {
+                    add_action('wp_before_admin_bar_render', static function (): void {
+                        global $wp_admin_bar;
+                        if (!$wp_admin_bar instanceof \WP_Admin_Bar) {
+                            return;
+                        }
+                        $node = $wp_admin_bar->get_node('mtnc');
+                        if ($node === null) {
+                            return;
+                        }
+                        $args = get_object_vars($node);
+                        if (!is_string($args['title'] ?? null)) {
+                            return;
+                        }
+                        $args['title'] = str_replace('icon-transparent.png', 'icon-small.png', $args['title']);
+                        $wp_admin_bar->add_node($args);
+                    }, PHP_INT_MAX - 2);
+                },
+                'adminCss' => <<<'CSS'
+                #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(1); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
+                CSS,
+            ],
             'image-urls' => [
                 'label' => __('Fix its double-slash image URLs', 'wppack-tidy-admin'),
                 // Vendor bug: MTNC_URL is defined with trailingslashit() but
