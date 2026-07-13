@@ -92,6 +92,7 @@ final class SetupNoticeRelocatorTest extends TestCase
         $this->assertStringContainsString('notice notice-warning inline', $content, 'inline class stops common.js relocating the notice');
         $this->assertStringNotContainsString('is-dismissible', $content, 'no dismiss button injected inside the widget');
         $this->assertStringNotContainsString('notice-dismiss', $content, 'literal dismiss buttons are stripped');
+        $this->assertStringNotContainsString('width: 95%', $content, 'vendor widths sized for the original placement overflow the widget');
 
         // Consumed by the widget — must not print again in the admin header.
         ob_start();
@@ -174,7 +175,9 @@ final class SetupNotice
         if ($this->configured) {
             return;
         }
-        echo '<div class="notice notice-warning is-dismissible"><p>Please finish the setup.</p>'
+        // The inline width mirrors Redirection's setup notice, calibrated to
+        // the original top-of-page placement — it must not survive relocation.
+        echo '<div class="notice notice-warning is-dismissible" style="width: 95%"><p>Please finish the setup.</p>'
             . '<form method="post"><button type="submit" class="notice-dismiss"><span class="screen-reader-text">Dismiss</span></button></form></div>';
     }
 }
