@@ -121,7 +121,7 @@ final class Revisionary extends AbstractModule
                 body[class*="page_revisionary"] #side-info-column:has(.pp-revisions-pro-promo-right-sidebar) { display: none !important; }
                 /* The content column reserved 75% beside the promo sidebar —
                    with the sidebar gone, let it use the full width */
-                body.revisionary-settings .has-right-sidebar #post-body-content { margin-right: 0 !important; width: 100% !important; float: none !important; }
+                body.revisionary-settings .has-right-sidebar #post-body-content { margin-right: 0 !important; width: 100% !important; float: none !important; flex: 1 1 100% !important; max-width: 100% !important; }
                 CSS,
                 'extraScreenMetaContent' => [
                     [
