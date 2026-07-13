@@ -64,6 +64,7 @@
         "wp-plugin/redirection": "*",
         "wp-plugin/redis-cache": "*",
         "wp-plugin/reviews-feed": "*",
+        "wp-plugin/revisionary": "*",
         "wp-plugin/smashballoon-wpchat-livechat-customer-support": "*",
         "wp-plugin/taxonomy-terms-order": "*",
         "wp-plugin/w3-total-cache": "*",
