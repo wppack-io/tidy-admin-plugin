@@ -86,19 +86,51 @@ final class Revisionary extends AbstractModule
                 body[class*="page_revisionary"] a.pp-upgrade-btn { display: none !important; }
                 CSS,
             ],
-            'help-links' => [
+            'pro-tabs' => [
+                'label' => __('Remove Pro-only education tabs', 'wppack-tidy-admin'),
+                // The settings screen's Integrations / Statuses / Notifications
+                // tabs are Pro teasers (each panel only pitches the Pro
+                // feature). Matched by their anchor targets — labels vary by
+                // locale; the panels stay reachable by URL hash.
+                'adminCss' => <<<'CSS'
+                body[class*="page_revisionary"] li.nav-tab:has(> a[href="#ppr-tab-integrations"]),
+                body[class*="page_revisionary"] li.nav-tab:has(> a[href="#ppr-tab-statuses"]),
+                body[class*="page_revisionary"] li.nav-tab:has(> a[href="#ppr-tab-notifications"]) { display: none !important; }
+                CSS,
+            ],
+            'support-box' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
-                // The vendor's real documentation library, on top of the
-                // automatic WordPress.org sidebar.
+                // The settings screen's "Need PublishPress Revisions support?"
+                // side column (its own class says it: advertisement-box) — a
+                // support pitch plus an upgrade banner link. Its useful links
+                // are carried into the Help panel below; the wordpress.org
+                // support-forum link is already in the automatic sidebar.
+                'adminCss' => <<<'CSS'
+                body[class*="page_revisionary"] #postbox-container-pp { display: none !important; }
+                CSS,
                 'extraScreenMetaContent' => [
                     [
                         'category' => 'help',
                         'parent' => 'revisionary-q',
                         'html' => '<ul class="tidy-admin-meta-links">'
-                            . '<li><a href="https://publishpress.com/knowledge-base/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation') . '</a></li>'
+                            . '<li><a href="https://publishpress.com/knowledge-base/start-revisions/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation') . '</a></li>'
+                            . '<li><a href="https://publishpress.com/knowledge-base/plugins-revisions-support" target="_blank" rel="noopener noreferrer">' . esc_html__('Compatible Plugins', 'revisionary') . '</a></li>'
                             . '</ul>',
                     ],
                 ],
+            ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                // The settings screen wraps its .wrap so the automatic core
+                // float never engages and the buttons sat in a flow row above
+                // the page. Overlay them at the top right, on the page title's
+                // row like the list screens; an opened panel drops over the
+                // content below.
+                'adminCss' => <<<'CSS'
+                body[class*="page_revisionary-settings"] #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
+                body[class*="page_revisionary-settings"] #tidy-admin-meta-region #screen-meta-links { margin-right: 20px; }
+                body[class*="page_revisionary-settings"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                CSS,
             ],
         ];
     }
