@@ -118,9 +118,13 @@ final class PublishPressChecklists extends AbstractModule
                 // a lock in Free (two each under Content, Approval, Images
                 // and Featured Image) — dead UI the vendor marks with its own
                 // ppc-pro-locked-row class; the group's working requirements
-                // stay. The upgrade link lives in the Upgrades panel.
+                // stay. The Settings > General tab locks four more rows the
+                // same way (status/taxonomy filters, duplicate checklists,
+                // post-list column: disabled checkbox plus a PRO badge link).
+                // The upgrade link lives in the Upgrades panel.
                 'adminCss' => <<<'CSS'
-                body[class*="page_ppch"] tr.ppc-pro-locked-row { display: none !important; }
+                body[class*="page_ppch"] tr.ppc-pro-locked-row,
+                body[class*="page_ppch"] tr:has(a.pro-badge) { display: none !important; }
                 CSS,
             ],
             'support-box' => [
