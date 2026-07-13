@@ -199,46 +199,32 @@ final class Maintenance extends AbstractModule
                         if (!is_string($args['title'] ?? null)) {
                             return;
                         }
-                        // Swap the vendor <img> for an empty span painted via
-                        // maskIconCss below — a real element, so it behaves
-                        // exactly like the other masked toolbar icons
-                        $args['title'] = (string) preg_replace('/<img[^>]*>/', '<span class="mtnc-mask-icon"></span>', $args['title']);
+                        // Swap the vendor <img> (a brand-colored PNG no CSS
+                        // color can reach) for the dashicons hammer — the
+                        // maintenance symbol — which follows the item's text
+                        // color natively (rest, hover, front) like every core
+                        // icon
+                        $args['title'] = (string) preg_replace('/<img[^>]*>/', '<span class="ab-icon dashicons-before dashicons-hammer"></span>', $args['title']);
                         $wp_admin_bar->add_node($args);
                     }, PHP_INT_MAX - 2);
                 },
-                'adminCss' => <<<'CSS'
-                /* The 20px icon slot every toolbar icon uses; the span replaces
-                   the vendor <img> (see the node rewrite above) and is painted
-                   by maskIconCss below — scheme base at rest, text hover color
-                   on hover, like a native dashicon */
-                #wpadminbar #wp-admin-bar-mtnc .mtnc-mask-icon { display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin: -2px 6px 0 0; }
-                CSS
-                    // The OFF-state status dot is hardcoded brand red (#FE2D2D),
+                'adminCss' => // The OFF-state status dot is hardcoded brand red (#FE2D2D),
                     // too loud next to core's palette — paint it in the active
                     // scheme's own notification colour instead. The ON-state
                     // green stays: maintenance mode being live is worth a
                     // distinct colour.
-                    . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled')
+                    AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled')
                     // Text hover follows the scheme like every native item
-                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc')
-                    . "\n" . AdminBar::maskIconCss('#wp-admin-bar-mtnc', '.mtnc-mask-icon', esc_url(plugins_url('img/icon-small.png', WP_PLUGIN_DIR . '/maintenance/maintenance.php'))),
+                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc'),
                 // The same toolbar rules follow the admin bar to the front end
-                'frontCss' => <<<'CSS'
-                /* The 20px icon slot every toolbar icon uses; the span replaces
-                   the vendor <img> (see the node rewrite above) and is painted
-                   by maskIconCss below — scheme base at rest, text hover color
-                   on hover, like a native dashicon */
-                #wpadminbar #wp-admin-bar-mtnc .mtnc-mask-icon { display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin: -2px 6px 0 0; }
-                CSS
-                    // The OFF-state status dot is hardcoded brand red (#FE2D2D),
+                'frontCss' => // The OFF-state status dot is hardcoded brand red (#FE2D2D),
                     // too loud next to core's palette — paint it in the active
                     // scheme's own notification colour instead. The ON-state
                     // green stays: maintenance mode being live is worth a
                     // distinct colour.
-                    . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled')
+                    AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled')
                     // Text hover follows the scheme like every native item
-                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc')
-                    . "\n" . AdminBar::maskIconCss('#wp-admin-bar-mtnc', '.mtnc-mask-icon', esc_url(plugins_url('img/icon-small.png', WP_PLUGIN_DIR . '/maintenance/maintenance.php'))),
+                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc'),
             ],
             'image-urls' => [
                 'label' => __('Fix its double-slash image URLs', 'wppack-tidy-admin'),
