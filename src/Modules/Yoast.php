@@ -151,7 +151,7 @@ final class Yoast extends AbstractModule
                     // from adopting the element. The position/size override
                     // replicates the vendor's own icon metrics (20px at 0 6px).
                     . "\n" . AdminBar::maskIconCss('#wp-admin-bar-wpseo-menu', '.yoast-logo.svg', 'data:image/svg+xml;base64,' . base64_encode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M203.6 395c6.8-17.4 6.8-36.6 0-54l-79.4-204h70.9l47.7 149.4 74.8-207.6H116.4c-41.8 0-76 34.2-76 76V357c0 41.8 34.2 76 76 76H173c16-8.9 24.6-22.7 30.6-38M471.6 154.8c0-41.8-34.2-76-76-76h-3L285.7 365c-9.6 26.7-19.4 49.3-30.3 68h216.2z"/><path d="m338 1.3-93.3 259.1-42.1-131.9h-89.1l83.8 215.2c6 15.5 6 32.5 0 48-7.4 19-19 37.3-53 41.9l-7.2 1v76h8.3c81.7 0 118.9-57.2 149.6-142.9L431.6 1.3zM279.4 362c-32.9 92-67.6 128.7-125.7 131.8v-45c37.5-7.5 51.3-31 59.1-51.1 7.5-19.3 7.5-40.7 0-60l-75-192.7h52.8l53.3 166.8 105.9-294h58.1z"/></svg>'))
-                    . "\n" . '#wpadminbar #wp-admin-bar-wpseo-menu .yoast-logo.svg { -webkit-mask-position: 0 6px; mask-position: 0 6px; -webkit-mask-size: 20px; mask-size: 20px; }',
+                    . "\n" . 'html:root #wpadminbar #wp-admin-bar-wpseo-menu .yoast-logo.svg { -webkit-mask-position: 0 6px; mask-position: 0 6px; -webkit-mask-size: 20px; mask-size: 20px; }',
                 // The same toolbar rules follow the admin bar to the front end
                 'frontCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-wpseo-menu', ['.wp-ui-notification'])
                     . AdminBar::nativeHoverCss('#wp-admin-bar-wpseo-menu')
@@ -161,7 +161,7 @@ final class Yoast extends AbstractModule
                     // from adopting the element. The position/size override
                     // replicates the vendor's own icon metrics (20px at 0 6px).
                     . "\n" . AdminBar::maskIconCss('#wp-admin-bar-wpseo-menu', '.yoast-logo.svg', 'data:image/svg+xml;base64,' . base64_encode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M203.6 395c6.8-17.4 6.8-36.6 0-54l-79.4-204h70.9l47.7 149.4 74.8-207.6H116.4c-41.8 0-76 34.2-76 76V357c0 41.8 34.2 76 76 76H173c16-8.9 24.6-22.7 30.6-38M471.6 154.8c0-41.8-34.2-76-76-76h-3L285.7 365c-9.6 26.7-19.4 49.3-30.3 68h216.2z"/><path d="m338 1.3-93.3 259.1-42.1-131.9h-89.1l83.8 215.2c6 15.5 6 32.5 0 48-7.4 19-19 37.3-53 41.9l-7.2 1v76h8.3c81.7 0 118.9-57.2 149.6-142.9L431.6 1.3zM279.4 362c-32.9 92-67.6 128.7-125.7 131.8v-45c37.5-7.5 51.3-31 59.1-51.1 7.5-19.3 7.5-40.7 0-60l-75-192.7h52.8l53.3 166.8 105.9-294h58.1z"/></svg>'))
-                    . "\n" . '#wpadminbar #wp-admin-bar-wpseo-menu .yoast-logo.svg { -webkit-mask-position: 0 6px; mask-position: 0 6px; -webkit-mask-size: 20px; mask-size: 20px; }',
+                    . "\n" . 'html:root #wpadminbar #wp-admin-bar-wpseo-menu .yoast-logo.svg { -webkit-mask-position: 0 6px; mask-position: 0 6px; -webkit-mask-size: 20px; mask-size: 20px; }',
             ],
             'admin-bar-hide' => [
                 'label' => __('Hide its admin bar menu entirely', 'wppack-tidy-admin'),

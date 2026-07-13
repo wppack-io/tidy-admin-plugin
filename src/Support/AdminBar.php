@@ -106,7 +106,10 @@ final class AdminBar
     public static function maskIconCss(string $item, string $icon, string $maskUrl): string
     {
         self::registerIconBaseVar();
-        $sel = "#wpadminbar {$item} {$icon}";
+        // html:root outranks vendor rules that carry extra attribute scopes
+        // (AIOSEO ships [dir="ltr"]-prefixed !important background rules on the
+        // front bar that would otherwise repaint the artwork over the mask)
+        $sel = "html:root #wpadminbar {$item} {$icon}";
 
         // color: inherit overrides any color the vendor pins on the icon
         // element itself, so currentColor below always means the item's
@@ -116,7 +119,7 @@ final class AdminBar
             . " -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;"
             . " -webkit-mask-position: center; mask-position: center;"
             . " -webkit-mask-size: contain; mask-size: contain; }\n"
-            . "#wpadminbar {$item}:hover {$icon} { background-color: currentColor !important; }";
+            . "html:root #wpadminbar {$item}:hover {$icon} { background-color: currentColor !important; }";
     }
 
     /**
