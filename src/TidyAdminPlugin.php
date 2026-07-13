@@ -236,6 +236,15 @@ final class TidyAdminPlugin
     {
         $activePlugins = (array) get_option('active_plugins', []);
 
+        // Network-activated plugins never appear in the per-site option — they
+        // live in the network's active_sitewide_plugins, keyed by basename.
+        if (is_multisite()) {
+            $activePlugins = [
+                ...$activePlugins,
+                ...array_keys((array) get_site_option('active_sitewide_plugins', [])),
+            ];
+        }
+
         // On the request that activates a plugin, activate_plugin() only adds it
         // to active_plugins *after* init — so its module would sit out the very
         // request where activation-time cleanups (e.g. suppressing an
