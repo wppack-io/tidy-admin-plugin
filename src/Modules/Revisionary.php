@@ -60,8 +60,12 @@ final class Revisionary extends AbstractModule
                 // treatment to the Settings link. Hide it with CSS instead —
                 // it stays the last item and soaks up its own repaint — and
                 // lead the panel to the vendor's pricing page.
+                // Matched in both of its states: as registered
+                // (…admin.php?page=revisionary) and after the vendor's script
+                // rewrites the href to its sales site.
                 'adminCss' => <<<'CSS'
-                #adminmenu #toplevel_page_revisionary-q .wp-submenu li:has(> a[href$="page=revisionary"]) { display: none !important; }
+                #adminmenu #toplevel_page_revisionary-q .wp-submenu li:has(> a[href$="page=revisionary"]),
+                #adminmenu #toplevel_page_revisionary-q .wp-submenu li:has(> a[href*="publishpress.com/links/revisions-menu"]) { display: none !important; }
                 CSS,
                 'extraScreenMetaContent' => [
                     [
