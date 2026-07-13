@@ -383,24 +383,38 @@ final class Elementor extends AbstractModule
             ],
             'panel-placement' => [
                 'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
-                // Elementor pins a fixed 48px "Site Builder" top bar over the
-                // content area on its editor-one screens (#wpbody clears it with
-                // a margin), so the default flow row would sit as a gray band
-                // between the bar and the page. Hang the buttons from the bar's
-                // bottom edge instead — like core's Help tab under the admin bar
-                // — and let an opened panel drop over the content below.
+                // Elementor pins a fixed 48px dark "Site Builder" top bar
+                // (z-index 1100) over the content area on its editor-one
+                // screens, and the Home app draws an identical sticky header in
+                // the same spot. Pin the screen-meta region over that bar,
+                // buttons vertically centred and inset from the right past the
+                // bar's My account button; an opened panel drops over the
+                // content below. On editor-one screens Elementor makes #wpbody
+                // position: fixed — a stacking context with z-index auto, so
+                // nothing inside it can ever paint above the bar (and raising
+                // #wpbody itself would paint the page over the bar) — move the
+                // region to <body> after it renders, where its own z-index wins.
+                'register' => static function (): void {
+                    add_action('admin_footer', static function (): void {
+                        echo '<script>(function(){'
+                            . 'var bar = document.getElementById("editor-one-top-bar") || document.getElementById("elementor-home-app");'
+                            . 'var region = document.getElementById("tidy-admin-meta-region");'
+                            . 'if (bar && region) { document.body.appendChild(region); }'
+                            . '})();</script>';
+                    }, PHP_INT_MAX);
+                },
                 'adminCss' => <<<'CSS'
-                body:has(#editor-one-top-bar) #tidy-admin-meta-region { position: absolute; top: 0; left: 20px; right: 0; z-index: 100; }
-                body:has(#editor-one-top-bar) #tidy-admin-meta-region #screen-meta-links { display: block; float: right; margin-right: 20px; }
-                body:has(#editor-one-top-bar) #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
-                /* The Home screen has no editor-one bar; its app draws its own
-                   48px dark header at the top of the content area. Hang the
-                   buttons below that header too, inset from the right edge so
-                   they sit clear of the header row's "Go to site setup / Edit
-                   site" actions. */
-                body.toplevel_page_elementor-home #tidy-admin-meta-region { position: absolute; top: 48px; left: 20px; right: 0; z-index: 100; }
-                body.toplevel_page_elementor-home #tidy-admin-meta-region #screen-meta-links { margin-right: 340px; }
-                body.toplevel_page_elementor-home #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                body > #tidy-admin-meta-region { position: fixed; top: 32px; left: 160px; right: 0; z-index: 1101; }
+                body > #tidy-admin-meta-region #screen-meta-links { display: flex; float: none; justify-content: flex-end; margin: 0 150px 0 0; padding-top: 5px; }
+                body > #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
+                body.folded > #tidy-admin-meta-region { left: 36px; }
+                @media (max-width: 960px) {
+                    body.auto-fold > #tidy-admin-meta-region { left: 36px; }
+                }
+                /* Below 783px the admin bar is 46px tall and the side menu collapses */
+                @media (max-width: 782px) {
+                    body > #tidy-admin-meta-region { top: 46px; left: 0; }
+                }
                 CSS,
             ],
             'getting-started-style' => [
