@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-13T07:43:43+00:00\n"
+"PO-Revision-Date: 2026-07-13T08:26:54+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -39,6 +39,7 @@ msgstr "ヘッダーのアップグレードボタンをアップグレードパ
 #: src/Modules/EwwwImageOptimizer.php:76
 #: src/Modules/FeedsForTiktok.php:77
 #: src/Modules/FeedsForYoutube.php:89
+#: src/Modules/Maintenance.php:123
 #: src/Modules/OptinMonster.php:59
 #: src/Modules/RedisCache.php:97
 #: src/Modules/W3TotalCache.php:71
@@ -88,6 +89,7 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/InstagramFeed.php:196
 #: src/Modules/LiteSpeedCache.php:70
 #: src/Modules/LocationWeather.php:176
+#: src/Modules/Maintenance.php:80
 #: src/Modules/MonsterInsights.php:126
 #: src/Modules/OptinMonster.php:134
 #: src/Modules/Redirection.php:92
@@ -152,6 +154,7 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/InstagramFeed.php:90
 #: src/Modules/LiteSpeedCache.php:107
 #: src/Modules/LocationWeather.php:72
+#: src/Modules/Maintenance.php:152
 #: src/Modules/Mc4wp.php:52
 #: src/Modules/MonsterInsights.php:98
 #: src/Modules/OptinMonster.php:107
@@ -183,6 +186,7 @@ msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に�
 #: src/Modules/FeedsForYoutube.php:198
 #: src/Modules/InstagramFeed.php:123
 #: src/Modules/LocationWeather.php:105
+#: src/Modules/Maintenance.php:57
 #: src/Modules/Mc4wp.php:92
 #: src/Modules/MonsterInsights.php:106
 #: src/Modules/OptinMonster.php:64
@@ -220,6 +224,7 @@ msgstr "「複数の SEO プラグイン」警告をセットアップウィジ�
 #: src/Modules/Duplicator.php:367
 #: src/Modules/LiteSpeedCache.php:91
 #: src/Modules/LocationWeather.php:191
+#: src/Modules/Maintenance.php:67
 #: src/Modules/WpMailSmtp.php:260
 msgid "Restore the standard admin footer"
 msgstr "標準の管理画面フッターを復元"
@@ -290,6 +295,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/InstagramFeed.php:318
 #: src/Modules/LiteSpeedCache.php:123
 #: src/Modules/LocationWeather.php:229
+#: src/Modules/Maintenance.php:128
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/MonsterInsights.php:188
 #: src/Modules/OptinMonster.php:184
@@ -312,6 +318,7 @@ msgstr "管理バーメニューを整理・正規化"
 
 #: src/Modules/AllInOneSeo.php:575
 #: src/Modules/LiteSpeedCache.php:134
+#: src/Modules/Maintenance.php:206
 #: src/Modules/MonsterInsights.php:72
 #: src/Modules/RedisCache.php:118
 #: src/Modules/W3TotalCache.php:111
@@ -373,6 +380,7 @@ msgstr "有効化時のウェルカム画面へのリダイレクトを停止"
 #: src/Modules/FeedsForTiktok.php:97
 #: src/Modules/FeedsForYoutube.php:204
 #: src/Modules/InstagramFeed.php:129
+#: src/Modules/Maintenance.php:44
 #: src/Modules/OptinMonster.php:70
 #: src/Modules/RedisCache.php:56
 #: src/Modules/ReviewsFeed.php:133
@@ -507,6 +515,10 @@ msgstr "ウェザーエディター内の Pro 宣伝をアップグレードパ�
 #: src/Modules/LocationWeather.php:208
 msgid "Skip the unused block-editor promo bundle"
 msgstr "未使用のブロックエディター宣伝バンドルを読み込まない"
+
+#: src/Modules/Maintenance.php:166
+msgid "Fix its double-slash image URLs"
+msgstr "画像 URL の二重スラッシュを修正"
 
 #: src/Modules/Mc4wp.php:64
 #: src/Support/WordPressOrgLinks.php:47

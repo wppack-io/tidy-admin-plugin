@@ -162,6 +162,46 @@ final class Maintenance extends AbstractModule
                     ],
                 ],
             ],
+            'image-urls' => [
+                'label' => __('Fix its double-slash image URLs', 'wppack-tidy-admin'),
+                // Vendor bug: MTNC_URL is defined with trailingslashit() but
+                // concatenated as MTNC_URL . '/img/…', so every image URL reads
+                // "…/maintenance//img/…". Browsers normalize the path, so the
+                // images load — this only cleans the markup up.
+                'register' => static function (): void {
+                    // The admin-bar icon (added on wp_before_admin_bar_render;
+                    // re-adding under the same id updates the node in place,
+                    // and runs before the opt-in admin-bar-hide removal)
+                    add_action('wp_before_admin_bar_render', static function (): void {
+                        global $wp_admin_bar;
+                        if (!$wp_admin_bar instanceof \WP_Admin_Bar) {
+                            return;
+                        }
+                        $node = $wp_admin_bar->get_node('mtnc');
+                        if ($node === null) {
+                            return;
+                        }
+                        $args = get_object_vars($node);
+                        if (!is_string($args['title'] ?? null)) {
+                            return;
+                        }
+                        $args['title'] = str_replace('maintenance//img/', 'maintenance/img/', $args['title']);
+                        $wp_admin_bar->add_node($args);
+                    }, PHP_INT_MAX - 1);
+                    // The settings page's logo and design-picker placeholders are
+                    // echoed inline with the same broken concatenation — no
+                    // server-side handle, so normalize the attributes in place
+                    add_action('admin_print_footer_scripts', static function (): void {
+                        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                        if (($_GET['page'] ?? '') !== 'maintenance') {
+                            return;
+                        }
+                        echo '<script>document.querySelectorAll(\'img[src*="maintenance//img/"]\').forEach(function (img) {'
+                            . 'img.src = img.src.replace("maintenance//img/", "maintenance/img/");'
+                            . '});</script>' . "\n";
+                    });
+                },
+            ],
             'admin-bar-hide' => [
                 'label' => __('Hide its admin bar menu entirely', 'wppack-tidy-admin'),
                 'default' => false,
