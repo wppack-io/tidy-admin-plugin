@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-12T12:50:14+09:00\n"
+"POT-Creation-Date: 2026-07-13T16:43:42+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -41,6 +41,7 @@ msgstr ""
 #: src/Modules/FeedsForTiktok.php:77
 #: src/Modules/FeedsForYoutube.php:89
 #: src/Modules/OptinMonster.php:59
+#: src/Modules/RedisCache.php:97
 #: src/Modules/W3TotalCache.php:71
 #: src/Modules/WpChat.php:148
 msgid "Upgrade to Pro"
@@ -81,7 +82,7 @@ msgstr ""
 #: src/Modules/CustomPostTypeUi.php:100
 #: src/Modules/CustomTwitterFeeds.php:102
 #: src/Modules/Duplicator.php:264
-#: src/Modules/Elementor.php:318
+#: src/Modules/Elementor.php:322
 #: src/Modules/EmbedPress.php:171
 #: src/Modules/FeedsForTiktok.php:123
 #: src/Modules/FeedsForYoutube.php:233
@@ -91,6 +92,7 @@ msgstr ""
 #: src/Modules/MonsterInsights.php:126
 #: src/Modules/OptinMonster.php:134
 #: src/Modules/Redirection.php:92
+#: src/Modules/RedisCache.php:81
 #: src/Modules/ReviewsFeed.php:114
 #: src/Modules/W3TotalCache.php:238
 #: src/Modules/WpChat.php:129
@@ -143,7 +145,7 @@ msgstr ""
 #: src/Modules/CustomPostTypeUi.php:80
 #: src/Modules/CustomTwitterFeeds.php:80
 #: src/Modules/Duplicator.php:180
-#: src/Modules/Elementor.php:423
+#: src/Modules/Elementor.php:451
 #: src/Modules/EmbedPress.php:99
 #: src/Modules/EwwwImageOptimizer.php:119
 #: src/Modules/FeedsForTiktok.php:88
@@ -155,6 +157,7 @@ msgstr ""
 #: src/Modules/MonsterInsights.php:98
 #: src/Modules/OptinMonster.php:107
 #: src/Modules/PublishPressFuture.php:100
+#: src/Modules/RedisCache.php:102
 #: src/Modules/ReviewsFeed.php:95
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:71
@@ -185,6 +188,7 @@ msgstr ""
 #: src/Modules/MonsterInsights.php:106
 #: src/Modules/OptinMonster.php:64
 #: src/Modules/PublishPressFuture.php:129
+#: src/Modules/RedisCache.php:72
 #: src/Modules/ReviewsFeed.php:127
 #: src/Modules/WpConsent.php:82
 #: src/Modules/WpForms.php:70
@@ -231,7 +235,7 @@ msgid "Hide locked Pro settings rows"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:338
-#: src/Modules/Elementor.php:376
+#: src/Modules/Elementor.php:380
 #: src/Modules/EwwwImageOptimizer.php:155
 #: src/Modules/WpMailSmtp.php:332
 msgid "Hide the license fields (turn off while entering a key)"
@@ -279,7 +283,7 @@ msgstr ""
 #: src/Modules/CookieYes.php:165
 #: src/Modules/CustomFacebookFeed.php:230
 #: src/Modules/CustomTwitterFeeds.php:137
-#: src/Modules/Elementor.php:385
+#: src/Modules/Elementor.php:389
 #: src/Modules/EmbedPress.php:196
 #: src/Modules/EwwwImageOptimizer.php:141
 #: src/Modules/FeedsForTiktok.php:151
@@ -310,6 +314,7 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:575
 #: src/Modules/LiteSpeedCache.php:134
 #: src/Modules/MonsterInsights.php:72
+#: src/Modules/RedisCache.php:118
 #: src/Modules/W3TotalCache.php:111
 #: src/Modules/WpForms.php:173
 #: src/Modules/Yoast.php:150
@@ -354,6 +359,7 @@ msgstr ""
 #: src/Modules/Elementor.php:105
 #: src/Modules/FeedsForYoutube.php:56
 #: src/Modules/InstagramFeed.php:54
+#: src/Modules/RedisCache.php:45
 #: src/Modules/ReviewsFeed.php:51
 #: src/Modules/WpChat.php:61
 #: src/Modules/WpForms.php:76
@@ -369,6 +375,7 @@ msgstr ""
 #: src/Modules/FeedsForYoutube.php:204
 #: src/Modules/InstagramFeed.php:129
 #: src/Modules/OptinMonster.php:70
+#: src/Modules/RedisCache.php:56
 #: src/Modules/ReviewsFeed.php:133
 #: src/Modules/WpChat.php:111
 #: src/Modules/WpConsent.php:121
@@ -378,7 +385,7 @@ msgstr ""
 #: src/Modules/CookieYes.php:79
 #: src/Modules/CustomFacebookFeed.php:42
 #: src/Modules/CustomTwitterFeeds.php:43
-#: src/Modules/Elementor.php:300
+#: src/Modules/Elementor.php:304
 #: src/Modules/FeedsForTiktok.php:43
 #: src/Modules/FeedsForYoutube.php:44
 #: src/Modules/InstagramFeed.php:42
@@ -438,11 +445,11 @@ msgstr ""
 msgid "Clean promotions out of the Overview dashboard widget"
 msgstr ""
 
-#: src/Modules/Elementor.php:407
+#: src/Modules/Elementor.php:435
 msgid "Restyle the Getting Started screen to the WordPress admin look"
 msgstr ""
 
-#: src/Modules/Elementor.php:434
+#: src/Modules/Elementor.php:462
 msgid "Academy"
 msgstr ""
 
@@ -597,11 +604,15 @@ msgstr ""
 msgid "Match its menu notification badge to the admin colour scheme"
 msgstr ""
 
-#: src/Modules/WordPressCore.php:44
+#: src/Modules/WordPressCore.php:46
 msgid "Remove the \"WordPress update available\" nag from every screen"
 msgstr ""
 
-#: src/Modules/WordPressCore.php:64
+#: src/Modules/WordPressCore.php:66
+msgid "Paint SVG menu icons server-side (no color flash while the page loads)"
+msgstr ""
+
+#: src/Modules/WordPressCore.php:113
 msgid "Remove the \"WordPress Events and News\" dashboard widget"
 msgstr ""
 
@@ -681,12 +692,12 @@ msgstr ""
 msgid "Upgrades"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:450
+#: src/Support/SubmenuCleaner.php:459
 #: src/Support/UpgradesDirectory.php:299
 msgid "Upgrade"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:451
+#: src/Support/SubmenuCleaner.php:460
 msgid "Premium features"
 msgstr ""
 

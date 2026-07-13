@@ -22,7 +22,9 @@ use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
  * These cleanups touch WordPress's own UI rather than a vendor's promotions,
  * so each one defaults to OFF — this plugin's remit is tidying *plugins*, and
  * a core screen should only change when the user explicitly opts in on
- * Settings > Tidy Admin.
+ * Settings > Tidy Admin. (menu-icon-paint is the exception: it normalizes
+ * vendor icons through a core mechanism and is visually a no-op after load,
+ * so it ships on.)
  */
 final class WordPressCore extends AbstractModule
 {
@@ -57,6 +59,53 @@ final class WordPressCore extends AbstractModule
                     add_action('admin_init', static function (): void {
                         remove_action('admin_notices', 'update_nag', 3);
                         remove_action('network_admin_notices', 'update_nag', 3);
+                    });
+                },
+            ],
+            'menu-icon-paint' => [
+                'label' => __('Paint SVG menu icons server-side (no color flash while the page loads)', 'wppack-tidy-admin'),
+                /*
+                 * Core repaints plugin sidebar icons (base64 SVGs) to the admin
+                 * scheme's icon color only at jQuery-ready (svg-painter.js), so
+                 * vendors' brand-colored icons flash until a heavy page finishes
+                 * loading. Pre-paint the registered icons in PHP with the same
+                 * three fill replacements svg-painter performs and the same
+                 * scheme base color: the icons render in the right color from
+                 * the first paint, and svg-painter still runs for the hover /
+                 * current states, repainting identical pixels. Unlike this
+                 * module's other features it normalizes vendor chrome (core is
+                 * only the mechanism) and changes nothing visually after load,
+                 * so it ships on.
+                 */
+                'register' => static function (): void {
+                    // After every admin_menu registration, before the menu renders
+                    add_action('admin_head', static function (): void {
+                        global $menu, $_wp_admin_css_colors;
+                        if (!is_array($menu)) {
+                            return;
+                        }
+                        $schemeKey = get_user_option('admin_color');
+                        $scheme = $_wp_admin_css_colors[is_string($schemeKey) ? $schemeKey : 'fresh'] ?? null;
+                        // Core's fallback palette when a scheme registers no icon colors
+                        $color = is_object($scheme) && isset($scheme->icon_colors['base']) && is_string($scheme->icon_colors['base'])
+                            ? $scheme->icon_colors['base']
+                            : '#a7aaad';
+                        foreach ($menu as &$item) {
+                            $icon = (string) ($item[6] ?? '');
+                            if (!str_starts_with($icon, 'data:image/svg+xml;base64,')) {
+                                continue;
+                            }
+                            $svg = base64_decode(substr($icon, 26), true);
+                            if ($svg === false) {
+                                continue;
+                            }
+                            // The exact substitutions svg-painter.js applies
+                            $svg = (string) preg_replace('/fill="(.+?)"/', 'fill="' . $color . '"', $svg);
+                            $svg = (string) preg_replace('/style="(.+?)"/', 'style="fill:' . $color . '"', $svg);
+                            $svg = (string) preg_replace('/fill:.*?;/', 'fill: ' . $color . ';', $svg);
+                            $item[6] = 'data:image/svg+xml;base64,' . base64_encode($svg);
+                        }
+                        unset($item);
                     });
                 },
             ],

@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-07-09T14:46:15+09:00\n"
-"PO-Revision-Date: 2026-07-12T03:50:15+00:00\n"
+"PO-Revision-Date: 2026-07-13T07:43:43+00:00\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -40,6 +40,7 @@ msgstr "ヘッダーのアップグレードボタンをアップグレードパ
 #: src/Modules/FeedsForTiktok.php:77
 #: src/Modules/FeedsForYoutube.php:89
 #: src/Modules/OptinMonster.php:59
+#: src/Modules/RedisCache.php:97
 #: src/Modules/W3TotalCache.php:71
 #: src/Modules/WpChat.php:148
 msgid "Upgrade to Pro"
@@ -80,7 +81,7 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/CustomPostTypeUi.php:100
 #: src/Modules/CustomTwitterFeeds.php:102
 #: src/Modules/Duplicator.php:264
-#: src/Modules/Elementor.php:318
+#: src/Modules/Elementor.php:322
 #: src/Modules/EmbedPress.php:171
 #: src/Modules/FeedsForTiktok.php:123
 #: src/Modules/FeedsForYoutube.php:233
@@ -90,6 +91,7 @@ msgstr "フィールド選択から Pro 専用フィールドタイプを非表�
 #: src/Modules/MonsterInsights.php:126
 #: src/Modules/OptinMonster.php:134
 #: src/Modules/Redirection.php:92
+#: src/Modules/RedisCache.php:81
 #: src/Modules/ReviewsFeed.php:114
 #: src/Modules/W3TotalCache.php:238
 #: src/Modules/WpChat.php:129
@@ -142,7 +144,7 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/CustomPostTypeUi.php:80
 #: src/Modules/CustomTwitterFeeds.php:80
 #: src/Modules/Duplicator.php:180
-#: src/Modules/Elementor.php:423
+#: src/Modules/Elementor.php:451
 #: src/Modules/EmbedPress.php:99
 #: src/Modules/EwwwImageOptimizer.php:119
 #: src/Modules/FeedsForTiktok.php:88
@@ -154,6 +156,7 @@ msgstr "アップグレード系メニューをアップグレードパネルへ
 #: src/Modules/MonsterInsights.php:98
 #: src/Modules/OptinMonster.php:107
 #: src/Modules/PublishPressFuture.php:100
+#: src/Modules/RedisCache.php:102
 #: src/Modules/ReviewsFeed.php:95
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:71
@@ -184,6 +187,7 @@ msgstr "投稿一覧のタイトル列を SEO 列の隣で読みやすい幅に�
 #: src/Modules/MonsterInsights.php:106
 #: src/Modules/OptinMonster.php:64
 #: src/Modules/PublishPressFuture.php:129
+#: src/Modules/RedisCache.php:72
 #: src/Modules/ReviewsFeed.php:127
 #: src/Modules/WpConsent.php:82
 #: src/Modules/WpForms.php:70
@@ -230,7 +234,7 @@ msgid "Hide locked Pro settings rows"
 msgstr "ロックされた Pro 設定行を非表示"
 
 #: src/Modules/AllInOneSeo.php:338
-#: src/Modules/Elementor.php:376
+#: src/Modules/Elementor.php:380
 #: src/Modules/EwwwImageOptimizer.php:155
 #: src/Modules/WpMailSmtp.php:332
 msgid "Hide the license fields (turn off while entering a key)"
@@ -278,7 +282,7 @@ msgstr "フローティングのクイックリンクメニューを除去"
 #: src/Modules/CookieYes.php:165
 #: src/Modules/CustomFacebookFeed.php:230
 #: src/Modules/CustomTwitterFeeds.php:137
-#: src/Modules/Elementor.php:385
+#: src/Modules/Elementor.php:389
 #: src/Modules/EmbedPress.php:196
 #: src/Modules/EwwwImageOptimizer.php:141
 #: src/Modules/FeedsForTiktok.php:151
@@ -309,6 +313,7 @@ msgstr "管理バーメニューを整理・正規化"
 #: src/Modules/AllInOneSeo.php:575
 #: src/Modules/LiteSpeedCache.php:134
 #: src/Modules/MonsterInsights.php:72
+#: src/Modules/RedisCache.php:118
 #: src/Modules/W3TotalCache.php:111
 #: src/Modules/WpForms.php:173
 #: src/Modules/Yoast.php:150
@@ -353,6 +358,7 @@ msgstr "ページ内の余分な空見出しを非表示"
 #: src/Modules/Elementor.php:105
 #: src/Modules/FeedsForYoutube.php:56
 #: src/Modules/InstagramFeed.php:54
+#: src/Modules/RedisCache.php:45
 #: src/Modules/ReviewsFeed.php:51
 #: src/Modules/WpChat.php:61
 #: src/Modules/WpForms.php:76
@@ -368,6 +374,7 @@ msgstr "有効化時のウェルカム画面へのリダイレクトを停止"
 #: src/Modules/FeedsForYoutube.php:204
 #: src/Modules/InstagramFeed.php:129
 #: src/Modules/OptinMonster.php:70
+#: src/Modules/RedisCache.php:56
 #: src/Modules/ReviewsFeed.php:133
 #: src/Modules/WpChat.php:111
 #: src/Modules/WpConsent.php:121
@@ -377,7 +384,7 @@ msgstr "マーケティング通知・お知らせを除去"
 #: src/Modules/CookieYes.php:79
 #: src/Modules/CustomFacebookFeed.php:42
 #: src/Modules/CustomTwitterFeeds.php:43
-#: src/Modules/Elementor.php:300
+#: src/Modules/Elementor.php:304
 #: src/Modules/FeedsForTiktok.php:43
 #: src/Modules/FeedsForYoutube.php:44
 #: src/Modules/InstagramFeed.php:42
@@ -437,11 +444,11 @@ msgstr "アクセシビリティ宣伝ダッシュボードウィジェットを
 msgid "Clean promotions out of the Overview dashboard widget"
 msgstr "概要ダッシュボードウィジェット内の宣伝を除去"
 
-#: src/Modules/Elementor.php:407
+#: src/Modules/Elementor.php:435
 msgid "Restyle the Getting Started screen to the WordPress admin look"
 msgstr "クイックスタート画面を WordPress 標準のデザインに揃える"
 
-#: src/Modules/Elementor.php:434
+#: src/Modules/Elementor.php:462
 msgid "Academy"
 msgstr "アカデミー"
 
@@ -596,11 +603,15 @@ msgstr "有効なメニュー項目を管理画面のカラースキームに合
 msgid "Match its menu notification badge to the admin colour scheme"
 msgstr "メニューの通知バッジを管理カラースキームに合わせる"
 
-#: src/Modules/WordPressCore.php:44
+#: src/Modules/WordPressCore.php:46
 msgid "Remove the \"WordPress update available\" nag from every screen"
 msgstr "「WordPress の更新が利用可能」の催促を全画面から除去"
 
-#: src/Modules/WordPressCore.php:64
+#: src/Modules/WordPressCore.php:66
+msgid "Paint SVG menu icons server-side (no color flash while the page loads)"
+msgstr "SVG メニューアイコンをサーバー側で配色スキーム色に塗る(読み込み中の色のちらつきを防止)"
+
+#: src/Modules/WordPressCore.php:113
 msgid "Remove the \"WordPress Events and News\" dashboard widget"
 msgstr "「WordPress イベントとニュース」ダッシュボードウィジェットを除去"
 
@@ -680,12 +691,12 @@ msgstr "セットアップが必要なプラグイン"
 msgid "Upgrades"
 msgstr "アップグレード"
 
-#: src/Support/SubmenuCleaner.php:450
+#: src/Support/SubmenuCleaner.php:459
 #: src/Support/UpgradesDirectory.php:299
 msgid "Upgrade"
 msgstr "アップグレード"
 
-#: src/Support/SubmenuCleaner.php:451
+#: src/Support/SubmenuCleaner.php:460
 msgid "Premium features"
 msgstr "プレミアム機能"
 
