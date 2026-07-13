@@ -61,6 +61,7 @@
         "wp-plugin/post-expirator": "*",
         "wp-plugin/post-types-order": "*",
         "wp-plugin/redirection": "*",
+        "wp-plugin/redis-cache": "*",
         "wp-plugin/reviews-feed": "*",
         "wp-plugin/smashballoon-wpchat-livechat-customer-support": "*",
         "wp-plugin/taxonomy-terms-order": "*",
