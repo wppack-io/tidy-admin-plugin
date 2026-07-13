@@ -420,9 +420,14 @@ final class Elementor extends AbstractModule
                 @media (max-width: 960px) {
                     body.auto-fold > #tidy-admin-meta-region { left: 56px; }
                 }
-                /* Below 783px the admin bar is 46px tall and the side menu collapses */
+                /* Below 783px the admin bar is 46px tall and the side menu
+                   collapses (the body keeps .auto-fold there, so this selector
+                   must match the ≤960px rule's specificity to win). The 10px
+                   inset mirrors core's mobile #wpcontent padding, so the opened
+                   panel keeps the standard gap from the screen edge. */
                 @media (max-width: 782px) {
-                    body > #tidy-admin-meta-region { top: 46px; left: 0; }
+                    body > #tidy-admin-meta-region,
+                    body.auto-fold > #tidy-admin-meta-region { top: 46px; left: 10px; }
                 }
                 CSS,
             ],
