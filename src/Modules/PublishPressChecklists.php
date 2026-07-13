@@ -97,6 +97,32 @@ final class PublishPressChecklists extends AbstractModule
                     'publishpress.com/checklists', // "Upgrade to Pro" row link
                 ],
             ],
+            'pro-tabs' => [
+                'label' => __('Remove Pro-only education tabs', 'wppack-tidy-admin'),
+                // Checklist groups whose every requirement is Pro-locked
+                // (Publish Date/Time, Audio/Video, Accessibility, All in One
+                // SEO — verified against the vendor's own ppc-pro-locked-row
+                // marker) — the tab would only show dead rows once those are
+                // hidden below. Matched by the anchors' data-tab keys; labels
+                // vary by locale.
+                'adminCss' => <<<'CSS'
+                body[class*="page_ppch"] li:has(> a[data-tab="publish_date_time"]),
+                body[class*="page_ppch"] li:has(> a[data-tab="audio_video"]),
+                body[class*="page_ppch"] li:has(> a[data-tab="accessibility"]),
+                body[class*="page_ppch"] li:has(> a[data-tab="all_in_one_seo"]) { display: none !important; }
+                CSS,
+            ],
+            'pro-locked-fields' => [
+                'label' => __('Hide locked Pro settings rows', 'wppack-tidy-admin'),
+                // Requirement rows that only work in Pro render disabled with
+                // a lock in Free (two each under Content, Approval, Images
+                // and Featured Image) — dead UI the vendor marks with its own
+                // ppc-pro-locked-row class; the group's working requirements
+                // stay. The upgrade link lives in the Upgrades panel.
+                'adminCss' => <<<'CSS'
+                body[class*="page_ppch"] tr.ppc-pro-locked-row { display: none !important; }
+                CSS,
+            ],
             'support-box' => [
                 'label' => __('Hide the support pitch column on its screens', 'wppack-tidy-admin'),
                 // The settings screen's "Need PublishPress Checklists
