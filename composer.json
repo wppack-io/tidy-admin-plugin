@@ -75,6 +75,7 @@
         "wp-plugin/wpconsent-cookies-banner-privacy-suite": "*",
         "wp-plugin/wpforms-lite": "*",
         "wp-plugin/yet-another-related-posts-plugin": "*",
+        "wp-theme/twentytwentyfive": "*",
         "wpnx-io/wp-translations": "*",
         "yoast/phpunit-polyfills": "^4.0"
     },
