@@ -60,6 +60,17 @@ final class Revisionary extends AbstractModule
                     add_action('admin_menu', static function (): void {
                         remove_submenu_page('revisionary-q', 'revisionary');
                     }, PHP_INT_MAX - 1);
+                    // CoreAdmin's script repaints the *last* submenu item gold
+                    // and rewrites its href to the sales site, assuming it is
+                    // its own Upgrade item — with that item removed it would
+                    // hijack the Settings link instead; undo it after load.
+                    add_action('admin_footer', static function (): void {
+                        echo '<script>window.addEventListener("load", function () {'
+                            . 'document.querySelectorAll("#toplevel_page_revisionary-q .wp-submenu a[href*=\"publishpress.com\"]").forEach(function (a) {'
+                            . 'a.href = ' . wp_json_encode(admin_url('admin.php?page=revisionary-settings')) . ';'
+                            . 'a.style.fontWeight = ""; a.style.color = ""; a.removeAttribute("target");'
+                            . '});});</script>' . "\n";
+                    }, PHP_INT_MAX);
                 },
                 'extraScreenMetaContent' => [
                     [
@@ -106,7 +117,11 @@ final class Revisionary extends AbstractModule
                 // are carried into the Help panel below; the wordpress.org
                 // support-forum link is already in the automatic sidebar.
                 'adminCss' => <<<'CSS'
-                body[class*="page_revisionary"] #postbox-container-pp { display: none !important; }
+                body[class*="page_revisionary"] #postbox-container-pp,
+                body[class*="page_revisionary"] #side-info-column:has(.pp-revisions-pro-promo-right-sidebar) { display: none !important; }
+                /* The content column reserved 75% beside the promo sidebar —
+                   with the sidebar gone, let it use the full width */
+                body.revisionary-settings .has-right-sidebar #post-body-content { margin-right: 0 !important; width: 100% !important; float: none !important; }
                 CSS,
                 'extraScreenMetaContent' => [
                     [
@@ -118,6 +133,16 @@ final class Revisionary extends AbstractModule
                             . '</ul>',
                     ],
                 ],
+            ],
+            'footer' => [
+                'label' => __('Restore the standard admin footer', 'wppack-tidy-admin'),
+                // The settings screen appends its own <footer>: a five-star
+                // review pitch, About us / Documentation / Contact links and a
+                // PublishPress logo. The documentation link already lives in
+                // the Help panel; the rest is branding.
+                'adminCss' => <<<'CSS'
+                body[class*="page_revisionary"] #wpbody-content footer:has(.pp-pressshack-logo) { display: none !important; }
+                CSS,
             ],
             'panel-placement' => [
                 'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
