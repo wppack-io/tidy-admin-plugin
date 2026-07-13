@@ -106,6 +106,7 @@ final class TidyAdminPlugin
         $noticeDenyByHook = [];
         $setupNoticePlugins = [];
         $adminCss = [self::BASE_ADMIN_CSS];
+        $frontCss = [];
         $directoryPlugins = [];
         $panelParentAliases = [];
 
@@ -191,6 +192,9 @@ final class TidyAdminPlugin
                 if (trim($feature['adminCss'] ?? '') !== '') {
                     $adminCss[] = $feature['adminCss'];
                 }
+                if (trim($feature['frontCss'] ?? '') !== '') {
+                    $frontCss[] = $feature['frontCss'];
+                }
                 if (isset($feature['register'])) {
                     ($feature['register'])();
                 }
@@ -207,7 +211,7 @@ final class TidyAdminPlugin
         (new Support\PluginListLinkCleaner($upsellLinkUrlsByPlugin))->register();
         (new Support\NoticeHookCleaner($noticeDenyByHook))->register();
         (new Support\SetupNoticeRelocator($setupNoticePlugins))->register();
-        (new Support\AdminCss(implode("\n", $adminCss)))->register();
+        (new Support\AdminCss(implode("\n", $adminCss), implode("\n", $frontCss)))->register();
         (new Support\SettingsPage($settingsModules))->register();
 
         $this->emptyDefaultAdminFooter();

@@ -126,6 +126,8 @@ interface Module
      *    captured by re-running the hook callbacks (e.g. queued on
      *    admin_init behind an own-page check).
      *  - 'adminCss': hides promotional UI that PHP hooks cannot control.
+     *  - 'frontCss': toolbar-scoped CSS also printed on the front end while
+     *    the admin bar shows (admin-bar normalisation must follow the bar).
      *  - 'register': plugin-specific hook registrations for this feature.
      *
      * @return array<string, array{
@@ -139,6 +141,7 @@ interface Module
      *     setupNoticeByHook?: array<string, list<string>>,
      *     setupNoticeCapture?: callable(): void,
      *     adminCss?: string,
+     *     frontCss?: string,
      *     register?: callable(): void,
      * }>
      */

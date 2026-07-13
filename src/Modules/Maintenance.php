@@ -212,6 +212,16 @@ final class Maintenance extends AbstractModule
                     // green stays: maintenance mode being live is worth a
                     // distinct colour.
                     . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled'),
+                // The same toolbar rules follow the admin bar to the front end
+                'frontCss' => <<<'CSS'
+                #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(1); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
+                CSS
+                    // The OFF-state status dot is hardcoded brand red (#FE2D2D),
+                    // too loud next to core's palette — paint it in the active
+                    // scheme's own notification colour instead. The ON-state
+                    // green stays: maintenance mode being live is worth a
+                    // distinct colour.
+                    . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled'),
             ],
             'image-urls' => [
                 'label' => __('Fix its double-slash image URLs', 'wppack-tidy-admin'),
