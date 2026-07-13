@@ -123,9 +123,31 @@ supported, with the major versions the cleanups were verified against:
 
 ## Installation
 
-Require `wppack/tidy-admin-plugin` with Composer (type `wordpress-plugin`) and
-activate it, or drop the `tidy-admin/` directory into `wp-content/plugins/`.
-No configuration.
+### Composer
+
+The plugin is published on
+[Packagist](https://packagist.org/packages/wppack/tidy-admin-plugin) as a
+`wordpress-plugin` package:
+
+```console
+$ composer require wppack/tidy-admin-plugin
+```
+
+Until the first stable release is tagged, require the development branch
+explicitly:
+
+```console
+$ composer require wppack/tidy-admin-plugin:1.x-dev
+```
+
+[composer/installers](https://github.com/composer/installers) places the
+plugin under `wp-content/plugins/` (add an `installer-paths` mapping for
+`type:wordpress-plugin` if your project lays WordPress out differently),
+then activate it from the Plugins screen. No configuration.
+
+### Manual
+
+Drop the plugin directory into `wp-content/plugins/` and activate it.
 
 ## Testing
 

@@ -122,9 +122,31 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 
 ## インストール
 
-Composer で `wppack/tidy-admin-plugin`(type: `wordpress-plugin`)を require して
-有効化するか、`tidy-admin/` ディレクトリを `wp-content/plugins/` に配置して
-ください。設定は不要です。
+### Composer
+
+[Packagist](https://packagist.org/packages/wppack/tidy-admin-plugin) に
+`wordpress-plugin` タイプのパッケージとして公開しています:
+
+```console
+$ composer require wppack/tidy-admin-plugin
+```
+
+最初の安定版がタグ付けされるまでは、開発ブランチを明示して require して
+ください:
+
+```console
+$ composer require wppack/tidy-admin-plugin:1.x-dev
+```
+
+[composer/installers](https://github.com/composer/installers) が
+`wp-content/plugins/` 配下に配置します(レイアウトが異なるプロジェクトでは
+`type:wordpress-plugin` の `installer-paths` を設定してください)。あとは
+プラグイン画面から有効化するだけで、設定は不要です。
+
+### 手動
+
+プラグインのディレクトリを `wp-content/plugins/` に配置して有効化して
+ください。
 
 ## テスト
 
