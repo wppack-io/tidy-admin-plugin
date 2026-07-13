@@ -290,10 +290,14 @@ final class Elementor extends AbstractModule
                 // The "News & Updates" feed (the vendor's marketing blog) renders
                 // inside the same monolithic widget callback with no hook of its
                 // own. The functional header (version, Create New Page) and the
-                // Recently Edited list stay.
+                // Recently Edited list stay. The header's drop shadow, padding
+                // and margin existed to set it off from the feed — with the
+                // feed gone they trail into empty space, so drop them (a
+                // Recently Edited list brings its own divider heading).
                 'adminCss' => <<<'CSS'
                 #e-dashboard-overview .e-overview__feed,
                 #e-dashboard-overview .e-overview__footer { display: none !important; }
+                #e-dashboard-overview .e-overview__header { padding-bottom: 0; margin-bottom: 0; box-shadow: none; }
                 CSS,
             ],
             'deactivation-survey' => [
