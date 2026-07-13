@@ -51,6 +51,7 @@ final class TidyAdminPlugin
         Modules\InstagramFeed::class,
         Modules\LiteSpeedCache::class,
         Modules\LocationWeather::class,
+        Modules\Maintenance::class,
         Modules\Mc4wp::class,
         Modules\MonsterInsights::class,
         Modules\OptinMonster::class,
