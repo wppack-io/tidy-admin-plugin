@@ -27,7 +27,7 @@ final class AdminBar
      * @var array<string, string>
      */
     private const HOVER_COLORS = [
-        'fresh' => '#00b9eb',
+        'fresh' => '#72aee6',
         'light' => '#04a4cc',
         'modern' => '#7b90ff',
         'blue' => '#ffffff',
@@ -57,6 +57,7 @@ final class AdminBar
         'ocean' => '#aa9d88',
         'sunrise' => '#ccaf0b',
     ];
+
 
     /**
      * The active user's scheme notification colour — the base value emitted
@@ -148,18 +149,16 @@ final class AdminBar
      * CSS that restores WordPress's native toolbar hover feedback to a vendor's
      * admin-bar menu item that overrides or suppresses it. The item's label takes
      * the active scheme's own hover colour (re-asserted with two IDs so it beats a
-     * single-ID vendor rule). Baked-colour SVG icons can't take `color`/`fill`, so
-     * an optional brightness filter gives them an approximate hover response.
+     * single-ID vendor rule).
      *
      * @param string       $item            the plugin's top-level `#wp-admin-bar-…` node
-     * @param list<string> $iconSelectors   icon selectors (already scoped to the node) to brighten on hover
      * @param string       $abItemPath      path from the node to its top-level `.ab-item` (default a direct
      *                                       child); pass a deeper path for wrappers (e.g. MonsterInsights)
      * @param bool         $resetBackground neutralise a custom hover background the vendor paints (e.g.
      *                                       MonsterInsights flips to white). Off by default so the item keeps
      *                                       the toolbar's own native hover darken like every other item
      */
-    public static function nativeHoverCss(string $item, array $iconSelectors = [], string $abItemPath = '> .ab-item', bool $resetBackground = false): string
+    public static function nativeHoverCss(string $item, string $abItemPath = '> .ab-item', bool $resetBackground = false): string
     {
         $target = static fn(string $prefix): string => "{$prefix} {$item}:hover {$abItemPath},\n"
             . "{$prefix} {$item} {$abItemPath}:focus";
@@ -170,24 +169,9 @@ final class AdminBar
         }
 
         // Fresh is the un-classed default; the rest override per active scheme.
-        $css .= $target('#wpadminbar') . " { color: #00b9eb !important; }";
+        $css .= $target('#wpadminbar') . " { color: " . self::HOVER_COLORS['fresh'] . " !important; }";
         foreach (self::HOVER_COLORS as $scheme => $hex) {
             $css .= "\n" . $target("body.admin-color-{$scheme} #wpadminbar") . " { color: {$hex} !important; }";
-        }
-
-        if ($iconSelectors !== []) {
-            $icons = implode(
-                ",\n",
-                array_map(static fn(string $s): string => "#wpadminbar {$item}:hover {$s}", $iconSelectors),
-            );
-            // A baked-colour (near-white) SVG-background icon can't take `color`, so a
-            // plain brightness bump leaves it white. Tint it toward the toolbar's
-            // blue-family hover accent with a filter chain instead — an approximation
-            // of the exact per-scheme colour (which a filter can't target), matching
-            // the common fresh/modern/light/blue schemes.
-            $css .= "\n{$icons} { filter: brightness(0) saturate(100%) invert(56%) sepia(46%) "
-                . "saturate(900%) hue-rotate(196deg) brightness(101%) contrast(94%) !important;"
-                . " transition: filter .1s ease; }";
         }
 
         return $css;

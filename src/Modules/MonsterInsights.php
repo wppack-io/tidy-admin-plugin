@@ -59,7 +59,6 @@ final class MonsterInsights extends AbstractModule
                 // a real dashicon (recolours with the text), so no icon filter needed.
                 'adminCss' => AdminBar::nativeHoverCss(
                     '#wp-admin-bar-monsterinsights_frontend_button',
-                    [],
                     '> .monsterinsights-adminbar-content > .ab-item',
                     true,
                 ) . <<<'CSS'
@@ -70,7 +69,6 @@ final class MonsterInsights extends AbstractModule
                 // The same toolbar rules follow the admin bar to the front end
                 'frontCss' => AdminBar::nativeHoverCss(
                     '#wp-admin-bar-monsterinsights_frontend_button',
-                    [],
                     '> .monsterinsights-adminbar-content > .ab-item',
                     true,
                 ) . <<<'CSS'
