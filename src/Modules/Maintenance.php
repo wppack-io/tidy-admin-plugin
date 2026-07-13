@@ -208,7 +208,7 @@ final class Maintenance extends AbstractModule
                 #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(0.66); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
                 /* Hover: tint toward the toolbar's blue-family hover accent,
                    like the other normalized toolbar icons */
-                #wpadminbar #wp-admin-bar-mtnc:hover > .ab-item img { filter: brightness(0) saturate(100%) invert(56%) sepia(46%) saturate(900%) hue-rotate(196deg) brightness(101%) contrast(94%); }
+                #wpadminbar #wp-admin-bar-mtnc:hover > .ab-item img { filter: brightness(0) saturate(100%) invert(56%) sepia(46%) saturate(900%) hue-rotate(196deg) brightness(101%) contrast(94%) !important; }
                 /* Non-gray admin schemes (modern, coffee, …) rest their icons
                    near-white (#f3f1f1 ≈ invert .95); the front bar and the two
                    gray schemes keep the gray above */
@@ -226,7 +226,7 @@ final class Maintenance extends AbstractModule
                 #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(0.66); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
                 /* Hover: tint toward the toolbar's blue-family hover accent,
                    like the other normalized toolbar icons */
-                #wpadminbar #wp-admin-bar-mtnc:hover > .ab-item img { filter: brightness(0) saturate(100%) invert(56%) sepia(46%) saturate(900%) hue-rotate(196deg) brightness(101%) contrast(94%); }
+                #wpadminbar #wp-admin-bar-mtnc:hover > .ab-item img { filter: brightness(0) saturate(100%) invert(56%) sepia(46%) saturate(900%) hue-rotate(196deg) brightness(101%) contrast(94%) !important; }
                 CSS
                     // The OFF-state status dot is hardcoded brand red (#FE2D2D),
                     // too loud next to core's palette — paint it in the active
