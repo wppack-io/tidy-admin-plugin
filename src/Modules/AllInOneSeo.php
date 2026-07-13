@@ -585,12 +585,12 @@ final class AllInOneSeo extends AbstractModule
                 // AIOSEO logo is a baked-colour SVG background, so it only takes the
                 // approximate brightness filter.
                 'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-aioseo-main', ['.aioseo-menu-notification-counter'])
-                    . AdminBar::nativeHoverCss('#wp-admin-bar-aioseo-main', ['.aioseo-logo']),
+                    . AdminBar::nativeHoverCss('#wp-admin-bar-aioseo-main'),
                 // The same toolbar rules follow the admin bar to the front end,
                 // plus a rest-state dim: the baked near-white logo matches the
                 // light admin schemes but not the front bar's gray icons
                 'frontCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-aioseo-main', ['.aioseo-menu-notification-counter'])
-                    . AdminBar::nativeHoverCss('#wp-admin-bar-aioseo-main', ['.aioseo-logo']) . <<<'CSS'
+                    . AdminBar::nativeHoverCss('#wp-admin-bar-aioseo-main') . <<<'CSS'
                 #wpadminbar #wp-admin-bar-aioseo-main .aioseo-logo { filter: brightness(0) invert(0.66); }
                 CSS,
             ],

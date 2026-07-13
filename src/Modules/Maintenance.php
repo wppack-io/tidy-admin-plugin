@@ -210,6 +210,9 @@ final class Maintenance extends AbstractModule
                    near-white (#f3f1f1 ≈ invert .95); the front bar and the two
                    gray schemes keep the gray above */
                 body:not(.admin-color-fresh):not(.admin-color-light) #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(0.95); }
+                /* Hover: mimic svg-painter's focus repaint (near-white schemes
+                   focus to #fff), like the painter-managed Yoast/AIOSEO icons */
+                #wpadminbar #wp-admin-bar-mtnc:hover > .ab-item img { filter: brightness(0) invert(1) !important; }
                 CSS
                     // The OFF-state status dot is hardcoded brand red (#FE2D2D),
                     // too loud next to core's palette — paint it in the active
@@ -217,9 +220,9 @@ final class Maintenance extends AbstractModule
                     // green stays: maintenance mode being live is worth a
                     // distinct colour.
                     . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled')
-                    // Hover: the exact same whole-item treatment AIOSEO and
-                    // Yoast get, so the hover color pairs match across plugins
-                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc', ['> .ab-item']),
+                    // Text hover follows the scheme like every native item;
+                    // the icon mimics svg-painter's focus repaint below
+                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc'),
                 // The same toolbar rules follow the admin bar to the front end
                 'frontCss' => <<<'CSS'
                 /* Rest: the default palette's icon gray (#a7aaad ≈ invert .66) */
@@ -231,9 +234,9 @@ final class Maintenance extends AbstractModule
                     // green stays: maintenance mode being live is worth a
                     // distinct colour.
                     . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled')
-                    // Hover: the exact same whole-item treatment AIOSEO and
-                    // Yoast get, so the hover color pairs match across plugins
-                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc', ['> .ab-item']),
+                    // Text hover follows the scheme like every native item;
+                    // the icon mimics svg-painter's focus repaint below
+                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc'),
             ],
             'image-urls' => [
                 'label' => __('Fix its double-slash image URLs', 'wppack-tidy-admin'),

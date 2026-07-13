@@ -171,10 +171,10 @@ final class Yoast extends AbstractModule
                 // Restyle it to WordPress's native count bubble in the scheme's own
                 // notification colour.
                 'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-wpseo-menu', ['.wp-ui-notification'])
-                    . AdminBar::nativeHoverCss('#wp-admin-bar-wpseo-menu', ['.yoast-logo']),
+                    . AdminBar::nativeHoverCss('#wp-admin-bar-wpseo-menu'),
                 // The same toolbar rules follow the admin bar to the front end
                 'frontCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-wpseo-menu', ['.wp-ui-notification'])
-                    . AdminBar::nativeHoverCss('#wp-admin-bar-wpseo-menu', ['.yoast-logo']),
+                    . AdminBar::nativeHoverCss('#wp-admin-bar-wpseo-menu'),
             ],
             'admin-bar-hide' => [
                 'label' => __('Hide its admin bar menu entirely', 'wppack-tidy-admin'),
