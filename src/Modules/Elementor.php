@@ -404,12 +404,17 @@ final class Elementor extends AbstractModule
                     }, PHP_INT_MAX);
                 },
                 'adminCss' => <<<'CSS'
-                body > #tidy-admin-meta-region { position: fixed; top: 32px; left: 160px; right: 0; z-index: 1101; }
-                body > #tidy-admin-meta-region #screen-meta-links { display: flex; float: none; justify-content: flex-end; margin: 0 150px 0 0; padding-top: 5px; }
+                /* The standard 20px gap past the admin menu, so the opened
+                   panel never touches it */
+                body > #tidy-admin-meta-region { position: fixed; top: 32px; left: 180px; right: 0; z-index: 1101; }
+                /* The buttons hang from the region's top edge — flush under the
+                   admin bar while closed, flush under the opened panel exactly
+                   like core's Help tab */
+                body > #tidy-admin-meta-region #screen-meta-links { display: flex; float: none; justify-content: flex-end; margin: 0 150px 0 0; }
                 body > #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
-                body.folded > #tidy-admin-meta-region { left: 36px; }
+                body.folded > #tidy-admin-meta-region { left: 56px; }
                 @media (max-width: 960px) {
-                    body.auto-fold > #tidy-admin-meta-region { left: 36px; }
+                    body.auto-fold > #tidy-admin-meta-region { left: 56px; }
                 }
                 /* Below 783px the admin bar is 46px tall and the side menu collapses */
                 @media (max-width: 782px) {
