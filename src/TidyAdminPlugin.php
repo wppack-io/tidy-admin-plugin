@@ -57,6 +57,7 @@ final class TidyAdminPlugin
         Modules\OptinMonster::class,
         Modules\PostTypesOrder::class,
         Modules\PublishPressAuthors::class,
+        Modules\PublishPressBlocks::class,
         Modules\PublishPressCapabilities::class,
         Modules\PublishPressChecklists::class,
         Modules\PublishPressFuture::class,

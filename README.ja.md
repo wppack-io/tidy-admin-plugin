@@ -110,6 +110,7 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 4.x |
 | [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 2.x |
 | [PublishPress Authors](https://wordpress.org/plugins/publishpress-authors/) | 4.x |
+| [PublishPress Blocks](https://wordpress.org/plugins/advanced-gutenberg/) | 3.x |
 | [PublishPress Capabilities](https://wordpress.org/plugins/capability-manager-enhanced/) | 2.x |
 | [PublishPress Checklists](https://wordpress.org/plugins/publishpress-checklists/) | 2.x |
 | [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 4.x |

@@ -765,3 +765,7 @@ msgstr "プラグインページ"
 #: src/Modules/PublishPressChecklists.php:101
 msgid "Hide the support pitch column on its screens"
 msgstr "画面上のサポート勧誘カラムを非表示"
+
+#: src/Modules/PublishPressBlocks.php:95
+msgid "Hide locked Pro feature cards on its dashboard"
+msgstr "ダッシュボードのロックされた Pro 機能カードを非表示"
