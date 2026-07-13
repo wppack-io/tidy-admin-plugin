@@ -199,20 +199,19 @@ final class Maintenance extends AbstractModule
                         if (!is_string($args['title'] ?? null)) {
                             return;
                         }
-                        $args['title'] = str_replace('icon-transparent.png', 'icon-small.png', $args['title']);
+                        // Swap the vendor <img> for an empty span painted via
+                        // maskIconCss below — a real element, so it behaves
+                        // exactly like the other masked toolbar icons
+                        $args['title'] = (string) preg_replace('/<img[^>]*>/', '<span class="mtnc-mask-icon"></span>', $args['title']);
                         $wp_admin_bar->add_node($args);
                     }, PHP_INT_MAX - 2);
                 },
                 'adminCss' => <<<'CSS'
-                /* Rest: the default palette's icon gray (#a7aaad ≈ invert .66) */
-                #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(0.66); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
-                /* Non-gray admin schemes (modern, coffee, …) rest their icons
-                   near-white (#f3f1f1 ≈ invert .95); the front bar and the two
-                   gray schemes keep the gray above */
-                body:not(.admin-color-fresh):not(.admin-color-light) #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(0.95); }
-                /* Hover: mimic svg-painter's focus repaint (near-white schemes
-                   focus to #fff), like the painter-managed Yoast/AIOSEO icons */
-                #wpadminbar #wp-admin-bar-mtnc:hover > .ab-item img { filter: brightness(0) invert(1) !important; }
+                /* The 20px icon slot every toolbar icon uses; the span replaces
+                   the vendor <img> (see the node rewrite above) and is painted
+                   by maskIconCss below — scheme base at rest, text hover color
+                   on hover, like a native dashicon */
+                #wpadminbar #wp-admin-bar-mtnc .mtnc-mask-icon { display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin: -2px 6px 0 0; }
                 CSS
                     // The OFF-state status dot is hardcoded brand red (#FE2D2D),
                     // too loud next to core's palette — paint it in the active
@@ -220,13 +219,16 @@ final class Maintenance extends AbstractModule
                     // green stays: maintenance mode being live is worth a
                     // distinct colour.
                     . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled')
-                    // Text hover follows the scheme like every native item;
-                    // the icon mimics svg-painter's focus repaint below
-                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc'),
+                    // Text hover follows the scheme like every native item
+                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc')
+                    . "\n" . AdminBar::maskIconCss('#wp-admin-bar-mtnc', '.mtnc-mask-icon', esc_url(plugins_url('img/icon-small.png', WP_PLUGIN_DIR . '/maintenance/maintenance.php'))),
                 // The same toolbar rules follow the admin bar to the front end
                 'frontCss' => <<<'CSS'
-                /* Rest: the default palette's icon gray (#a7aaad ≈ invert .66) */
-                #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(0.66); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
+                /* The 20px icon slot every toolbar icon uses; the span replaces
+                   the vendor <img> (see the node rewrite above) and is painted
+                   by maskIconCss below — scheme base at rest, text hover color
+                   on hover, like a native dashicon */
+                #wpadminbar #wp-admin-bar-mtnc .mtnc-mask-icon { display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin: -2px 6px 0 0; }
                 CSS
                     // The OFF-state status dot is hardcoded brand red (#FE2D2D),
                     // too loud next to core's palette — paint it in the active
@@ -234,9 +236,9 @@ final class Maintenance extends AbstractModule
                     // green stays: maintenance mode being live is worth a
                     // distinct colour.
                     . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled')
-                    // Text hover follows the scheme like every native item;
-                    // the icon mimics svg-painter's focus repaint below
-                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc'),
+                    // Text hover follows the scheme like every native item
+                    . "\n" . AdminBar::nativeHoverCss('#wp-admin-bar-mtnc')
+                    . "\n" . AdminBar::maskIconCss('#wp-admin-bar-mtnc', '.mtnc-mask-icon', esc_url(plugins_url('img/icon-small.png', WP_PLUGIN_DIR . '/maintenance/maintenance.php'))),
             ],
             'image-urls' => [
                 'label' => __('Fix its double-slash image URLs', 'wppack-tidy-admin'),

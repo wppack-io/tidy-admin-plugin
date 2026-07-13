@@ -60,6 +60,66 @@ final class AdminBar
 
 
     /**
+     * Prints the toolbar icon base color once per request as a CSS custom
+     * property (--tidy-ab-icon on #wpadminbar): the active scheme's
+     * icon_colors base in wp-admin, the default #a7aaad on the front end.
+     * Resolved at print time — the color schemes register on admin_init,
+     * after the module CSS strings are built on init.
+     */
+    public static function registerIconBaseVar(): void
+    {
+        static $registered = false;
+        if ($registered) {
+            return;
+        }
+        $registered = true;
+
+        $print = static function (): void {
+            $color = '#a7aaad';
+            if (is_admin()) {
+                global $_wp_admin_css_colors;
+                $schemeKey = get_user_option('admin_color');
+                $scheme = $_wp_admin_css_colors[is_string($schemeKey) ? $schemeKey : 'fresh'] ?? null;
+                if (is_object($scheme) && isset($scheme->icon_colors['base']) && is_string($scheme->icon_colors['base'])) {
+                    $color = $scheme->icon_colors['base'];
+                }
+            }
+            echo '<style>#wpadminbar { --tidy-ab-icon: ' . $color . '; }</style>' . "\n";
+        };
+        add_action('admin_head', $print, 5);
+        add_action('wp_head', static function () use ($print): void {
+            if (is_admin_bar_showing()) {
+                $print();
+            }
+        }, 5);
+    }
+
+    /**
+     * Repaints a toolbar icon through a mask of the vendor's own artwork so it
+     * behaves exactly like a native dashicon: the scheme's icon base color at
+     * rest, and the item's (hover-colored) text color on hover. Blanking the
+     * original background also keeps core's svg-painter from adopting the
+     * element — it only manages elements whose computed background is still a
+     * base64 SVG when it scans at ready — so the color is right from the first
+     * paint, with no late repaint flash.
+     */
+    public static function maskIconCss(string $item, string $icon, string $maskUrl): string
+    {
+        self::registerIconBaseVar();
+        $sel = "#wpadminbar {$item} {$icon}";
+
+        // color: inherit overrides any color the vendor pins on the icon
+        // element itself, so currentColor below always means the item's
+        // (hover-colored) text color.
+        return $sel . " { color: inherit !important; background-image: none !important; background-color: var(--tidy-ab-icon, #a7aaad) !important;"
+            . " -webkit-mask-image: url(\"{$maskUrl}\"); mask-image: url(\"{$maskUrl}\");"
+            . " -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;"
+            . " -webkit-mask-position: center; mask-position: center;"
+            . " -webkit-mask-size: contain; mask-size: contain; }\n"
+            . "#wpadminbar {$item}:hover {$icon} { background-color: currentColor !important; }";
+    }
+
+    /**
      * The active user's scheme notification colour — the base value emitted
      * before the body.admin-color-* overrides. In wp-admin those overrides
      * re-assert the same colour; on the front end (no admin-color-* body
