@@ -151,7 +151,11 @@ final class AllInOneSeo extends AbstractModule
                    Tools page is excluded too: its Snippets tab renders a functional
                    .aioseo-cta banner ("Install WPCode to load the Snippet Library") that
                    is the page's own content, not an upsell */
-                body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]):not([class*="page_aioseo-tools"]) .aioseo-cta { display: none !important; }
+                body[class*="page_aioseo"]:not([class*="page_aioseo-local-seo"]):not([class*="page_aioseo-search-statistics"]):not([class*="page_aioseo-link-assistant"]):not([class*="page_aioseo-redirects"]):not([class*="page_aioseo-ai-insights"]):not([class*="page_aioseo-feature-manager"]):not([class*="page_aioseo-tools"]) .aioseo-cta:not(.floating) { display: none !important; }
+                /* :not(.floating): the floating variant is the teaser-route
+                   overlay (Author SEO etc.: blurred fake settings + the CTA
+                   card explaining the Pro feature) — hiding it left only the
+                   blur; a teaser destination keeps its own CTA */
                 /* AIOSEO: dashboard Quicklinks tiles for Pro-only pages — the pages live
                    in the Upgrades panel's Premium features tab. Scoped to the Quicklinks
                    grid so the relocated Feature Manager page keeps every one of its
@@ -353,9 +357,14 @@ final class AllInOneSeo extends AbstractModule
                         if (($_GET['page'] ?? '') !== 'aioseo-settings') {
                             return;
                         }
+                        $licenseLabels = wp_json_encode(array_values(array_unique([
+                            'License',
+                            __('License', 'all-in-one-seo-pack'),
+                        ])));
                         echo '<script>(function () {'
+                            . 'var labels = ' . $licenseLabels . ';'
                             . 'function hide() { document.querySelectorAll(".var-tab, .aioseo-sidepanel-button").forEach(function (tab) {'
-                            . 'if (tab.textContent.trim() === "License") { tab.style.display = "none"; }'
+                            . 'if (labels.indexOf(tab.textContent.trim()) !== -1) { tab.style.display = "none"; }'
                             . '}); }'
                             . 'new MutationObserver(hide).observe(document.getElementById("wpbody-content") || document.body, { childList: true, subtree: true });'
                             . 'hide();'
@@ -396,7 +405,14 @@ final class AllInOneSeo extends AbstractModule
                         if (!isset($labelsByPage[$page])) {
                             return;
                         }
-                        $labels = wp_json_encode($labelsByPage[$page]);
+                        // Match the English msgids AND their localized forms via
+                        // AIOSEO's own text domain, so a translated admin (the
+                        // Vue app renders the same translated strings) no longer
+                        // fails open and keeps the tab visible.
+                        $labels = wp_json_encode(array_values(array_unique(array_merge(
+                            $labelsByPage[$page],
+                            array_map(static fn(string $l): string => __($l, 'all-in-one-seo-pack'), $labelsByPage[$page]),
+                        ))));
                         echo '<script>(function () {'
                             . 'var labels = ' . $labels . ';'
                             // Prefix match: some tab labels carry a "NEW!" pill suffix
