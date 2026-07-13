@@ -204,7 +204,15 @@ final class Maintenance extends AbstractModule
                     }, PHP_INT_MAX - 2);
                 },
                 'adminCss' => <<<'CSS'
-                #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(1); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
+                /* Rest: the default palette's icon gray (#a7aaad ≈ invert .66) */
+                #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(0.66); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
+                /* Hover: tint toward the toolbar's blue-family hover accent,
+                   like the other normalized toolbar icons */
+                #wpadminbar #wp-admin-bar-mtnc:hover > .ab-item img { filter: brightness(0) saturate(100%) invert(56%) sepia(46%) saturate(900%) hue-rotate(196deg) brightness(101%) contrast(94%); }
+                /* Non-gray admin schemes (modern, coffee, …) rest their icons
+                   near-white (#f3f1f1 ≈ invert .95); the front bar and the two
+                   gray schemes keep the gray above */
+                body:not(.admin-color-fresh):not(.admin-color-light) #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(0.95); }
                 CSS
                     // The OFF-state status dot is hardcoded brand red (#FE2D2D),
                     // too loud next to core's palette — paint it in the active
@@ -214,7 +222,11 @@ final class Maintenance extends AbstractModule
                     . "\n" . AdminBar::notificationColorCss('#wpadminbar #wp-admin-bar-mtnc .mtnc-status-dot-disabled'),
                 // The same toolbar rules follow the admin bar to the front end
                 'frontCss' => <<<'CSS'
-                #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(1); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
+                /* Rest: the default palette's icon gray (#a7aaad ≈ invert .66) */
+                #wpadminbar #wp-admin-bar-mtnc > .ab-item img { filter: brightness(0) invert(0.66); height: 20px; width: auto; vertical-align: middle; margin: -2px 6px 0 0; }
+                /* Hover: tint toward the toolbar's blue-family hover accent,
+                   like the other normalized toolbar icons */
+                #wpadminbar #wp-admin-bar-mtnc:hover > .ab-item img { filter: brightness(0) saturate(100%) invert(56%) sepia(46%) saturate(900%) hue-rotate(196deg) brightness(101%) contrast(94%); }
                 CSS
                     // The OFF-state status dot is hardcoded brand red (#FE2D2D),
                     // too loud next to core's palette — paint it in the active

@@ -586,6 +586,13 @@ final class AllInOneSeo extends AbstractModule
                 // approximate brightness filter.
                 'adminCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-aioseo-main', ['.aioseo-menu-notification-counter'])
                     . AdminBar::nativeHoverCss('#wp-admin-bar-aioseo-main', ['.aioseo-logo']),
+                // The same toolbar rules follow the admin bar to the front end,
+                // plus a rest-state dim: the baked near-white logo matches the
+                // light admin schemes but not the front bar's gray icons
+                'frontCss' => AdminBar::notificationBubbleCss('#wp-admin-bar-aioseo-main', ['.aioseo-menu-notification-counter'])
+                    . AdminBar::nativeHoverCss('#wp-admin-bar-aioseo-main', ['.aioseo-logo']) . <<<'CSS'
+                #wpadminbar #wp-admin-bar-aioseo-main .aioseo-logo { filter: brightness(0) invert(0.66); }
+                CSS,
             ],
             'admin-bar-hide' => [
                 'label' => __('Hide its admin bar menu entirely', 'wppack-tidy-admin'),
