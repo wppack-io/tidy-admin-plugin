@@ -65,11 +65,18 @@ final class Revisionary extends AbstractModule
                     // its own Upgrade item — with that item removed it would
                     // hijack the Settings link instead; undo it after load.
                     add_action('admin_footer', static function (): void {
-                        echo '<script>window.addEventListener("load", function () {'
-                            . 'document.querySelectorAll("#toplevel_page_revisionary-q .wp-submenu a[href*=\"publishpress.com\"]").forEach(function (a) {'
+                        echo '<script>(function () {'
+                            . 'function fix() { document.querySelectorAll("#toplevel_page_revisionary-q .wp-submenu a[href*=\"publishpress.com\"]").forEach(function (a) {'
                             . 'a.href = ' . wp_json_encode(admin_url('admin.php?page=revisionary-settings')) . ';'
                             . 'a.style.fontWeight = ""; a.style.color = ""; a.removeAttribute("target");'
-                            . '});});</script>' . "\n";
+                            . '}); }'
+                            // The vendor's ready handler can queue behind deferred
+                            // jQuery and run after window load, so watch the menu
+                            // and undo the gold repaint whenever it happens
+                            . 'var menu = document.getElementById("toplevel_page_revisionary-q");'
+                            . 'if (menu) { new MutationObserver(fix).observe(menu, { attributes: true, subtree: true, attributeFilter: ["href", "style"] }); }'
+                            . 'fix();'
+                            . '})();</script>' . "\n";
                     }, PHP_INT_MAX);
                 },
                 'extraScreenMetaContent' => [
@@ -121,7 +128,10 @@ final class Revisionary extends AbstractModule
                 body[class*="page_revisionary"] #side-info-column:has(.pp-revisions-pro-promo-right-sidebar) { display: none !important; }
                 /* The content column reserved 75% beside the promo sidebar —
                    with the sidebar gone, let it use the full width */
-                body.revisionary-settings .has-right-sidebar #post-body-content { margin-right: 0 !important; width: 100% !important; float: none !important; flex: 1 1 100% !important; max-width: 100% !important; }
+                body.revisionary-settings .has-right-sidebar #post-body-content { margin-right: 0 !important; width: auto !important; float: none !important; flex: 1 1 auto !important; max-width: 100% !important; }
+                /* The wrap floats left (shrink-to-fit beside the sidebar); as a
+                   normal block it keeps the standard 20px right gap */
+                body.revisionary-settings .wrap.pressshack-admin-wrapper { float: none !important; width: auto !important; margin-right: 20px !important; }
                 CSS,
                 'extraScreenMetaContent' => [
                     [
