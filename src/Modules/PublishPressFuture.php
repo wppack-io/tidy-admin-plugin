@@ -143,11 +143,19 @@ final class PublishPressFuture extends AbstractModule
                 'label' => __('Remove the "You\'re using the Free version" bar', 'wppack-tidy-admin'),
                 /*
                  * The version-notices library's TopNotice on its own screens.
-                 * The display settings are supplied through this filter, so
-                 * emptying it stops the rendering entirely.
+                 * Every PublishPress plugin registers its banner through this
+                 * shared filter, so drop only this plugin's entry — emptying
+                 * the whole array would also silence sibling plugins whose
+                 * own module toggle is off.
                  */
                 'register' => static function (): void {
-                    add_filter('pp_version_notice_top_notice_settings', '__return_empty_array', PHP_INT_MAX);
+                    add_filter('pp_version_notice_top_notice_settings', static function ($settings) {
+                        if (is_array($settings)) {
+                            unset($settings['publishpress-future']);
+                        }
+
+                        return $settings;
+                    }, PHP_INT_MAX);
                 },
             ],
             'rating-footer' => [
