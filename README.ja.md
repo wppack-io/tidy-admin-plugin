@@ -109,7 +109,12 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 | [Location Weather](https://wordpress.org/plugins/location-weather/) | 3.x |
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 4.x |
 | [Post Types Order](https://wordpress.org/plugins/post-types-order/) | 2.x |
+| [PublishPress Authors](https://wordpress.org/plugins/publishpress-authors/) | 4.x |
+| [PublishPress Capabilities](https://wordpress.org/plugins/capability-manager-enhanced/) | 2.x |
+| [PublishPress Checklists](https://wordpress.org/plugins/publishpress-checklists/) | 2.x |
 | [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 4.x |
+| [PublishPress Permissions](https://wordpress.org/plugins/press-permit-core/) | 4.x |
+| [PublishPress Planner](https://wordpress.org/plugins/publishpress/) | 4.x |
 | [PublishPress Revisions](https://wordpress.org/plugins/revisionary/) | 3.x |
 | [Redirection](https://wordpress.org/plugins/redirection/) | 5.x |
 | [Redis Object Cache](https://wordpress.org/plugins/redis-cache/) | 2.x |

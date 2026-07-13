@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-13T17:26:53+09:00\n"
+"POT-Creation-Date: 2026-07-13T20:51:06+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -40,9 +40,15 @@ msgstr ""
 #: src/Modules/EwwwImageOptimizer.php:76
 #: src/Modules/FeedsForTiktok.php:77
 #: src/Modules/FeedsForYoutube.php:89
-#: src/Modules/Maintenance.php:123
+#: src/Modules/Maintenance.php:124
 #: src/Modules/OptinMonster.php:59
+#: src/Modules/PublishPressAuthors.php:90
+#: src/Modules/PublishPressCapabilities.php:92
+#: src/Modules/PublishPressChecklists.php:90
+#: src/Modules/PublishPressPermissions.php:95
+#: src/Modules/PublishPressPlanner.php:90
 #: src/Modules/RedisCache.php:97
+#: src/Modules/Revisionary.php:92
 #: src/Modules/W3TotalCache.php:71
 #: src/Modules/WpChat.php:148
 msgid "Upgrade to Pro"
@@ -60,10 +66,10 @@ msgstr ""
 #: src/Modules/EwwwImageOptimizer.php:81
 #: src/Modules/FeedsForYoutube.php:94
 #: src/Modules/InstagramFeed.php:79
-#: src/Modules/MonsterInsights.php:83
+#: src/Modules/MonsterInsights.php:92
 #: src/Modules/OptinMonster.php:85
 #: src/Modules/ReviewsFeed.php:84
-#: src/Modules/W3TotalCache.php:147
+#: src/Modules/W3TotalCache.php:154
 #: src/Modules/WpConsent.php:54
 #: src/Modules/WpForms.php:97
 #: src/Modules/WpMailSmtp.php:75
@@ -90,19 +96,22 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:196
 #: src/Modules/LiteSpeedCache.php:70
 #: src/Modules/LocationWeather.php:176
-#: src/Modules/Maintenance.php:80
-#: src/Modules/MonsterInsights.php:126
+#: src/Modules/Maintenance.php:81
+#: src/Modules/MonsterInsights.php:135
 #: src/Modules/OptinMonster.php:134
+#: src/Modules/PublishPressPermissions.php:111
+#: src/Modules/PublishPressPlanner.php:95
 #: src/Modules/Redirection.php:92
 #: src/Modules/RedisCache.php:81
 #: src/Modules/ReviewsFeed.php:114
-#: src/Modules/W3TotalCache.php:238
+#: src/Modules/Revisionary.php:103
+#: src/Modules/W3TotalCache.php:245
 #: src/Modules/WpChat.php:129
 #: src/Modules/WpConsent.php:171
 #: src/Modules/WpForms.php:246
 #: src/Modules/WpMailSmtp.php:297
 #: src/Modules/WpSmush.php:191
-#: src/Modules/Yoast.php:239
+#: src/Modules/Yoast.php:256
 msgid "Hide upsell promotions on its screens"
 msgstr ""
 
@@ -127,8 +136,14 @@ msgstr ""
 #: src/Modules/Mc4wp.php:44
 #: src/Modules/MonsterInsights.php:46
 #: src/Modules/OptinMonster.php:44
+#: src/Modules/PublishPressAuthors.php:70
+#: src/Modules/PublishPressCapabilities.php:71
+#: src/Modules/PublishPressChecklists.php:70
 #: src/Modules/PublishPressFuture.php:39
+#: src/Modules/PublishPressPermissions.php:70
+#: src/Modules/PublishPressPlanner.php:70
 #: src/Modules/ReviewsFeed.php:60
+#: src/Modules/Revisionary.php:70
 #: src/Modules/W3TotalCache.php:58
 #: src/Modules/WpChat.php:51
 #: src/Modules/WpConsent.php:44
@@ -155,13 +170,19 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:90
 #: src/Modules/LiteSpeedCache.php:107
 #: src/Modules/LocationWeather.php:72
-#: src/Modules/Maintenance.php:152
+#: src/Modules/Maintenance.php:153
 #: src/Modules/Mc4wp.php:52
-#: src/Modules/MonsterInsights.php:98
+#: src/Modules/MonsterInsights.php:107
 #: src/Modules/OptinMonster.php:107
+#: src/Modules/PublishPressAuthors.php:110
+#: src/Modules/PublishPressCapabilities.php:103
+#: src/Modules/PublishPressChecklists.php:116
 #: src/Modules/PublishPressFuture.php:100
+#: src/Modules/PublishPressPermissions.php:124
+#: src/Modules/PublishPressPlanner.php:109
 #: src/Modules/RedisCache.php:102
 #: src/Modules/ReviewsFeed.php:95
+#: src/Modules/Revisionary.php:125
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:71
 #: src/Modules/WpConsent.php:88
@@ -177,7 +198,7 @@ msgstr ""
 msgid "Keep the post-list title column readable beside its SEO column"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:166
+#: src/Modules/AllInOneSeo.php:170
 #: src/Modules/CookieYes.php:90
 #: src/Modules/CustomFacebookFeed.php:113
 #: src/Modules/CustomTwitterFeeds.php:89
@@ -187,13 +208,16 @@ msgstr ""
 #: src/Modules/FeedsForYoutube.php:198
 #: src/Modules/InstagramFeed.php:123
 #: src/Modules/LocationWeather.php:105
-#: src/Modules/Maintenance.php:57
+#: src/Modules/Maintenance.php:58
 #: src/Modules/Mc4wp.php:92
-#: src/Modules/MonsterInsights.php:106
+#: src/Modules/MonsterInsights.php:115
 #: src/Modules/OptinMonster.php:64
+#: src/Modules/PublishPressCapabilities.php:97
+#: src/Modules/PublishPressChecklists.php:95
 #: src/Modules/PublishPressFuture.php:129
 #: src/Modules/RedisCache.php:72
 #: src/Modules/ReviewsFeed.php:127
+#: src/Modules/Revisionary.php:97
 #: src/Modules/WpConsent.php:82
 #: src/Modules/WpForms.php:70
 #: src/Modules/WpMailSmtp.php:115
@@ -202,88 +226,102 @@ msgstr ""
 msgid "Remove upgrade links from the plugin list"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:172
+#: src/Modules/AllInOneSeo.php:176
 #: src/Modules/PublishPressFuture.php:143
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:191
+#: src/Modules/AllInOneSeo.php:195
 #: src/Modules/Cfdb7.php:47
 #: src/Modules/CookieYes.php:55
 #: src/Modules/Elementor.php:210
 #: src/Modules/Mc4wp.php:120
-#: src/Modules/PublishPressFuture.php:154
+#: src/Modules/PublishPressAuthors.php:61
+#: src/Modules/PublishPressCapabilities.php:62
+#: src/Modules/PublishPressChecklists.php:61
+#: src/Modules/PublishPressFuture.php:162
+#: src/Modules/PublishPressPermissions.php:61
+#: src/Modules/PublishPressPlanner.php:61
+#: src/Modules/Revisionary.php:61
 #: src/Modules/Yarpp.php:41
 msgid "Remove the review request"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:217
+#: src/Modules/AllInOneSeo.php:221
 msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:269
+#: src/Modules/AllInOneSeo.php:273
 #: src/Modules/Duplicator.php:367
 #: src/Modules/LiteSpeedCache.php:91
 #: src/Modules/LocationWeather.php:191
-#: src/Modules/Maintenance.php:67
+#: src/Modules/Maintenance.php:68
+#: src/Modules/PublishPressAuthors.php:126
+#: src/Modules/PublishPressCapabilities.php:119
+#: src/Modules/PublishPressChecklists.php:132
+#: src/Modules/PublishPressPermissions.php:140
+#: src/Modules/PublishPressPlanner.php:125
+#: src/Modules/Revisionary.php:153
 #: src/Modules/WpMailSmtp.php:260
 msgid "Restore the standard admin footer"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:289
+#: src/Modules/AllInOneSeo.php:293
 msgid "Fix styling conflicts with WordPress core"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:298
+#: src/Modules/AllInOneSeo.php:302
 #: src/Modules/PublishPressFuture.php:135
 msgid "Hide locked Pro settings rows"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:338
+#: src/Modules/AllInOneSeo.php:342
 #: src/Modules/Elementor.php:380
 #: src/Modules/EwwwImageOptimizer.php:155
 #: src/Modules/WpMailSmtp.php:332
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:367
+#: src/Modules/AllInOneSeo.php:376
+#: src/Modules/PublishPressPermissions.php:100
+#: src/Modules/Revisionary.php:113
 #: src/Modules/WpMailSmtp.php:177
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:414
+#: src/Modules/AllInOneSeo.php:430
 msgid "Remove its news dashboard widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:427
+#: src/Modules/AllInOneSeo.php:443
 #: src/Modules/WpMailSmtp.php:248
 msgid "Always show the Scheduled Actions tools page"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:439
+#: src/Modules/AllInOneSeo.php:455
 msgid "Stop AIOSEO from adding AI buttons to the editor"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:471
+#: src/Modules/AllInOneSeo.php:487
 msgid "Disable all AI features"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:484
+#: src/Modules/AllInOneSeo.php:500
 msgid "Remove the border on its editor toolbar icons"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:495
+#: src/Modules/AllInOneSeo.php:511
 msgid "Hide the AI credits upsell"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:505
+#: src/Modules/AllInOneSeo.php:521
 #: src/Modules/EmbedPress.php:161
 #: src/Modules/WpForms.php:221
 #: src/Modules/WpMailSmtp.php:241
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:512
+#: src/Modules/AllInOneSeo.php:528
 #: src/Modules/BrokenLinkChecker.php:64
 #: src/Modules/CookieYes.php:165
 #: src/Modules/CustomFacebookFeed.php:230
@@ -296,41 +334,44 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:318
 #: src/Modules/LiteSpeedCache.php:123
 #: src/Modules/LocationWeather.php:229
-#: src/Modules/Maintenance.php:128
+#: src/Modules/Maintenance.php:129
 #: src/Modules/Mc4wp.php:144
-#: src/Modules/MonsterInsights.php:188
+#: src/Modules/MonsterInsights.php:197
 #: src/Modules/OptinMonster.php:184
 #: src/Modules/ReviewsFeed.php:193
+#: src/Modules/Revisionary.php:163
 #: src/Modules/WpChat.php:170
 #: src/Modules/WpConsent.php:223
 #: src/Modules/WpForms.php:288
 #: src/Modules/WpMailSmtp.php:319
 #: src/Modules/WpSmush.php:167
-#: src/Modules/Yoast.php:303
+#: src/Modules/Yoast.php:320
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:552
+#: src/Modules/AllInOneSeo.php:568
+#: src/Modules/Maintenance.php:180
 #: src/Modules/MonsterInsights.php:54
 #: src/Modules/W3TotalCache.php:87
 #: src/Modules/Yoast.php:119
 msgid "Clean up and normalize its admin bar menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:575
+#: src/Modules/AllInOneSeo.php:606
 #: src/Modules/LiteSpeedCache.php:134
-#: src/Modules/Maintenance.php:206
-#: src/Modules/MonsterInsights.php:72
+#: src/Modules/Maintenance.php:284
+#: src/Modules/MonsterInsights.php:81
 #: src/Modules/RedisCache.php:118
-#: src/Modules/W3TotalCache.php:111
+#: src/Modules/W3TotalCache.php:118
 #: src/Modules/WpForms.php:173
-#: src/Modules/Yoast.php:150
+#: src/Modules/Yoast.php:167
 msgid "Hide its admin bar menu entirely"
 msgstr ""
 
 #: src/Modules/AllInOneWpMigration.php:44
 #: src/Modules/EmbedPress.php:39
 #: src/Modules/LocationWeather.php:44
+#: src/Modules/Maintenance.php:167
 #: src/Modules/ReviewsFeed.php:160
 #: src/Modules/Wordfence.php:150
 msgid "Make its admin menu icon white like the core icons"
@@ -381,10 +422,16 @@ msgstr ""
 #: src/Modules/FeedsForTiktok.php:97
 #: src/Modules/FeedsForYoutube.php:204
 #: src/Modules/InstagramFeed.php:129
-#: src/Modules/Maintenance.php:44
+#: src/Modules/Maintenance.php:45
 #: src/Modules/OptinMonster.php:70
+#: src/Modules/PublishPressAuthors.php:44
+#: src/Modules/PublishPressCapabilities.php:44
+#: src/Modules/PublishPressChecklists.php:44
+#: src/Modules/PublishPressPermissions.php:44
+#: src/Modules/PublishPressPlanner.php:44
 #: src/Modules/RedisCache.php:56
 #: src/Modules/ReviewsFeed.php:133
+#: src/Modules/Revisionary.php:44
 #: src/Modules/WpChat.php:111
 #: src/Modules/WpConsent.php:121
 msgid "Remove marketing notices and announcements"
@@ -490,7 +537,7 @@ msgid "Remove the news, promo and review-request banners"
 msgstr ""
 
 #: src/Modules/LiteSpeedCache.php:58
-#: src/Modules/Yoast.php:161
+#: src/Modules/Yoast.php:178
 msgid "Disable promotional introduction popups"
 msgstr ""
 
@@ -500,7 +547,7 @@ msgstr ""
 
 #: src/Modules/LocationWeather.php:132
 #: src/Modules/Mc4wp.php:128
-#: src/Modules/MonsterInsights.php:112
+#: src/Modules/MonsterInsights.php:121
 #: src/Modules/PostTypesOrder.php:50
 #: src/Modules/Redirection.php:76
 #: src/Modules/Wordfence.php:116
@@ -517,7 +564,7 @@ msgstr ""
 msgid "Skip the unused block-editor promo bundle"
 msgstr ""
 
-#: src/Modules/Maintenance.php:166
+#: src/Modules/Maintenance.php:244
 msgid "Fix its double-slash image URLs"
 msgstr ""
 
@@ -538,11 +585,11 @@ msgstr ""
 msgid "Hide the \"You are here\" breadcrumb"
 msgstr ""
 
-#: src/Modules/MonsterInsights.php:208
+#: src/Modules/MonsterInsights.php:217
 msgid "Hide the setup pitch in the analytics dashboard widget"
 msgstr ""
 
-#: src/Modules/MonsterInsights.php:221
+#: src/Modules/MonsterInsights.php:230
 msgid "Remove the duplicate Insights item from the Dashboard menu"
 msgstr ""
 
@@ -560,11 +607,16 @@ msgstr ""
 msgid "Remove the icon from its Settings menu item"
 msgstr ""
 
+#: src/Modules/PublishPressAuthors.php:95
+#: src/Modules/PublishPressChecklists.php:101
+msgid "Hide the support pitch column on its screens"
+msgstr ""
+
 #: src/Modules/PublishPressFuture.php:59
 msgid "Show Scheduled Actions in the sidebar instead of a page button"
 msgstr ""
 
-#: src/Modules/PublishPressFuture.php:161
+#: src/Modules/PublishPressFuture.php:169
 msgid "Keep the post-list expiration column readable"
 msgstr ""
 
@@ -572,31 +624,31 @@ msgstr ""
 msgid "Add the WordPress.org links to the plugin's Help tab"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:122
+#: src/Modules/W3TotalCache.php:129
 msgid "Silence its fetched marketing notices"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:162
+#: src/Modules/W3TotalCache.php:169
 msgid "Fold documentation links into the native Help"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:179
+#: src/Modules/W3TotalCache.php:186
 msgid "FAQ"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:181
+#: src/Modules/W3TotalCache.php:188
 msgid "Support"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:183
+#: src/Modules/W3TotalCache.php:190
 msgid "Setup Guide"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:187
+#: src/Modules/W3TotalCache.php:194
 msgid "Resources"
 msgstr ""
 
-#: src/Modules/W3TotalCache.php:205
+#: src/Modules/W3TotalCache.php:212
 msgid "Open the Help and Upgrades panels below its toolbar"
 msgstr ""
 
@@ -664,15 +716,15 @@ msgstr ""
 msgid "Remove the HelpScout support beacon"
 msgstr ""
 
-#: src/Modules/Yoast.php:173
+#: src/Modules/Yoast.php:190
 msgid "Stop the \"set up a redirect\" upsell when trashing content"
 msgstr ""
 
-#: src/Modules/Yoast.php:202
+#: src/Modules/Yoast.php:219
 msgid "Stop the webinar promo notice"
 msgstr ""
 
-#: src/Modules/Yoast.php:273
+#: src/Modules/Yoast.php:290
 msgid "Use the freed upsell space for content"
 msgstr ""
 

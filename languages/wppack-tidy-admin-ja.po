@@ -761,3 +761,7 @@ msgstr "接続して Pro をインストール"
 #: src/Support/WordPressOrgLinks.php:45
 msgid "Plugin page"
 msgstr "プラグインページ"
+
+#: src/Modules/PublishPressChecklists.php:101
+msgid "Hide the support pitch column on its screens"
+msgstr "画面上のサポート勧誘カラムを非表示"
