@@ -55,6 +55,7 @@
         "wp-plugin/feeds-for-tiktok": "*",
         "wp-plugin/feeds-for-youtube": "*",
         "wp-plugin/google-analytics-for-wordpress": "*",
+        "wp-plugin/insert-headers-and-footers": "*",
         "wp-plugin/instagram-feed": "*",
         "wp-plugin/litespeed-cache": "^7.8",
         "wp-plugin/location-weather": "*",
