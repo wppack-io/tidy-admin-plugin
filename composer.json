@@ -82,7 +82,7 @@
         "wp-plugin/wpforms-lite": "*",
         "wp-plugin/yet-another-related-posts-plugin": "*",
         "wp-theme/twentytwentyfive": "*",
-        "wpnx-io/wp-translations": "*",
+        "wppack/translations-installer": "^1.0",
         "yoast/phpunit-polyfills": "^4.0"
     },
     "autoload": {
@@ -99,7 +99,7 @@
         "allow-plugins": {
             "composer/installers": true,
             "roots/wordpress-core-installer": true,
-            "wpnx-io/wp-translations": true
+            "wppack/translations-installer": true
         },
         "optimize-autoloader": true,
         "preferred-install": "dist",
