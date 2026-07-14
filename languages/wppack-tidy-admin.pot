@@ -3,13 +3,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WPPack Tidy Admin 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tidy-admin\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tidy-admin-plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-14T15:57:44+09:00\n"
+"POT-Creation-Date: 2026-07-15T09:08:20+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -71,6 +71,7 @@ msgstr ""
 #: src/Modules/OptinMonster.php:85
 #: src/Modules/ReviewsFeed.php:84
 #: src/Modules/W3TotalCache.php:154
+#: src/Modules/WpCode.php:70
 #: src/Modules/WpConsent.php:54
 #: src/Modules/WpForms.php:97
 #: src/Modules/WpMailSmtp.php:75
@@ -108,6 +109,7 @@ msgstr ""
 #: src/Modules/Revisionary.php:103
 #: src/Modules/W3TotalCache.php:245
 #: src/Modules/WpChat.php:129
+#: src/Modules/WpCode.php:288
 #: src/Modules/WpConsent.php:171
 #: src/Modules/WpForms.php:246
 #: src/Modules/WpMailSmtp.php:297
@@ -148,6 +150,7 @@ msgstr ""
 #: src/Modules/Revisionary.php:70
 #: src/Modules/W3TotalCache.php:58
 #: src/Modules/WpChat.php:51
+#: src/Modules/WpCode.php:62
 #: src/Modules/WpConsent.php:44
 #: src/Modules/WpForms.php:62
 #: src/Modules/WpMailSmtp.php:61
@@ -188,6 +191,7 @@ msgstr ""
 #: src/Modules/Revisionary.php:125
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:71
+#: src/Modules/WpCode.php:105
 #: src/Modules/WpConsent.php:88
 #: src/Modules/WpForms.php:184
 #: src/Modules/WpMailSmtp.php:85
@@ -221,6 +225,7 @@ msgstr ""
 #: src/Modules/RedisCache.php:72
 #: src/Modules/ReviewsFeed.php:127
 #: src/Modules/Revisionary.php:97
+#: src/Modules/WpCode.php:128
 #: src/Modules/WpConsent.php:82
 #: src/Modules/WpForms.php:70
 #: src/Modules/WpMailSmtp.php:115
@@ -247,6 +252,7 @@ msgstr ""
 #: src/Modules/PublishPressPermissions.php:61
 #: src/Modules/PublishPressPlanner.php:61
 #: src/Modules/Revisionary.php:61
+#: src/Modules/WpCode.php:134
 #: src/Modules/Yarpp.php:41
 msgid "Remove the review request"
 msgstr ""
@@ -284,6 +290,7 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:342
 #: src/Modules/Elementor.php:380
 #: src/Modules/EwwwImageOptimizer.php:155
+#: src/Modules/WpCode.php:373
 #: src/Modules/WpMailSmtp.php:332
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
@@ -354,6 +361,7 @@ msgstr ""
 #: src/Modules/ReviewsFeed.php:193
 #: src/Modules/Revisionary.php:163
 #: src/Modules/WpChat.php:170
+#: src/Modules/WpCode.php:310
 #: src/Modules/WpConsent.php:223
 #: src/Modules/WpForms.php:288
 #: src/Modules/WpMailSmtp.php:319
@@ -365,6 +373,7 @@ msgstr ""
 #: src/Modules/AllInOneSeo.php:568
 #: src/Modules/MonsterInsights.php:54
 #: src/Modules/W3TotalCache.php:87
+#: src/Modules/WpCode.php:253
 #: src/Modules/Yoast.php:119
 msgid "Clean up and normalize its admin bar menu"
 msgstr ""
@@ -375,6 +384,7 @@ msgstr ""
 #: src/Modules/MonsterInsights.php:81
 #: src/Modules/RedisCache.php:118
 #: src/Modules/W3TotalCache.php:118
+#: src/Modules/WpCode.php:275
 #: src/Modules/WpForms.php:173
 #: src/Modules/Yoast.php:167
 msgid "Hide its admin bar menu entirely"
@@ -446,6 +456,7 @@ msgstr ""
 #: src/Modules/ReviewsFeed.php:133
 #: src/Modules/Revisionary.php:44
 #: src/Modules/WpChat.php:111
+#: src/Modules/WpCode.php:148
 #: src/Modules/WpConsent.php:121
 msgid "Remove marketing notices and announcements"
 msgstr ""
@@ -476,6 +487,7 @@ msgid "Fix the squeezed select fields on its screens"
 msgstr ""
 
 #: src/Modules/Duplicator.php:254
+#: src/Modules/WpCode.php:170
 #: src/Modules/WpForms.php:87
 #: src/Modules/WpMailSmtp.php:161
 msgid "Remove the \"You're using Lite\" notice bar"
@@ -703,6 +715,22 @@ msgstr ""
 
 #: src/Modules/WordPressCore.php:113
 msgid "Remove the \"WordPress Events and News\" dashboard widget"
+msgstr ""
+
+#: src/Modules/WpCode.php:178
+msgid "Move the Pro pitch under Headers & Footers to the Upgrades panel"
+msgstr ""
+
+#: src/Modules/WpCode.php:206
+msgid "Remove the WPConsent and WP Mail SMTP cross-sell notices"
+msgstr ""
+
+#: src/Modules/WpCode.php:219
+msgid "Remove the Code Revisions teaser sections"
+msgstr ""
+
+#: src/Modules/WpCode.php:240
+msgid "Remove the Page Scripts teaser box from the post editor"
 msgstr ""
 
 #: src/Modules/WpForms.php:152

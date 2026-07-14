@@ -777,3 +777,19 @@ msgstr "壊れた設定タブのリンクを修正"
 #: src/Modules/Maintenance.php:180
 msgid "Give its admin bar icon the native toolbar icon styling"
 msgstr "管理バーのアイコンをネイティブのツールバーアイコンと同じ見た目にする"
+
+#: src/Modules/WpCode.php:178
+msgid "Move the Pro pitch under Headers & Footers to the Upgrades panel"
+msgstr "Headers & Footers 下の Pro 宣伝をアップグレードパネルへ移設"
+
+#: src/Modules/WpCode.php:206
+msgid "Remove the WPConsent and WP Mail SMTP cross-sell notices"
+msgstr "WPConsent と WP Mail SMTP のクロスセル通知を除去"
+
+#: src/Modules/WpCode.php:219
+msgid "Remove the Page Scripts teaser box from the post editor"
+msgstr "投稿エディターから Page Scripts のティーザーボックスを除去"
+
+#: src/Modules/WpCode.php:222
+msgid "Remove the Code Revisions teaser sections"
+msgstr "コードリビジョンのティーザーセクションを除去"

@@ -71,6 +71,7 @@ final class TidyAdminPlugin
         Modules\W3TotalCache::class,
         Modules\WordPressCore::class,
         Modules\WpChat::class,
+        Modules\WpCode::class,
         Modules\WpConsent::class,
         Modules\Wordfence::class,
         Modules\WpForms::class,
