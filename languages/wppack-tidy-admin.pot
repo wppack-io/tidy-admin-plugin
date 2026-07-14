@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-13T23:49:43+09:00\n"
+"POT-Creation-Date: 2026-07-14T15:38:45+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -40,7 +40,7 @@ msgstr ""
 #: src/Modules/EwwwImageOptimizer.php:76
 #: src/Modules/FeedsForTiktok.php:77
 #: src/Modules/FeedsForYoutube.php:89
-#: src/Modules/Maintenance.php:124
+#: src/Modules/Maintenance.php:123
 #: src/Modules/OptinMonster.php:59
 #: src/Modules/PublishPressAuthors.php:90
 #: src/Modules/PublishPressBlocks.php:90
@@ -97,7 +97,7 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:196
 #: src/Modules/LiteSpeedCache.php:70
 #: src/Modules/LocationWeather.php:176
-#: src/Modules/Maintenance.php:81
+#: src/Modules/Maintenance.php:80
 #: src/Modules/MonsterInsights.php:135
 #: src/Modules/OptinMonster.php:134
 #: src/Modules/PublishPressPermissions.php:111
@@ -172,14 +172,14 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:90
 #: src/Modules/LiteSpeedCache.php:107
 #: src/Modules/LocationWeather.php:72
-#: src/Modules/Maintenance.php:153
+#: src/Modules/Maintenance.php:152
 #: src/Modules/Mc4wp.php:52
 #: src/Modules/MonsterInsights.php:107
 #: src/Modules/OptinMonster.php:107
 #: src/Modules/PublishPressAuthors.php:165
 #: src/Modules/PublishPressBlocks.php:133
 #: src/Modules/PublishPressCapabilities.php:103
-#: src/Modules/PublishPressChecklists.php:142
+#: src/Modules/PublishPressChecklists.php:146
 #: src/Modules/PublishPressFuture.php:102
 #: src/Modules/PublishPressPermissions.php:124
 #: src/Modules/PublishPressPlanner.php:109
@@ -211,7 +211,7 @@ msgstr ""
 #: src/Modules/FeedsForYoutube.php:198
 #: src/Modules/InstagramFeed.php:123
 #: src/Modules/LocationWeather.php:105
-#: src/Modules/Maintenance.php:58
+#: src/Modules/Maintenance.php:57
 #: src/Modules/Mc4wp.php:92
 #: src/Modules/MonsterInsights.php:115
 #: src/Modules/OptinMonster.php:64
@@ -259,10 +259,10 @@ msgstr ""
 #: src/Modules/Duplicator.php:367
 #: src/Modules/LiteSpeedCache.php:91
 #: src/Modules/LocationWeather.php:191
-#: src/Modules/Maintenance.php:68
+#: src/Modules/Maintenance.php:67
 #: src/Modules/PublishPressAuthors.php:181
 #: src/Modules/PublishPressCapabilities.php:119
-#: src/Modules/PublishPressChecklists.php:158
+#: src/Modules/PublishPressChecklists.php:162
 #: src/Modules/PublishPressPermissions.php:140
 #: src/Modules/PublishPressPlanner.php:125
 #: src/Modules/Revisionary.php:153
@@ -341,14 +341,14 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:318
 #: src/Modules/LiteSpeedCache.php:123
 #: src/Modules/LocationWeather.php:229
-#: src/Modules/Maintenance.php:129
+#: src/Modules/Maintenance.php:128
 #: src/Modules/Mc4wp.php:144
 #: src/Modules/MonsterInsights.php:197
 #: src/Modules/OptinMonster.php:184
 #: src/Modules/PublishPressAuthors.php:191
 #: src/Modules/PublishPressBlocks.php:122
 #: src/Modules/PublishPressCapabilities.php:129
-#: src/Modules/PublishPressChecklists.php:168
+#: src/Modules/PublishPressChecklists.php:172
 #: src/Modules/PublishPressPermissions.php:150
 #: src/Modules/PublishPressPlanner.php:137
 #: src/Modules/ReviewsFeed.php:193
@@ -363,7 +363,6 @@ msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:568
-#: src/Modules/Maintenance.php:180
 #: src/Modules/MonsterInsights.php:54
 #: src/Modules/W3TotalCache.php:87
 #: src/Modules/Yoast.php:119
@@ -372,7 +371,7 @@ msgstr ""
 
 #: src/Modules/AllInOneSeo.php:606
 #: src/Modules/LiteSpeedCache.php:134
-#: src/Modules/Maintenance.php:284
+#: src/Modules/Maintenance.php:219
 #: src/Modules/MonsterInsights.php:81
 #: src/Modules/RedisCache.php:118
 #: src/Modules/W3TotalCache.php:118
@@ -384,7 +383,7 @@ msgstr ""
 #: src/Modules/AllInOneWpMigration.php:44
 #: src/Modules/EmbedPress.php:39
 #: src/Modules/LocationWeather.php:44
-#: src/Modules/Maintenance.php:167
+#: src/Modules/Maintenance.php:166
 #: src/Modules/ReviewsFeed.php:160
 #: src/Modules/Wordfence.php:150
 msgid "Make its admin menu icon white like the core icons"
@@ -435,7 +434,7 @@ msgstr ""
 #: src/Modules/FeedsForTiktok.php:97
 #: src/Modules/FeedsForYoutube.php:204
 #: src/Modules/InstagramFeed.php:129
-#: src/Modules/Maintenance.php:45
+#: src/Modules/Maintenance.php:44
 #: src/Modules/OptinMonster.php:70
 #: src/Modules/PublishPressAuthors.php:44
 #: src/Modules/PublishPressBlocks.php:44
@@ -578,7 +577,7 @@ msgstr ""
 msgid "Skip the unused block-editor promo bundle"
 msgstr ""
 
-#: src/Modules/Maintenance.php:244
+#: src/Modules/Maintenance.php:179
 msgid "Fix its double-slash image URLs"
 msgstr ""
 
@@ -626,7 +625,7 @@ msgid "Fix its broken settings-tab links"
 msgstr ""
 
 #: src/Modules/PublishPressAuthors.php:150
-#: src/Modules/PublishPressChecklists.php:127
+#: src/Modules/PublishPressChecklists.php:131
 msgid "Hide the support pitch column on its screens"
 msgstr ""
 
