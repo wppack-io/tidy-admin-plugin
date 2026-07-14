@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+use WPPack\Plugin\TidyAdminPlugin\Support\AdminBar;
 
 final class Maintenance extends AbstractModule
 {
@@ -174,6 +175,53 @@ final class Maintenance extends AbstractModule
                    icons of every other scheme; un-dim the resting state there */
                 body:not(.admin-color-fresh):not(.admin-color-light) #toplevel_page_maintenance:not(.wp-has-current-submenu):not(:hover) .wp-menu-image img { opacity: 0.95; }
                 CSS,
+            ],
+            'admin-bar' => [
+                'label' => __('Give its admin bar icon the native toolbar icon styling', 'wppack-tidy-admin'),
+                // Only the toolbar item's icon is touched — the green/red
+                // status dot beside the label keeps the vendor's own colours
+                // (state information). The toolbar ships icon-transparent.png,
+                // the M mark on a *filled* circle, which a whitening filter
+                // would turn into a solid blob — so swap in the sidebar's
+                // icon-small.png (the bare mark, the same artwork the sidebar
+                // menu shows) and paint it like a native dashicon: the
+                // scheme's icon base at rest, the text colour on hover.
+                'register' => static function (): void {
+                    add_action('wp_before_admin_bar_render', static function (): void {
+                        global $wp_admin_bar;
+                        if (!$wp_admin_bar instanceof \WP_Admin_Bar) {
+                            return;
+                        }
+                        $node = $wp_admin_bar->get_node('mtnc');
+                        if ($node === null) {
+                            return;
+                        }
+                        $args = get_object_vars($node);
+                        if (!is_string($args['title'] ?? null)) {
+                            return;
+                        }
+                        // Swap the vendor <img> for an empty span painted via
+                        // maskIconCss below — a real element, so it behaves
+                        // exactly like the other masked toolbar icons
+                        $args['title'] = (string) preg_replace('/<img[^>]*>/', '<span class="mtnc-mask-icon"></span>', $args['title']);
+                        $wp_admin_bar->add_node($args);
+                    }, PHP_INT_MAX - 2);
+                },
+                'adminCss' => <<<'CSS'
+                /* The 20px icon slot every toolbar icon uses; the span replaces
+                   the vendor <img> (see the node rewrite above) and is painted
+                   by maskIconCss below */
+                #wpadminbar #wp-admin-bar-mtnc .mtnc-mask-icon { display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin: -2px 6px 0 0; }
+                CSS
+                    . "\n" . AdminBar::maskIconCss('#wp-admin-bar-mtnc', '.mtnc-mask-icon', esc_url(plugins_url('img/icon-small.png', WP_PLUGIN_DIR . '/maintenance/maintenance.php'))),
+                // The same toolbar rules follow the admin bar to the front end
+                'frontCss' => <<<'CSS'
+                /* The 20px icon slot every toolbar icon uses; the span replaces
+                   the vendor <img> (see the node rewrite above) and is painted
+                   by maskIconCss below */
+                #wpadminbar #wp-admin-bar-mtnc .mtnc-mask-icon { display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin: -2px 6px 0 0; }
+                CSS
+                    . "\n" . AdminBar::maskIconCss('#wp-admin-bar-mtnc', '.mtnc-mask-icon', esc_url(plugins_url('img/icon-small.png', WP_PLUGIN_DIR . '/maintenance/maintenance.php'))),
             ],
             'image-urls' => [
                 'label' => __('Fix its double-slash image URLs', 'wppack-tidy-admin'),

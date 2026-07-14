@@ -773,3 +773,7 @@ msgstr "ダッシュボードのロックされた Pro 機能カードを非表�
 #: src/Modules/PublishPressAuthors.php:95
 msgid "Fix its broken settings-tab links"
 msgstr "壊れた設定タブのリンクを修正"
+
+#: src/Modules/Maintenance.php:180
+msgid "Give its admin bar icon the native toolbar icon styling"
+msgstr "管理バーのアイコンをネイティブのツールバーアイコンと同じ見た目にする"
