@@ -92,6 +92,10 @@ this plugin must never have.
   and link verbatim (the vendor's own text domain) in the panel's Upgrade tab,
   like Duplicator's License pitch. It helps at purchase time; don't discard it.
 - External links open in a new tab with `rel="noopener noreferrer"`.
+- When the toggles are integrated into a vendor header row (next to the
+  vendor's own controls), they keep core's top-hanging look: aligned to the
+  row's **top edge** (cancel the row's top padding if needed), never
+  vertically centered against the neighboring controls.
 
 ## Layout invariants
 

@@ -129,6 +129,11 @@ default when the flag is unset. Everything else defaults to ON.
   surfaces e.g. on the plugin-delete confirmation). Hide such shared promo
   elements globally, not scoped to `body[class*="page_{slug}"]`; keep the
   scope only for parts that are functional on the plugin's own pages.
+- **Screen-meta buttons placed into a vendor header row always hang from its
+  top edge.** Even when asked to put Help/Upgrades next to (「重ねる」) vendor
+  header controls, top-align the toggles — they are core's top-hanging chips
+  (bottom-rounded, no top border) — and **never vertically center them**
+  against the neighboring controls.
 - `declare(strict_types=1)`, PER coding style, one final class per file.
 
 ## Testing

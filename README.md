@@ -106,6 +106,7 @@ supported, with the major versions the cleanups were verified against:
 | [Twitter Feeds (Smash Balloon)](https://wordpress.org/plugins/custom-twitter-feeds/) | 2.x |
 | [YouTube Feeds (Smash Balloon)](https://wordpress.org/plugins/feeds-for-youtube/) | 2.x |
 | [WPChat (Smash Balloon)](https://wordpress.org/plugins/smashballoon-wpchat-livechat-customer-support/) | 1.x |
+| [WPCode Lite](https://wordpress.org/plugins/insert-headers-and-footers/) | 2.x |
 | [WPConsent](https://wordpress.org/plugins/wpconsent-cookies-banner-privacy-suite/) | 1.x |
 | [Location Weather](https://wordpress.org/plugins/location-weather/) | 3.x |
 | [MC4WP (Mailchimp for WP)](https://wordpress.org/plugins/mailchimp-for-wp/) | 4.x |
