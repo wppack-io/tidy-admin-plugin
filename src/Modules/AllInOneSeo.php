@@ -172,6 +172,28 @@ final class AllInOneSeo extends AbstractModule
                     'aioseo.com/lite-upgrade', // Upgrade to Pro (Docs and Support row links stay)
                 ],
             ],
+            'taxonomy-upsell' => [
+                'label' => __('Remove the Custom Taxonomies teaser on term screens', 'wppack-tidy-admin'),
+                /*
+                 * "Custom Taxonomies are a PRO Feature" — Lite appends a blurred
+                 * mock of the term-SEO metabox plus a floating CTA card under
+                 * every viewable taxonomy's list table (after-{tax}-table) and
+                 * term edit form ({tax}_edit_form). Term SEO does not exist in
+                 * Lite at all, so the whole section is an upsell — unhook it at
+                 * the source. current_screen fires after Lite registers the
+                 * hooks and before the term screens render them.
+                 */
+                'register' => static function (): void {
+                    add_action('current_screen', static function (\WP_Screen $screen): void {
+                        if ($screen->taxonomy === '' || !function_exists('aioseo') || empty(aioseo()->postSettings)) {
+                            return;
+                        }
+                        foreach (["{$screen->taxonomy}_edit_form", "after-{$screen->taxonomy}-table"] as $hook) {
+                            remove_action($hook, [aioseo()->postSettings, 'addTaxonomyUpsell']);
+                        }
+                    });
+                },
+            ],
             'upgrade-bar' => [
                 'label' => __('Remove the "You\'re using the Free version" bar', 'wppack-tidy-admin'),
                 /*
