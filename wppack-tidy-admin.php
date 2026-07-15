@@ -14,7 +14,7 @@ declare(strict_types=1);
 /**
  * Plugin Name: WPPack Tidy Admin
  * Description: Tidy up wp-admin — take plugin vendors' upsells, promos and notices out of the flow. Per-plugin modules activate only when the target plugin is active.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Requires PHP: 8.2
  * Requires at least: 6.7
  * Author: WPPack
