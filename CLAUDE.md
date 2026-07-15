@@ -243,6 +243,12 @@ survive a reset). Two lessons baked into the script; keep them if editing:
 - **Per-plugin work happens on its own branch** (e.g. `plugin/aioseo`):
   adding a module or iterating on one plugin's cleanups stays off `1.x`
   until it is verified, then merges into `1.x`.
+- **A pushed release tag is immutable** — the plugin is consumed via
+  Packagist, where moving or deleting a published tag is forbidden. Never
+  retag; if a released tag is wrong, cut a new higher version. Tags are
+  annotated+signed (`git tag -m`), match the `Version:` plugin header
+  (bumped in a `chore(release)` commit), and use semver: module
+  additions/`feat` → minor, fix-only → patch.
 
 ## Guideline self-evaluation
 
