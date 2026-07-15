@@ -793,3 +793,7 @@ msgstr "投稿エディターから Page Scripts のティーザーボックス�
 #: src/Modules/WpCode.php:222
 msgid "Remove the Code Revisions teaser sections"
 msgstr "コードリビジョンのティーザーセクションを除去"
+
+#: src/Modules/AllInOneSeo.php:177
+msgid "Remove the Custom Taxonomies teaser on term screens"
+msgstr "ターム画面のカスタムタクソノミーティーザーを除去"

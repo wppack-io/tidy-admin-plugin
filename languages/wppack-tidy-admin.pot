@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-15T09:08:20+09:00\n"
+"POT-Creation-Date: 2026-07-15T14:08:22+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -235,11 +235,15 @@ msgid "Remove upgrade links from the plugin list"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:176
+msgid "Remove the Custom Taxonomies teaser on term screens"
+msgstr ""
+
+#: src/Modules/AllInOneSeo.php:198
 #: src/Modules/PublishPressFuture.php:145
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:195
+#: src/Modules/AllInOneSeo.php:217
 #: src/Modules/Cfdb7.php:47
 #: src/Modules/CookieYes.php:55
 #: src/Modules/Elementor.php:210
@@ -257,11 +261,11 @@ msgstr ""
 msgid "Remove the review request"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:221
+#: src/Modules/AllInOneSeo.php:243
 msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:273
+#: src/Modules/AllInOneSeo.php:295
 #: src/Modules/Duplicator.php:367
 #: src/Modules/LiteSpeedCache.php:91
 #: src/Modules/LocationWeather.php:191
@@ -276,18 +280,18 @@ msgstr ""
 msgid "Restore the standard admin footer"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:293
+#: src/Modules/AllInOneSeo.php:315
 msgid "Fix styling conflicts with WordPress core"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:302
+#: src/Modules/AllInOneSeo.php:324
 #: src/Modules/PublishPressAuthors.php:124
 #: src/Modules/PublishPressChecklists.php:116
 #: src/Modules/PublishPressFuture.php:137
 msgid "Hide locked Pro settings rows"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:342
+#: src/Modules/AllInOneSeo.php:364
 #: src/Modules/Elementor.php:380
 #: src/Modules/EwwwImageOptimizer.php:155
 #: src/Modules/WpCode.php:373
@@ -295,7 +299,7 @@ msgstr ""
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:376
+#: src/Modules/AllInOneSeo.php:398
 #: src/Modules/PublishPressChecklists.php:101
 #: src/Modules/PublishPressPermissions.php:100
 #: src/Modules/Revisionary.php:113
@@ -303,39 +307,39 @@ msgstr ""
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:430
+#: src/Modules/AllInOneSeo.php:452
 msgid "Remove its news dashboard widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:443
+#: src/Modules/AllInOneSeo.php:465
 #: src/Modules/WpMailSmtp.php:248
 msgid "Always show the Scheduled Actions tools page"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:455
+#: src/Modules/AllInOneSeo.php:477
 msgid "Stop AIOSEO from adding AI buttons to the editor"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:487
+#: src/Modules/AllInOneSeo.php:509
 msgid "Disable all AI features"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:500
+#: src/Modules/AllInOneSeo.php:522
 msgid "Remove the border on its editor toolbar icons"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:511
+#: src/Modules/AllInOneSeo.php:533
 msgid "Hide the AI credits upsell"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:521
+#: src/Modules/AllInOneSeo.php:543
 #: src/Modules/EmbedPress.php:161
 #: src/Modules/WpForms.php:221
 #: src/Modules/WpMailSmtp.php:241
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:528
+#: src/Modules/AllInOneSeo.php:550
 #: src/Modules/BrokenLinkChecker.php:64
 #: src/Modules/CookieYes.php:165
 #: src/Modules/CustomFacebookFeed.php:230
@@ -370,7 +374,7 @@ msgstr ""
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:568
+#: src/Modules/AllInOneSeo.php:590
 #: src/Modules/MonsterInsights.php:54
 #: src/Modules/W3TotalCache.php:87
 #: src/Modules/WpCode.php:253
@@ -378,7 +382,7 @@ msgstr ""
 msgid "Clean up and normalize its admin bar menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:606
+#: src/Modules/AllInOneSeo.php:628
 #: src/Modules/LiteSpeedCache.php:134
 #: src/Modules/Maintenance.php:267
 #: src/Modules/MonsterInsights.php:81
