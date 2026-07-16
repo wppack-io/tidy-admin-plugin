@@ -223,6 +223,15 @@ survive a reset). Two lessons baked into the script; keep them if editing:
   that crashes WP loading when offline (passes a `WP_Error` to
   `wp_get_image_editor()`); the script pre-sets `sbi_db_version` to skip it.
 
+## Release procedure
+
+- **Bump the `Version:` header in `wppack-tidy-admin.php` to match the tag
+  BEFORE tagging.** `wp plugin list` reads the header, not the composer
+  version (sanitize-characters shipped a v1.0.1 with a `1.0.0` header this
+  way).
+- Tags are `vX.Y.Z`. Packagist picks new tags up automatically via the
+  GitHub integration — no manual submission.
+
 ## Git commit discipline
 
 - **One commit = one logical change.** Split unrelated concerns (a feature
