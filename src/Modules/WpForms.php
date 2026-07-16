@@ -25,7 +25,7 @@ final class WpForms extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [1];
+        return [1, 2];
     }
 
     public function menuParent(): string
@@ -101,11 +101,12 @@ final class WpForms extends AbstractModule
                 // are install pages for WPConsent and WP Mail SMTP.
                 'submenuRelocations' => [
                     'premium' => [
-                        'wpforms-entries',   // Entries (Pro; Lite stores no entries)
-                        'wpforms-payments',  // Payments (Pro)
-                        'wpforms-addons',    // Addons (Pro-only add-ons)
-                        'wpforms-wpconsent', // Privacy Compliance (installs WPConsent)
-                        'wpforms-smtp',      // SMTP (installs WP Mail SMTP)
+                        'wpforms-entries',        // Entries (Pro; Lite stores no entries)
+                        'wpforms-payments',       // Payments (Pro)
+                        'wpforms-addons',         // Addons (Pro-only add-ons)
+                        'wpforms-wpconsent',      // Privacy Compliance (installs WPConsent; gone in v2, kept for v1)
+                        'wpforms-smtp',           // SMTP (installs WP Mail SMTP)
+                        'wpforms-sugar-calendar', // Events (v2; installs Sugar Calendar)
                     ],
                 ],
                 // Geolocation and Access Controls are Pro-only Settings tabs whose views
@@ -244,6 +245,19 @@ final class WpForms extends AbstractModule
             ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
+                'register' => static function (): void {
+                    // "Privacy Compliance — Set Up WPConsent" row inside the GDPR
+                    // section of Settings > General (v2 successor of the removed
+                    // wpforms-wpconsent menu page; a sister-product install pitch,
+                    // not a setting). WPConsentCallout adds it on this filter at 15.
+                    add_filter('wpforms_settings_defaults', static function ($settings) {
+                        if (is_array($settings) && isset($settings['general']['gdpr-privacy-compliance'])) {
+                            unset($settings['general']['gdpr-privacy-compliance']);
+                        }
+
+                        return $settings;
+                    }, 20);
+                },
                 // These are all Vue/JS-rendered or baked into the settings markup with
                 // no server hook to intercept, so CSS is the reachable option.
                 'adminCss' => <<<'CSS'
