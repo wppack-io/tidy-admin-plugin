@@ -2,14 +2,14 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPPack Tidy Admin 1.0.0\n"
+"Project-Id-Version: WPPack Tidy Admin 1.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tidy-admin-plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-15T14:08:22+09:00\n"
+"POT-Creation-Date: 2026-07-17T15:55:57+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -50,6 +50,7 @@ msgstr ""
 #: src/Modules/PublishPressPlanner.php:90
 #: src/Modules/RedisCache.php:97
 #: src/Modules/Revisionary.php:92
+#: src/Modules/TaxoPress.php:65
 #: src/Modules/W3TotalCache.php:71
 #: src/Modules/WpChat.php:148
 msgid "Upgrade to Pro"
@@ -107,11 +108,12 @@ msgstr ""
 #: src/Modules/RedisCache.php:81
 #: src/Modules/ReviewsFeed.php:114
 #: src/Modules/Revisionary.php:103
+#: src/Modules/TaxoPress.php:152
 #: src/Modules/W3TotalCache.php:245
 #: src/Modules/WpChat.php:129
 #: src/Modules/WpCode.php:288
 #: src/Modules/WpConsent.php:171
-#: src/Modules/WpForms.php:246
+#: src/Modules/WpForms.php:247
 #: src/Modules/WpMailSmtp.php:297
 #: src/Modules/WpSmush.php:191
 #: src/Modules/Yoast.php:256
@@ -148,6 +150,7 @@ msgstr ""
 #: src/Modules/PublishPressPlanner.php:70
 #: src/Modules/ReviewsFeed.php:60
 #: src/Modules/Revisionary.php:70
+#: src/Modules/TaxoPress.php:44
 #: src/Modules/W3TotalCache.php:58
 #: src/Modules/WpChat.php:51
 #: src/Modules/WpCode.php:62
@@ -189,11 +192,12 @@ msgstr ""
 #: src/Modules/RedisCache.php:102
 #: src/Modules/ReviewsFeed.php:95
 #: src/Modules/Revisionary.php:125
+#: src/Modules/TaxoPress.php:128
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:71
 #: src/Modules/WpCode.php:105
 #: src/Modules/WpConsent.php:88
-#: src/Modules/WpForms.php:184
+#: src/Modules/WpForms.php:185
 #: src/Modules/WpMailSmtp.php:85
 #: src/Modules/WpSmush.php:144
 #: src/Modules/Yarpp.php:49
@@ -256,6 +260,7 @@ msgstr ""
 #: src/Modules/PublishPressPermissions.php:61
 #: src/Modules/PublishPressPlanner.php:61
 #: src/Modules/Revisionary.php:61
+#: src/Modules/TaxoPress.php:87
 #: src/Modules/WpCode.php:134
 #: src/Modules/Yarpp.php:41
 msgid "Remove the review request"
@@ -276,6 +281,7 @@ msgstr ""
 #: src/Modules/PublishPressPermissions.php:140
 #: src/Modules/PublishPressPlanner.php:125
 #: src/Modules/Revisionary.php:153
+#: src/Modules/TaxoPress.php:143
 #: src/Modules/WpMailSmtp.php:260
 msgid "Restore the standard admin footer"
 msgstr ""
@@ -303,6 +309,7 @@ msgstr ""
 #: src/Modules/PublishPressChecklists.php:101
 #: src/Modules/PublishPressPermissions.php:100
 #: src/Modules/Revisionary.php:113
+#: src/Modules/TaxoPress.php:187
 #: src/Modules/WpMailSmtp.php:177
 msgid "Remove Pro-only education tabs"
 msgstr ""
@@ -334,7 +341,7 @@ msgstr ""
 
 #: src/Modules/AllInOneSeo.php:543
 #: src/Modules/EmbedPress.php:161
-#: src/Modules/WpForms.php:221
+#: src/Modules/WpForms.php:222
 #: src/Modules/WpMailSmtp.php:241
 msgid "Remove the floating quick-links menu"
 msgstr ""
@@ -367,7 +374,7 @@ msgstr ""
 #: src/Modules/WpChat.php:170
 #: src/Modules/WpCode.php:310
 #: src/Modules/WpConsent.php:223
-#: src/Modules/WpForms.php:288
+#: src/Modules/WpForms.php:302
 #: src/Modules/WpMailSmtp.php:319
 #: src/Modules/WpSmush.php:167
 #: src/Modules/Yoast.php:320
@@ -389,7 +396,7 @@ msgstr ""
 #: src/Modules/RedisCache.php:118
 #: src/Modules/W3TotalCache.php:118
 #: src/Modules/WpCode.php:275
-#: src/Modules/WpForms.php:173
+#: src/Modules/WpForms.php:174
 #: src/Modules/Yoast.php:167
 msgid "Hide its admin bar menu entirely"
 msgstr ""
@@ -435,6 +442,7 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:54
 #: src/Modules/RedisCache.php:45
 #: src/Modules/ReviewsFeed.php:51
+#: src/Modules/TaxoPress.php:102
 #: src/Modules/WpChat.php:61
 #: src/Modules/WpForms.php:76
 #: src/Modules/WpSmush.php:115
@@ -459,6 +467,7 @@ msgstr ""
 #: src/Modules/RedisCache.php:56
 #: src/Modules/ReviewsFeed.php:133
 #: src/Modules/Revisionary.php:44
+#: src/Modules/TaxoPress.php:70
 #: src/Modules/WpChat.php:111
 #: src/Modules/WpCode.php:148
 #: src/Modules/WpConsent.php:121
@@ -665,6 +674,10 @@ msgstr ""
 msgid "Add the WordPress.org links to the plugin's Help tab"
 msgstr ""
 
+#: src/Modules/TaxoPress.php:113
+msgid "Remove the Upgrade to Pro sidebar from its screens"
+msgstr ""
+
 #: src/Modules/W3TotalCache.php:129
 msgid "Silence its fetched marketing notices"
 msgstr ""
@@ -737,11 +750,11 @@ msgstr ""
 msgid "Remove the Page Scripts teaser box from the post editor"
 msgstr ""
 
-#: src/Modules/WpForms.php:152
+#: src/Modules/WpForms.php:153
 msgid "Clean up its admin bar menu (upgrade, paid features, promo links)"
 msgstr ""
 
-#: src/Modules/WpForms.php:231
+#: src/Modules/WpForms.php:232
 msgid "Keep its styles out of the command palette"
 msgstr ""
 

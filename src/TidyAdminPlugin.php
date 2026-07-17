@@ -68,6 +68,7 @@ final class TidyAdminPlugin
         Modules\Revisionary::class,
         Modules\ReviewsFeed::class,
         Modules\TaxonomyTermsOrder::class,
+        Modules\TaxoPress::class,
         Modules\W3TotalCache::class,
         Modules\WordPressCore::class,
         Modules\WpChat::class,
