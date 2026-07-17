@@ -54,6 +54,26 @@ final class NoticeHookCleanerTest extends TestCase
 
         $this->assertTrue($ran);
     }
+
+    /**
+     * On a *filter* hook the stripper runs as part of the chain — it must
+     * pass the value through, not blank it (a void return once emptied
+     * TaxoPress's whole settings-field list), and the surviving callbacks
+     * must keep operating on the real value.
+     */
+    public function test_denying_on_a_filter_hook_preserves_the_filtered_value(): void
+    {
+        $promo = new PromoNotice();
+        add_filter('tidy_admin_test_fields', [$promo, 'addPromoField']);
+        add_filter('tidy_admin_test_fields', static fn(array $fields): array => [...$fields, 'functional']);
+
+        (new NoticeHookCleaner(['tidy_admin_test_fields' => [PromoNotice::class . '::addPromoField']]))->register();
+
+        $this->assertSame(
+            ['base', 'functional'],
+            apply_filters('tidy_admin_test_fields', ['base']),
+        );
+    }
 }
 
 final class PromoNotice
@@ -69,5 +89,12 @@ final class PromoNotice
     public function renderOther(): void
     {
         $this->renderedOther = true;
+    }
+
+    /** @param array<int, string> $fields
+     * @return array<int, string> */
+    public function addPromoField(array $fields): array
+    {
+        return [...$fields, 'promo'];
     }
 }

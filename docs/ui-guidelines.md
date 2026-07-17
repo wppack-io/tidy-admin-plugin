@@ -155,6 +155,10 @@ recurring failure modes:
 - [ ] **Teaser destinations stay intact**: pages relocated into "Premium
   features" keep their own upsell CTAs — exclusion rules must not blank
   them out.
+- [ ] **Check what remains, not only that the target is gone**: after
+  unhooking a callback — especially from a *filter* — load the screen and
+  confirm the surrounding UI still renders. A removal that also blanks its
+  neighbours (like a filter chain fed null) passes an absence-only check.
 
 ## Setup notices
 

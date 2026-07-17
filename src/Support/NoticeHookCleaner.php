@@ -28,9 +28,19 @@ final class NoticeHookCleaner
     public function register(): void
     {
         foreach ($this->denyByHook as $hook => $deny) {
-            add_action(
+            // Pass the first argument through untouched: on a *filter* hook
+            // this stripper is itself a callback in the chain, and returning
+            // nothing would feed null to every later callback and the caller
+            // (a void return once blanked TaxoPress's whole settings-field
+            // list). Actions ignore the return value, so this is safe for
+            // both hook kinds.
+            add_filter(
                 $hook,
-                static fn() => self::stripCallbacks($hook, $deny),
+                static function (mixed $value = null) use ($hook, $deny): mixed {
+                    self::stripCallbacks($hook, $deny);
+
+                    return $value;
+                },
                 PHP_INT_MIN,
             );
         }
