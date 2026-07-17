@@ -805,3 +805,7 @@ msgstr "画面右の Upgrade to Pro サイドバーを除去"
 #: src/Modules/WpSmush.php:145
 msgid "Move the conflicting-plugins notice to the plugin screens and dashboard widget"
 msgstr "プラグイン競合の通知をプラグイン画面とダッシュボードウィジェットへ移設"
+
+#: src/Modules/TaxoPress.php:158
+msgid "Hide the locked Add New buttons on its list screens"
+msgstr "一覧画面のロックされた「Add New」ボタンを非表示"
