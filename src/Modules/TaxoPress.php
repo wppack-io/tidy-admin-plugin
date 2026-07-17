@@ -172,6 +172,22 @@ final class TaxoPress extends AbstractModule
                     'in_admin_footer' => ['SimpleTags_Admin::taxopress_admin_footer'],
                 ],
             ],
+            'pro-locked-fields' => [
+                'label' => __('Hide locked Pro settings rows', 'wppack-tidy-admin'),
+                /*
+                 * The "Taxonomy Display" row on the Metaboxes screen's
+                 * settings: a lock-marked select whose only option is
+                 * "Default" plus a "This feature is available in TaxoPress
+                 * Pro" tooltip — dead UI in Free. The vendor callback only
+                 * inserts this one row into the field list, so dropping it
+                 * leaves every functional field untouched.
+                 */
+                'noticeDenyByHook' => [
+                    'taxopress_settings_post_type_ai_fields' => [
+                        'PublishPress\\Taxopress\\TaxopressCoreAdmin::filter_settings_post_type_ai_fields',
+                    ],
+                ],
+            ],
             'pro-add-buttons' => [
                 'label' => __('Hide the locked Add New buttons on its list screens', 'wppack-tidy-admin'),
                 /*
