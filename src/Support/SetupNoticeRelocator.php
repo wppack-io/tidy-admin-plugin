@@ -47,10 +47,15 @@ final class SetupNoticeRelocator
 
         foreach ($this->plugins as $plugin) {
             foreach ($plugin['noticesByHook'] as $hook => $names) {
-                add_action($hook, static function () use ($hook, $names, $plugin): void {
+                // Pass-through return: harmless on the action hooks used today,
+                // and keeps a future filter-hook declaration from feeding null
+                // down its chain (see NoticeHookCleaner::register)
+                add_filter($hook, static function (mixed $value = null) use ($hook, $names, $plugin): mixed {
                     if (!self::isOwnScreen($plugin['pagePrefixes'])) {
                         CallbackMatcher::extract($hook, $names);
                     }
+
+                    return $value;
                 }, PHP_INT_MIN);
             }
         }

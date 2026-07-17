@@ -85,12 +85,17 @@ final class SubmenuCleaner
         // runs, the discount shows in the Upgrades panel instead of nagging.
         foreach ($this->saleNotices as $sale) {
             foreach ($sale['byHook'] as $hook => $names) {
-                add_action($hook, function () use ($hook, $names, $sale): void {
+                // Pass-through return: harmless on the action hooks used today,
+                // and keeps a future filter-hook declaration from feeding null
+                // down its chain (see NoticeHookCleaner::register)
+                add_filter($hook, function (mixed $value = null) use ($hook, $names, $sale): mixed {
                     foreach (CallbackMatcher::extract($hook, $names) as $callback) {
                         ob_start();
                         $callback();
                         $this->saleHtml[$sale['parent']] = ($this->saleHtml[$sale['parent']] ?? '') . (string) ob_get_clean();
                     }
+
+                    return $value;
                 }, PHP_INT_MIN);
             }
         }
