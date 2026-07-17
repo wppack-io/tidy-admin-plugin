@@ -172,6 +172,18 @@ final class AllInOneSeo extends AbstractModule
                     'aioseo.com/lite-upgrade', // Upgrade to Pro (Docs and Support row links stay)
                 ],
             ],
+            'activation-redirect' => [
+                'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
+                // On activation AIOSEO sets an activation_redirect cache flag
+                // and SetupWizard::redirect (admin_init, 9999) sends the user
+                // to index.php?page=aioseo-setup-wizard. It already honours an
+                // aioseo_activation_redirect *option* as an opt-out, so make
+                // that option read true — the flag is still cleared, just no
+                // redirect (the wizard stays reachable from its own screens).
+                'register' => static function (): void {
+                    add_filter('pre_option_aioseo_activation_redirect', '__return_true');
+                },
+            ],
             'taxonomy-upsell' => [
                 'label' => __('Remove the Custom Taxonomies teaser on term screens', 'wppack-tidy-admin'),
                 /*

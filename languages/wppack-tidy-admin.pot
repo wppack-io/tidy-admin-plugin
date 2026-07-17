@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-17T15:55:57+09:00\n"
+"POT-Creation-Date: 2026-07-17T17:09:11+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -239,15 +239,31 @@ msgid "Remove upgrade links from the plugin list"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:176
+#: src/Modules/CookieYes.php:44
+#: src/Modules/CustomFacebookFeed.php:54
+#: src/Modules/CustomTwitterFeeds.php:55
+#: src/Modules/Elementor.php:105
+#: src/Modules/FeedsForYoutube.php:56
+#: src/Modules/InstagramFeed.php:54
+#: src/Modules/RedisCache.php:45
+#: src/Modules/ReviewsFeed.php:51
+#: src/Modules/TaxoPress.php:102
+#: src/Modules/WpChat.php:61
+#: src/Modules/WpForms.php:76
+#: src/Modules/WpSmush.php:115
+msgid "Stop the welcome-screen redirect on activation"
+msgstr ""
+
+#: src/Modules/AllInOneSeo.php:188
 msgid "Remove the Custom Taxonomies teaser on term screens"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:198
+#: src/Modules/AllInOneSeo.php:210
 #: src/Modules/PublishPressFuture.php:145
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:217
+#: src/Modules/AllInOneSeo.php:229
 #: src/Modules/Cfdb7.php:47
 #: src/Modules/CookieYes.php:55
 #: src/Modules/Elementor.php:210
@@ -266,11 +282,11 @@ msgstr ""
 msgid "Remove the review request"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:243
+#: src/Modules/AllInOneSeo.php:255
 msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:295
+#: src/Modules/AllInOneSeo.php:307
 #: src/Modules/Duplicator.php:367
 #: src/Modules/LiteSpeedCache.php:91
 #: src/Modules/LocationWeather.php:191
@@ -286,18 +302,18 @@ msgstr ""
 msgid "Restore the standard admin footer"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:315
+#: src/Modules/AllInOneSeo.php:327
 msgid "Fix styling conflicts with WordPress core"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:324
+#: src/Modules/AllInOneSeo.php:336
 #: src/Modules/PublishPressAuthors.php:124
 #: src/Modules/PublishPressChecklists.php:116
 #: src/Modules/PublishPressFuture.php:137
 msgid "Hide locked Pro settings rows"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:364
+#: src/Modules/AllInOneSeo.php:376
 #: src/Modules/Elementor.php:380
 #: src/Modules/EwwwImageOptimizer.php:155
 #: src/Modules/WpCode.php:373
@@ -305,7 +321,7 @@ msgstr ""
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:398
+#: src/Modules/AllInOneSeo.php:410
 #: src/Modules/PublishPressChecklists.php:101
 #: src/Modules/PublishPressPermissions.php:100
 #: src/Modules/Revisionary.php:113
@@ -314,39 +330,39 @@ msgstr ""
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:452
+#: src/Modules/AllInOneSeo.php:464
 msgid "Remove its news dashboard widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:465
+#: src/Modules/AllInOneSeo.php:477
 #: src/Modules/WpMailSmtp.php:248
 msgid "Always show the Scheduled Actions tools page"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:477
+#: src/Modules/AllInOneSeo.php:489
 msgid "Stop AIOSEO from adding AI buttons to the editor"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:509
+#: src/Modules/AllInOneSeo.php:521
 msgid "Disable all AI features"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:522
+#: src/Modules/AllInOneSeo.php:534
 msgid "Remove the border on its editor toolbar icons"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:533
+#: src/Modules/AllInOneSeo.php:545
 msgid "Hide the AI credits upsell"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:543
+#: src/Modules/AllInOneSeo.php:555
 #: src/Modules/EmbedPress.php:161
 #: src/Modules/WpForms.php:222
 #: src/Modules/WpMailSmtp.php:241
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:550
+#: src/Modules/AllInOneSeo.php:562
 #: src/Modules/BrokenLinkChecker.php:64
 #: src/Modules/CookieYes.php:165
 #: src/Modules/CustomFacebookFeed.php:230
@@ -381,7 +397,7 @@ msgstr ""
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:590
+#: src/Modules/AllInOneSeo.php:602
 #: src/Modules/MonsterInsights.php:54
 #: src/Modules/W3TotalCache.php:87
 #: src/Modules/WpCode.php:253
@@ -389,7 +405,7 @@ msgstr ""
 msgid "Clean up and normalize its admin bar menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:628
+#: src/Modules/AllInOneSeo.php:640
 #: src/Modules/LiteSpeedCache.php:134
 #: src/Modules/Maintenance.php:267
 #: src/Modules/MonsterInsights.php:81
@@ -432,21 +448,6 @@ msgstr ""
 
 #: src/Modules/BrokenLinkChecker.php:57
 msgid "Hide the stray empty heading on its pages"
-msgstr ""
-
-#: src/Modules/CookieYes.php:44
-#: src/Modules/CustomFacebookFeed.php:54
-#: src/Modules/CustomTwitterFeeds.php:55
-#: src/Modules/Elementor.php:105
-#: src/Modules/FeedsForYoutube.php:56
-#: src/Modules/InstagramFeed.php:54
-#: src/Modules/RedisCache.php:45
-#: src/Modules/ReviewsFeed.php:51
-#: src/Modules/TaxoPress.php:102
-#: src/Modules/WpChat.php:61
-#: src/Modules/WpForms.php:76
-#: src/Modules/WpSmush.php:115
-msgid "Stop the welcome-screen redirect on activation"
 msgstr ""
 
 #: src/Modules/CookieYes.php:64
