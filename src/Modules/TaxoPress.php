@@ -123,6 +123,30 @@ final class TaxoPress extends AbstractModule
                         'PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_admin_advertising_sidebar_banner',
                     ],
                 ],
+                // The vendor sizes the content wrap as 100% minus the ad
+                // column (400px on settings-style pages, 350px on the
+                // tag-cloud style ones) and leaves the empty sidebar wrapper
+                // in the markup — give the freed width back to the content.
+                'adminCss' => <<<'CSS'
+                /* width:auto, not 100%: as a block the wrap fills the row minus core's
+                   .wrap side margins — 100% would add those margins on top and overflow */
+                body[class*="page_st_"] .st_wrap.admin-settings,
+                body[class*="page_st_"] .st_wrap.tagcloudui { width: auto !important; display: block !important; }
+                body[class*="page_st_"] .taxopress-right-sidebar { display: none !important; }
+                CSS,
+            ],
+            'panel-placement' => [
+                'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
+                /*
+                 * TaxoPress pages use the standard .wrap + h1 pattern, but
+                 * nested inside .taxopress-block-wrap, so the automatic
+                 * core-float placement doesn't detect them. Opt into it: the
+                 * buttons float right and the page title flows up beside
+                 * them, exactly like core.
+                 */
+                'adminCss' => <<<'CSS'
+                body[class*="page_st_"] #tidy-admin-meta-region #screen-meta-links { display: block; float: right; }
+                CSS,
             ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
@@ -148,39 +172,21 @@ final class TaxoPress extends AbstractModule
                     'in_admin_footer' => ['SimpleTags_Admin::taxopress_admin_footer'],
                 ],
             ],
-            'upsell-ui' => [
-                'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
+            'pro-add-buttons' => [
+                'label' => __('Hide the locked Add New buttons on its list screens', 'wppack-tidy-admin'),
                 /*
-                 * The inline "... is a Pro feature. Upgrade to Pro" promo
-                 * boxes TaxopressCoreAdmin hooks into otherwise-functional
-                 * forms (AI providers, Auto Terms, Auto Links, Suggest Terms,
-                 * metabox term results, copy-with-metadata). Each callback
-                 * renders a promo box and nothing else, so they are removed
-                 * at their hooks. The lock-marked controls (disabled order/
-                 * schedule/display selects with a lock icon) stay — they are
-                 * plan-state markers, not free-standing promos.
+                 * Free allows one item per feature: once it exists, the
+                 * vendor lock-marks the "Add New ..." title button and the
+                 * add form behind it is a Pro pitch. Hide the button in that
+                 * locked state — it is the entry path to a Pro-only page,
+                 * and the same pitch stays available in the Upgrades panel.
+                 * With no item yet the button renders without the lock and
+                 * stays. The Pro pitch pages themselves keep all of their
+                 * "this is a Pro feature" guidance (teaser destinations stay
+                 * intact — an unexplained dead form would be worse).
                  */
-                'noticeDenyByHook' => [
-                    'taxopress_ai_after_open_ai_fields' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_core_ai_after_open_ai_fields'],
-                    'taxopress_ai_after_ibm_watson_fields' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_core_ai_after_ibm_watson_fields'],
-                    'taxopress_ai_after_dandelion_fields' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_core_ai_after_dandelion_fields'],
-                    'taxopress_ai_after_open_calais_fields' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_core_ai_after_open_calais_fields'],
-                    'load_taxopress_ai_term_results' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_core_ai_term_results_banner'],
-                    'taxopress_autoterms_after_autoterm_terms_to_use' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_core_autoterm_terms_to_use_field'],
-                    'taxopress_autoterms_after_autoterm_advanced' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_core_autoterm_advanced_field'],
-                    'taxopress_autolinks_after_html_exclusions_tr' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_core_autolinks_after_html_exclusions_promo'],
-                    'taxopress_suggestterm_after_api_fields' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_core_suggestterm_after_api_fields'],
-                    'taxopress_terms_copy_with_metadata_promo' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_terms_copy_with_metadata_promo'],
-                ],
                 'adminCss' => <<<'CSS'
-                /* TaxoPress: "This feature is available in TaxoPress Pro" limit banners
-                   above the free-limited list screens (one-item limit in Free; the lock
-                   on the Add New button keeps signalling the limit) and any promo box
-                   echoed outside the unhooked callbacks. The functional .taxopress-warning
-                   (shortcode info) carries no upgrade-pro class and stays. */
-                .taxopress-warning.upgrade-pro,
-                .st-taxonomy-content.promo-box-area:has(> .taxopress-warning.upgrade-pro),
-                .taxopress-content-promo-box { display: none !important; }
+                body[class*="page_st_"] .page-title-action:has(.dashicons-lock) { display: none !important; }
                 CSS,
             ],
             'pro-tabs' => [
