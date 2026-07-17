@@ -140,6 +140,20 @@ final class WpSmush extends AbstractModule
                     ],
                 ],
             ],
+            'conflict-notice' => [
+                'label' => __('Move the conflicting-plugins notice to the plugin screens and dashboard widget', 'wppack-tidy-admin'),
+                /*
+                 * "You have multiple image optimization plugins installed that
+                 * could conflict with Smush ..." — functional guidance, but
+                 * printed on every admin screen. Confined to Smush's own
+                 * screens plus the Pending plugin setup widget; it reads its
+                 * conflict list from a transient Smush keeps up to date, so it
+                 * disappears by itself once the conflict is resolved.
+                 */
+                'setupNoticeByHook' => [
+                    'admin_notices' => ['Smush\\App\\Admin::show_plugin_conflict_notice'],
+                ],
+            ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
                 // The Documentation and Help & Support links from its header nav,
