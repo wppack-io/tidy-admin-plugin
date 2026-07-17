@@ -63,6 +63,16 @@ its own the moment the plan unlocks it. Pure promotions around them (partner /
 affiliate pitches, connect nags on foreign screens, review requests) are
 still removed as usual.
 
+**Locked-entry exception — hide the entrance, keep the explanation.** When
+a whole page is the Pro pitch (e.g. an "Add New …" form once the free
+version's item limit is reached, TaxoPress-style), the page's own "upgrade
+to Pro" guidance **stays** — stripping it leaves an unexplained dead form.
+Hide the **entry path** instead: the vendor's lock-marked buttons or links
+leading there (match the lock marker, e.g. `:has(.dashicons-lock)`, so the
+button reappears untouched while the free slot is still usable). This is
+the same principle as "teaser destinations stay intact", applied to pages
+reached by lock-marked entrances rather than relocated menu items.
+
 When in doubt whether something is promotional or functional, leave it and
 note the question — removing a functional element is the one failure mode
 this plugin must never have.
