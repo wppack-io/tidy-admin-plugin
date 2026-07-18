@@ -85,12 +85,8 @@ final class TaxoPress extends AbstractModule
             ],
             'review-request' => [
                 'label' => __('Remove the review request', 'wppack-tidy-admin'),
-                /*
-                 * "Are you enjoying TaxoPress?" — a bundled 5-star rating nag
-                 * (review-request/review.php) printed on every admin screen
-                 * from one week after install. admin_footer only carries its
-                 * dismiss JS/CSS, so it goes along with the notice.
-                 */
+                // "Are you enjoying TaxoPress?" 5-star rating nag on every admin
+                // screen; admin_footer only carries its dismiss JS/CSS.
                 'noticeDenyByHook' => [
                     'admin_notices' => ['Taxopress_Modules_Reviews::admin_notices'],
                     'network_admin_notices' => ['Taxopress_Modules_Reviews::admin_notices'],
@@ -100,36 +96,23 @@ final class TaxoPress extends AbstractModule
             ],
             'activation-redirect' => [
                 'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
-                // On activation TaxoPress sets a taxopress_activate option and
-                // redirect_on_activate (admin_init) sends the user to its
-                // Dashboard with a welcome banner. Strip the redirect callback
-                // before admin_init runs it; the handler also deletes the
-                // option, so nothing goes stale — the flag is simply ignored.
+                // redirect_on_activate (admin_init) forwards to the Dashboard
+                // welcome screen; the handler clears its own flag, so nothing stales.
                 'noticeDenyByHook' => [
                     'admin_init' => ['SimpleTags_Admin::redirect_on_activate'],
                 ],
             ],
             'upgrade-sidebar' => [
                 'label' => __('Remove the Upgrade to Pro sidebar from its screens', 'wppack-tidy-admin'),
-                /*
-                 * The right-hand column on every list screen: an "Upgrade to
-                 * TaxoPress Pro" ad box plus a "Need TaxoPress Support?" box
-                 * whose links (knowledge base, wordpress.org support) live in
-                 * the Help panel on these screens — nothing functional is
-                 * lost. Removed at the source hook.
-                 */
+                // Right-hand "Upgrade to TaxoPress Pro" + "Need Support?" ad
+                // column on every list screen; its links live in the Help panel.
                 'noticeDenyByHook' => [
                     'taxopress_admin_after_sidebar' => [
                         'PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_admin_advertising_sidebar_banner',
                     ],
                 ],
-                // The vendor sizes the content wrap as 100% minus the ad
-                // column (400px on settings-style pages, 350px on the
-                // tag-cloud style ones) and leaves the empty sidebar wrapper
-                // in the markup — give the freed width back to the content.
+                // Give the freed ad-column width back to the content wrap.
                 'adminCss' => <<<'CSS'
-                /* width:auto, not 100%: as a block the wrap fills the row minus core's
-                   .wrap side margins — 100% would add those margins on top and overflow */
                 body[class*="page_st_"] .st_wrap.admin-settings,
                 body[class*="page_st_"] .st_wrap.tagcloudui { width: auto !important; display: block !important; }
                 body[class*="page_st_"] .taxopress-right-sidebar { display: none !important; }
@@ -137,13 +120,8 @@ final class TaxoPress extends AbstractModule
             ],
             'panel-placement' => [
                 'label' => __('Integrate the Help and Upgrades buttons into the page header', 'wppack-tidy-admin'),
-                /*
-                 * TaxoPress pages use the standard .wrap + h1 pattern, but
-                 * nested inside .taxopress-block-wrap, so the automatic
-                 * core-float placement doesn't detect them. Opt into it: the
-                 * buttons float right and the page title flows up beside
-                 * them, exactly like core.
-                 */
+                // Opt into the core-float placement (the vendor's .wrap nesting
+                // hides it from auto-detection).
                 'adminCss' => <<<'CSS'
                 body[class*="page_st_"] #tidy-admin-meta-region #screen-meta-links { display: block; float: right; }
                 CSS,
@@ -174,14 +152,8 @@ final class TaxoPress extends AbstractModule
             ],
             'pro-locked-fields' => [
                 'label' => __('Hide locked Pro settings rows', 'wppack-tidy-admin'),
-                /*
-                 * The "Taxonomy Display" row on the Metaboxes screen's
-                 * settings: a lock-marked select whose only option is
-                 * "Default" plus a "This feature is available in TaxoPress
-                 * Pro" tooltip — dead UI in Free. The vendor callback only
-                 * inserts this one row into the field list, so dropping it
-                 * leaves every functional field untouched.
-                 */
+                // "Taxonomy Display" row on the Metaboxes settings: a lock-marked
+                // select the vendor callback adds as its only field — dead in Free.
                 'noticeDenyByHook' => [
                     'taxopress_settings_post_type_ai_fields' => [
                         'PublishPress\\Taxopress\\TaxopressCoreAdmin::filter_settings_post_type_ai_fields',
@@ -190,17 +162,9 @@ final class TaxoPress extends AbstractModule
             ],
             'pro-add-buttons' => [
                 'label' => __('Hide the locked Add New buttons on its list screens', 'wppack-tidy-admin'),
-                /*
-                 * Free allows one item per feature: once it exists, the
-                 * vendor lock-marks the "Add New ..." title button and the
-                 * add form behind it is a Pro pitch. Hide the button in that
-                 * locked state — it is the entry path to a Pro-only page,
-                 * and the same pitch stays available in the Upgrades panel.
-                 * With no item yet the button renders without the lock and
-                 * stays. The Pro pitch pages themselves keep all of their
-                 * "this is a Pro feature" guidance (teaser destinations stay
-                 * intact — an unexplained dead form would be worse).
-                 */
+                // Past the Free one-item limit the vendor lock-marks the "Add
+                // New" button (its target page is a Pro pitch). See
+                // docs/ui-guidelines.md — locked-entry exception.
                 'adminCss' => <<<'CSS'
                 body[class*="page_st_"] .page-title-action:has(.dashicons-lock) { display: none !important; }
                 CSS,
