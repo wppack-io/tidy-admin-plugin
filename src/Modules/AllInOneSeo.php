@@ -508,11 +508,23 @@ final class AllInOneSeo extends AbstractModule
                                 }
                             }
                         }
+                        /*
+                         * Keep the block registered (existing content and the
+                         * block itself stay untouched) but take it out of the
+                         * "Type / to choose a block" flow: supports.inserter
+                         * false hides it from the inserter and the slash
+                         * suggestions. Applied via the registration-time JS
+                         * filter, so unlike a domReady unregister it cannot
+                         * race the plugin's own editor bundle (which once let
+                         * the block through on sites with a different script
+                         * order).
+                         */
                         wp_add_inline_script(
                             'wp-blocks',
-                            'wp.domReady(function(){'
-                            . 'if(wp.blocks.getBlockType&&wp.blocks.getBlockType("aioseo/ai-assistant")){'
-                            . 'wp.blocks.unregisterBlockType("aioseo/ai-assistant");}});',
+                            'wp.hooks.addFilter("blocks.registerBlockType","tidy-admin/aioseo-ai-assistant-inserter",'
+                            . 'function(settings,name){if(name==="aioseo/ai-assistant"){'
+                            . 'settings.supports=Object.assign({},settings.supports,{inserter:false});}'
+                            . 'return settings;});',
                         );
                     }, PHP_INT_MAX);
                 },
