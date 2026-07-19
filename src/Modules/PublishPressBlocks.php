@@ -129,6 +129,19 @@ final class PublishPressBlocks extends AbstractModule
                 body[class*="page_advgb"] #tidy-admin-meta-region #screen-meta { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); }
                 CSS,
             ],
+            'editor-pro-ads' => [
+                'label' => __('Remove the Pro ad panels from the block editor', 'wppack-tidy-admin'),
+                // The advgb_pro_ad_js/css pair injects "PRO" teaser panels
+                // (Font Settings, Theme Settings, …) into block inspectors.
+                'register' => static function (): void {
+                    $dequeue = static function (): void {
+                        wp_dequeue_script('advgb_pro_ad_js');
+                        wp_dequeue_style('advgb_pro_ad_css');
+                    };
+                    add_action('enqueue_block_editor_assets', $dequeue, PHP_INT_MAX);
+                    add_action('admin_enqueue_scripts', $dequeue, PHP_INT_MAX);
+                },
+            ],
             'help-links' => [
                 'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
                 // The vendor's documentation category and contact page — the
