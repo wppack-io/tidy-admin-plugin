@@ -809,3 +809,7 @@ msgstr "プラグイン競合の通知をプラグイン画面とダッシュボ
 #: src/Modules/TaxoPress.php:158
 msgid "Hide the locked Add New buttons on its list screens"
 msgstr "一覧画面のロックされた「Add New」ボタンを非表示"
+
+#: src/Modules/AllInOneSeo.php:188
+msgid "Hide the Author SEO (E-E-A-T) teaser on user profiles"
+msgstr "ユーザープロフィールの Author SEO (E-E-A-T) ティーザーを非表示"

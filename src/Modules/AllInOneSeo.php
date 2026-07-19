@@ -184,6 +184,16 @@ final class AllInOneSeo extends AbstractModule
                     add_filter('pre_option_aioseo_activation_redirect', '__return_true');
                 },
             ],
+            'author-seo-teaser' => [
+                'label' => __('Hide the Author SEO (E-E-A-T) teaser on user profiles', 'wppack-tidy-admin'),
+                // The "Author Info (E-E-A-T)" card on the profile/user-edit
+                // Author SEO tab is a Pro teaser (blurred fields under a
+                // required-plans overlay); the functional Social Profiles card
+                // in the same tab, and the tab itself, stay.
+                'adminCss' => <<<'CSS'
+                #your-profile .aioseo-card:has(.aioseo-required-plans) { display: none !important; }
+                CSS,
+            ],
             'taxonomy-upsell' => [
                 'label' => __('Remove the Custom Taxonomies teaser on term screens', 'wppack-tidy-admin'),
                 /*

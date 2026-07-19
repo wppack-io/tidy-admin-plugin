@@ -2,14 +2,14 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPPack Tidy Admin 1.2.0\n"
+"Project-Id-Version: WPPack Tidy Admin 1.2.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tidy-admin-plugin\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-17T18:49:22+09:00\n"
+"POT-Creation-Date: 2026-07-20T08:00:45+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -182,7 +182,7 @@ msgstr ""
 #: src/Modules/MonsterInsights.php:107
 #: src/Modules/OptinMonster.php:107
 #: src/Modules/PublishPressAuthors.php:165
-#: src/Modules/PublishPressBlocks.php:133
+#: src/Modules/PublishPressBlocks.php:146
 #: src/Modules/PublishPressCapabilities.php:103
 #: src/Modules/PublishPressChecklists.php:146
 #: src/Modules/PublishPressFuture.php:102
@@ -191,7 +191,7 @@ msgstr ""
 #: src/Modules/RedisCache.php:102
 #: src/Modules/ReviewsFeed.php:95
 #: src/Modules/Revisionary.php:125
-#: src/Modules/TaxoPress.php:152
+#: src/Modules/TaxoPress.php:130
 #: src/Modules/Wordfence.php:75
 #: src/Modules/WpChat.php:71
 #: src/Modules/WpCode.php:105
@@ -246,7 +246,7 @@ msgstr ""
 #: src/Modules/InstagramFeed.php:54
 #: src/Modules/RedisCache.php:45
 #: src/Modules/ReviewsFeed.php:51
-#: src/Modules/TaxoPress.php:102
+#: src/Modules/TaxoPress.php:98
 #: src/Modules/WpChat.php:61
 #: src/Modules/WpForms.php:76
 #: src/Modules/WpSmush.php:115
@@ -254,15 +254,19 @@ msgid "Stop the welcome-screen redirect on activation"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:188
+msgid "Hide the Author SEO (E-E-A-T) teaser on user profiles"
+msgstr ""
+
+#: src/Modules/AllInOneSeo.php:198
 msgid "Remove the Custom Taxonomies teaser on term screens"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:210
+#: src/Modules/AllInOneSeo.php:220
 #: src/Modules/PublishPressFuture.php:145
 msgid "Remove the \"You're using the Free version\" bar"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:229
+#: src/Modules/AllInOneSeo.php:239
 #: src/Modules/Cfdb7.php:47
 #: src/Modules/CookieYes.php:55
 #: src/Modules/Elementor.php:210
@@ -281,11 +285,11 @@ msgstr ""
 msgid "Remove the review request"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:255
+#: src/Modules/AllInOneSeo.php:265
 msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:307
+#: src/Modules/AllInOneSeo.php:317
 #: src/Modules/Duplicator.php:367
 #: src/Modules/LiteSpeedCache.php:91
 #: src/Modules/LocationWeather.php:191
@@ -296,24 +300,24 @@ msgstr ""
 #: src/Modules/PublishPressPermissions.php:140
 #: src/Modules/PublishPressPlanner.php:125
 #: src/Modules/Revisionary.php:153
-#: src/Modules/TaxoPress.php:167
+#: src/Modules/TaxoPress.php:145
 #: src/Modules/WpMailSmtp.php:260
 msgid "Restore the standard admin footer"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:327
+#: src/Modules/AllInOneSeo.php:337
 msgid "Fix styling conflicts with WordPress core"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:336
+#: src/Modules/AllInOneSeo.php:346
 #: src/Modules/PublishPressAuthors.php:124
 #: src/Modules/PublishPressChecklists.php:116
 #: src/Modules/PublishPressFuture.php:137
-#: src/Modules/TaxoPress.php:176
+#: src/Modules/TaxoPress.php:154
 msgid "Hide locked Pro settings rows"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:376
+#: src/Modules/AllInOneSeo.php:386
 #: src/Modules/Elementor.php:380
 #: src/Modules/EwwwImageOptimizer.php:155
 #: src/Modules/WpCode.php:373
@@ -321,48 +325,48 @@ msgstr ""
 msgid "Hide the license fields (turn off while entering a key)"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:410
+#: src/Modules/AllInOneSeo.php:420
 #: src/Modules/PublishPressChecklists.php:101
 #: src/Modules/PublishPressPermissions.php:100
 #: src/Modules/Revisionary.php:113
-#: src/Modules/TaxoPress.php:209
+#: src/Modules/TaxoPress.php:173
 #: src/Modules/WpMailSmtp.php:177
 msgid "Remove Pro-only education tabs"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:464
+#: src/Modules/AllInOneSeo.php:474
 msgid "Remove its news dashboard widget"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:477
+#: src/Modules/AllInOneSeo.php:487
 #: src/Modules/WpMailSmtp.php:248
 msgid "Always show the Scheduled Actions tools page"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:489
+#: src/Modules/AllInOneSeo.php:499
 msgid "Stop AIOSEO from adding AI buttons to the editor"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:521
+#: src/Modules/AllInOneSeo.php:543
 msgid "Disable all AI features"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:534
+#: src/Modules/AllInOneSeo.php:556
 msgid "Remove the border on its editor toolbar icons"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:545
+#: src/Modules/AllInOneSeo.php:567
 msgid "Hide the AI credits upsell"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:555
+#: src/Modules/AllInOneSeo.php:577
 #: src/Modules/EmbedPress.php:161
 #: src/Modules/WpForms.php:222
 #: src/Modules/WpMailSmtp.php:241
 msgid "Remove the floating quick-links menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:562
+#: src/Modules/AllInOneSeo.php:584
 #: src/Modules/BrokenLinkChecker.php:64
 #: src/Modules/CookieYes.php:165
 #: src/Modules/CustomFacebookFeed.php:230
@@ -387,7 +391,7 @@ msgstr ""
 #: src/Modules/PublishPressPlanner.php:137
 #: src/Modules/ReviewsFeed.php:193
 #: src/Modules/Revisionary.php:163
-#: src/Modules/TaxoPress.php:139
+#: src/Modules/TaxoPress.php:122
 #: src/Modules/WpChat.php:170
 #: src/Modules/WpCode.php:310
 #: src/Modules/WpConsent.php:223
@@ -398,7 +402,7 @@ msgstr ""
 msgid "Integrate the Help and Upgrades buttons into the page header"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:602
+#: src/Modules/AllInOneSeo.php:624
 #: src/Modules/MonsterInsights.php:54
 #: src/Modules/W3TotalCache.php:87
 #: src/Modules/WpCode.php:253
@@ -406,7 +410,7 @@ msgstr ""
 msgid "Clean up and normalize its admin bar menu"
 msgstr ""
 
-#: src/Modules/AllInOneSeo.php:640
+#: src/Modules/AllInOneSeo.php:670
 #: src/Modules/LiteSpeedCache.php:134
 #: src/Modules/Maintenance.php:267
 #: src/Modules/MonsterInsights.php:81
@@ -664,6 +668,10 @@ msgstr ""
 msgid "Hide locked Pro feature cards on its dashboard"
 msgstr ""
 
+#: src/Modules/PublishPressBlocks.php:133
+msgid "Remove the Pro ad panels from the block editor"
+msgstr ""
+
 #: src/Modules/PublishPressFuture.php:61
 msgid "Show Scheduled Actions in the sidebar instead of a page button"
 msgstr ""
@@ -676,11 +684,11 @@ msgstr ""
 msgid "Add the WordPress.org links to the plugin's Help tab"
 msgstr ""
 
-#: src/Modules/TaxoPress.php:113
+#: src/Modules/TaxoPress.php:106
 msgid "Remove the Upgrade to Pro sidebar from its screens"
 msgstr ""
 
-#: src/Modules/TaxoPress.php:192
+#: src/Modules/TaxoPress.php:164
 msgid "Hide the locked Add New buttons on its list screens"
 msgstr ""
 
@@ -828,20 +836,20 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#: src/Support/SetupNoticeRelocator.php:113
+#: src/Support/SetupNoticeRelocator.php:118
 msgid "Pending plugin setup"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:238
+#: src/Support/SubmenuCleaner.php:243
 msgid "Upgrades"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:459
+#: src/Support/SubmenuCleaner.php:464
 #: src/Support/UpgradesDirectory.php:299
 msgid "Upgrade"
 msgstr ""
 
-#: src/Support/SubmenuCleaner.php:460
+#: src/Support/SubmenuCleaner.php:465
 msgid "Premium features"
 msgstr ""
 
