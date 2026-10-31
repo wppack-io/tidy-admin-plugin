@@ -124,7 +124,7 @@ supported, with the major versions the cleanups were verified against:
 | [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 1.x, 2.x |
 | [TaxoPress](https://wordpress.org/plugins/simple-tags/) | 3.x, 4.x |
 | [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) | 2.x |
-| [Wordfence](https://wordpress.org/plugins/wordfence/) | 8.x |
+| [Wordfence](https://wordpress.org/plugins/wordfence/) | 8.x, 9.x |
 | [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 4.x |
 | [Smush](https://wordpress.org/plugins/wp-smushit/) | 4.x |
 | [WPForms Lite](https://wordpress.org/plugins/wpforms-lite/) | 1.x, 2.x |
