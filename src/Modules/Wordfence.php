@@ -24,7 +24,7 @@ final class Wordfence extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [8];
+        return [8, 9];
     }
 
     public function menuParent(): string
@@ -231,7 +231,8 @@ final class Wordfence extends AbstractModule
                         position: absolute; top: 0; left: 0; right: 0; z-index: 50;
                     }
                     body[class*="_Wordfence"] .wf-section-title .wf-hidden-xs,
-                    body[class*="page_WFLS"] .wfls-section-title .wfls-hidden-xs { display: none !important; }
+                    body[class*="page_WFLS"] .wfls-section-title:not(.wfls-section-title-featured) .wfls-hidden-xs,
+                    body[class*="page_WFLS"] .wfls-section-title-featured :is(.wfls-section-title-help, .wfls-section-title-inline-help) { display: none !important; }
                     /* All Options pins a fixed, full-width controls bar (search + Save
                        Changes; z-index 900) flush under the admin bar, right over the
                        overlaid Help/Upgrades buttons. Make it sticky instead: it starts
@@ -278,43 +279,46 @@ final class Wordfence extends AbstractModule
                    container padding gives the title-row rhythm; below 768 the
                    margin-top override further down does). */
                 body[class*="_Wordfence"] .wf-page-tabs,
-                body[class*="page_WFLS"] .wfls-page-tabs { position: relative; }
+                body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) { position: relative; }
                 body[class*="_Wordfence"] .wf-page-tabs > li.wordfence-lock-icon,
-                body[class*="page_WFLS"] .wfls-page-tabs > li.wfls-header-icon {
+                body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) > li.wfls-header-icon {
                     position: absolute; top: -39px; left: 20px; margin: 0;
                 }
                 /* The wfls grid already insets its bar to the content edge, so the icon
                    needs no extra 20px on wide screens */
                 @media (min-width: 768px) {
-                    body[class*="page_WFLS"] .wfls-page-tabs > li.wfls-header-icon { left: 0; }
+                    body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) > li.wfls-header-icon { left: 0; }
                 }
-                /* Align Login Security's tab palette with the wf- screens': #333 text on
+                /* Login Security 9.x's "featured" layout (.wfls-page-tabs-featured, no
+                   header icon) restyles its tabs to match its own page shell, so the
+                   icon and palette rules below only apply to the classic bar.
+                   Align Login Security's tab palette with the wf- screens': #333 text on
                    inactive tabs (the active tab keeps its own color), and the same gray
                    boxes at every width (its narrow layout leaves inactive tabs
                    transparent) */
-                body[class*="page_WFLS"] .wfls-page-tabs li.wfls-tab { background-color: #e6e6e6; }
-                body[class*="page_WFLS"] .wfls-page-tabs li.wfls-tab.wfls-active { background-color: #f1f1f1; }
-                body[class*="page_WFLS"] .wfls-page-tabs li.wfls-tab:not(.wfls-active) a { color: #333 !important; }
+                body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) li.wfls-tab { background-color: #e6e6e6; }
+                body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) li.wfls-tab.wfls-active { background-color: #f1f1f1; }
+                body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) li.wfls-tab:not(.wfls-active) a { color: #333 !important; }
                 /* Hover: the box lightens, the label takes the active tab's color and
                    no underline (wf tabs set text-decoration: none, wfls leaves the
                    admin default underline) */
-                body[class*="page_WFLS"] .wfls-page-tabs li.wfls-tab:hover {
+                body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) li.wfls-tab:hover {
                     background-color: #f1f1f1; border-bottom-color: #f1f1f1;
                 }
-                body[class*="page_WFLS"] .wfls-page-tabs li.wfls-tab:not(.wfls-active):hover a { color: #1b719e !important; }
-                body[class*="page_WFLS"] .wfls-page-tabs li.wfls-tab a,
-                body[class*="page_WFLS"] .wfls-page-tabs li.wfls-tab a:hover { text-decoration: none !important; }
+                body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) li.wfls-tab:not(.wfls-active):hover a { color: #1b719e !important; }
+                body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) li.wfls-tab a,
+                body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) li.wfls-tab a:hover { text-decoration: none !important; }
                 @media (max-width: 767px) {
                     /* Keep the title-row rhythm on the narrow layout too: push the bar
                        down so the icon sits 10px under the (46px) admin bar with 7px
                        above the tabs, and align the icon with the content's 10px edge */
                     body[class*="_Wordfence"] .wf-page-tabs,
-                    body[class*="page_WFLS"] .wfls-page-tabs { margin-top: 18px; }
+                    body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) { margin-top: 18px; }
                     body[class*="_Wordfence"] .wf-page-tabs > li.wordfence-lock-icon,
-                    body[class*="page_WFLS"] .wfls-page-tabs > li.wfls-header-icon { left: 10px; }
+                    body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) > li.wfls-header-icon { left: 10px; }
                     /* wfls' narrow bar has no left padding, so its first tab hugs the
                        screen edge; give it the wf bars' 10px content inset */
-                    body[class*="page_WFLS"] .wfls-page-tabs { padding-left: 10px; }
+                    body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) { padding-left: 10px; }
                     /* The 2FA QR container is hardcoded to 256x256 with side margins
                        sized for a wide layout, while its canvas shrinks responsively —
                        leaving the code off-center in a box of the wrong size. Let the
@@ -330,8 +334,8 @@ final class Wordfence extends AbstractModule
                     /* ... and its narrow-screen tab borders are white to match that band;
                        with the band gone they vanish, so restore the wide-screen gray
                        (the active tab's bottom edge keeps blending into the content) */
-                    body[class*="page_WFLS"] .wfls-page-tabs li.wfls-tab { border-color: #d0d0d0; }
-                    body[class*="page_WFLS"] .wfls-page-tabs li.wfls-tab.wfls-active { border-bottom-color: #f1f1f1; }
+                    body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) li.wfls-tab { border-color: #d0d0d0; }
+                    body[class*="page_WFLS"] .wfls-page-tabs:not(.wfls-page-tabs-featured) li.wfls-tab.wfls-active { border-bottom-color: #f1f1f1; }
                     /* Tools swaps its tab bar for a compact dropdown nav below 768px
                        (.wf-nav-pills.wf-visible-xs) with the same lock icon as its first
                        item; give it the same rhythm (icon 10px under the bar, 7px above
@@ -366,7 +370,8 @@ final class Wordfence extends AbstractModule
                 CSS,
                 /*
                  * Each Wordfence screen's title row carries a page-specific
-                 * "Learn more about the <screen>" documentation link. Move it into
+                 * "Learn more about the <screen>" documentation link (Login Security
+                 * 9.x's featured titles carry it bare, outside .wfls-hidden-xs). Move it into
                  * the Help panel so the tab shows the right link per page (and the
                  * title row is free for the overlaid buttons).
                  */
@@ -376,13 +381,13 @@ final class Wordfence extends AbstractModule
                             . 'var t=document.querySelector(".wf-section-title, .wfls-section-title");'
                             . 'var h=document.querySelector("#tidy-admin-plugin-help-wrap .tidy-admin-help-tabs-wrap");'
                             . 'if(!t||!h)return;'
-                            . 'var a=t.querySelector(".wf-hidden-xs a[href], .wfls-hidden-xs a[href]");if(!a)return;'
+                            . 'var a=t.querySelector(".wf-hidden-xs a[href], .wfls-hidden-xs a[href], a.wfls-section-title-help[href], a.wfls-section-title-inline-help[href]");if(!a)return;'
                             . 'var ul=document.createElement("ul");ul.className="tidy-admin-meta-links";'
                             . 'var li=document.createElement("li");'
                             . 'var link=document.createElement("a");link.href=a.href;link.target="_blank";link.rel="noopener noreferrer";'
                             . 'link.textContent=a.textContent.replace(/\\s*\\(opens in new tab\\)\\s*/i,"").trim();'
                             . 'li.appendChild(link);ul.appendChild(li);h.insertBefore(ul,h.firstChild);'
-                            . 'var s=t.querySelector(".wf-hidden-xs, .wfls-hidden-xs");if(s)s.style.display="none";'
+                            . '(a.closest(".wf-hidden-xs, .wfls-hidden-xs")||a).style.display="none";'
                             . '});</script>';
                     });
                 },
