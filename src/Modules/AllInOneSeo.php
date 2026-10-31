@@ -15,8 +15,12 @@ namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
 use WP_Admin_Bar;
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+use WPPack\Plugin\TidyAdminPlugin\Module;
 use WPPack\Plugin\TidyAdminPlugin\Support\AdminBar;
 
+/**
+ * @phpstan-import-type Feature from Module
+ */
 final class AllInOneSeo extends AbstractModule
 {
     public function targetPluginFile(): string
@@ -26,7 +30,7 @@ final class AllInOneSeo extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [4];
+        return [4, 5];
     }
 
     public function menuParent(): string
@@ -39,7 +43,97 @@ final class AllInOneSeo extends AbstractModule
         return ['aioseo'];
     }
 
+    /**
+     * Shared definitions plus the parts that only apply to the installed
+     * major — see v4Features() / v5Features().
+     */
     public function features(): array
+    {
+        return self::installedMajor() === 4
+            ? self::v4Features(self::sharedFeatures())
+            : self::v5Features(self::sharedFeatures());
+    }
+
+    /**
+     * Major version of the loaded AIOSEO (its main file defines AIOSEO_VERSION
+     * on load, before the init hook that builds the features). 0 when it is
+     * not loaded, which gets the latest major's definitions.
+     */
+    private static function installedMajor(): int
+    {
+        return \defined('AIOSEO_VERSION') ? (int) \constant('AIOSEO_VERSION') : 0;
+    }
+
+    /**
+     * AIOSEO 4.x only: block-editor elements that 5.0 removed.
+     *
+     * @param array<string, Feature> $features
+     * @return array<string, Feature>
+     */
+    private static function v4Features(array $features): array
+    {
+        $css = [
+            /* AIOSEO 4: the Headline Analyzer's own toolbar button (5.0 folded the
+               analyzer into the AIOSEO sidebar's Optimization panel) */
+            'toolbar-icons' => <<<'CSS'
+                #aioseo-headline-analyzer-sidebar-button { border: 0 !important; }
+                CSS,
+            /* AIOSEO 4: the block-editor sidebar renders these teasers as accordion
+               cards with stable classes (Cornerstone Content, Additional Keywords).
+               5.0 rebuilt the sidebar: Cornerstone Content became a regular
+               settings row (covered by the shared rules) and Keywords is free in
+               Lite */
+            'pro-settings-rows' => <<<'CSS'
+                body:is(.post-php, .post-new-php) .aioseo-sidebar-card.card-cornerstone-content,
+                body:is(.post-php, .post-new-php) .aioseo-sidebar-card[class*="card-additional-keyphra"] { display: none !important; }
+                CSS,
+        ];
+        foreach ($css as $key => $rules) {
+            if (isset($features[$key])) {
+                $features[$key]['adminCss'] = ($features[$key]['adminCss'] ?? '') . "\n" . $rules;
+            }
+        }
+
+        return $features;
+    }
+
+    /**
+     * AIOSEO 5.x only: surfaces that 5.0 added.
+     *
+     * @param array<string, Feature> $features
+     * @return array<string, Feature>
+     */
+    private static function v5Features(array $features): array
+    {
+        $features['newsroom'] = [
+            'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
+            /*
+             * The "Newsroom" (5.0): a feed of aioseo.com posts, cross-posts
+             * from its other products included, shown three ways — a
+             * megaphone button + drawer in its header, a "What's new" modal
+             * after every update, and feature callouts above its screens.
+             * The modal and the callouts have their own off switches; the
+             * drawer is part of the Vue header, so hide it with CSS.
+             */
+            'register' => static function (): void {
+                add_filter('aioseo_show_whats_new_modal', '__return_false');
+                add_filter('aioseo_show_newsroom_callouts', '__return_false');
+            },
+            'adminCss' => <<<'CSS'
+                .aioseo-header .header-actions .round:has(.aioseo-megaphone),
+                .aioseo-newsroom-drawer { display: none !important; }
+                CSS,
+        ];
+
+        return $features;
+    }
+
+    /**
+     * Definitions that hold for every supported major.
+     *
+     * @return array<string, Feature>
+     */
+    private static function sharedFeatures(): array
     {
         return [
             'upgrade-menus' => [
@@ -364,10 +458,6 @@ final class AllInOneSeo extends AbstractModule
                    Priority Score, ...) — editor screens carry no page_aioseo body class */
                 body:is(.post-php, .post-new-php) .aioseo-app .aioseo-settings-row:has(.aioseo-pro-badge),
                 body:is(.post-php, .post-new-php) .aioseo-app .aioseo-settings-row:has(.aioseo-alert.inline-upsell) { display: none !important; }
-                /* AIOSEO: the block-editor sidebar renders the same teasers as accordion
-                   cards with stable classes (Cornerstone Content, Additional Keywords) */
-                body:is(.post-php, .post-new-php) .aioseo-sidebar-card.card-cornerstone-content,
-                body:is(.post-php, .post-new-php) .aioseo-sidebar-card[class*="card-additional-keyphra"] { display: none !important; }
                 /* AIOSEO: the sidebar's Pro menu entries, hidden by CSS so they cannot
                    flash before the label-matching script runs on re-renders — matched
                    by their icons (Link Assistant, Redirects; SEO Revisions' icon has
@@ -555,10 +645,9 @@ final class AllInOneSeo extends AbstractModule
             'toolbar-icons' => [
                 'label' => __('Remove the border on its editor toolbar icons', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
-                /* AIOSEO: the Headline Analyzer and AIOSEO score badges in the editor's
-                   top toolbar draw a 1px box around the icon; core's pinned toolbar
-                   buttons have none, so drop it for a consistent look */
-                #aioseo-headline-analyzer-sidebar-button,
+                /* AIOSEO: the score badge in the editor's top toolbar draws a 1px box
+                   around the icon; core's pinned toolbar buttons have none, so drop it
+                   for a consistent look */
                 .interface-pinned-items button .score-disabled,
                 .interface-pinned-items button [id*="aioseo-score"] { border: 0 !important; }
                 CSS,
