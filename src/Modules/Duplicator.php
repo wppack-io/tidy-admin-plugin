@@ -14,7 +14,11 @@ declare(strict_types=1);
 namespace WPPack\Plugin\TidyAdminPlugin\Modules;
 
 use WPPack\Plugin\TidyAdminPlugin\AbstractModule;
+use WPPack\Plugin\TidyAdminPlugin\Module;
 
+/**
+ * @phpstan-import-type Feature from Module
+ */
 final class Duplicator extends AbstractModule
 {
     public function targetPluginFile(): string
@@ -24,7 +28,7 @@ final class Duplicator extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [1];
+        return [1, 5];
     }
 
     public function menuParent(): string
@@ -37,90 +41,47 @@ final class Duplicator extends AbstractModule
         return ['duplicator'];
     }
 
+    /**
+     * Duplicator 5 rebuilt Lite on the Pro codebase (every upsell now lives in
+     * its LiteBase add-on), so almost no hook, class or selector carried over
+     * from 1.x: each major gets its own definitions, sharing only the Upgrades
+     * panel head and the knowledge-base links.
+     */
     public function features(): array
     {
+        return self::installedMajor() === 1 ? $this->v1Features() : $this->v5Features();
+    }
+
+    /**
+     * Major version of the loaded Duplicator (define.php sets DUPLICATOR_VERSION
+     * on load, before the init hook that builds the features). 0 when it is not
+     * loaded, which gets the latest major's definitions.
+     */
+    private static function installedMajor(): int
+    {
+        return \defined('DUPLICATOR_VERSION') ? (int) \constant('DUPLICATOR_VERSION') : 0;
+    }
+
+    /**
+     * Duplicator 1.x (the legacy Lite codebase).
+     *
+     * @return array<string, Feature>
+     */
+    private function v1Features(): array
+    {
         return [
-            'upgrade-menus' => [
-                'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
-                'submenuRelocations' => [
-                    'upgrade' => [
-                        // "Upgrade to Pro" — its slug IS an external campaign URL
-                        'duplicator.com/lite-upgrade',
-                    ],
-                ],
-                /*
-                 * The Lite notice bar, reproduced verbatim (sentence, bold lead,
-                 * orange link and arrow, band colors) as the head of the Upgrades
-                 * panel — the lite-bar feature removes it from the screens.
-                 */
-                'extraScreenMetaContent' => [
-                    [
-                        'category' => 'upgrade',
-                        'parent' => $this->menuParent(),
-                        'html' => '<p class="tidy-admin-dup-lite-bar">'
-                            . wp_kses(
-                                sprintf(
-                                    // The notice bar's own sentence: bold lead, orange link
-                                    __(
-                                        '<strong>You\'re using Duplicator Lite.</strong> To unlock more features consider '
-                                        . '<a href="%s" target="_blank" rel="noopener noreferrer">upgrading to Pro</a>',
-                                        'duplicator',
-                                    ),
-                                    'https://duplicator.com/lite-upgrade/',
-                                ),
-                                ['a' => ['href' => [], 'rel' => [], 'target' => []], 'strong' => []],
-                            )
-                            . ' <a class="tidy-admin-dup-upgrade-arrow" href="https://duplicator.com/lite-upgrade/" target="_blank" rel="noopener noreferrer">&rarr;</a>'
-                            . '</p>'
-                            . '<p><a href="https://duplicator.com/lite-upgrade/" target="_blank" rel="noopener noreferrer">'
-                            . esc_html__('Upgrade to Pro', 'wppack-tidy-admin') . '</a></p>',
-                    ],
-                ],
-                'adminCss' => <<<'CSS'
-                /* The reproduced Lite bar (#dup-notice-bar: centered gray strip
-                   under an orange rule) across the top of the opened Upgrades panel.
-                   Centered as a block — the original's flex would split our text
-                   nodes into separate items and skew the inter-word spacing */
-                .tidy-admin-dup-lite-bar {
-                    display: block;
-                    background-color: #dddddd; color: #777777; text-align: center;
-                    padding: 7px; margin: 0; border-top: #fe4716 3px solid;
-                    /* Above the panel's absolutely-positioned tint layer (the register
-                       script pushes that layer below the band, this covers the paint
-                       order while the panel is opening) */
-                    position: relative; z-index: 5;
-                }
-                /* Links and arrow exactly as the bar styles them */
-                .tidy-admin-dup-lite-bar a { color: #fe4716; }
-                .tidy-admin-dup-upgrade-arrow { font-weight: bold; text-decoration: none; }
-                CSS,
-                /*
-                 * Module content can only land inside the panel's Upgrade tab; hoist
-                 * the band to the very top of the panel, above the tab columns. The
-                 * panel's tinted content layer (.tidy-admin-help-back) is absolutely
-                 * positioned from the panel's top, so it is pushed down by the band's
-                 * height — measured when the panel actually opens (it is display:none
-                 * until then) and again on resize, since the band can wrap.
-                 */
-                'register' => static function (): void {
-                    add_action('admin_print_footer_scripts', static function (): void {
-                        if (!str_starts_with((string) ($_GET['page'] ?? ''), 'duplicator')) {
-                            return;
-                        }
-                        echo '<script>document.addEventListener("DOMContentLoaded",function(){'
-                            . 'var n=document.querySelector(".tidy-admin-dup-lite-bar");'
-                            . 'var w=document.getElementById("tidy-admin-upgrades-wrap");'
-                            . 'if(!n||!w){return;}'
-                            . 'w.insertBefore(n,w.firstChild);'
-                            . 'var back=w.querySelector(".tidy-admin-help-back");'
-                            . 'var fit=function(){if(back){back.style.top=n.offsetHeight+"px";}};'
-                            . 'new MutationObserver(fit).observe(w,{attributes:true,attributeFilter:["class"]});'
-                            . 'window.addEventListener("resize",fit);'
-                            . 'fit();'
-                            . '});</script>';
-                    });
-                },
-            ],
+            'upgrade-menus' => $this->upgradeMenus(
+                sprintf(
+                    // The notice bar's own sentence: bold lead, orange link
+                    __(
+                        '<strong>You\'re using Duplicator Lite.</strong> To unlock more features consider '
+                        . '<a href="%s" target="_blank" rel="noopener noreferrer">upgrading to Pro</a>',
+                        'duplicator',
+                    ),
+                    'https://duplicator.com/lite-upgrade/',
+                ),
+                '#777777',
+            ),
             'premium-pages' => [
                 'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
                 /*
@@ -202,13 +163,7 @@ final class Duplicator extends AbstractModule
                             . ' Resources to additional support, approved hosting, and alternatives to fit your needs can be found below.',
                             'duplicator',
                         ) . '</p>'
-                            . '<p><strong>' . esc_html__('Knowledgebase', 'duplicator') . '</strong></p>'
-                            . '<ul class="tidy-admin-meta-links">'
-                            . '<li><a href="https://duplicator.com/knowledge-base-article-categories/quick-start/" target="_blank" rel="noopener noreferrer">' . esc_html__('Quick Start', 'duplicator') . '</a></li>'
-                            . '<li><a href="https://duplicator.com/knowledge-base/" target="_blank" rel="noopener noreferrer">' . esc_html__('User Guide', 'duplicator') . '</a></li>'
-                            . '<li><a href="https://duplicator.com/knowledge-base-article-categories/troubleshooting/" target="_blank" rel="noopener noreferrer">' . esc_html__('FAQs', 'duplicator') . '</a></li>'
-                            . '<li><a href="https://duplicator.com/knowledge-base/changelog/" target="_blank" rel="noopener noreferrer">' . esc_html__('Change Log', 'duplicator') . '</a></li>'
-                            . '</ul>'
+                            . self::knowledgebaseLinks()
                             . '<p><strong>' . esc_html__('How to install this Backup?', 'duplicator') . '</strong></p>'
                             . '<ul class="tidy-admin-meta-links">'
                             . '<li><a href="https://duplicator.com/knowledge-base/classic-install/" target="_blank" rel="noopener noreferrer">' . esc_html__('Install to Empty Directory ', 'duplicator') . '</a></li>'
@@ -397,5 +352,309 @@ final class Duplicator extends AbstractModule
                 CSS,
             ],
         ];
+    }
+
+    /**
+     * Duplicator 5.x: every Lite upsell is its own LiteBase class hung on a
+     * named hook, so nearly all of them are removed at the source.
+     *
+     * @return array<string, Feature>
+     */
+    private function v5Features(): array
+    {
+        $lite = 'Duplicator\\Addons\\LiteBase\\';
+
+        return [
+            'upgrade-menus' => $this->upgradeMenus(
+                sprintf(
+                    // The notice bar's own sentence: bold lead, orange link
+                    _x(
+                        '<strong>You\'re using Duplicator Lite.</strong> To unlock more features consider %1$supgrading to Pro%2$s',
+                        '1 and 2 are opening and closing anchor tags',
+                        'duplicator',
+                    ),
+                    '<a href="https://duplicator.com/lite-upgrade/" target="_blank" rel="noopener noreferrer">',
+                    '</a>',
+                ),
+                '#666666',
+            ),
+            'premium-pages' => [
+                'label' => __('Move Premium feature pages to the Upgrades panel', 'wppack-tidy-admin'),
+                /*
+                 * LiteBase registers these as mock pages: blurred fake UI under an
+                 * "Upgrade to Pro" popup. Storage is a working page in 5.x (local
+                 * and Duplicator Cloud storages), so it stays in the menu.
+                 */
+                'submenuRelocations' => [
+                    'premium' => [
+                        'duplicator-import',              // Import Backups (mock)
+                        'duplicator-incremental-backups', // Incremental Backups (mock)
+                        'duplicator-schedules',           // Schedule Backups (mock)
+                        'duplicator-staging',             // Staging (mock)
+                    ],
+                ],
+                /*
+                 * Tabs LiteBase adds to functional pages: Tools > Recovery /
+                 * Templates (mocks), DB Reset (a DB Reset Pro cross-sell) and
+                 * Settings > Access (mock). Linked from the panel, hidden below.
+                 */
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'premium',
+                        'parent' => 'duplicator',
+                        'html' => '<ul class="tidy-admin-meta-links">'
+                            . '<li><a href="admin.php?page=duplicator-tools&tab=recovery">' . esc_html__('Recovery', 'duplicator') . '</a></li>'
+                            . '<li><a href="admin.php?page=duplicator-tools&tab=templates">' . esc_html__('Templates', 'duplicator') . '</a></li>'
+                            . '<li><a href="admin.php?page=duplicator-tools&tab=db-reset">' . esc_html__('DB Reset', 'duplicator') . '</a></li>'
+                            . '<li><a href="admin.php?page=duplicator-settings&tab=capabilities">' . esc_html__('Access', 'duplicator') . '</a></li>'
+                            . '</ul>',
+                    ],
+                ],
+                // CSS, not the duplicator_sub_menu_items_* filters: dropping the
+                // items there would also unroute the tab pages linked above
+                'adminCss' => <<<'CSS'
+                #dup-submenu-l2-duplicator-tools-recovery,
+                #dup-submenu-l2-duplicator-tools-templates,
+                #dup-submenu-l2-duplicator-tools-db-reset,
+                #dup-submenu-l2-duplicator-settings-capabilities { display: none !important; }
+                CSS,
+            ],
+            'help-links' => [
+                'label' => __('Move documentation and support links to the Help panel', 'wppack-tidy-admin'),
+                'submenuRelocations' => [
+                    'help' => [
+                        'duplicator-about-us', // About Us (team/product background — a resource)
+                    ],
+                ],
+                /*
+                 * Its Tools > Support tab, kept verbatim in the plugin's own text
+                 * domain: the intro, the knowledge-base links its dropdown offers
+                 * and a link to the tab itself (whose other half is a Premium
+                 * Support pitch). The WordPress.org links are added automatically.
+                 */
+                'extraScreenMetaContent' => [
+                    [
+                        'category' => 'help',
+                        'parent' => $this->menuParent(),
+                        'html' => '<p>' . esc_html__(
+                            "Migrating WordPress is a complex process and the logic to make all the magic happen smoothly may not work quickly\n"
+                            . "with every site. With over 30,000 plugins and a very complex server eco-system some migrations may run into issues.\n"
+                            . "This is why Duplicator includes a detailed knowledgebase that can help with many common issues.\n"
+                            . 'Resources to additional support, approved hosting, and alternatives to fit your needs can be found below.',
+                            'duplicator',
+                        ) . '</p>'
+                            . self::knowledgebaseLinks()
+                            . '<p><a href="' . esc_url(admin_url('admin.php?page=duplicator-tools&tab=support')) . '">' . esc_html__('Support', 'duplicator') . '</a></p>',
+                    ],
+                ],
+                'adminCss' => <<<'CSS'
+                /* Duplicator: its own "Help" modal launcher in the logo header —
+                   replaced by the standard Help panel */
+                .dup-global-help { display: none !important; }
+                /* Duplicator: the Tools > Support tab, now in the Help panel */
+                #dup-submenu-l2-duplicator-tools-support { display: none !important; }
+                CSS,
+            ],
+            'plugin-list-links' => [
+                'label' => __('Remove upgrade links from the plugin list', 'wppack-tidy-admin'),
+                'upsellLinkUrls' => [
+                    'duplicator.com/lite-upgrade', // Upgrade to Pro (the Settings/meta links stay)
+                ],
+            ],
+            'lite-bar' => [
+                'label' => __('Remove the "You\'re using Lite" notice bar', 'wppack-tidy-admin'),
+                // "You're using Duplicator Lite. To unlock more features consider
+                // upgrading to Pro" — pinned above the header on every screen
+                'noticeDenyByHook' => [
+                    'in_admin_header' => [$lite . 'Notifications\\NoticeBar'],
+                ],
+            ],
+            'education-upsells' => [
+                'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
+                'noticeDenyByHook' => [
+                    // "Upgrade to Pro to Unlock..." bar under the Backups list
+                    'duplicator_packages_table_footer_content' => [$lite . 'Notifications\\PackagesBottomBar'],
+                    // "Need more storage options?" cloud logos + Upgrade to Pro, under
+                    // the Storage list and the New Backup storage picker
+                    'duplicator_storages_table_footer_content' => [$lite . 'Notifications\\StoragesTableFeatures'],
+                    // "Get Duplicator Pro and Unlock all the Powerful Features" box
+                    // under every Settings tab
+                    'duplicator_render_page_content_duplicator-settings' => [$lite . 'Notifications\\SettingsFeatureBox'],
+                    // New Backup presets: the disabled "Media Only" / "Custom" Pro
+                    // choices and the upgrade note under them
+                    'duplicator_component_preset_actions' => [$lite . 'Notifications\\PackageComponentsLite'],
+                    'duplicator_package_components_after_presets' => [$lite . 'Notifications\\PackageComponentsLite'],
+                    // Newsletter subscribe form and WP Media Cleanup cross-sell in the
+                    // scan report
+                    'duplicator_scan_footer' => [$lite . 'Notifications\\EmailSubscribeForm'],
+                    'duplicator_scan_report_footer' => [$lite . 'Notifications\\MediaCleanupScanUpsell'],
+                    // Newsletter subscribe notice after the first completed backup
+                    'admin_notices' => [$lite . 'Notifications\\FirstBackupSubscribeBanner'],
+                ],
+            ],
+            'sale-notices' => [
+                'label' => __('Show sale notices only in the Upgrades panel', 'wppack-tidy-admin'),
+                'saleNoticeRelocation' => [
+                    'parent' => $this->menuParent(),
+                    'byHook' => [
+                        // Remote announcements (notifications.duplicator.com feed,
+                        // promotions/product news) printed above the Backups list
+                        'duplicator_before_packages_table_action' => ['Duplicator\\Core\\Views\\Notifications'],
+                    ],
+                ],
+            ],
+            'dashboard-widget' => [
+                'label' => __('Remove the recommended-plugin cross-sell from its dashboard widget', 'wppack-tidy-admin'),
+                // "Recommended Plugin: ..." row (rotating cross-sell; the backup
+                // status and storage rows above it stay)
+                'noticeDenyByHook' => [
+                    'duplicator_dashboard_widget_after_sections' => [$lite . 'Notifications\\DashboardRecommendedPlugin'],
+                ],
+            ],
+            'license-pitch' => [
+                'label' => __('Hide the license pitch on its settings screen', 'wppack-tidy-admin'),
+                // Settings > General "License" section: Lite needs no key, so it is
+                // only "consider upgrading ... 50% off" plus Connect to Duplicator
+                // Pro. Its pending-error admin notice stays.
+                'noticeDenyByHook' => [
+                    'duplicator_settings_general_before' => [$lite . 'Settings\\ConnectController::render'],
+                ],
+            ],
+            'welcome-redirect' => [
+                'label' => __('Stop the post-install welcome-page redirect', 'wppack-tidy-admin'),
+                // Activation redirects to a "Getting Started" page (newsletter and
+                // telemetry opt-in plus a feature pitch); the plugin's own filter
+                // skips it. The page stays reachable by URL.
+                'register' => static function (): void {
+                    add_filter('duplicator_disable_onboarding_redirect', '__return_true');
+                },
+            ],
+            'footer' => [
+                'label' => __('Restore the standard admin footer', 'wppack-tidy-admin'),
+                /*
+                 * "Made with ♥ by the Duplicator Team" with Support / Docs /
+                 * Migration Services / Free Plugins links and social icons; Docs
+                 * and the support forum live in the Help panel. Its "Please rate
+                 * Duplicator" footer text is already covered by the plugin-wide
+                 * footer emptying.
+                 */
+                'noticeDenyByHook' => [
+                    'in_admin_footer' => ['Duplicator\\Views\\PluginFooter::render'],
+                ],
+            ],
+            'panel-placement' => [
+                'label' => __('Overlay the Help and Upgrades buttons onto the page title', 'wppack-tidy-admin'),
+                /*
+                 * Duplicator moves #screen-meta-links/#screen-meta into its own
+                 * absolutely-positioned #dup-meta-screen band over the logo header
+                 * and pins the toggles 50px in from its right edge; line them up
+                 * with the content's right edge instead. That band is a .dup-styles
+                 * wrapper whose normalize layer zeroes every div/ul/li/p margin and
+                 * padding and drops link underlines, so restore the core Help-panel
+                 * spacing inside our panels.
+                 */
+                'adminCss' => <<<'CSS'
+                body[class*="_page_duplicator"] #screen-meta-links { right: 0; }
+                #dup-meta-screen .tidy-admin-meta-panel .tidy-admin-help-tabs ul { margin: 1em 0; }
+                #dup-meta-screen .tidy-admin-meta-panel .tidy-admin-help-tabs-wrap { padding: 0 20px; }
+                #dup-meta-screen .tidy-admin-meta-panel .tidy-admin-help-tab { margin: 1em 22px 12px 0; }
+                #dup-meta-screen .tidy-admin-meta-panel .tidy-admin-help-sidebar { padding: 0 8px 0 12px; }
+                #dup-meta-screen .tidy-admin-meta-panel :is(.tidy-admin-help-tab, .tidy-admin-help-tabs-wrap, .tidy-admin-help-sidebar) p { margin: 1em 0; line-height: 1.5; }
+                #dup-meta-screen .tidy-admin-meta-panel .tidy-admin-meta-links { margin: 1em 0 12px; }
+                #dup-meta-screen .tidy-admin-meta-panel .tidy-admin-meta-links li { margin: 0 0 6px 18px; }
+                #dup-meta-screen .tidy-admin-meta-panel :is(.tidy-admin-help-tabs-wrap, .tidy-admin-help-sidebar) a { text-decoration: underline; }
+                /* The reproduced Lite bar keeps Duplicator's own (unpadded) band */
+                #dup-meta-screen .tidy-admin-meta-panel .tidy-admin-dup-lite-bar { margin: 0; line-height: 1.5; }
+                CSS,
+            ],
+        ];
+    }
+
+    /**
+     * Upgrades panel head: the relocated "Upgrade to Pro" menu link plus the
+     * Lite notice bar reproduced verbatim (sentence, bold lead, orange link and
+     * arrow, band colors) — the lite-bar feature removes the original.
+     *
+     * @return Feature
+     */
+    private function upgradeMenus(string $barSentence, string $barColor): array
+    {
+        return [
+            'label' => __('Move upgrade menus to the Upgrades panel', 'wppack-tidy-admin'),
+            'submenuRelocations' => [
+                'upgrade' => [
+                    // "Upgrade to Pro" — its slug IS an external campaign URL
+                    'duplicator.com/lite-upgrade',
+                ],
+            ],
+            'extraScreenMetaContent' => [
+                [
+                    'category' => 'upgrade',
+                    'parent' => $this->menuParent(),
+                    'html' => '<p class="tidy-admin-dup-lite-bar">'
+                        . wp_kses($barSentence, ['a' => ['href' => [], 'rel' => [], 'target' => []], 'strong' => []])
+                        . ' <a class="tidy-admin-dup-upgrade-arrow" href="https://duplicator.com/lite-upgrade/" target="_blank" rel="noopener noreferrer">&rarr;</a>'
+                        . '</p>'
+                        . '<p><a href="https://duplicator.com/lite-upgrade/" target="_blank" rel="noopener noreferrer">'
+                        . esc_html__('Upgrade to Pro', 'wppack-tidy-admin') . '</a></p>',
+                ],
+            ],
+            'adminCss' => <<<CSS
+            /* The reproduced Lite bar (#dup-notice-bar: centered gray strip
+               under an orange rule) across the top of the opened Upgrades panel.
+               Centered as a block — the original's flex would split our text
+               nodes into separate items and skew the inter-word spacing */
+            .tidy-admin-dup-lite-bar {
+                display: block;
+                background-color: #dddddd; color: {$barColor}; text-align: center;
+                padding: 7px; margin: 0; border-top: #fe4716 3px solid;
+                /* Above the panel's absolutely-positioned tint layer (the register
+                   script pushes that layer below the band, this covers the paint
+                   order while the panel is opening) */
+                position: relative; z-index: 5;
+            }
+            /* Links and arrow exactly as the bar styles them */
+            .tidy-admin-dup-lite-bar a { color: #fe4716; }
+            .tidy-admin-dup-upgrade-arrow { font-weight: bold; text-decoration: none; }
+            CSS,
+            /*
+             * Module content can only land inside the panel's Upgrade tab; hoist
+             * the band to the very top of the panel, above the tab columns. The
+             * panel's tinted content layer (.tidy-admin-help-back) is absolutely
+             * positioned from the panel's top, so it is pushed down by the band's
+             * height — measured when the panel actually opens (it is display:none
+             * until then) and again on resize, since the band can wrap.
+             */
+            'register' => static function (): void {
+                add_action('admin_print_footer_scripts', static function (): void {
+                    if (!str_starts_with((string) ($_GET['page'] ?? ''), 'duplicator')) {
+                        return;
+                    }
+                    echo '<script>document.addEventListener("DOMContentLoaded",function(){'
+                        . 'var n=document.querySelector(".tidy-admin-dup-lite-bar");'
+                        . 'var w=document.getElementById("tidy-admin-upgrades-wrap");'
+                        . 'if(!n||!w){return;}'
+                        . 'w.insertBefore(n,w.firstChild);'
+                        . 'var back=w.querySelector(".tidy-admin-help-back");'
+                        . 'var fit=function(){if(back){back.style.top=n.offsetHeight+"px";}};'
+                        . 'new MutationObserver(fit).observe(w,{attributes:true,attributeFilter:["class"]});'
+                        . 'window.addEventListener("resize",fit);'
+                        . 'fit();'
+                        . '});</script>';
+                });
+            },
+        ];
+    }
+
+    /** The knowledge-base links its Tools > Support section dropdown offers. */
+    private static function knowledgebaseLinks(): string
+    {
+        return '<p><strong>' . esc_html__('Knowledgebase', 'duplicator') . '</strong></p>'
+            . '<ul class="tidy-admin-meta-links">'
+            . '<li><a href="https://duplicator.com/knowledge-base-article-categories/quick-start/" target="_blank" rel="noopener noreferrer">' . esc_html__('Quick Start', 'duplicator') . '</a></li>'
+            . '<li><a href="https://duplicator.com/knowledge-base/" target="_blank" rel="noopener noreferrer">' . esc_html__('User Guide', 'duplicator') . '</a></li>'
+            . '<li><a href="https://duplicator.com/knowledge-base-article-categories/troubleshooting/" target="_blank" rel="noopener noreferrer">' . esc_html__('FAQs', 'duplicator') . '</a></li>'
+            . '<li><a href="https://duplicator.com/knowledge-base/changelog/" target="_blank" rel="noopener noreferrer">' . esc_html__('Change Log', 'duplicator') . '</a></li>'
+            . '</ul>';
     }
 }

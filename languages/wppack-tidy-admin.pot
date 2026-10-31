@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-31T15:56:59+09:00\n"
+"POT-Creation-Date: 2026-10-31T18:54:16+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -36,7 +36,7 @@ msgstr ""
 #: src/Modules/AdvancedCustomFields.php:66
 #: src/Modules/AllInOneWpMigration.php:79
 #: src/Modules/CookieYes.php:160
-#: src/Modules/Duplicator.php:76
+#: src/Modules/Duplicator.php:599
 #: src/Modules/EwwwImageOptimizer.php:76
 #: src/Modules/FeedsForTiktok.php:77
 #: src/Modules/FeedsForYoutube.php:89
@@ -62,7 +62,8 @@ msgstr ""
 #: src/Modules/Bnfw.php:47
 #: src/Modules/CustomFacebookFeed.php:79
 #: src/Modules/CustomPostTypeUi.php:58
-#: src/Modules/Duplicator.php:125
+#: src/Modules/Duplicator.php:86
+#: src/Modules/Duplicator.php:382
 #: src/Modules/Elementor.php:137
 #: src/Modules/EmbedPress.php:71
 #: src/Modules/EwwwImageOptimizer.php:81
@@ -91,7 +92,8 @@ msgstr ""
 #: src/Modules/CustomFacebookFeed.php:201
 #: src/Modules/CustomPostTypeUi.php:100
 #: src/Modules/CustomTwitterFeeds.php:102
-#: src/Modules/Duplicator.php:264
+#: src/Modules/Duplicator.php:219
+#: src/Modules/Duplicator.php:473
 #: src/Modules/Elementor.php:322
 #: src/Modules/EmbedPress.php:171
 #: src/Modules/FeedsForTiktok.php:123
@@ -155,7 +157,7 @@ msgstr ""
 #: src/Modules/CustomFacebookFeed.php:71
 #: src/Modules/CustomPostTypeUi.php:45
 #: src/Modules/CustomTwitterFeeds.php:72
-#: src/Modules/Duplicator.php:44
+#: src/Modules/Duplicator.php:583
 #: src/Modules/Elementor.php:118
 #: src/Modules/EmbedPress.php:53
 #: src/Modules/EwwwImageOptimizer.php:63
@@ -194,7 +196,8 @@ msgstr ""
 #: src/Modules/CustomFacebookFeed.php:94
 #: src/Modules/CustomPostTypeUi.php:80
 #: src/Modules/CustomTwitterFeeds.php:80
-#: src/Modules/Duplicator.php:180
+#: src/Modules/Duplicator.php:141
+#: src/Modules/Duplicator.php:423
 #: src/Modules/Elementor.php:451
 #: src/Modules/EmbedPress.php:99
 #: src/Modules/EwwwImageOptimizer.php:119
@@ -238,7 +241,8 @@ msgstr ""
 #: src/Modules/CookieYes.php:90
 #: src/Modules/CustomFacebookFeed.php:113
 #: src/Modules/CustomTwitterFeeds.php:89
-#: src/Modules/Duplicator.php:248
+#: src/Modules/Duplicator.php:203
+#: src/Modules/Duplicator.php:459
 #: src/Modules/Elementor.php:204
 #: src/Modules/EmbedPress.php:132
 #: src/Modules/FeedsForYoutube.php:198
@@ -316,7 +320,8 @@ msgid "Move the \"multiple SEO plugins\" warning to the setup widget"
 msgstr ""
 
 #: src/Modules/AllInOneSeo.php:411
-#: src/Modules/Duplicator.php:367
+#: src/Modules/Duplicator.php:322
+#: src/Modules/Duplicator.php:533
 #: src/Modules/LiteSpeedCache.php:91
 #: src/Modules/LocationWeather.php:191
 #: src/Modules/Maintenance.php:68
@@ -506,33 +511,39 @@ msgstr ""
 msgid "Fix the squeezed select fields on its screens"
 msgstr ""
 
-#: src/Modules/Duplicator.php:254
+#: src/Modules/Duplicator.php:209
+#: src/Modules/Duplicator.php:465
 #: src/Modules/WpCode.php:170
 #: src/Modules/WpForms.php:87
 #: src/Modules/WpMailSmtp.php:161
 msgid "Remove the \"You're using Lite\" notice bar"
 msgstr ""
 
-#: src/Modules/Duplicator.php:318
+#: src/Modules/Duplicator.php:273
+#: src/Modules/Duplicator.php:496
 #: src/Modules/EmbedPress.php:138
 #: src/Modules/LocationWeather.php:122
 msgid "Show sale notices only in the Upgrades panel"
 msgstr ""
 
-#: src/Modules/Duplicator.php:329
+#: src/Modules/Duplicator.php:284
+#: src/Modules/Duplicator.php:507
 #: src/Modules/WpConsent.php:156
 msgid "Remove the recommended-plugin cross-sell from its dashboard widget"
 msgstr ""
 
-#: src/Modules/Duplicator.php:341
+#: src/Modules/Duplicator.php:296
+#: src/Modules/Duplicator.php:515
 msgid "Hide the license pitch on its settings screen"
 msgstr ""
 
-#: src/Modules/Duplicator.php:353
+#: src/Modules/Duplicator.php:308
+#: src/Modules/Duplicator.php:524
 msgid "Stop the post-install welcome-page redirect"
 msgstr ""
 
-#: src/Modules/Duplicator.php:382
+#: src/Modules/Duplicator.php:337
+#: src/Modules/Duplicator.php:546
 #: src/Modules/Wordfence.php:215
 msgid "Overlay the Help and Upgrades buttons onto the page title"
 msgstr ""
