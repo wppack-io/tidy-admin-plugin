@@ -24,7 +24,7 @@ final class TaxonomyTermsOrder extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [1];
+        return [1, 2];
     }
 
     public function menuParent(): string
