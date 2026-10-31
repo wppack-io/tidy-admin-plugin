@@ -131,6 +131,33 @@ final class MonsterInsights extends AbstractModule
                     ],
                 ],
             ],
+            'review-request' => [
+                'label' => __('Remove the review request', 'wppack-tidy-admin'),
+                // "Hey - we noticed you've been using MonsterInsights ..." 5-star
+                // rating request on every admin screen; its dismiss AJAX stays.
+                'noticeDenyByHook' => [
+                    'admin_notices' => ['MonsterInsights_Review::review_request'],
+                ],
+            ],
+            'marketing-notices' => [
+                'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
+                // "Make Your Website Analytics Compliant with Privacy Laws" —
+                // Install Now / Learn More for the sister plugin WPConsent on every
+                // admin screen (cross-sell); its settings tab stays reachable.
+                'noticeDenyByHook' => [
+                    'admin_notices' => ['monsterinsights_wpconsent_install_notice'],
+                ],
+            ],
+            'activation-redirect' => [
+                'label' => __('Stop the welcome-screen redirect on activation', 'wppack-tidy-admin'),
+                // First activation sends the next admin request to the onboarding
+                // wizard (11.x: off-site on connect.monsterinsights.com); the
+                // plugin's own filter skips it and the activation flag is still
+                // cleared. Settings > General keeps its Launch Setup Wizard button.
+                'register' => static function (): void {
+                    add_filter('monsterinsights_enable_onboarding_wizard', '__return_false');
+                },
+            ],
             'upsell-ui' => [
                 'label' => __('Hide upsell promotions on its screens', 'wppack-tidy-admin'),
                 'adminCss' => <<<'CSS'
