@@ -182,6 +182,7 @@ default when the flag is unset. Everything else defaults to ON.
 | Code style fix | `vendor/bin/php-cs-fixer fix` |
 | Dev server (browser testing) | `bin/dev-server` → http://localhost:8080 (admin / password); this machine: `TIDY_ADMIN_DEV_PORT=8082` |
 | Reset dev site to fresh state | `bin/dev-reset` (also bootstraps first-time setup) |
+| Lock workflow actions | `gh actions-lock` after adding a workflow or changing any `uses:` — commit `.github/workflows/actions.lock` with it; CI (`verify-lockfile.yml`) fails on a stale lockfile |
 
 ## Browser testing (dev server)
 
