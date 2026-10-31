@@ -117,7 +117,7 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 | [PublishPress Future](https://wordpress.org/plugins/post-expirator/) | 4.x |
 | [PublishPress Permissions](https://wordpress.org/plugins/press-permit-core/) | 4.x |
 | [PublishPress Planner](https://wordpress.org/plugins/publishpress/) | 4.x |
-| [PublishPress Revisions](https://wordpress.org/plugins/revisionary/) | 3.x |
+| [PublishPress Revisions](https://wordpress.org/plugins/revisionary/) | 3.x, 4.x |
 | [Redirection](https://wordpress.org/plugins/redirection/) | 5.x |
 | [Redis Object Cache](https://wordpress.org/plugins/redis-cache/) | 2.x, 3.x |
 | [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 1.x |
