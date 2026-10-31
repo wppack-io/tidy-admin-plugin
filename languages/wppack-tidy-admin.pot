@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-31T19:23:36+09:00\n"
+"POT-Creation-Date: 2026-10-31T19:36:53+09:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wppack-tidy-admin\n"
@@ -102,7 +102,7 @@ msgstr ""
 #: src/Modules/LiteSpeedCache.php:70
 #: src/Modules/LocationWeather.php:176
 #: src/Modules/Maintenance.php:81
-#: src/Modules/MonsterInsights.php:135
+#: src/Modules/MonsterInsights.php:162
 #: src/Modules/OptinMonster.php:134
 #: src/Modules/PublishPressPermissions.php:111
 #: src/Modules/PublishPressPlanner.php:95
@@ -134,6 +134,7 @@ msgstr ""
 #: src/Modules/FeedsForYoutube.php:204
 #: src/Modules/InstagramFeed.php:129
 #: src/Modules/Maintenance.php:45
+#: src/Modules/MonsterInsights.php:143
 #: src/Modules/OptinMonster.php:70
 #: src/Modules/PublishPressAuthors.php:44
 #: src/Modules/PublishPressBlocks.php:44
@@ -274,6 +275,7 @@ msgstr ""
 #: src/Modules/Elementor.php:105
 #: src/Modules/FeedsForYoutube.php:56
 #: src/Modules/InstagramFeed.php:54
+#: src/Modules/MonsterInsights.php:152
 #: src/Modules/RedisCache.php:45
 #: src/Modules/ReviewsFeed.php:51
 #: src/Modules/TaxoPress.php:102
@@ -301,6 +303,7 @@ msgstr ""
 #: src/Modules/CookieYes.php:55
 #: src/Modules/Elementor.php:210
 #: src/Modules/Mc4wp.php:120
+#: src/Modules/MonsterInsights.php:135
 #: src/Modules/PublishPressAuthors.php:61
 #: src/Modules/PublishPressBlocks.php:61
 #: src/Modules/PublishPressCapabilities.php:62
@@ -412,7 +415,7 @@ msgstr ""
 #: src/Modules/LocationWeather.php:229
 #: src/Modules/Maintenance.php:129
 #: src/Modules/Mc4wp.php:144
-#: src/Modules/MonsterInsights.php:201
+#: src/Modules/MonsterInsights.php:228
 #: src/Modules/OptinMonster.php:184
 #: src/Modules/PublishPressAuthors.php:191
 #: src/Modules/PublishPressBlocks.php:122
@@ -645,11 +648,11 @@ msgstr ""
 msgid "Hide the \"You are here\" breadcrumb"
 msgstr ""
 
-#: src/Modules/MonsterInsights.php:221
+#: src/Modules/MonsterInsights.php:248
 msgid "Hide the setup pitch in the analytics dashboard widget"
 msgstr ""
 
-#: src/Modules/MonsterInsights.php:234
+#: src/Modules/MonsterInsights.php:261
 msgid "Remove the duplicate Insights item from the Dashboard menu"
 msgstr ""
 
