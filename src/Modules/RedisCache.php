@@ -25,7 +25,7 @@ final class RedisCache extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [2];
+        return [2, 3];
     }
 
     public function menuParent(): string
