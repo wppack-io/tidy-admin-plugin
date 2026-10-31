@@ -121,7 +121,7 @@ WordPress.org プラグインガイドライン第11条(「プラグインは管
 | [Redirection](https://wordpress.org/plugins/redirection/) | 5.x |
 | [Redis Object Cache](https://wordpress.org/plugins/redis-cache/) | 2.x, 3.x |
 | [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 1.x |
-| [TaxoPress](https://wordpress.org/plugins/simple-tags/) | 3.x |
+| [TaxoPress](https://wordpress.org/plugins/simple-tags/) | 3.x, 4.x |
 | [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) | 2.x |
 | [Wordfence](https://wordpress.org/plugins/wordfence/) | 8.x |
 | [WP Mail SMTP](https://wordpress.org/plugins/wp-mail-smtp/) | 4.x |

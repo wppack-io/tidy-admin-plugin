@@ -24,7 +24,7 @@ final class TaxoPress extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [3];
+        return [3, 4];
     }
 
     public function menuParent(): string
@@ -69,10 +69,14 @@ final class TaxoPress extends AbstractModule
             'marketing-notices' => [
                 'label' => __('Remove marketing notices and announcements', 'wppack-tidy-admin'),
                 // The purple "You're using TaxoPress Free — Upgrade to Pro"
-                // bar the shared wordpress-version-notices library pins above
-                // the plugin's own screens; drop this plugin's entry after it
-                // is added (the module callbacks live on container-built
-                // instances, so the settings filter is the clean kill switch).
+                // bar above the plugin's own screens. 3.x pins it through the
+                // shared wordpress-version-notices library: drop this plugin's
+                // entry after it is added (the module callbacks live on
+                // container-built instances, so the settings filter is the
+                // clean kill switch). 4.x prints it itself on in_admin_header.
+                'noticeDenyByHook' => [
+                    'in_admin_header' => ['PublishPress\\Taxopress\\TaxopressCoreAdmin::taxopress_render_upgrade_notice'],
+                ],
                 'register' => static function (): void {
                     add_filter('pp_version_notice_top_notice_settings', static function ($settings) {
                         if (is_array($settings)) {
@@ -104,7 +108,7 @@ final class TaxoPress extends AbstractModule
             ],
             'upgrade-sidebar' => [
                 'label' => __('Remove the Upgrade to Pro sidebar from its screens', 'wppack-tidy-admin'),
-                // Right-hand "Upgrade to TaxoPress Pro" + "Need Support?" ad
+                // Right-hand "Upgrade to Pro" + "Need Support?" ad
                 // column on every list screen; its links live in the Help panel.
                 'noticeDenyByHook' => [
                     'taxopress_admin_after_sidebar' => [
@@ -136,16 +140,17 @@ final class TaxoPress extends AbstractModule
                         'category' => 'help',
                         'parent' => 'st_options',
                         'html' => '<ul class="tidy-admin-meta-links">'
-                            . '<li><a href="https://taxopress.com/docs/taxopress/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation') . '</a></li>'
+                            . '<li><a href="https://publishpress.com/knowledge-base/start-publishpress-taxonomies/" target="_blank" rel="noopener noreferrer">' . esc_html__('Documentation') . '</a></li>'
                             . '</ul>',
                     ],
                 ],
             ],
             'footer' => [
                 'label' => __('Restore the standard admin footer', 'wppack-tidy-admin'),
-                // "Thanks for using TaxoPress | TaxoPress.com | Version x.y"
-                // printed into in_admin_footer on its own screens (the
-                // emptied core footer is the fallback).
+                // Vendor footer on its own screens, printed into in_admin_footer
+                // (3.x: "Thanks for using TaxoPress | Version x.y"; 4.x adds a
+                // ★★★★★ rating request and About/Docs/Contact links); the
+                // emptied core footer is the fallback.
                 'noticeDenyByHook' => [
                     'in_admin_footer' => ['SimpleTags_Admin::taxopress_admin_footer'],
                 ],
