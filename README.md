@@ -99,7 +99,7 @@ supported, with the major versions the cleanups were verified against:
 | [Instagram Feed (Smash Balloon)](https://wordpress.org/plugins/instagram-feed/) | 6.x |
 | [LiteSpeed Cache](https://wordpress.org/plugins/litespeed-cache/) | 7.x |
 | [Maintenance](https://wordpress.org/plugins/maintenance/) | 4.x |
-| [MonsterInsights (Google Analytics)](https://wordpress.org/plugins/google-analytics-for-wordpress/) | 10.x |
+| [MonsterInsights (Google Analytics)](https://wordpress.org/plugins/google-analytics-for-wordpress/) | 10.x, 11.x |
 | [OptinMonster](https://wordpress.org/plugins/optinmonster/) | 2.x |
 | [Reviews Feed (Smash Balloon)](https://wordpress.org/plugins/reviews-feed/) | 2.x |
 | [TikTok Feeds (Smash Balloon)](https://wordpress.org/plugins/feeds-for-tiktok/) | 1.x |

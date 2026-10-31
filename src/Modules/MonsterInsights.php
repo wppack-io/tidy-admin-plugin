@@ -26,7 +26,7 @@ final class MonsterInsights extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [10];
+        return [10, 11];
     }
 
     public function menuParent(): string
@@ -140,6 +140,10 @@ final class MonsterInsights extends AbstractModule
                 /* The "Thank you for being a loyal MonsterInsights Lite user. Upgrade
                    to Pro and unlock all the awesome features." callout (settings tabs) */
                 body[class*="page_monsterinsights"] .monsterinsights-upsell { display: none !important; }
+                /* 11.x: "Pro Tip: ... Install Now" cross-sell for the Universally
+                   translation plugin (Overview / Countries reports, Publisher
+                   settings); drawn by the Vue app with no PHP hook of its own */
+                body[class*="page_monsterinsights"] .monsterinsights-universally-promo { display: none !important; }
                 /* Per-tab Pro-feature blocks whose only control is an "Upgrade" button
                    (Google AMP, Media Tracking, the EU-consent / compliance addons,
                    ...) — hide the whole settings block so no empty heading is left
