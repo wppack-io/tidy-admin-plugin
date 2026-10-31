@@ -24,7 +24,7 @@ final class Revisionary extends AbstractModule
 
     public function supportedMajorVersions(): array
     {
-        return [3];
+        return [3, 4];
     }
 
     public function menuParent(): string
@@ -61,9 +61,10 @@ final class Revisionary extends AbstractModule
                 'label' => __('Remove the review request', 'wppack-tidy-admin'),
                 // The "Are you enjoying PublishPress Revisions?" banner from the
                 // shared publishpress/wordpress-reviews library — it exposes its
-                // own display filter.
+                // own display filter. Last priority: the plugin adds its own
+                // screen check to the same filter later, ignoring the value in.
                 'register' => static function (): void {
-                    add_filter('publishpress_wp_reviews_display_banner_revisionary', '__return_false');
+                    add_filter('publishpress_wp_reviews_display_banner_revisionary', '__return_false', PHP_INT_MAX);
                 },
             ],
             'upgrade-menus' => [
@@ -108,6 +109,18 @@ final class Revisionary extends AbstractModule
                 'adminCss' => <<<'CSS'
                 body[class*="page_revisionary"] a.pp-upgrade-btn { display: none !important; }
                 CSS,
+                // 4.x visual compare screen: the "Compare Custom Fields" sidebar
+                // box pitching Pro, sent to the script as presentation.fieldsPromo
+                // (the slot it falls back to is Pro-only, empty in Free).
+                'register' => static function (): void {
+                    add_filter('visual_post_compare_comparison_payload', static function ($payload) {
+                        if (is_array($payload) && is_array($payload['presentation'] ?? null)) {
+                            unset($payload['presentation']['fieldsPromo']);
+                        }
+
+                        return $payload;
+                    }, PHP_INT_MAX);
+                },
             ],
             'pro-tabs' => [
                 'label' => __('Remove Pro-only education tabs', 'wppack-tidy-admin'),
