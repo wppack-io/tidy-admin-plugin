@@ -27,7 +27,10 @@ agent navigation + session hygiene, nothing duplicated from there.
    behaviour (consistent admin-bar/menu styling, native hover, unified
    notification bubbles, per-plugin show/hide toggles) is core work, not out of
    scope. Never break a functional element; when unsure whether something is
-   promotional, leave it and ask.
+   promotional, leave it and ask. Status cards and announcements for features
+   the free version includes (e.g. Wordfence's "Passkeys are disabled" card)
+   are functional, however banner-like: a promotion is defined by sending the
+   user to a purchase, upgrade, sign-up or another product.
 8. **Follow [docs/ui-guidelines.md](docs/ui-guidelines.md) for every UI
    decision** — it defines what gets removed, relocated, confined, or
    CSS-hidden, and which mechanism to use. Propose a guideline change

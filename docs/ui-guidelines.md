@@ -73,6 +73,15 @@ button reappears untouched while the free slot is still usable). This is
 the same principle as "teaser destinations stay intact", applied to pages
 reached by lock-marked entrances rather than relocated menu items.
 
+**Free-feature status and announcements are not promotions.** A box that
+reports the state of a feature the free version includes — Wordfence's
+"Passkeys are disabled" card with its Enable / Manage buttons — or a notice
+announcing a new free feature ("Introducing Passkeys") stays, even when it is
+prominent or styled like a banner. What makes something a promotion is where
+it sends the user: to a purchase, an upgrade, a sign-up or another product
+(cross-sell). A call to action that turns on or configures something the
+user already has is functional.
+
 When in doubt whether something is promotional or functional, leave it and
 note the question — removing a functional element is the one failure mode
 this plugin must never have.
