@@ -120,7 +120,7 @@ supported, with the major versions the cleanups were verified against:
 | [PublishPress Planner](https://wordpress.org/plugins/publishpress/) | 4.x |
 | [PublishPress Revisions](https://wordpress.org/plugins/revisionary/) | 3.x |
 | [Redirection](https://wordpress.org/plugins/redirection/) | 5.x |
-| [Redis Object Cache](https://wordpress.org/plugins/redis-cache/) | 2.x |
+| [Redis Object Cache](https://wordpress.org/plugins/redis-cache/) | 2.x, 3.x |
 | [Taxonomy Terms Order](https://wordpress.org/plugins/taxonomy-terms-order/) | 1.x |
 | [TaxoPress](https://wordpress.org/plugins/simple-tags/) | 3.x |
 | [W3 Total Cache](https://wordpress.org/plugins/w3-total-cache/) | 2.x |
