@@ -210,7 +210,7 @@ wp-admin. There is simply nothing for a module to do.
 
 ## Adding a module
 
-Every new module follows the checklist in [CLAUDE.md](../CLAUDE.md) and the
+Every new module follows the checklist in [AGENTS.md](../AGENTS.md) and the
 classification rules in [ui-guidelines.md](ui-guidelines.md): install the
 real plugin as a dev dependency, classify every piece of vendor UI, declare
 each cleanup as an individually toggleable feature with a verified major

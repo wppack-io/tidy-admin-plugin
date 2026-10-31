@@ -133,6 +133,7 @@
             "/.gitignore",
             "/.php-cs-fixer.php",
             "/.wordpress-org",
+            "/AGENTS.md",
             "/CLAUDE.md",
             "/bin",
             "/compose.yaml",
