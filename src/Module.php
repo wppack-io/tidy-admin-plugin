@@ -20,6 +20,21 @@ namespace WPPack\Plugin\TidyAdminPlugin;
  * (Plugin::activeModules()). Only upsells, promotions, and review requests may
  * be removed — never touch functional pages or functional notices; functional
  * content is relocated per docs/ui-guidelines.md, never dropped.
+ *
+ * @phpstan-type Feature array{
+ *     label: string,
+ *     default?: bool,
+ *     submenuRelocations?: array{upgrade?: list<string>, premium?: list<string>, help?: list<string>},
+ *     extraScreenMetaContent?: list<array{category: 'upgrade'|'premium'|'help', parent: string, html: string}>,
+ *     saleNoticeRelocation?: array{parent: string, byHook: array<string, list<string>>},
+ *     upsellLinkUrls?: list<string>,
+ *     noticeDenyByHook?: array<string, list<string>>,
+ *     setupNoticeByHook?: array<string, list<string>>,
+ *     setupNoticeCapture?: callable(): void,
+ *     adminCss?: string,
+ *     frontCss?: string,
+ *     register?: callable(): void,
+ * }
  */
 interface Module
 {
@@ -130,20 +145,7 @@ interface Module
      *    the admin bar shows (admin-bar normalisation must follow the bar).
      *  - 'register': plugin-specific hook registrations for this feature.
      *
-     * @return array<string, array{
-     *     label: string,
-     *     default?: bool,
-     *     submenuRelocations?: array{upgrade?: list<string>, premium?: list<string>, help?: list<string>},
-     *     extraScreenMetaContent?: list<array{category: 'upgrade'|'premium'|'help', parent: string, html: string}>,
-     *     saleNoticeRelocation?: array{parent: string, byHook: array<string, list<string>>},
-     *     upsellLinkUrls?: list<string>,
-     *     noticeDenyByHook?: array<string, list<string>>,
-     *     setupNoticeByHook?: array<string, list<string>>,
-     *     setupNoticeCapture?: callable(): void,
-     *     adminCss?: string,
-     *     frontCss?: string,
-     *     register?: callable(): void,
-     * }>
+     * @return array<string, Feature>
      */
     public function features(): array;
 }
